@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbf7f1;
+  --foreground: #2b2b2b;
+  --zen-bg: #fbf7f1;
+  --zen-paper: #f6f0e8;
+  --zen-ink: #2b2b2b;
+  --zen-accent: #6b705c;
+  --zen-muted: #9aa09a;
 }
 
 @theme inline {
@@ -14,13 +19,67 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #0b0b0b;
     --foreground: #ededed;
+    --zen-bg: #0b0b0b;
+    --zen-paper: #0e0e0e;
+    --zen-ink: #e6e6e6;
+    --zen-accent: #8fa88f;
+    --zen-muted: #6f7a6f;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at 10% 10%, rgba(0,0,0,0.02), transparent 12%), var(--zen-bg);
+  color: var(--zen-ink);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Zen components */
+.zen-card {
+  background: var(--zen-paper);
+  color: var(--zen-ink);
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(10,10,10,0.06);
+}
+
+.zen-title {
+  font-family: var(--font-zen-serif);
+  letter-spacing: 0.02em;
+  color: var(--zen-ink);
+}
+
+.zen-subtle {
+  color: var(--zen-muted);
+}
+
+.zen-button {
+  background: var(--zen-accent);
+  color: white;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(107,112,92,0.08);
+}
+
+.zen-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+/* Ghost button */
+.zen-ghost {
+  background: transparent;
+  border: 1px solid rgba(27,27,27,0.06);
+  color: var(--zen-ink);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+/* small screens center */
+@media (max-width: 640px) {
+  .zen-card { padding: 2rem; margin: 1rem; }
 }
