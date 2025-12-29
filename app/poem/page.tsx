@@ -18,15 +18,6 @@ export default function PoemPage() {
               靜夜思
             </a>
           </div>
-
-          <div>
-            <a
-              href="/"
-              className="zen-ghost inline-block"
-            >
-              返回首頁
-            </a>
-          </div>
         </footer>
       </main>
     </div>
