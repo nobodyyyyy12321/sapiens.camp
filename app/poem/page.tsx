@@ -1,6 +1,10 @@
 import React from "react";
+import Link from "next/link";
+import { getArticles } from "../../lib/articles-firebase";
 
-export default function PoemPage() {
+export default async function PoemPage() {
+  const articles = await getArticles({ type: "poem" });
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-serif dark:bg-black">
       <main className="w-full max-w-2xl rounded-lg bg-white p-12 shadow-md dark:bg-[#0b0b0b]">
@@ -9,16 +13,23 @@ export default function PoemPage() {
           <p className="mt-2 text-sm zen-subtle">請選擇一首詩：</p>
         </header>
 
-        <footer className="mt-8 flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between">
-          <div>
-            <a
-              href="/poem/jingye-si"
-              className="zen-button inline-block"
-            >
-              靜夜思
-            </a>
-          </div>
-        </footer>
+        <section className="space-y-3">
+          {articles.length === 0 ? (
+            <p className="text-center zen-subtle">目前無詩文（請確認 Firestore articles collection）</p>
+          ) : (
+            articles.map((a) => (
+              <div key={a.id} className="flex justify-center">
+                <Link
+                  href={`/poem/${a.slug || a.id}`}
+                  className="zen-button inline-block"
+                >
+                  {a.title}
+                </Link>
+              </div>
+            ))
+          )}
+        </section>
+
       </main>
     </div>
   );
