@@ -13,16 +13,22 @@ async function trySendVerificationEmail(to: string, url: string) {
     // Prefer Resend (resend.com) if API key provided
     if (process.env.RESEND_API_KEY) {
       try {
-        //const Resend = (await import("resend")).default;
         const resend = new Resend(process.env.RESEND_API_KEY);
-        const from = process.env.MAIL_FROM || `no-reply@${process.env.NEXTAUTH_URL?.replace(/^https?:\/\//, "") || "example.com"}`;
-        await resend.emails.send({
-          from:"onboarding@resend.dev",
+        const from = process.env.MAIL_FROM || `onboarding@resend.dev`;
+        const result = await resend.emails.send({
+          from: from,
           to: to,
           subject: "請驗證您的帳號",
           html: `<p>請點擊下方連結完成驗證：</p><p><a href="${url}">${url}</a></p>`,
         });
-        return { sent: true as const, previewUrl: undefined };
+        
+        if (result.error) {
+          console.error("Resend send error:", result.error);
+          // fallthrough to other methods
+        } else {
+          console.log("Email sent successfully via Resend to:", to);
+          return { sent: true as const, previewUrl: undefined };
+        }
       } catch (e) {
         console.error("Resend send error:", e);
         // fallthrough to other methods
