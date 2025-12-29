@@ -52,11 +52,11 @@ export async function getPoems(filters?: {
     }
 
     const snapshot = await query.get();
-    let poems = snapshot.docs.map((doc: any) => docToPoem(doc));
+    let poems: Poem[] = snapshot.docs.map((doc: any) => docToPoem(doc));
 
     // 客戶端過濾 tags（因為 Firestore 不支援陣列包含查詢的組合）
     if (filters?.tags && filters.tags.length > 0) {
-      poems = poems.filter((poem) =>
+      poems = poems.filter((poem: Poem) =>
         filters.tags!.some((tag) => poem.tags?.includes(tag))
       );
     }

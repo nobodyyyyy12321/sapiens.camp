@@ -10,8 +10,21 @@
 
 ### 2. 準備環境變數
 
-在部署平台（如 Vercel）設定以下環境變數：
+⚠️ **重要：Firebase 服務帳號 JSON 檔案不應該直接部署！**
 
+您需要從 Firebase 服務帳號 JSON 檔案中提取三個變數，並在 Vercel 中設定為環境變數。
+
+**詳細步驟請參考：`VERCEL_FIREBASE_SETUP.md`**
+
+快速步驟：
+1. 從 Firebase Console 下載服務帳號 JSON 檔案
+2. 提取以下三個值：
+   - `project_id` → `FIREBASE_PROJECT_ID`
+   - `client_email` → `FIREBASE_CLIENT_EMAIL`
+   - `private_key` → `FIREBASE_PRIVATE_KEY`
+3. 在 Vercel Dashboard > Settings > Environment Variables 中設定
+
+**環境變數格式：**
 ```
 FIREBASE_PROJECT_ID=your-firebase-project-id
 FIREBASE_CLIENT_EMAIL=your-service-account-email@your-project.iam.gserviceaccount.com
