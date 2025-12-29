@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { findUserByName, findUserByEmail } from "./lib/users";
+import { findUserByEmail } from "./lib/users";
 import bcrypt from "bcryptjs";
 
 /**

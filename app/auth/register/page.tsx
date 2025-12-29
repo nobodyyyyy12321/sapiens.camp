@@ -35,7 +35,15 @@ export default function RegisterPage() {
       return;
     }
 
-    // Redirect to login
+    // If verification URL returned (no SMTP), show it to the user; otherwise navigate to login with notice
+    if (data?.verificationUrl) {
+      // show verification instructions
+      setError(null);
+      alert(`已建立帳號。請使用下列連結完成驗證：\n${data.verificationUrl}`);
+      router.push("/auth/login");
+      return;
+    }
+
     router.push("/auth/login");
   }
 

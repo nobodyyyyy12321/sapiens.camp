@@ -6,6 +6,9 @@ export type User = {
   name: string;
   email?: string;
   passwordHash?: string;
+  emailVerified?: boolean;
+  verificationToken?: string;
+  verificationExpires?: string; // ISO string
   bio?: string;
   avatarUrl?: string;
   socialLinks?: {
@@ -41,6 +44,10 @@ export function findUserByEmail(email: string): User | undefined {
 
 export function findUserByName(name: string): User | undefined {
   return getUsers().find((u) => u.name === name);
+}
+
+export function findUserByVerificationToken(token: string): User | undefined {
+  return getUsers().find((u) => u.verificationToken === token);
 }
 
 export function saveUser(user: User) {
