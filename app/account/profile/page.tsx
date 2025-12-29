@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-type SocialLinks = { twitter?: string; github?: string; website?: string };
+type SocialLinks = { x?: string;facebook?: string; instagram?: string; website?: string };
 
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
