@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Link from "next/link";
 import Providers from "./providers/SessionProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
           </header>
 
           {children}
+          <Analytics />
         </Providers>
       </body>
     </html>
