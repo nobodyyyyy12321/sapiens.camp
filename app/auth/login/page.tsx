@@ -2,13 +2,15 @@
 
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams?.get("callbackUrl") || "/";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -21,8 +23,37 @@ export default function LoginPage() {
       return;
     }
 
-    // On success, redirect to home
-    router.push("/");
+    // On success, redirect to callbackUrl (or home)
+    router.push(callbackUrl);
+  }
+
+  async function resendVerification() {
+    setError(null);
+    if (!email) {
+      setError("請先輸入 Email 再按此按鈕");
+      return;
+    }
+    try {
+      const res = await fetch("/api/auth/resend", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
+      const j = await res.json();
+      if (!res.ok) {
+        setError(j?.error || "無法寄出驗證信");
+        return;
+      }
+      if (j?.ok) {
+        if (j.verificationSent) {
+          setError(null);
+          alert("驗證信已寄出，請檢查您的信箱");
+        } else if (j.verificationUrl) {
+          // no SMTP — show link
+          alert(`驗證連結：\n${j.verificationUrl}`);
+        }
+      } else if (j?.message === "already_verified") {
+        setError("此帳號已完成驗證，請直接登入");
+      }
+    } catch (e) {
+      setError("寄送驗證信失敗");
+    }
   }
 
   return (
@@ -35,6 +66,9 @@ export default function LoginPage() {
           <button className="zen-button">登入</button>
           {error && <p className="text-sm text-red-600">{error}</p>}
         </form>
+        <div className="mt-4 flex items-center gap-3">
+          <button className="text-sm zen-ghost" onClick={resendVerification}>重新寄發驗證信</button>
+        </div>
         <p className="mt-4 text-sm zen-subtle">還沒有帳號？ <a className="text-accent" href="/auth/register">註冊</a></p>
       </main>
     </div>

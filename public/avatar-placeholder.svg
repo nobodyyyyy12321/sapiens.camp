@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 160 160" role="img" aria-label="avatar placeholder">
+  <rect width="100%" height="100%" fill="#e9ecee" />
+  <g transform="translate(30,12)">
+    <circle cx="50" cy="36" r="28" fill="#b5bdc0" />
+    <ellipse cx="50" cy="110" rx="58" ry="34" fill="#c3c8cb" />
+  </g>
+</svg>

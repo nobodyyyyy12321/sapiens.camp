@@ -1,11 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function AuthNav() {
   const { data: session, status } = useSession();
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  useEffect(() => {
+    let mounted = true;
+    async function loadProfile() {
+      try {
+        const res = await fetch('/api/user/profile');
+        if (!res.ok) return;
+        const j = await res.json();
+        if (j?.ok && j.user?.avatarUrl && mounted) setAvatarUrl(j.user.avatarUrl);
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    if (session?.user) loadProfile();
+    return () => { mounted = false };
+  }, [session]);
 
   if (status === "loading") {
     return <div className="text-sm zen-subtle">載入中…</div>;
@@ -14,7 +31,8 @@ export default function AuthNav() {
   if (!session?.user) {
     return (
       <div className="flex items-center gap-3">
-        <Link href="/auth/login" className="text-sm zen-subtle">登入</Link>
+        <Link href="/auth/login" className="text-sm zen-ghost px-3 py-1 rounded">登入</Link>
+        <Link href="/auth/register" className="text-sm zen-button px-3 py-1 rounded">註冊</Link>
       </div>
     );
   }
@@ -23,14 +41,33 @@ export default function AuthNav() {
 
   return (
     <div className="flex items-center gap-3">
-      <span className="text-sm zen-subtle">{name}</span>
-      <Link href="/account/profile" className="text-sm zen-subtle">我的檔案</Link>
-      <button
-        className="text-sm zen-ghost"
-        onClick={() => signOut({ callbackUrl: "/" })}
-      >
-        登出
-      </button>
+      {avatarUrl ? (
+        <img src={avatarUrl} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+      ) : session.user.image ? (
+        <img src={session.user.image} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+      ) : null}
+
+      <div className="relative group">
+        <button aria-haspopup="true" className="text-sm zen-subtle flex items-center gap-2">
+          <span>{name}</span>
+          <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        <div className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity absolute right-0 mt-2 w-44 bg-black text-white rounded shadow-md z-20 border border-gray-800">
+          <div className="py-1">
+            <Link href="/account/profile" className="block px-4 py-2 text-sm hover:bg-gray-800">個人資料</Link>
+            <Link href="/account/records" className="block px-4 py-2 text-sm hover:bg-gray-800">紀錄</Link>
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="w-full text-left px-4 py-2 text-sm hover:bg-gray-800"
+            >
+              登出
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

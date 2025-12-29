@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
+import AuthNav from "./components/AuthNav";
+import Link from "next/link";
+import Providers from "./providers/SessionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,19 +35,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
       >
-        <header className="w-full py-6">
-          <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
-            <div className="flex items-center gap-4">
-              <a href="/" className="text-lg font-semibold zen-title">出口成章</a>
-            </div>
+        <Providers>
+          <header className="w-full py-6">
+            <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
+              <div className="flex items-center gap-4">
+                <Link href="/" className="zen-ghost px-3 py-1 rounded">首頁</Link>
+              </div>
 
-            <div className="flex items-center gap-3">
-              <a href="/auth/login" className="text-sm zen-subtle">登入</a>
-            </div>
-          </nav>
-        </header>
+              <div className="flex items-center gap-3">
+                <AuthNav />
+              </div>
+            </nav>
+          </header>
 
-        {children}
+          {children}
+        </Providers>
       </body>
     </html>
   );

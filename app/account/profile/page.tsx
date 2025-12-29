@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 type SocialLinks = { twitter?: string; github?: string; website?: string };
@@ -8,6 +8,7 @@ type SocialLinks = { twitter?: string; github?: string; website?: string };
 export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const [name, setName] = useState("");
@@ -56,6 +57,8 @@ export default function ProfilePage() {
     reader.readAsDataURL(file);
   }
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   async function save() {
     setSaving(true);
     setError(null);
@@ -72,7 +75,27 @@ export default function ProfilePage() {
       return;
     }
     // optionally reload or show success
+    setEditing(false);
     router.refresh();
+  }
+
+  function makeSocialHref(platform: string, value?: string) {
+    if (!value) return null;
+    const v = value.trim();
+    if (v.startsWith("http://") || v.startsWith("https://")) return v;
+    const clean = v.replace(/^@+/, "");
+    switch (platform) {
+      case "facebook":
+        return `https://facebook.com/${clean}`;
+      case "instagram":
+        return `https://instagram.com/${clean}`;
+      case "x":
+        return `https://x.com/${clean}`;
+      case "website":
+        return clean.startsWith("http") ? clean : `https://${clean}`;
+      default:
+        return null;
+    }
   }
 
   if (loading) return <div className="p-12">載入中…</div>;
@@ -80,40 +103,131 @@ export default function ProfilePage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <main className="w-full max-w-2xl zen-card p-8">
-        <h1 className="text-2xl zen-title mb-4">我的檔案</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl zen-title mb-4">我的檔案</h1>
+          {!editing ? (
+            <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
+          ) : (
+            <div>
+              <button className="zen-button mr-2" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
+              <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
+            </div>
+          )}
+        </div>
 
         <div className="flex gap-6">
-          <div className="w-40">
+          <div className="w-40 flex flex-col items-center">
             <div className="mb-2">
-              <img src={avatarUrl || "/avatar-placeholder.png"} alt="avatar" className="w-40 h-40 rounded-md object-cover" />
+              <img src={avatarUrl || "/avatar-placeholder.svg"} alt="avatar" className="w-40 h-40 rounded-md object-cover" />
             </div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const f = e.target.files?.[0];
-                if (f) uploadAvatar(f);
-              }}
-            />
+            {editing && (
+              <>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0];
+                    if (f) uploadAvatar(f);
+                  }}
+                />
+                <button type="button" className="zen-button mt-2" onClick={() => fileInputRef.current?.click()}>選擇檔案</button>
+              </>
+            )}
           </div>
 
           <div className="flex-1">
             <label className="block mb-2">顯示名稱</label>
-            <input className="w-full p-2 rounded-md mb-3" value={name} onChange={(e) => setName(e.target.value)} />
+            {editing ? (
+              <input className="w-full p-2 rounded-md mb-3" value={name} onChange={(e) => setName(e.target.value)} />
+            ) : (
+              <div className="mb-3">{name}</div>
+            )}
 
             <label className="block mb-2">Email</label>
-            <input className="w-full p-2 rounded-md mb-3" value={email} readOnly />
+            <div className="mb-3">{email}</div>
 
             <label className="block mb-2">自我介紹</label>
-            <textarea className="w-full p-2 rounded-md mb-3" rows={4} value={bio} onChange={(e) => setBio(e.target.value)} />
+            {editing ? (
+              <textarea className="w-full p-2 rounded-md mb-3" rows={4} value={bio} onChange={(e) => setBio(e.target.value)} />
+            ) : (
+              <div className="mb-3 whitespace-pre-wrap">{bio || <span className="text-gray-500">尚未設定</span>}</div>
+            )}
 
             <label className="block mb-2">社群連結</label>
-            <input className="w-full p-2 rounded-md mb-2" placeholder="Twitter" value={socialLinks.twitter || ""} onChange={(e) => setSocialLinks({ ...socialLinks, twitter: e.target.value })} />
-            <input className="w-full p-2 rounded-md mb-2" placeholder="GitHub" value={socialLinks.github || ""} onChange={(e) => setSocialLinks({ ...socialLinks, github: e.target.value })} />
-            <input className="w-full p-2 rounded-md mb-2" placeholder="Website" value={socialLinks.website || ""} onChange={(e) => setSocialLinks({ ...socialLinks, website: e.target.value })} />
+            {editing ? (
+              <>
+                <input className="w-full p-2 rounded-md mb-2" placeholder="Facebook" value={(socialLinks as any).facebook || ""} onChange={(e) => setSocialLinks({ ...socialLinks, facebook: e.target.value })} />
+                <input className="w-full p-2 rounded-md mb-2" placeholder="Instagram" value={(socialLinks as any).instagram || ""} onChange={(e) => setSocialLinks({ ...socialLinks, instagram: e.target.value })} />
+                <input className="w-full p-2 rounded-md mb-2" placeholder="X (Twitter)" value={(socialLinks as any).x || ""} onChange={(e) => setSocialLinks({ ...socialLinks, x: e.target.value })} />
+                <input className="w-full p-2 rounded-md mb-2" placeholder="Website" value={(socialLinks as any).website || ""} onChange={(e) => setSocialLinks({ ...socialLinks, website: e.target.value })} />
+              </>
+            ) : (
+              <div className="mb-3">
+                {(socialLinks as any).facebook && (() => {
+                  const href = makeSocialHref("facebook", (socialLinks as any).facebook);
+                  return (
+                    <div className="flex items-center gap-2">
+                      <a href={href || undefined} target="_blank" rel="noreferrer" aria-label="Facebook" className="text-accent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M22 12a10 10 0 10-11.5 9.9v-7H8.9v-2.9h1.6V9.4c0-1.6 1-2.6 2.5-2.6.7 0 1.4.1 1.4.1v1.6h-.8c-.8 0-1 .5-1 1v1.3h1.7l-.3 2.9h-1.4v7A10 10 0 0022 12z" />
+                        </svg>
+                      </a>
+                      <a href={href || undefined} target="_blank" rel="noreferrer" className="text-accent">{(socialLinks as any).facebook}</a>
+                    </div>
+                  );
+                })()}
+
+                {(socialLinks as any).instagram && (() => {
+                  const href = makeSocialHref("instagram", (socialLinks as any).instagram);
+                  return (
+                    <div className="flex items-center gap-2">
+                      <a href={href || undefined} target="_blank" rel="noreferrer" aria-label="Instagram" className="text-accent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.5" />
+                          <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
+                          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
+                        </svg>
+                      </a>
+                      <a href={href || undefined} target="_blank" rel="noreferrer" className="text-accent">{(socialLinks as any).instagram}</a>
+                    </div>
+                  );
+                })()}
+
+                {(socialLinks as any).x && (() => {
+                  const href = makeSocialHref("x", (socialLinks as any).x);
+                  return (
+                    <div className="flex items-center gap-2">
+                      <a href={href || undefined} target="_blank" rel="noreferrer" aria-label="X" className="text-accent">
+                        <span className="inline-flex items-center justify-center w-5 h-5 bg-black text-white rounded">X</span>
+                      </a>
+                      <a href={href || undefined} target="_blank" rel="noreferrer" className="text-accent">{(socialLinks as any).x}</a>
+                    </div>
+                  );
+                })()}
+
+                {socialLinks.website && (() => {
+                  const href = makeSocialHref("website", socialLinks.website);
+                  return (
+                    <div className="flex items-center gap-2">
+                      <a href={href || undefined} target="_blank" rel="noreferrer" aria-label="Website" className="text-accent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+                          <path d="M2 12h20M12 2c2.5 3 2.5 10 0 20" stroke="currentColor" strokeWidth="1.2" />
+                        </svg>
+                      </a>
+                      <a href={href || undefined} target="_blank" rel="noreferrer" className="text-accent">{socialLinks.website}</a>
+                    </div>
+                  );
+                })()}
+
+                {!((socialLinks as any).facebook || (socialLinks as any).instagram || (socialLinks as any).x || socialLinks.website) && <div className="text-gray-500">尚未設定</div>}
+              </div>
+            )}
 
             <div className="mt-4">
-              <button className="zen-button" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存變更'}</button>
+              {!editing && <></>}
               {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
             </div>
           </div>

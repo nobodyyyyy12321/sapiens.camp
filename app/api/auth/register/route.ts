@@ -1,37 +1,66 @@
 import { NextResponse } from "next/server";
 import { findUserByName, findUserByEmail, saveUser } from "../../../../lib/users";
 import bcrypt from "bcryptjs";
+import { Resend } from "resend";
+
+
+
 
 async function trySendVerificationEmail(to: string, url: string) {
-  // Try to send email via nodemailer if configured; otherwise log and return false
+  // Try to send email via nodemailer. If SMTP env not configured and
+  // we're in development, create an Ethereal test account and send a preview email.
   try {
-    if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-      console.log("Verification URL (no SMTP configured):", url);
-      return false;
+    // Prefer Resend (resend.com) if API key provided
+    if (process.env.RESEND_API_KEY) {
+      try {
+        //const Resend = (await import("resend")).default;
+        const resend = new Resend(process.env.RESEND_API_KEY);
+        const from = process.env.MAIL_FROM || `no-reply@${process.env.NEXTAUTH_URL?.replace(/^https?:\/\//, "") || "example.com"}`;
+        await resend.emails.send({
+          from:"onboarding@resend.dev",
+          to: to,
+          subject: "請驗證您的帳號",
+          html: `<p>請點擊下方連結完成驗證：</p><p><a href="${url}">${url}</a></p>`,
+        });
+        return { sent: true as const, previewUrl: undefined };
+      } catch (e) {
+        console.error("Resend send error:", e);
+        // fallthrough to other methods
+      }
     }
     const nodemailer = await import("nodemailer");
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
 
-    const from = process.env.MAIL_FROM || process.env.SMTP_USER;
-    await transporter.sendMail({
-      from,
-      to,
-      subject: "請驗證您的帳號",
-      html: `<p>請點擊下方連結完成驗證：</p><p><a href="${url}">${url}</a></p>`,
-    });
-    return true;
+    // If SMTP is configured, use it.
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 587,
+        secure: process.env.SMTP_SECURE === "true",
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+
+      const from = process.env.MAIL_FROM || process.env.SMTP_USER;
+      await transporter.sendMail({
+        from,
+        to,
+        subject: "請驗證您的帳號",
+        html: `<p>請點擊下方連結完成驗證：</p><p><a href="${url}">${url}</a></p>`,
+      });
+
+      return { sent: true as const, previewUrl: undefined };
+    }
+
+    // No SMTP or Resend configured — log the verification URL so developers
+    // can copy it manually. Do not create or send Ethereal test emails.
+    console.log("Verification URL (no SMTP/Resend configured):", url);
+    return { sent: false as const, previewUrl: undefined };
   } catch (err) {
     console.error("send email error:", err);
     console.log("Verification URL:", url);
-    return false;
+    return { sent: false as const, previewUrl: undefined };
   }
 }
 
@@ -70,9 +99,15 @@ export async function POST(req: Request) {
     const base = process.env.NEXTAUTH_URL || `http://localhost:3000`;
     const verificationUrl = `${base}/api/auth/verify?token=${verificationToken}`;
 
-    const sent = await trySendVerificationEmail(email, verificationUrl);
+    const sendResult = await trySendVerificationEmail(email, verificationUrl);
 
-    return NextResponse.json({ ok: true, userId: user.id, verificationSent: sent, verificationUrl: sent ? undefined : verificationUrl });
+    return NextResponse.json({
+      ok: true,
+      userId: user.id,
+      verificationSent: sendResult.sent,
+      verificationUrl: sendResult.sent ? undefined : verificationUrl,
+      previewUrl: sendResult.previewUrl,
+    });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });

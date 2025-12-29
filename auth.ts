@@ -4,14 +4,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { findUserByEmail } from "./lib/users";
 import bcrypt from "bcryptjs";
 
-/**
- * NextAuth configuration with a Credentials provider that checks
- * email + password against stored passwordHash.
- */
-
 export const authOptions = {
   providers: [
-    // Credentials provider for email/password login
+    GithubProvider({
+      clientId: process.env.GITHUB_ID ?? "",
+      clientSecret: process.env.GITHUB_SECRET ?? "",
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -24,21 +22,20 @@ export const authOptions = {
         if (!user || !user.passwordHash) return null;
         const valid = await bcrypt.compare(credentials.password, user.passwordHash);
         if (!valid) return null;
-        // Return minimal user object for session
+        if (!user.emailVerified) {
+          throw new Error("請先完成電子郵件驗證");
+        }
         return { id: user.id, name: user.name, email: user.email } as any;
       },
     }),
-
-    // Optional GitHub provider (if configured)
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? "",
-      clientSecret: process.env.GITHUB_SECRET ?? "",
-    }),
   ],
-  session: {
-    strategy: "jwt" as const,
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+  session: { strategy: "jwt" as const },
+  pages: { error: "/auth/error" },
+  secret: process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET,
 };
 
-export default NextAuth(authOptions as any);
+const { handlers, auth } = NextAuth(authOptions as any);
+const handler = handlers.GET;
+
+export { auth, handler };
+export default handler;
