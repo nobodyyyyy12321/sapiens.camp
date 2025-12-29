@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import React, { Suspense } from "react";
+import { useRouter } from "next/navigation";
+import SearchParamsProvider, { useSearchParamsContext } from "../../components/SearchParamsProvider";
 
-export default function AuthErrorPage() {
-  const search = useSearchParams();
+function ErrorInner() {
+  const search = useSearchParamsContext();
   const router = useRouter();
   const error = search?.get("error") || "unknown_error";
 
@@ -19,5 +20,15 @@ export default function AuthErrorPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchParamsProvider>
+        <ErrorInner />
+      </SearchParamsProvider>
+    </Suspense>
   );
 }

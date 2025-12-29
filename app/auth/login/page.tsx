@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import SearchParamsProvider, { useSearchParamsContext } from "../../components/SearchParamsProvider";
 
-export default function LoginPage() {
+function LoginInner() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParamsContext();
   const callbackUrl = searchParams?.get("callbackUrl") || "/";
 
   async function submit(e: React.FormEvent) {
@@ -17,13 +18,11 @@ export default function LoginPage() {
     setError(null);
 
     const res = await signIn("credentials", { redirect: false, email, password });
-    // res is typed loosely
     if ((res as any)?.error) {
       setError((res as any).error || "Login failed");
       return;
     }
 
-    // On success, redirect to callbackUrl (or home)
     router.push(callbackUrl);
   }
 
@@ -45,7 +44,6 @@ export default function LoginPage() {
           setError(null);
           alert("驗證信已寄出，請檢查您的信箱");
         } else if (j.verificationUrl) {
-          // no SMTP — show link
           alert(`驗證連結：\n${j.verificationUrl}`);
         }
       } else if (j?.message === "already_verified") {
@@ -72,5 +70,15 @@ export default function LoginPage() {
         <p className="mt-4 text-sm zen-subtle">還沒有帳號？ <a className="text-accent" href="/auth/register">註冊</a></p>
       </main>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchParamsProvider>
+        <LoginInner />
+      </SearchParamsProvider>
+    </Suspense>
   );
 }
