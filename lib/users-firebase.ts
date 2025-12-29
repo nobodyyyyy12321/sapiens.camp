@@ -129,7 +129,12 @@ export async function updateUser(
   try {
     const db = getFirestoreDB();
     const updateData: any = { ...updates };
-    
+
+    // 移除值為 undefined 的欄位，避免 Firestore update 出錯
+    Object.keys(updateData).forEach((k) => {
+      if ((updateData as any)[k] === undefined) delete (updateData as any)[k];
+    });
+
     // 如果更新 email，轉換為小寫
     if (updateData.email) {
       updateData.email = updateData.email.toLowerCase();
