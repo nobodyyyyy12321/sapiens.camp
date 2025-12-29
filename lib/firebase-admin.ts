@@ -1,8 +1,10 @@
 import { initializeApp, getApps, cert, App } from "firebase-admin/app";
 import { getFirestore, Firestore } from "firebase-admin/firestore";
+import { getStorage } from "firebase-admin/storage";
 
 let app: App | undefined;
 let db: Firestore | undefined;
+let storageBucketName: string | undefined;
 
 export function getFirebaseAdmin() {
   if (app && db) {
@@ -36,11 +38,24 @@ export function getFirebaseAdmin() {
   });
 
   db = getFirestore(app);
+  // optional: storage bucket name
+  storageBucketName = process.env.FIREBASE_STORAGE_BUCKET;
   return { app, db };
 }
 
 export function getFirestoreDB(): Firestore {
   const { db } = getFirebaseAdmin();
   return db!;
+}
+
+export function getStorageBucket() {
+  const { app } = getFirebaseAdmin();
+  if (!process.env.FIREBASE_STORAGE_BUCKET) {
+    throw new Error(
+      "FIREBASE_STORAGE_BUCKET 環境變數未設定。請在 .env.local 加入 FIREBASE_STORAGE_BUCKET=your-bucket-name"
+    );
+  }
+  const storage = getStorage(app);
+  return storage.bucket(process.env.FIREBASE_STORAGE_BUCKET);
 }
 

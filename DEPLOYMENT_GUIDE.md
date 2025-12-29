@@ -10,6 +10,35 @@
 
 ### 2. 準備環境變數
 
+⚠️ **重要：必須設定以下環境變數！**
+
+#### 必須設定的環境變數
+
+**1. NextAuth 認證密鑰（必須）**
+
+```bash
+# 變數名稱：NEXTAUTH_SECRET（優先）或 AUTH_SECRET
+# 用途：用於簽名和加密 JWT token，保護用戶會話安全
+
+# 生成方式（選擇一種）：
+# 方式 1：使用 OpenSSL
+openssl rand -base64 32
+
+# 方式 2：使用 Node.js
+node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+
+# 方式 3：使用線上工具
+# https://generate-secret.vercel.app/32
+```
+
+**2. NextAuth URL（必須）**
+
+```
+NEXTAUTH_URL=https://memorize.guru
+```
+
+**3. Firebase 相關（如果使用 Firebase）**
+
 ⚠️ **重要：Firebase 服務帳號 JSON 檔案不應該直接部署！**
 
 您需要從 Firebase 服務帳號 JSON 檔案中提取三個變數，並在 Vercel 中設定為環境變數。
@@ -24,12 +53,7 @@
    - `private_key` → `FIREBASE_PRIVATE_KEY`
 3. 在 Vercel Dashboard > Settings > Environment Variables 中設定
 
-**環境變數格式：**
-```
-FIREBASE_PROJECT_ID=your-firebase-project-id
-FIREBASE_CLIENT_EMAIL=your-service-account-email@your-project.iam.gserviceaccount.com
-FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour private key here\n-----END PRIVATE KEY-----\n"
-```
+**完整環境變數清單請參考：`VERCEL_ENV_VARIABLES.md`**
 
 ## 部署方式
 
