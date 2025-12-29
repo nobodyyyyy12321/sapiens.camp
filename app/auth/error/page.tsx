@@ -2,7 +2,7 @@
 
 import React, { Suspense } from "react";
 import { useRouter } from "next/navigation";
-import SearchParamsProvider, { useSearchParamsContext } from "@/components/SearchParamsProvider";
+import SearchParamsProvider, { useSearchParamsContext } from "../../components/SearchParamsProvider";
 
 function ErrorInner() {
   const search = useSearchParamsContext();

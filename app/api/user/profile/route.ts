@@ -10,7 +10,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = findUserByEmail(session.user.email as string);
+    const user = await findUserByEmail(session.user.email as string);
     if (!user) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
@@ -29,7 +29,7 @@ export async function PATCH(req: Request) {
     if (!session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const user = findUserByEmail(session.user.email as string);
+    const user = await findUserByEmail(session.user.email as string);
     if (!user) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
@@ -45,7 +45,7 @@ export async function PATCH(req: Request) {
       updates.socialLinks = body.socialLinks;
     }
 
-    const updated = updateUser(user.id, updates);
+    const updated = await updateUser(user.id, updates);
     
     return NextResponse.json({ ok: true, user: updated });
   } catch (e) {

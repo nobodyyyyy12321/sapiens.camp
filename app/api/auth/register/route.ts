@@ -72,11 +72,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing name, email or password" }, { status: 400 });
     }
 
-    if (findUserByEmail(email)) {
+    if (await findUserByEmail(email)) {
       return NextResponse.json({ error: "Email already registered" }, { status: 409 });
     }
 
-    if (findUserByName(name)) {
+    if (await findUserByName(name)) {
       return NextResponse.json({ error: "Name already registered" }, { status: 409 });
     }
 
@@ -94,7 +94,7 @@ export async function POST(req: Request) {
       verificationExpires,
     };
 
-    saveUser(user as any);
+    await saveUser(user as any);
 
     const base = process.env.NEXTAUTH_URL || `http://localhost:3000`;
     const verificationUrl = `${base}/api/auth/verify?token=${verificationToken}`;

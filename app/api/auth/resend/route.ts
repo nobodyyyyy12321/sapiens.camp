@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     const { email } = body;
     if (!email) return NextResponse.json({ error: "Missing email" }, { status: 400 });
 
-    const user = findUserByEmail(email as string);
+    const user = await findUserByEmail(email as string);
     if (!user) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     if (user.emailVerified) return NextResponse.json({ ok: false, message: "already_verified" });
@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     if (!token || (user.verificationExpires && new Date(user.verificationExpires) < new Date())) {
       token = crypto.randomUUID();
       const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
-      updateUser(user.id, { verificationToken: token, verificationExpires: expires });
+      await updateUser(user.id, { verificationToken: token, verificationExpires: expires });
     }
 
     const base = process.env.NEXTAUTH_URL || `http://localhost:3000`;

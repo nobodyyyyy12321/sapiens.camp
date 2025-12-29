@@ -12,7 +12,7 @@ export async function GET(req: Request) {
       return NextResponse.redirect(location.toString());
     }
 
-    const user = findUserByVerificationToken(token);
+    const user = await findUserByVerificationToken(token);
     if (!user) {
       const location = new URL('/', req.url);
       location.searchParams.set('verified', '0');
@@ -28,7 +28,7 @@ export async function GET(req: Request) {
       return NextResponse.redirect(location.toString());
     }
 
-    updateUser(user.id, { emailVerified: true, verificationToken: undefined, verificationExpires: undefined });
+    await updateUser(user.id, { emailVerified: true, verificationToken: undefined, verificationExpires: undefined });
     const successLocation = new URL('/', req.url);
     successLocation.searchParams.set('verified', '1');
     return NextResponse.redirect(successLocation.toString());
