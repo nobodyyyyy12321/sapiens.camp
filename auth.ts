@@ -1,4 +1,4 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { findUserByEmail } from "./lib/users";
@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs";
  * email + password against stored passwordHash.
  */
 
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   providers: [
     // Credentials provider for email/password login
     CredentialsProvider({
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         if (!credentials || !credentials.email || !credentials.password) return null;
         const user = findUserByEmail(credentials.email);
         if (!user || !user.passwordHash) return null;

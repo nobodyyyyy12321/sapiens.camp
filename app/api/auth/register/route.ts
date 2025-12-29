@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { findUserByName, findUserByEmail, saveUser } from "../../../../lib/users.ts";
+import { findUserByName, findUserByEmail, saveUser } from "../../../../lib/users";
 import bcrypt from "bcryptjs";
 
 async function trySendVerificationEmail(to: string, url: string) {
