@@ -23,6 +23,7 @@ export type User = {
     success: boolean;
     timestamp: string;
   }>;
+  recitationsPublic?: boolean;
 };
 
 const COLLECTION_NAME = "users";

@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 type RecitationRecord = {
   articleId: string;
@@ -15,31 +15,45 @@ type RecitationRecord = {
 export default function RecordsPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const params = useParams();
   const [recitations, setRecitations] = useState<RecitationRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [shareCopied, setShareCopied] = useState(false);
+  const [recitationsPublic, setRecitationsPublic] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/login");
+    const nameParam = params?.name;
+    if (!nameParam || typeof nameParam !== "string") {
+      router.push("/");
       return;
     }
 
-    if (status === "authenticated" && session?.user?.email) {
-      fetch("/api/user/profile")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.user?.recitations) {
-            setRecitations(data.user.recitations);
+    const decodedName = decodeURIComponent(nameParam);
+    setUserName(decodedName);
+
+    // Fetch the user's profile
+    fetch(`/api/user/profile?name=${encodeURIComponent(decodedName)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          const owner = session?.user?.name === decodedName;
+          setIsOwner(owner);
+          setRecitationsPublic(data.user.recitationsPublic ?? false);
+          
+          // Show records if owner or if public
+          if (owner || data.user.recitationsPublic) {
+            setRecitations(data.user.recitations || []);
           }
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Failed to fetch recitations:", err);
-          setLoading(false);
-        });
-    }
-  }, [status, session, router]);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch recitations:", err);
+        setLoading(false);
+      });
+  }, [status, session, router, params]);
 
   if (loading || status === "loading") {
     return (
@@ -74,30 +88,39 @@ export default function RecordsPage() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
         <div className="flex items-center justify-between w-full max-w-md mb-8">
-          <h1 className="text-4xl font-bold zen-title">紀錄</h1>
-          <button className="zen-ghost" onClick={handleShare}>
-            {shareCopied ? "已複製" : "分享連結"}
-          </button>
+          <h1 className="text-4xl font-bold zen-title">
+            {userName ? `${userName} 的紀錄` : "紀錄"}
+          </h1>
+          {isOwner && (
+            <button className="zen-ghost" onClick={handleShare}>
+              {shareCopied ? "已複製" : "分享連結"}
+            </button>
+          )}
         </div>
 
-        <div className="w-full max-w-md space-y-6">
-          {/* Statistics Cards */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
-              <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
-              <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{totalAttempts}</p>
-            </div>
-
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
-              <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
-              <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{successCount}</p>
-            </div>
+        {!isOwner && !recitationsPublic ? (
+          <div className="w-full max-w-md text-center py-12">
+            <p className="text-gray-500">此用戶的背誦紀錄為不公開</p>
           </div>
+        ) : (
+          <div className="w-full max-w-md space-y-6">
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
+                <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
+                <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{totalAttempts}</p>
+              </div>
 
-          {/* Records List */}
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">背誦歷史</h2>
-            {recitations.length === 0 ? (
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
+                <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
+                <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{successCount}</p>
+              </div>
+            </div>
+
+            {/* Records List */}
+            <div className="mt-8">
+              <h2 className="text-xl font-semibold mb-4">背誦歷史</h2>
+              {recitations.length === 0 ? (
               <p className="text-center text-gray-500 py-8">尚無背誦紀錄</p>
             ) : (
               <div className="space-y-3">
@@ -139,6 +162,7 @@ export default function RecordsPage() {
             )}
           </div>
         </div>
+        )}
       </main>
     </div>
   );
