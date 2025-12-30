@@ -16,6 +16,13 @@ export type User = {
     website?: string;
     [key: string]: string | undefined;
   };
+  recitations?: Array<{
+    articleId: string;
+    articleNumber: number;
+    title: string;
+    success: boolean;
+    timestamp: string;
+  }>;
 };
 
 const COLLECTION_NAME = "users";
