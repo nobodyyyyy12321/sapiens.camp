@@ -22,7 +22,7 @@ const notoSerif = Noto_Serif_TC({
 
 export const metadata: Metadata = {
   title: "出口成章",
-  description: "禪風詩詞收藏與練習",
+  description: "語音背誦詩文輔助",
 };
 
 export default function RootLayout({
