@@ -6,11 +6,14 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const query = searchParams.get("q");
 
-    if (!query) {
-      return NextResponse.json({ articles: [] });
+    const allArticles = await getArticles();
+
+    if (!query || query.trim() === "") {
+      // Return all articles if no query
+      allArticles.sort((a, b) => (a.number || 0) - (b.number || 0));
+      return NextResponse.json({ articles: allArticles });
     }
 
-    const allArticles = await getArticles();
     const searchLower = query.toLowerCase();
 
     // Filter by title or author

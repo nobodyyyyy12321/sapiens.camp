@@ -1,5 +1,6 @@
 import React from "react";
 import { getArticleByNumber } from "../../../lib/articles-firebase";
+import RecitationClient from "./RecitationClient";
 
 type Props = { params: Promise<{ category: string; number: string }> };
 
@@ -33,11 +34,12 @@ export default async function ArticlePage({ params }: Props) {
           {article.author && <p className="mt-2 text-sm zen-subtle">— {article.author}</p>}
         </header>
 
-        <article className="space-y-4 text-center text-2xl leading-loose">
-          {lines.map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
-        </article>
+        <RecitationClient
+          articleId={article.id}
+          articleNumber={article.number || number}
+          title={article.title}
+          content={lines}
+        />
       </main>
     </div>
   );

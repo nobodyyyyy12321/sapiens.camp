@@ -15,8 +15,8 @@ export async function GET() {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const { id, name, email, bio, avatarUrl, socialLinks } = user;
-    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks } });
+    const { id, name, email, bio, avatarUrl, socialLinks, recitations } = user;
+    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks, recitations } });
   } catch (e) {
     console.error("GET User Error:", e);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });

@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [shareCopied, setShareCopied] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -98,6 +99,20 @@ export default function ProfilePage() {
     }
   }
 
+  function handleShare() {
+    const url = window.location.href;
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        setShareCopied(true);
+        setTimeout(() => setShareCopied(false), 1500);
+      }).catch(() => {
+        window.prompt("複製連結", url);
+      });
+    } else {
+      window.prompt("複製連結", url);
+    }
+  }
+
   if (loading) return <div className="p-12">載入中…</div>;
 
   return (
@@ -105,14 +120,19 @@ export default function ProfilePage() {
       <main className="w-full max-w-2xl zen-card p-8">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl zen-title mb-4">我的檔案</h1>
-          {!editing ? (
-            <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
-          ) : (
-            <div>
-              <button className="zen-button mr-2" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
-              <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            <button className="zen-ghost" onClick={handleShare}>
+              {shareCopied ? "已複製" : "分享連結"}
+            </button>
+            {!editing ? (
+              <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button className="zen-button" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
+                <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="flex gap-6">
