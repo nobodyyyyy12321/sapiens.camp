@@ -17,7 +17,6 @@ export default async function CategoryPage({ params }: Props) {
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-4xl font-bold zen-title">{category}</h1>
-          <p className="max-w-md text-lg leading-8 zen-subtle">請選擇詩文</p>
         </div>
 
         <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
