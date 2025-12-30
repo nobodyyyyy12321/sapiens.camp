@@ -39,7 +39,9 @@ export default function RootLayout({
           <header className="w-full py-6">
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4">
-                <Link href="/" className="zen-ghost px-3 py-1 rounded">首頁</Link>
+                <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                  首頁
+                </Link>
               </div>
 
               <div className="flex items-center gap-3">
