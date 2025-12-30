@@ -19,19 +19,21 @@ export default async function CategoryPage({ params }: Props) {
           <h1 className="max-w-xs text-4xl font-bold zen-title">{category}</h1>
         </div>
 
-        <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
+        <div className="w-full max-w-3xl" style={{ marginTop: "1cm" }}>
           {articles.length === 0 ? (
-            <p className="text-sm zen-subtle">目前無詩文</p>
+            <p className="text-sm zen-subtle text-center">目前無詩文</p>
           ) : (
-            articles.map((a) => (
-              <Link
-                key={a.id}
-                className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-                href={`/${encodeURIComponent(category)}/${a.number}`}
-              >
-                {a.title}{a.author ? ` - ${a.author}` : ""}
-              </Link>
-            ))
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              {articles.map((a) => (
+                <Link
+                  key={a.id}
+                  className="flex h-12 items-center justify-center rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100"
+                  href={`/${encodeURIComponent(category)}/${a.number}`}
+                >
+                  <span className="truncate">{a.title}{a.author ? ` - ${a.author}` : ""}</span>
+                </Link>
+              ))}
+            </div>
           )}
         </div>
       </main>
