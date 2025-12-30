@@ -24,6 +24,7 @@ export type User = {
     timestamp: string;
   }>;
   recitationsPublic?: boolean;
+  emailPublic?: boolean;
 };
 
 const COLLECTION_NAME = "users";

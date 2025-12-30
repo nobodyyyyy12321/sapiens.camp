@@ -16,10 +16,10 @@ export async function GET(request: Request) {
       }
 
       // Return limited public data
-      const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic } = user;
+      const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
       return NextResponse.json({ 
         ok: true, 
-        user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic } 
+        user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } 
       });
     }
 
@@ -34,8 +34,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic } = user;
-    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic } });
+    const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
+    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } });
   } catch (e) {
     console.error("GET User Error:", e);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
@@ -65,6 +65,9 @@ export async function PATCH(req: Request) {
     }
     if (typeof body.recitationsPublic === "boolean") {
       updates.recitationsPublic = body.recitationsPublic;
+    }
+    if (typeof body.emailPublic === "boolean") {
+      updates.emailPublic = body.emailPublic;
     }
 
     const updated = await updateUser(user.id, updates);

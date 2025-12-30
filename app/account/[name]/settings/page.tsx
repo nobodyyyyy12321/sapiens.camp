@@ -9,6 +9,7 @@ export default function SettingsPage() {
   const router = useRouter();
   const params = useParams();
   const [recitationsPublic, setRecitationsPublic] = useState(false);
+  const [emailPublic, setEmailPublic] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
@@ -40,6 +41,7 @@ export default function SettingsPage() {
         .then((data) => {
           if (data.user) {
             setRecitationsPublic(data.user.recitationsPublic ?? false);
+            setEmailPublic(data.user.emailPublic ?? false);
           }
           setLoading(false);
         })
@@ -59,7 +61,7 @@ export default function SettingsPage() {
       const res = await fetch("/api/user/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ recitationsPublic }),
+        body: JSON.stringify({ recitationsPublic, emailPublic }),
       });
 
       const data = await res.json();
@@ -110,6 +112,22 @@ export default function SettingsPage() {
                     <div className="font-medium">公開背誦紀錄</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                       允許其他使用者查看您的背誦紀錄和統計資料
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={emailPublic}
+                    onChange={(e) => setEmailPublic(e.target.checked)}
+                    className="w-5 h-5 mt-0.5"
+                  />
+                  <div>
+                    <div className="font-medium">公開電子郵件</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                      允許其他使用者在您的個人資料頁面查看您的電子郵件
                     </div>
                   </div>
                 </label>

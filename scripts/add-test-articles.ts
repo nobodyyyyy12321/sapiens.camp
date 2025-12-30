@@ -244,6 +244,51 @@ async function addTestArticles() {
         tags: ["邊塞", "戰爭", "將士"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+      },
+      {
+        number: 14,
+        title: "望廬山瀑布",
+        category: "唐詩",
+        author: "李白",
+        content: [
+          "日照香爐生紫煙，",
+          "遙看瀑布掛前川。",
+          "飛流直下三千尺，",
+          "疑是銀河落九天。"
+        ],
+        tags: ["山水", "瀑布", "壯觀"],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        number: 15,
+        title: "望天門山",
+        category: "唐詩",
+        author: "李白",
+        content: [
+          "天門中斷楚江開，",
+          "碧水東流至此回。",
+          "兩岸青山相對出，",
+          "孤帆一片日邊來。"
+        ],
+        tags: ["山水", "長江", "景色"],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        number: 16,
+        title: "贈汪倫",
+        category: "唐詩",
+        author: "李白",
+        content: [
+          "李白乘舟將欲行，",
+          "忽聞岸上踏歌聲。",
+          "桃花潭水深千尺，",
+          "不及汪倫送我情。"
+        ],
+        tags: ["友情", "送別", "感動"],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }
     ];
 
