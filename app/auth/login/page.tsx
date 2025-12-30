@@ -55,7 +55,7 @@ function LoginInner() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-start justify-center pt-16">
       <main className="w-full max-w-md zen-card p-8">
         <h1 className="text-2xl zen-title mb-2">登入</h1>
         <form onSubmit={submit} className="flex flex-col gap-3">

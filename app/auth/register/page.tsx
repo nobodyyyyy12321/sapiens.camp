@@ -56,7 +56,7 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-start justify-center pt-16">
       <main className="w-full max-w-md zen-card p-8">
         <h1 className="text-2xl zen-title mb-2">建立帳號（需 Email & 密碼）</h1>
         {success ? (
