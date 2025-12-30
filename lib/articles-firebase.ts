@@ -45,6 +45,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | undefine
     console.error("Error getting article by slug:", err);
     return undefined;
   }
+}
 
 export async function getArticleByTitle(title: string): Promise<Article | undefined> {
   try {
@@ -57,4 +58,17 @@ export async function getArticleByTitle(title: string): Promise<Article | undefi
     return undefined;
   }
 }
+
+export async function createArticle(article: Omit<Article, "id" | "createdAt" | "updatedAt">) {
+  try {
+    const db = getFirestoreDB();
+    const now = new Date().toISOString();
+    const data: any = { ...article, createdAt: now, updatedAt: now };
+    const docRef = await db.collection(COLLECTION_NAME).add(data);
+    const doc = await docRef.get();
+    return docToArticle(doc);
+  } catch (err) {
+    console.error("Error creating article:", err);
+    throw err;
+  }
 }
