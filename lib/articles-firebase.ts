@@ -6,9 +6,8 @@ export type Article = {
   category?: string;
   author?: string;
   content: string[] | string; // support array or single string
-  tags?: string[];
   type?: string; // e.g., 'poem'
-  slug?: string;
+  number?: number;
   createdAt?: string;
   updatedAt?: string;
   [key: string]: any;
@@ -53,14 +52,14 @@ export async function getArticlesByCategory(category: string): Promise<Article[]
   }
 }
 
-export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
+export async function getArticleByNumber(number: number): Promise<Article | undefined> {
   try {
     const db = getFirestoreDB();
-    const snapshot = await db.collection(COLLECTION_NAME).where("slug", "==", slug).limit(1).get();
+    const snapshot = await db.collection(COLLECTION_NAME).where("number", "==", number).limit(1).get();
     if (snapshot.empty) return undefined;
     return docToArticle(snapshot.docs[0]);
   } catch (err) {
-    console.error("Error getting article by slug:", err);
+    console.error("Error getting article by number:", err);
     return undefined;
   }
 }

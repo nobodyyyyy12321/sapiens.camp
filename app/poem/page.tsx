@@ -5,6 +5,9 @@ import { getArticles } from "../../lib/articles-firebase";
 export default async function PoemPage() {
   const articles = await getArticles({ type: "poem" });
 
+  // Sort by number (ascending)
+  articles.sort((a, b) => (a.number || 0) - (b.number || 0));
+
   // collect unique categories (use category field, fallback to type)
   const categories = Array.from(
     new Set(articles.map((a) => a.category || a.type || "uncategorized"))
@@ -24,7 +27,7 @@ export default async function PoemPage() {
           ) : (
             articles.map((a) => (
               <div key={a.id} className="flex justify-center">
-                <Link href={`/poem/${a.slug || a.id}`} className="zen-button inline-block">
+                <Link href={`/poem/${a.number}`} className="zen-button inline-block">
                   {a.title}
                 </Link>
               </div>
