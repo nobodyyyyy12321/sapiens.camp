@@ -17,7 +17,6 @@ export default function ProfilePage() {
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [socialLinks, setSocialLinks] = useState<SocialLinks>({});
-  const [recitationsPublic, setRecitationsPublic] = useState(false);
 
   const router = useRouter();
 
@@ -37,7 +36,6 @@ export default function ProfilePage() {
       setBio(u.bio || "");
       setAvatarUrl(u.avatarUrl || "");
       setSocialLinks(u.socialLinks || {});
-      setRecitationsPublic(u.recitationsPublic ?? false);
       setLoading(false);
     }
     load();
@@ -68,7 +66,7 @@ export default function ProfilePage() {
     const res = await fetch("/api/user/profile", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, bio, avatarUrl, socialLinks, recitationsPublic }),
+      body: JSON.stringify({ name, bio, avatarUrl, socialLinks }),
     });
 
     const j = await res.json();
@@ -175,23 +173,6 @@ export default function ProfilePage() {
               <textarea className="w-full p-2 rounded-md mb-3" rows={4} value={bio} onChange={(e) => setBio(e.target.value)} />
             ) : (
               <div className="mb-3 whitespace-pre-wrap">{bio || <span className="text-gray-500">尚未設定</span>}</div>
-            )}
-
-            <label className="block mb-2">背誦紀錄公開設定</label>
-            {editing ? (
-              <div className="mb-3">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={recitationsPublic}
-                    onChange={(e) => setRecitationsPublic(e.target.checked)}
-                    className="w-4 h-4"
-                  />
-                  <span>公開背誦紀錄</span>
-                </label>
-              </div>
-            ) : (
-              <div className="mb-3">{recitationsPublic ? "公開" : "不公開"}</div>
             )}
 
             <label className="block mb-2">社群連結</label>
