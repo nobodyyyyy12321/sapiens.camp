@@ -2,11 +2,24 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import Link from "next/link";
 
-function HomeContent() {
+type HomeContentProps = {
+  categories: string[];
+};
+
+function HomeContent({ categories }: HomeContentProps) {
   const searchParams = useSearchParams();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
+  const [loadedCategories, setLoadedCategories] = useState<string[]>([]);
 
+  useEffect(() => {
+    // Fetch categories
+    fetch("/api/categories")
+      .then((res) => res.json())
+      .then((data) => setLoadedCategories(data.categories || []))
+      .catch((err) => console.error("Failed to fetch categories:", err));
+  }, []);
   useEffect(() => {
     const verified = searchParams?.get("verified");
     const error = searchParams?.get("error");
@@ -62,27 +75,20 @@ function HomeContent() {
 
         </div>
         {/* Primary actions moved up */}
-        <div className="flex w-full max-w-md items-center gap-3 text-base font-medium" style={{ marginTop: "1cm" }}>
-          <a
-            className="flex h-12 flex-1 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-foreground transition-colors hover:bg-zinc-100"
-            href="/poem"
-          >
-            唐詩
-          </a>
-
-          <a
-            className="flex h-12 flex-1 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-foreground transition-colors hover:bg-zinc-100"
-            href="/songci"
-          >
-            宋詞
-          </a>
-
-          <a
-            className="flex h-12 flex-1 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-foreground transition-colors hover:bg-zinc-100"
-            href="/bible"
-          >
-            聖經
-          </a>
+        <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
+          {loadedCategories.length === 0 ? (
+            <p className="text-sm zen-subtle">載入中...</p>
+          ) : (
+            loadedCategories.map((category) => (
+              <Link
+                key={category}
+                className="flex h-12 flex-1 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-foreground transition-colors hover:bg-zinc-100"
+                href="/poem"
+              >
+                {category}
+              </Link>
+            ))
+          )}
         </div>
       </main>
     </div>
@@ -101,7 +107,7 @@ export default function Home() {
         </main>
       </div>
     }>
-      <HomeContent />
+      <HomeContent categories={[]} />
     </Suspense>
   );
 }

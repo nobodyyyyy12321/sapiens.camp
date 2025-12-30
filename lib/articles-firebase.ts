@@ -3,6 +3,7 @@ import { getFirestoreDB } from "./firebase-admin";
 export type Article = {
   id: string;
   title: string;
+  category?: string;
   author?: string;
   content: string[] | string; // support array or single string
   tags?: string[];
@@ -22,15 +23,32 @@ function docToArticle(doc: any): Article {
   } as Article;
 }
 
-export async function getArticles(filters?: { type?: string }): Promise<Article[]> {
+export async function getArticles(filters?: { type?: string; category?: string }): Promise<Article[]> {
   try {
     const db = getFirestoreDB();
     let query: any = db.collection(COLLECTION_NAME);
     if (filters?.type) query = query.where("type", "==", filters.type);
+    if (filters?.category) query = query.where("category", "==", filters.category);
     const snapshot = await query.get();
     return snapshot.docs.map((d: any) => docToArticle(d));
   } catch (err) {
     console.error("Error getting articles:", err);
+    return [];
+  }
+}
+
+export async function getArticlesByCategory(category: string): Promise<Article[]> {
+  try {
+    const db = getFirestoreDB();
+    // try category field first
+    let snapshot = await db.collection(COLLECTION_NAME).where("category", "==", category).get();
+    if (!snapshot.empty) return snapshot.docs.map((d: any) => docToArticle(d));
+    // fallback to type field
+    snapshot = await db.collection(COLLECTION_NAME).where("type", "==", category).get();
+    if (!snapshot.empty) return snapshot.docs.map((d: any) => docToArticle(d));
+    return [];
+  } catch (err) {
+    console.error("Error getting articles by category:", err);
     return [];
   }
 }

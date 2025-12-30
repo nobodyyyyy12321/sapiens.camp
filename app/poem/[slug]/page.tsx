@@ -1,10 +1,10 @@
 import React from "react";
 import { getArticleBySlug } from "../../../lib/articles-firebase";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export default async function ArticlePage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const article = await getArticleBySlug(slug);
 
   if (!article) {
@@ -15,9 +15,6 @@ export default async function ArticlePage({ params }: Props) {
             <h1 className="text-4xl zen-title">找不到文章</h1>
             <p className="mt-2 text-sm zen-subtle">找不到 slug 為「{slug}」的文章，請確認 Firestore `articles` 是否存在該文件。</p>
           </header>
-          <footer className="mt-8 text-center">
-            <a href="/poem" className="zen-ghost inline-block">回到詩頁</a>
-          </footer>
         </main>
       </div>
     );
@@ -40,17 +37,6 @@ export default async function ArticlePage({ params }: Props) {
             <p key={i}>{line}</p>
           ))}
         </article>
-
-        {article.translation?.en && (
-          <section className="mt-8 text-center text-sm zen-subtle">
-            <p>Translation (English):</p>
-            <p className="mt-2">{article.translation.en}</p>
-          </section>
-        )}
-
-        <footer className="mt-8 text-center">
-          <a href="/poem" className="zen-ghost inline-block">回到詩頁</a>
-        </footer>
       </main>
     </div>
   );
