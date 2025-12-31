@@ -69,7 +69,7 @@ export default function ManageList({ params }: { params: { name: string; id: str
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-transparent dark:bg-black">
       <main className="w-full max-w-2xl p-8">
         <button className="mb-4 text-sm" onClick={() => router.push(`/account/${encodeURIComponent(params.name)}/lists`)}>← 返回 清單</button>
         {loading ? <p>載入中…</p> : (

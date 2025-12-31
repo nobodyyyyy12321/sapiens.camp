@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fbf7f1;
+  /* Warmer beige background */
+  --background: #f5efe6;
   --foreground: #2b2b2b;
-  --zen-bg: #fbf7f1;
-  --zen-paper: #f6f0e8;
+  --zen-bg: #f5efe6;
+  --zen-paper: #f8f3ea;
   --zen-ink: #2b2b2b;
   --zen-accent: #6b705c;
   --zen-muted: #9aa09a;

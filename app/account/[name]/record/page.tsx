@@ -57,7 +57,7 @@ export default function RecordsPage() {
 
   if (loading || status === "loading") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+      <div className="flex min-h-screen items-center justify-center bg-transparent dark:bg-black">
         <main className="w-full max-w-2xl p-8 text-center">
           <p className="text-sm zen-subtle">載入中...</p>
         </main>
@@ -85,8 +85,8 @@ export default function RecordsPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         <div className="flex items-center justify-between w-full max-w-md mb-8">
           <h1 className="text-4xl font-bold zen-title">
             {userName ? `${userName} 的紀錄` : "紀錄"}

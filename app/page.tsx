@@ -19,8 +19,7 @@ function HomeContent({ categories }: HomeContentProps) {
   const [isVoiceListening, setIsVoiceListening] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [allArticles, setAllArticles] = useState<any[]>([]);
-  const [totalAttempts, setTotalAttempts] = useState<number | null>(null);
-  const [totalSuccesses, setTotalSuccesses] = useState<number | null>(null);
+  
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -36,16 +35,7 @@ function HomeContent({ categories }: HomeContentProps) {
       .then((data) => setAllArticles(data.articles || []))
       .catch((err) => console.error("Failed to fetch articles:", err));
 
-    // Fetch global stats
-    fetch("/api/stats")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.success) {
-          setTotalAttempts(Number(data.totalAttempts || 0));
-          setTotalSuccesses(Number(data.totalSuccesses || 0));
-        }
-      })
-      .catch((err) => console.error("Failed to fetch stats:", err));
+    // global stats moved to /stats page
   }, []);
 
   useEffect(() => {
@@ -169,8 +159,8 @@ function HomeContent({ categories }: HomeContentProps) {
   }, [searchParams]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black sm:items-start">
         {verificationMessage && (
           <div className={`w-full mb-6 p-4 rounded-md ${
             verificationMessage === "success" 
@@ -197,13 +187,7 @@ function HomeContent({ categories }: HomeContentProps) {
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-4xl font-bold zen-title">出口成章</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">Sustainable Human Classics</p>
-          <div className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
-            {totalAttempts !== null && totalSuccesses !== null ? (
-              <span>全站累計：嘗試 {totalAttempts} 次 ・ 成功 {totalSuccesses} 次</span>
-            ) : (
-              <span>載入中統計資料…</span>
-            )}
-          </div>
+          {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
 
         {/* Search box and voice button */}

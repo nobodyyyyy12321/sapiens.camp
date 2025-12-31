@@ -87,6 +87,7 @@ export async function POST(request: Request) {
             success,
             timestamp: timestamp || new Date().toISOString(),
             userEmail: session?.user?.email || null,
+            userName: session?.user?.name || null,
             anonymous: !session?.user?.email,
             createdAt: new Date().toISOString(),
           };

@@ -45,6 +45,9 @@ export default function RootLayout({
                 <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
                   榜單
                 </Link>
+                <Link href="/stats" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                  全站統計
+                </Link>
               </div>
 
               <div className="flex items-center gap-3">

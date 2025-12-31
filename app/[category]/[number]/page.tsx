@@ -12,7 +12,7 @@ export default async function ArticlePage({ params }: Props) {
 
   if (!article) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-serif dark:bg-black">
+      <div className="flex min-h-screen items-center justify-center bg-transparent font-serif dark:bg-black">
         <main className="w-full max-w-2xl rounded-lg zen-card p-12">
           <header className="mb-6 text-center">
             <h1 className="text-4xl zen-title">找不到文章</h1>
@@ -31,7 +31,7 @@ export default async function ArticlePage({ params }: Props) {
   const successCount = (article.successCount as number) || 0;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-serif dark:bg-black">
+    <div className="flex min-h-screen items-center justify-center bg-transparent font-serif dark:bg-black">
       <main className="w-full max-w-2xl rounded-lg zen-card p-12">
         <header className="mb-6 text-center relative">
           <h1 className="text-4xl zen-title">{article.title}</h1>

@@ -73,7 +73,7 @@ export default function ListsPage({ params }: { params: { name: string } }) {
   };
 
   return (
-    <div className="flex min-h-screen items-start justify-center bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-screen items-start justify-center bg-transparent dark:bg-black">
       <main className="w-full max-w-2xl pt-8 px-8 pb-8">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">清單</h2>
