@@ -19,6 +19,8 @@ function HomeContent({ categories }: HomeContentProps) {
   const [isVoiceListening, setIsVoiceListening] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [allArticles, setAllArticles] = useState<any[]>([]);
+  const [totalAttempts, setTotalAttempts] = useState<number | null>(null);
+  const [totalSuccesses, setTotalSuccesses] = useState<number | null>(null);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -33,6 +35,17 @@ function HomeContent({ categories }: HomeContentProps) {
       .then((res) => res.json())
       .then((data) => setAllArticles(data.articles || []))
       .catch((err) => console.error("Failed to fetch articles:", err));
+
+    // Fetch global stats
+    fetch("/api/stats")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success) {
+          setTotalAttempts(Number(data.totalAttempts || 0));
+          setTotalSuccesses(Number(data.totalSuccesses || 0));
+        }
+      })
+      .catch((err) => console.error("Failed to fetch stats:", err));
   }, []);
 
   useEffect(() => {
@@ -184,7 +197,13 @@ function HomeContent({ categories }: HomeContentProps) {
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-4xl font-bold zen-title">出口成章</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">Sustainable Human Classics</p>
-
+          <div className="mt-3 text-sm text-zinc-600 dark:text-zinc-400">
+            {totalAttempts !== null && totalSuccesses !== null ? (
+              <span>全站累計：嘗試 {totalAttempts} 次 ・ 成功 {totalSuccesses} 次</span>
+            ) : (
+              <span>載入中統計資料…</span>
+            )}
+          </div>
         </div>
 
         {/* Search box and voice button */}

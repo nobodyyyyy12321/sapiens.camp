@@ -1,6 +1,7 @@
 import React from "react";
 import { getArticleByNumber } from "../../../lib/articles-firebase";
 import RecitationClient from "./RecitationClient";
+import AddToListButton from "./AddToListButton";
 
 type Props = { params: Promise<{ category: string; number: string }> };
 
@@ -32,9 +33,12 @@ export default async function ArticlePage({ params }: Props) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-serif dark:bg-black">
       <main className="w-full max-w-2xl rounded-lg zen-card p-12">
-        <header className="mb-6 text-center">
+        <header className="mb-6 text-center relative">
           <h1 className="text-4xl zen-title">{article.title}</h1>
           {article.author && <p className="mt-2 text-sm zen-subtle">— {article.author}</p>}
+          <div className="absolute top-0 right-0 mt-2 mr-2">
+            <AddToListButton articleId={article.id} articleNumber={article.number || number} title={article.title} />
+          </div>
         </header>
 
         <RecitationClient

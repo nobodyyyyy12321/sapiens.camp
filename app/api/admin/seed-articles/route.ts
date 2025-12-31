@@ -478,6 +478,27 @@ export async function POST() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
+      ,
+      {
+        number: 52,
+        title: "臨江仙",
+        category: "明",
+        author: "楊慎",
+        content: [
+          "滾滾長江東逝水，",
+          "浪花淘盡英雄。",
+          "是非成敗轉頭空，",
+          "青山依舊在，",
+          "幾度夕陽紅。",
+          "白髮漁樵江渚上，",
+          "慣看秋月春風。",
+          "一壺濁酒喜相逢，",
+          "古今多少事，",
+          "都付笑談中。",
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
     ];
 
     let added = 0;

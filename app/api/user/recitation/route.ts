@@ -37,8 +37,13 @@ export async function POST(request: Request) {
             timestamp: timestamp || new Date().toISOString(),
           });
 
+          const attemptCountUser = (userData.attemptCount || 0) + 1;
+          const successCountUser = (userData.successCount || 0) + (success ? 1 : 0);
+
           await usersCol.doc(userDoc.id).update({
             recitations,
+            attemptCount: attemptCountUser,
+            successCount: successCountUser,
             updatedAt: new Date().toISOString(),
           });
         }
@@ -70,6 +75,24 @@ export async function POST(request: Request) {
           attemptCount = (data.attemptCount || 0) + 1;
           successCount = (data.successCount || 0) + (success ? 1 : 0);
           await articleRef.update({ attemptCount, successCount, updatedAt: new Date().toISOString() });
+        }
+
+        // Create a persistent recitation record in a dedicated collection
+        try {
+          const recordsCol = db.collection("recitationRecords");
+          const record = {
+            articleId,
+            articleNumber,
+            title,
+            success,
+            timestamp: timestamp || new Date().toISOString(),
+            userEmail: session?.user?.email || null,
+            anonymous: !session?.user?.email,
+            createdAt: new Date().toISOString(),
+          };
+          await recordsCol.add(record);
+        } catch (recErr) {
+          console.error("Failed to write recitation record doc:", recErr);
         }
 
         return NextResponse.json({ success: true, message: "Recitation recorded", attemptCount, successCount });
