@@ -30,7 +30,8 @@
 }
 
 body {
-  background: radial-gradient(circle at 10% 10%, rgba(0,0,0,0.02), transparent 12%), var(--zen-bg);
+  /* Uniform light background across the site */
+  background-color: var(--zen-bg);
   color: var(--zen-ink);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;

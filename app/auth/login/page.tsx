@@ -64,6 +64,20 @@ function LoginInner() {
           <button className="zen-button">登入</button>
           {error && <p className="text-sm text-red-600">{error}</p>}
         </form>
+        <div className="mt-4">
+          <div className="flex items-center gap-2 my-2">
+            <hr className="flex-1" />
+            <span className="text-sm text-zen-subtle">或</span>
+            <hr className="flex-1" />
+          </div>
+          <button
+            type="button"
+            className="w-full zen-button"
+            onClick={() => signIn("google", { callbackUrl })}
+          >
+            使用 Google 帳號登入
+          </button>
+        </div>
         <div className="mt-4 flex items-center gap-3">
           <button className="text-sm zen-ghost" onClick={resendVerification}>重新寄發驗證信</button>
         </div>
