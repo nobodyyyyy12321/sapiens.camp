@@ -10,7 +10,7 @@ export async function POST() {
       {
         number: 1,
         title: "靜夜思",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["床前明月光，", "疑是地上霜。", "舉頭望明月，", "低頭思故鄉。"],
         createdAt: new Date().toISOString(),
@@ -19,7 +19,7 @@ export async function POST() {
       {
         number: 2,
         title: "早發白帝城",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["朝辭白帝彩雲間，", "千里江陵一日還。", "兩岸猿聲啼不住，", "輕舟已過萬重山。"],
         createdAt: new Date().toISOString(),
@@ -28,7 +28,7 @@ export async function POST() {
       {
         number: 3,
         title: "登鶴雀樓",
-        category: "唐詩",
+        category: "唐",
         author: "王之渙",
         content: ["白日依山盡，", "黃河入海流。", "欲窮千里目，", "更上一層樓。"],
         createdAt: new Date().toISOString(),
@@ -37,7 +37,7 @@ export async function POST() {
       {
         number: 4,
         title: "春曉",
-        category: "唐詩",
+        category: "唐",
         author: "孟浩然",
         content: ["春眠不覺曉，", "處處聞啼鳥。", "夜來風雨聲，", "花落知多少。"],
         createdAt: new Date().toISOString(),
@@ -46,7 +46,7 @@ export async function POST() {
       {
         number: 5,
         title: "相思",
-        category: "唐詩",
+        category: "唐",
         author: "王維",
         content: ["紅豆生南國，", "春來發幾枝。", "願君多採擷，", "此物最相思。"],
         createdAt: new Date().toISOString(),
@@ -55,7 +55,7 @@ export async function POST() {
       {
         number: 6,
         title: "鹿柴",
-        category: "唐詩",
+        category: "唐",
         author: "王維",
         content: ["空山不見人，", "但聞人語響。", "返景入深林，", "復照青苔上。"],
         createdAt: new Date().toISOString(),
@@ -64,7 +64,7 @@ export async function POST() {
       {
         number: 7,
         title: "絕句",
-        category: "唐詩",
+        category: "唐",
         author: "杜甫",
         content: ["兩個黃鸝鳴翠柳，", "一行白鷺上青天。", "窗含西嶺千秋雪，", "門泊東吳萬里船。"],
         createdAt: new Date().toISOString(),
@@ -73,7 +73,7 @@ export async function POST() {
       {
         number: 8,
         title: "黃鶴樓送孟浩然之廣陵",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["故人西辭黃鶴樓，", "煙花三月下揚州。", "孤帆遠影碧空盡，", "唯見長江天際流。"],
         createdAt: new Date().toISOString(),
@@ -82,7 +82,7 @@ export async function POST() {
       {
         number: 9,
         title: "登高",
-        category: "唐詩",
+        category: "唐",
         author: "杜甫",
         content: [
           "風急天高猿嘯哀，", "渚清沙白鳥飛回。", "無邊落木蕭蕭下，", "不盡長江滾滾來。",
@@ -94,7 +94,7 @@ export async function POST() {
       {
         number: 10,
         title: "春望",
-        category: "唐詩",
+        category: "唐",
         author: "杜甫",
         content: [
           "國破山河在，", "城春草木深。", "感時花濺淚，", "恨別鳥驚心。",
@@ -106,7 +106,7 @@ export async function POST() {
       {
         number: 11,
         title: "楓橋夜泊",
-        category: "唐詩",
+        category: "唐",
         author: "張繼",
         content: ["月落烏啼霜滿天，", "江楓漁火對愁眠。", "姑蘇城外寒山寺，", "夜半鐘聲到客船。"],
         createdAt: new Date().toISOString(),
@@ -115,7 +115,7 @@ export async function POST() {
       {
         number: 12,
         title: "涼州詞",
-        category: "唐詩",
+        category: "唐",
         author: "王翰",
         content: ["葡萄美酒夜光杯，", "欲飲琵琶馬上催。", "醉臥沙場君莫笑，", "古來征戰幾人回。"],
         createdAt: new Date().toISOString(),
@@ -124,7 +124,7 @@ export async function POST() {
       {
         number: 13,
         title: "出塞",
-        category: "唐詩",
+        category: "唐",
         author: "王昌齡",
         content: ["秦時明月漢時關，", "萬里長征人未還。", "但使龍城飛將在，", "不教胡馬度陰山。"],
         createdAt: new Date().toISOString(),
@@ -133,7 +133,7 @@ export async function POST() {
       {
         number: 14,
         title: "望廬山瀑布",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["日照香爐生紫煙，", "遙看瀑布掛前川。", "飛流直下三千尺，", "疑是銀河落九天。"],
         createdAt: new Date().toISOString(),
@@ -142,7 +142,7 @@ export async function POST() {
       {
         number: 15,
         title: "望天門山",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["天門中斷楚江開，", "碧水東流至此回。", "兩岸青山相對出，", "孤帆一片日邊來。"],
         createdAt: new Date().toISOString(),
@@ -151,7 +151,7 @@ export async function POST() {
       {
         number: 16,
         title: "贈汪倫",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["李白乘舟將欲行，", "忽聞岸上踏歌聲。", "桃花潭水深千尺，", "不及汪倫送我情。"],
         createdAt: new Date().toISOString(),
@@ -160,7 +160,7 @@ export async function POST() {
       {
         number: 17,
         title: "送元二使安西",
-        category: "唐詩",
+        category: "唐",
         author: "王維",
         content: ["渭城朝雨浥輕塵，", "客舍青青柳色新。", "勸君更盡一杯酒，", "西出陽關無故人。"],
         createdAt: new Date().toISOString(),
@@ -169,7 +169,7 @@ export async function POST() {
       {
         number: 18,
         title: "獨坐敬亭山",
-        category: "唐詩",
+        category: "唐",
         author: "李白",
         content: ["眾鳥高飛盡，", "孤雲獨去閒。", "相看兩不厭，", "只有敬亭山。"],
         createdAt: new Date().toISOString(),
@@ -178,7 +178,7 @@ export async function POST() {
       {
         number: 19,
         title: "詠鵝",
-        category: "唐詩",
+        category: "唐",
         author: "駱賓王",
         content: ["鵝鵝鵝，", "曲項向天歌。", "白毛浮綠水，", "紅掌撥清波。"],
         createdAt: new Date().toISOString(),
@@ -187,7 +187,7 @@ export async function POST() {
       {
         number: 20,
         title: "憫農",
-        category: "唐詩",
+        category: "唐",
         author: "李紳",
         content: ["鋤禾日當午，", "汗滴禾下土。", "誰知盤中飧，", "粒粒皆辛苦。"],
         createdAt: new Date().toISOString(),
@@ -196,7 +196,7 @@ export async function POST() {
       {
         number: 21,
         title: "憫農其一",
-        category: "唐詩",
+        category: "唐",
         author: "李紳",
         content: ["春種一粒粟，", "秋收萬顆子。", "四海無閒田，", "農夫猶餓死。"],
         createdAt: new Date().toISOString(),
@@ -205,7 +205,7 @@ export async function POST() {
       {
         number: 22,
         title: "江雪",
-        category: "唐詩",
+        category: "唐",
         author: "柳宗元",
         content: ["千山鳥飛絕，", "萬徑人蹤滅。", "孤舟蓑笠翁，", "獨釣寒江雪。"],
         createdAt: new Date().toISOString(),
@@ -214,7 +214,7 @@ export async function POST() {
       {
         number: 23,
         title: "尋隱者不遇",
-        category: "唐詩",
+        category: "唐",
         author: "賈島",
         content: ["松下問童子，", "言師採藥去。", "只在此山中，", "雲深不知處。"],
         createdAt: new Date().toISOString(),
@@ -223,7 +223,7 @@ export async function POST() {
       {
         number: 24,
         title: "山行",
-        category: "唐詩",
+        category: "唐",
         author: "杜牧",
         content: ["遠上寒山石徑斜，", "白雲生處有人家。", "停車坐愛楓林晚，", "霜葉紅於二月花。"],
         createdAt: new Date().toISOString(),
@@ -232,7 +232,7 @@ export async function POST() {
       {
         number: 25,
         title: "清明",
-        category: "唐詩",
+        category: "唐",
         author: "杜牧",
         content: ["清明時節雨紛紛，", "路上行人欲斷魂。", "借問酒家何處有，", "牧童遙指杏花村。"],
         createdAt: new Date().toISOString(),
@@ -241,7 +241,7 @@ export async function POST() {
       {
         number: 26,
         title: "題都城南莊",
-        category: "唐詩",
+        category: "唐",
         author: "崔護",
         content: ["去年今日此門中，", "人面桃花相映紅。", "人面不知何處去，", "桃花依舊笑春風。"],
         createdAt: new Date().toISOString(),
@@ -250,7 +250,7 @@ export async function POST() {
       {
         number: 27,
         title: "芙蓉樓送辛漸",
-        category: "唐詩",
+        category: "唐",
         author: "王昌齡",
         content: ["寒雨連江夜入吳，", "平明送客楚山孤。", "洛陽親友如相問，", "一片冰心在玉壺。"],
         createdAt: new Date().toISOString(),
@@ -259,7 +259,7 @@ export async function POST() {
       {
         number: 28,
         title: "九月九日憶山東兄弟",
-        category: "唐詩",
+        category: "唐",
         author: "王維",
         content: ["獨在異鄉為異客，", "每逢佳節倍思親。", "遙知兄弟登高處，", "遍插茱萸少一人。"],
         createdAt: new Date().toISOString(),
@@ -268,7 +268,7 @@ export async function POST() {
       {
         number: 29,
         title: "回鄉偶書",
-        category: "唐詩",
+        category: "唐",
         author: "賀知章",
         content: ["少小離家老大回，", "鄉音無改鬢毛衰。", "兒童相見不相識，", "笑問客從何處來。"],
         createdAt: new Date().toISOString(),
@@ -277,7 +277,7 @@ export async function POST() {
       {
         number: 30,
         title: "詠柳",
-        category: "唐詩",
+        category: "唐",
         author: "賀知章",
         content: ["碧玉妝成一樹高，", "萬條垂下綠絲絛。", "不知細葉誰裁出，", "二月春風似剪刀。"],
         createdAt: new Date().toISOString(),
@@ -286,7 +286,7 @@ export async function POST() {
       {
         number: 31,
         title: "遊子吟",
-        category: "唐詩",
+        category: "唐",
         author: "孟郊",
         content: ["慈母手中線，", "遊子身上衣。", "臨行密密縫，", "意恐遲遲歸。", "誰言寸草心，", "報得三春暉。"],
         createdAt: new Date().toISOString(),
@@ -295,7 +295,7 @@ export async function POST() {
       {
         number: 32,
         title: "竹枝詞",
-        category: "唐詩",
+        category: "唐",
         author: "劉禹錫",
         content: ["楊柳青青江水平，", "聞郎江上踏歌聲。", "東邊日出西邊雨，", "道是無晴卻有晴。"],
         createdAt: new Date().toISOString(),
@@ -304,7 +304,7 @@ export async function POST() {
       {
         number: 33,
         title: "烏衣巷",
-        category: "唐詩",
+        category: "唐",
         author: "劉禹錫",
         content: ["朱雀橋邊野草花，", "烏衣巷口夕陽斜。", "舊時王謝堂前燕，", "飛入尋常百姓家。"],
         createdAt: new Date().toISOString(),
@@ -313,7 +313,7 @@ export async function POST() {
       {
         number: 34,
         title: "浪淘沙",
-        category: "唐詩",
+        category: "唐",
         author: "劉禹錫",
         content: ["九曲黃河萬里沙，", "浪淘風簸自天涯。", "如今直上銀河去，", "同到牽牛織女家。"],
         createdAt: new Date().toISOString(),
@@ -322,7 +322,7 @@ export async function POST() {
       {
         number: 35,
         title: "秋夕",
-        category: "唐詩",
+        category: "唐",
         author: "杜牧",
         content: ["銀燭秋光冷畫屏，", "輕羅小扇撲流螢。", "天階夜色涼如水，", "坐看牽牛織女星。"],
         createdAt: new Date().toISOString(),
@@ -331,7 +331,7 @@ export async function POST() {
       {
         number: 36,
         title: "泊秦淮",
-        category: "唐詩",
+        category: "唐",
         author: "杜牧",
         content: ["煙籠寒水月籠沙，", "夜泊秦淮近酒家。", "商女不知亡國恨，", "隔江猶唱後庭花。"],
         createdAt: new Date().toISOString(),
@@ -340,7 +340,7 @@ export async function POST() {
       {
         number: 37,
         title: "江南春",
-        category: "唐詩",
+        category: "唐",
         author: "杜牧",
         content: ["千里鶯啼綠映紅，", "水村山郭酒旗風。", "南朝四百八十寺，", "多少樓臺煙雨中。"],
         createdAt: new Date().toISOString(),
@@ -349,7 +349,7 @@ export async function POST() {
       {
         number: 38,
         title: "滁州西澗",
-        category: "唐詩",
+        category: "唐",
         author: "韋應物",
         content: ["獨憐幽草澗邊生，", "上有黃鸝深樹鳴。", "春潮帶雨晚來急，", "野渡無人舟自橫。"],
         createdAt: new Date().toISOString(),
@@ -358,7 +358,7 @@ export async function POST() {
       {
         number: 39,
         title: "早春呈水部張十八員外",
-        category: "唐詩",
+        category: "唐",
         author: "韓愈",
         content: ["天街小雨潤如酥，", "草色遙看近卻無。", "最是一年春好處，", "絕勝煙柳滿皇都。"],
         createdAt: new Date().toISOString(),
@@ -367,7 +367,7 @@ export async function POST() {
       {
         number: 40,
         title: "夜雨寄北",
-        category: "唐詩",
+        category: "唐",
         author: "李商隱",
         content: ["君問歸期未有期，", "巴山夜雨漲秋池。", "何當共剪西窗燭，", "卻話巴山夜雨時。"],
         createdAt: new Date().toISOString(),
@@ -376,7 +376,7 @@ export async function POST() {
       {
         number: 41,
         title: "無題",
-        category: "唐詩",
+        category: "唐",
         author: "李商隱",
         content: ["相見時難別亦難，", "東風無力百花殘。", "春蠶到死絲方盡，", "蠟炬成灰淚始乾。"],
         createdAt: new Date().toISOString(),
@@ -385,7 +385,7 @@ export async function POST() {
       {
         number: 42,
         title: "登樂遊原",
-        category: "唐詩",
+        category: "唐",
         author: "李商隱",
         content: ["向晚意不適，", "驅車登古原。", "夕陽無限好，", "只是近黃昏。"],
         createdAt: new Date().toISOString(),
@@ -394,7 +394,7 @@ export async function POST() {
       {
         number: 43,
         title: "題西林壁",
-        category: "唐詩",
+        category: "唐",
         author: "蘇軾",
         content: ["橫看成嶺側成峰，", "遠近高低各不同。", "不識廬山真面目，", "只緣身在此山中。"],
         createdAt: new Date().toISOString(),
@@ -403,7 +403,7 @@ export async function POST() {
       {
         number: 44,
         title: "竹石",
-        category: "唐詩",
+        category: "唐",
         author: "鄭燮",
         content: ["咬定青山不放鬆，", "立根原在破岩中。", "千磨萬擊還堅勁，", "任爾東西南北風。"],
         createdAt: new Date().toISOString(),
@@ -412,7 +412,7 @@ export async function POST() {
       {
         number: 45,
         title: "賦得古原草送別",
-        category: "唐詩",
+        category: "唐",
         author: "白居易",
         content: ["離離原上草，", "一歲一枯榮。", "野火燒不盡，", "春風吹又生。", "遠芳侵古道，", "晴翠接荒城。", "又送王孫去，", "萋萋滿別情。"],
         createdAt: new Date().toISOString(),
@@ -421,7 +421,7 @@ export async function POST() {
       {
         number: 46,
         title: "池上",
-        category: "唐詩",
+        category: "唐",
         author: "白居易",
         content: ["小娃撐小艇，", "偷採白蓮回。", "不解藏蹤跡，", "浮萍一道開。"],
         createdAt: new Date().toISOString(),
@@ -430,7 +430,7 @@ export async function POST() {
       {
         number: 47,
         title: "憶江南",
-        category: "唐詩",
+        category: "唐",
         author: "白居易",
         content: ["江南好，", "風景舊曾諳。", "日出江花紅勝火，", "春來江水綠如藍。", "能不憶江南？"],
         createdAt: new Date().toISOString(),
@@ -439,7 +439,7 @@ export async function POST() {
       {
         number: 48,
         title: "大林寺桃花",
-        category: "唐詩",
+        category: "唐",
         author: "白居易",
         content: ["人間四月芳菲盡，", "山寺桃花始盛開。", "長恨春歸無覓處，", "不知轉入此中來。"],
         createdAt: new Date().toISOString(),
@@ -448,7 +448,7 @@ export async function POST() {
       {
         number: 49,
         title: "元日",
-        category: "唐詩",
+        category: "唐",
         author: "王安石",
         content: ["爆竹聲中一歲除，", "春風送暖入屠蘇。", "千門萬戶曈曈日，", "總把新桃換舊符。"],
         createdAt: new Date().toISOString(),
@@ -457,9 +457,24 @@ export async function POST() {
       {
         number: 50,
         title: "泊船瓜洲",
-        category: "唐詩",
+        category: "唐",
         author: "王安石",
         content: ["京口瓜洲一水間，", "鍾山只隔數重山。", "春風又綠江南岸，", "明月何時照我還。"],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+      ,
+      {
+        number: 51,
+        title: "誡子書",
+        category: "漢",
+        author: "諸葛亮",
+        content: [
+          "夫君子之行，靜以修身，儉以養德，非淡泊無以明志，非寧靜無以致遠。",
+          "夫學須靜也，才須學也，非學無以廣才，非志無以成學。",
+          "淫慢則不能勵精，險躁則不能冶性。",
+          "年與時馳，意與日去，遂成枯落，多不接世，悲守窮廬，將復何及！",
+        ],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
@@ -467,8 +482,10 @@ export async function POST() {
 
     let added = 0;
     let skipped = 0;
-    const results = [];
+    let updated = 0;
+    const results: string[] = [];
 
+    /*
     for (const article of testArticles) {
       const existing = await articlesCol.where("number", "==", article.number).limit(1).get();
       
@@ -482,13 +499,51 @@ export async function POST() {
       results.push(`✅ 已新增：${article.title}`);
       added++;
     }
+    */
+   for (const article of testArticles) {
+  // 1. 根據編號搜尋現有文件
+  const snapshot = await articlesCol.where("number", "==", article.number).limit(1).get();
+  
+    if (!snapshot.empty) {
+    const doc = snapshot.docs[0];
+    const existingData = doc.data();
+    const docRef = doc.ref;
+
+    // 2. 比對欄位是否有差異
+    // 我們過濾出 article 中與 existingData 不同的部分
+    const updates: Record<string, any> = {};
+    const entries = Object.entries(article) as [string, any][];
+    for (const [key, value] of entries) {
+      if (JSON.stringify(value) !== JSON.stringify(existingData[key])) {
+        updates[key] = value;
+      }
+    }
+
+    // 3. 如果有差異，執行更新
+    if (Object.keys(updates).length > 0) {
+      await docRef.update(updates);
+      results.push(`🔄 已更新：${article.title} (更新了 ${Object.keys(updates).join(", ")} 欄位)`);
+      updated++;
+    } else {
+      results.push(`⏭️ 跳過：${article.title} (內容一致，無需更新)`);
+      skipped++;
+    }
+    continue;
+  }
+
+  // 4. 完全不存在則新增
+  await articlesCol.add(article);
+  results.push(`✅ 已新增：${article.title}`);
+  added++;
+}
 
     return NextResponse.json({
       success: true,
       added,
+      updated,
       skipped,
       results,
-      message: `完成！新增 ${added} 篇，跳過 ${skipped} 篇`
+      message: `完成！新增 ${added} 篇，更新 ${updated} 篇，跳過 ${skipped} 篇`
     });
   } catch (error: any) {
     console.error("Seed poems error:", error);

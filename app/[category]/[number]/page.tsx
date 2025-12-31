@@ -26,6 +26,9 @@ export default async function ArticlePage({ params }: Props) {
     ? (article.content as string[])
     : String(article.content || "").split(/\r?\n/).filter(Boolean);
 
+  const attemptCount = (article.attemptCount as number) || 0;
+  const successCount = (article.successCount as number) || 0;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-serif dark:bg-black">
       <main className="w-full max-w-2xl rounded-lg zen-card p-12">
@@ -39,6 +42,8 @@ export default async function ArticlePage({ params }: Props) {
           articleNumber={article.number || number}
           title={article.title}
           content={lines}
+          attemptCount={attemptCount}
+          successCount={successCount}
         />
       </main>
     </div>

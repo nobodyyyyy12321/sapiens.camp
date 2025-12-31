@@ -8,9 +8,11 @@ type RecitationClientProps = {
   articleNumber: number;
   title: string;
   content: string[];
+  attemptCount?: number;
+  successCount?: number;
 };
 
-export default function RecitationClient({ articleId, articleNumber, title, content }: RecitationClientProps) {
+export default function RecitationClient({ articleId, articleNumber, title, content, attemptCount = 0, successCount = 0 }: RecitationClientProps) {
   const { data: session } = useSession();
   const [isReciting, setIsReciting] = useState(false);
   const [recognizedText, setRecognizedText] = useState("");
@@ -18,6 +20,8 @@ export default function RecitationClient({ articleId, articleNumber, title, cont
   const [isListening, setIsListening] = useState(false);
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
   const recognitionRef = useRef<any>(null);
+  const [attemptCountState, setAttemptCountState] = useState<number>(attemptCount);
+  const [successCountState, setSuccessCountState] = useState<number>(successCount);
 
   const fullText = content.join("");
   const normalizeText = (text: string) => text.replace(/[\s\n\r，。、；：！？""''（）《》]/g, "");
@@ -96,36 +100,39 @@ export default function RecitationClient({ articleId, articleNumber, title, cont
 
     const isCorrect = normalizedOriginal === normalizedRecognized;
     setResult(isCorrect ? "correct" : "incorrect");
+    // Optimistic counters: update UI immediately on button click
+    setAttemptCountState((c) => c + 1);
+    if (isCorrect) setSuccessCountState((c) => c + 1);
 
-    if (session?.user?.email) {
-      // Save attempt record (both success and failure)
-      try {
-        console.log("Saving recitation attempt...", { articleId, articleNumber, title, isCorrect });
-        const response = await fetch("/api/user/recitation", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            articleId,
-            articleNumber,
-            title,
-            success: isCorrect,
-            timestamp: new Date().toISOString(),
-          }),
-        });
-        
-        const data = await response.json();
-        console.log("Recitation save response:", response.status, data);
-        
-        if (!response.ok) {
-          console.error("Failed to save recitation:", data);
-        } else {
-          console.log("✅ Recitation attempt saved successfully!");
-        }
-      } catch (error) {
-        console.error("Failed to save recitation record:", error);
+    // Always POST to record the attempt (anonymous allowed server-side)
+    try {
+      console.log("Saving recitation attempt...", { articleId, articleNumber, title, isCorrect });
+      const response = await fetch("/api/user/recitation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          articleId,
+          articleNumber,
+          title,
+          success: isCorrect,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Recitation save response:", response.status, data);
+
+      if (!response.ok) {
+        console.error("Failed to save recitation:", data);
+        // optional: revert optimistic update if server rejects (not doing here)
+      } else {
+        // reconcile with server counters
+        if (data.attemptCount !== undefined) setAttemptCountState(Number(data.attemptCount));
+        if (data.successCount !== undefined) setSuccessCountState(Number(data.successCount));
+        console.log("✅ Recitation attempt saved successfully!");
       }
-    } else {
-      console.warn("User not logged in, recitation not saved");
+    } catch (error) {
+      console.error("Failed to save recitation record:", error);
     }
   };
 
@@ -145,6 +152,11 @@ export default function RecitationClient({ articleId, articleNumber, title, cont
             <p key={i}>{line}</p>
           ))}
         </article>
+
+        <div className="flex justify-center gap-6 mb-6">
+          <span className="text-white text-sm font-medium">嘗試：{attemptCountState}</span>
+          <span className="text-white text-sm font-medium">成功：{successCountState}</span>
+        </div>
 
         <div className="mt-8 flex justify-center">
           <button
