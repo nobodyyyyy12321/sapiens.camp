@@ -2,12 +2,17 @@ import { NextResponse } from "next/server";
 import { auth } from "../../../../../auth";
 import { getFirestoreDB } from "../../../../../lib/firebase-admin";
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+async function resolveParams(params: any) {
+  if (params && typeof params.then === "function") return await params;
+  return params;
+}
+
+export async function PATCH(request: Request, { params }: { params: any }) {
   try {
     const session = await auth();
     if (!session?.user?.email) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-    const id = params.id;
+    const realParams = await resolveParams(params);
+    const id = realParams?.id;
     const { title, items } = await request.json();
     const db = getFirestoreDB();
     const ref = db.collection("lists").doc(id);
@@ -29,12 +34,12 @@ export async function PATCH(request: Request, { params }: { params: { id: string
   }
 }
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: any }) {
   try {
     const session = await auth();
     if (!session?.user?.email) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-    const id = params.id;
+    const realParams = await resolveParams(params);
+    const id = realParams?.id;
     const db = getFirestoreDB();
     const ref = db.collection("lists").doc(id);
     const doc = await ref.get();
@@ -49,12 +54,12 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: any }) {
   try {
     const session = await auth();
     if (!session?.user?.email) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-
-    const id = params.id;
+    const realParams = await resolveParams(params);
+    const id = realParams?.id;
     const db = getFirestoreDB();
     const ref = db.collection("lists").doc(id);
     const doc = await ref.get();
