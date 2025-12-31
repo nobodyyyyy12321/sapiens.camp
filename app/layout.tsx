@@ -42,6 +42,9 @@ export default function RootLayout({
                 <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
                   首頁
                 </Link>
+                <Link href="/all" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                  所有詩文
+                </Link>
                 <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
                   榜單
                 </Link>

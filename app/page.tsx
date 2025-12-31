@@ -223,7 +223,7 @@ function HomeContent({ categories }: HomeContentProps) {
           </div>
         )}
 
-        {/* Search results or categories */}
+        {/* Search results or link to All Poems */}
         {searchQuery.trim().length >= 2 ? (
           <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
             {isSearching ? (
@@ -244,19 +244,6 @@ function HomeContent({ categories }: HomeContentProps) {
           </div>
         ) : (
           <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
-            {loadedCategories.length === 0 ? (
-              <p className="text-sm zen-subtle">載入中...</p>
-            ) : (
-              loadedCategories.map((category) => (
-                <Link
-                  key={category}
-                  className="flex h-12 flex-1 min-w-0 items-center justify-center gap-2 rounded-full border border-zinc-200 px-4 text-foreground transition-colors hover:bg-zinc-100"
-                  href={`/${encodeURIComponent(category)}`}
-                >
-                  {category}
-                </Link>
-              ))
-            )}
           </div>
         )}
       </main>
