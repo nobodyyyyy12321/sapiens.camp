@@ -36,6 +36,18 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
       >
         <Providers>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "出口成章",
+                "url": "https://memorize.guru",
+                "logo": "https://memorize.guru/logo.png"
+              }),
+            }}
+          />
           <header className="w-full py-6 sticky top-0 z-50">
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">

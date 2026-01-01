@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://memorize.guru/sitemap.xml
+# Replace logo and other placeholders in code with your real domain
