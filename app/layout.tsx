@@ -44,13 +44,16 @@ export default function RootLayout({
                 "@type": "Organization",
                 "name": "出口成章",
                 "url": "https://memorize.guru",
-                "logo": "https://memorize.guru/logo.png"
+                "logo": "https://memorize.guru/logo.svg"
               }),
             }}
           />
           <header className="w-full py-6 sticky top-0 z-50">
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">
+                <Link href="/" className="flex items-center gap-2 px-0 py-0">
+                  <img src="/logo.svg" alt="出口成章" className="h-8 w-8" />
+                </Link>
                 <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   首頁
                 </Link>
