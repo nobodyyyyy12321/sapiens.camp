@@ -21,7 +21,7 @@ const notoSerif = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
-  title: "出口成章",
+  title: "給我背",
   description: "語音背誦詩文輔助",
 };
 
@@ -42,7 +42,7 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "出口成章",
+                "name": "給我背",
                 "url": "https://memorize.guru",
                 "logo": "https://memorize.guru/logo.svg"
               }),
@@ -52,7 +52,7 @@ export default function RootLayout({
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">
                 <Link href="/" className="flex items-center gap-2 px-0 py-0">
-                  <img src="/logo.svg" alt="出口成章" className="h-8 w-8" />
+                  <img src="/logo.svg" alt="給我背" className="h-8 w-8" />
                 </Link>
                 <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   首頁
