@@ -4,7 +4,7 @@ export default function LinksPage() {
       <main className="w-full max-w-3xl py-12 px-16">
         <h1 className="text-3xl font-bold zen-title mb-4">上進網站連結</h1>
 
-        <div className="space-y-4">
+        <div className="space-y-4 mt-10">
           <div className="flex items-center gap-2">
             <div className="text-lg font-medium">維基百科</div>
             <a href="https://zh.wikipedia.org/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://zh.wikipedia.org/</a>

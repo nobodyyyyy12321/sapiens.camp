@@ -38,20 +38,20 @@ export default function RootLayout({
         <Providers>
           <header className="w-full py-6">
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
-              <div className="flex items-center gap-4">
-                <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+              <div className="flex items-center gap-4 flex-nowrap">
+                <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   首頁
                 </Link>
-                <Link href="/all" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                <Link href="/all" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   所有詩文
                 </Link>
-                <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   榜單
                 </Link>
-                <Link href="/stats" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                <Link href="/stats" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   全站統計
                 </Link>
-                <Link href="/links" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded">
+                <Link href="/links" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   上進網站連結
                 </Link>
               </div>
