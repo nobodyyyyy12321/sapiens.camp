@@ -20,14 +20,65 @@ export async function POST(request: Request) {
     const db = getFirestoreDB();
     const usersCol = db.collection("users");
 
-    // If user is signed in, append recitation to their user doc; otherwise skip user storage
+    // Parse or create a visitorId for anonymous users (stored in cookie)
+    const cookieHeader = request.headers.get("cookie") || "";
+    const getCookie = (name: string) => {
+      const match = cookieHeader.match(new RegExp(`(?:^|; )${name}=([^;]+)`));
+      return match ? decodeURIComponent(match[1]) : undefined;
+    };
+    let visitorId = getCookie("visitorId");
+    let setVisitorCookie: string | null = null;
+    if (!visitorId) {
+      const rid = (globalThis as any).crypto?.randomUUID ? (globalThis as any).crypto.randomUUID() : `v_${Date.now()}_${Math.floor(Math.random()*1e6)}`;
+      visitorId = `anon_${rid}`;
+      // set cookie for 1 year
+      setVisitorCookie = `visitorId=${encodeURIComponent(visitorId)}; Path=/; Max-Age=${31536000}; SameSite=Lax`;
+    }
+
+    // If user is signed in, enforce a per-day quota for free accounts and append recitation
     if (session?.user?.email) {
       try {
         const userSnapshot = await usersCol.where("email", "==", session.user.email).limit(1).get();
         if (!userSnapshot.empty) {
           const userDoc = userSnapshot.docs[0];
-          const userData = userDoc.data();
+          const userData: any = userDoc.data();
 
+          // Free users: limit to 5 attempts per UTC day. Paid/pro users (userData.isPro === true) are exempt.
+          const isPro = Boolean(userData.isPro || userData.paid || userData.isPaid);
+          const LIMIT = 5;
+          const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD in UTC
+
+          const dailyCol = db.collection("userDailyRecitations");
+          const dailyDocId = `${userDoc.id}_${today}`;
+          const dailyRef = dailyCol.doc(dailyDocId);
+
+          // Transactionally check and increment daily count
+          try {
+            await db.runTransaction(async (tx) => {
+              const dailySnap = await tx.get(dailyRef);
+              const current = (dailySnap.exists && (dailySnap.data() as any).count) ? (dailySnap.data() as any).count : 0;
+              if (!isPro && current >= LIMIT) {
+                // throw a sentinel error to abort transaction and inform caller
+                const err: any = new Error("DAILY_QUOTA_EXCEEDED");
+                err.code = "DAILY_QUOTA_EXCEEDED";
+                throw err;
+              }
+              await tx.set(dailyRef, {
+                userId: userDoc.id,
+                date: today,
+                count: current + 1,
+                updatedAt: new Date().toISOString(),
+              }, { merge: true });
+            });
+          } catch (quotaErr: any) {
+            if (quotaErr && quotaErr.code === "DAILY_QUOTA_EXCEEDED") {
+              return NextResponse.json({ error: `Free account daily limit reached (${LIMIT}/day)` }, { status: 429 });
+            }
+            console.error("Failed to update daily quota:", quotaErr);
+            // continue — don't block the recitation if quota transaction failed for other reasons
+          }
+
+          // Append recitation to user's recitations array and update counters
           const recitations = userData.recitations || [];
           recitations.push({
             articleId,
@@ -49,6 +100,44 @@ export async function POST(request: Request) {
         }
       } catch (e) {
         console.error("Failed to update user recitations:", e);
+      }
+    }
+
+    // Anonymous (not signed in): enforce a smaller per-day quota using visitorId cookie
+    if (!session?.user?.email) {
+      try {
+        const LIMIT_ANON = 3;
+        const today = new Date().toISOString().slice(0, 10);
+        const dailyCol = db.collection("userDailyRecitations");
+        const dailyDocId = `${visitorId}_${today}`;
+        const dailyRef = dailyCol.doc(dailyDocId);
+
+        try {
+          await db.runTransaction(async (tx) => {
+            const dailySnap = await tx.get(dailyRef);
+            const current = (dailySnap.exists && (dailySnap.data() as any).count) ? (dailySnap.data() as any).count : 0;
+            if (current >= LIMIT_ANON) {
+              const err: any = new Error("DAILY_QUOTA_EXCEEDED");
+              err.code = "DAILY_QUOTA_EXCEEDED";
+              throw err;
+            }
+            await tx.set(dailyRef, {
+              visitorId,
+              date: today,
+              count: current + 1,
+              updatedAt: new Date().toISOString(),
+            }, { merge: true });
+          });
+        } catch (quotaErr: any) {
+          if (quotaErr && quotaErr.code === "DAILY_QUOTA_EXCEEDED") {
+            const headers: any = {};
+            if (setVisitorCookie) headers["Set-Cookie"] = setVisitorCookie;
+            return NextResponse.json({ error: `未登入帳號每日限次 (${LIMIT_ANON}/日)` }, { status: 429, headers });
+          }
+          console.error("Failed to update anonymous daily quota:", quotaErr);
+        }
+      } catch (e) {
+        console.error("Anonymous quota check failed:", e);
       }
     }
 

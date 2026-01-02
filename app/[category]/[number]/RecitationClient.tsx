@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type RecitationClientProps = {
   articleId: string;
@@ -70,7 +71,29 @@ export default function RecitationClient({ articleId, articleNumber, title, cont
     };
   }, []);
 
-  const startRecitation = () => {
+  const router = useRouter();
+
+  const startRecitation = async () => {
+    // If user is not signed in, call attempt API which increments/checks anonymous quota.
+    if (!session?.user?.email) {
+      try {
+        const res = await fetch("/api/user/recitation/attempt", { method: "POST", credentials: "include" });
+        if (res.status === 429) {
+          // redirect anonymous users to register page on 4th attempt
+          router.push("/auth/register");
+          return;
+        }
+        const data = await res.json();
+        if (!data || data.allowed === false) {
+          router.push("/auth/register");
+          return;
+        }
+      } catch (e) {
+        console.error("Attempt check failed:", e);
+        // allow recitation on error to avoid blocking happy path
+      }
+    }
+
     setIsReciting(true);
     setRecognizedText("");
     setInterimText("");
