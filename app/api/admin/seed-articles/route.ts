@@ -537,6 +537,18 @@ export async function POST() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
+      ,
+      {
+        number: 55,
+        title: "子曰",
+        category: "民國",
+        author: "卜學亮",
+        content: [
+          "歌詞待補",
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
     ];
 
     let added = 0;
