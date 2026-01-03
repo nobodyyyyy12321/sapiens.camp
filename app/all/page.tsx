@@ -48,7 +48,9 @@ export default function AllPoemsPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black sm:items-start">
-        <h1 className="max-w-xs text-4xl font-bold zen-title mb-3">所有詩文</h1>
+        {view === "languages" && (
+          <h1 className="max-w-xs text-4xl font-bold zen-title mb-3">所有詩文</h1>
+        )}
 
         {loading ? (
           <p className="text-sm zen-subtle">載入中…</p>
@@ -74,10 +76,6 @@ export default function AllPoemsPage() {
               )
             ) : (
               <div>
-                <div className="mb-4 flex items-center gap-3">
-                  <button onClick={() => { setView("languages"); setItems(null); setSelectedLanguage(null); }} className="px-4 py-2 rounded-full border">← 語言</button>
-                  <h2 className="text-lg font-medium">{selectedLanguage} 的分類</h2>
-                </div>
                 {(items && items.length > 0) ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {items.map((c) => (

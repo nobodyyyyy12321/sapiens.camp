@@ -14,8 +14,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["床前明月光，", "疑是地上霜。", "舉頭望明月，", "低頭思故鄉。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 2,
@@ -24,8 +22,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["朝辭白帝彩雲間，", "千里江陵一日還。", "兩岸猿聲啼不住，", "輕舟已過萬重山。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 3,
@@ -34,8 +30,6 @@ export async function POST() {
         author: "王之渙",
         language: "中文",
         content: ["白日依山盡，", "黃河入海流。", "欲窮千里目，", "更上一層樓。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 4,
@@ -44,8 +38,6 @@ export async function POST() {
         author: "孟浩然",
         language: "中文",
         content: ["春眠不覺曉，", "處處聞啼鳥。", "夜來風雨聲，", "花落知多少。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 5,
@@ -54,8 +46,6 @@ export async function POST() {
         author: "王維",
         language: "中文",
         content: ["紅豆生南國，", "春來發幾枝。", "願君多採擷，", "此物最相思。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 6,
@@ -64,8 +54,6 @@ export async function POST() {
         author: "王維",
         language: "中文",
         content: ["空山不見人，", "但聞人語響。", "返景入深林，", "復照青苔上。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 7,
@@ -74,8 +62,6 @@ export async function POST() {
         author: "杜甫",
         language: "中文",
         content: ["兩個黃鸝鳴翠柳，", "一行白鷺上青天。", "窗含西嶺千秋雪，", "門泊東吳萬里船。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 8,
@@ -84,8 +70,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["故人西辭黃鶴樓，", "煙花三月下揚州。", "孤帆遠影碧空盡，", "唯見長江天際流。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 9,
@@ -97,8 +81,6 @@ export async function POST() {
           "風急天高猿嘯哀，", "渚清沙白鳥飛回。", "無邊落木蕭蕭下，", "不盡長江滾滾來。",
           "萬里悲秋常作客，", "百年多病獨登台。", "艱難苦恨繁霜鬢，", "潦倒新停濁酒杯。"
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 10,
@@ -110,8 +92,6 @@ export async function POST() {
           "國破山河在，", "城春草木深。", "感時花濺淚，", "恨別鳥驚心。",
           "烽火連三月，", "家書抵萬金。", "白頭搔更短，", "渾欲不勝簪。"
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 11,
@@ -120,8 +100,6 @@ export async function POST() {
         author: "張繼",
         language: "中文",
         content: ["月落烏啼霜滿天，", "江楓漁火對愁眠。", "姑蘇城外寒山寺，", "夜半鐘聲到客船。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 12,
@@ -130,8 +108,6 @@ export async function POST() {
         author: "王翰",
         language: "中文",
         content: ["葡萄美酒夜光杯，", "欲飲琵琶馬上催。", "醉臥沙場君莫笑，", "古來征戰幾人回。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 13,
@@ -140,8 +116,6 @@ export async function POST() {
         author: "王昌齡",
         language: "中文",
         content: ["秦時明月漢時關，", "萬里長征人未還。", "但使龍城飛將在，", "不教胡馬度陰山。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 14,
@@ -150,8 +124,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["日照香爐生紫煙，", "遙看瀑布掛前川。", "飛流直下三千尺，", "疑是銀河落九天。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 15,
@@ -160,8 +132,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["天門中斷楚江開，", "碧水東流至此回。", "兩岸青山相對出，", "孤帆一片日邊來。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 16,
@@ -170,8 +140,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["李白乘舟將欲行，", "忽聞岸上踏歌聲。", "桃花潭水深千尺，", "不及汪倫送我情。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 17,
@@ -180,8 +148,6 @@ export async function POST() {
         author: "王維",
         language: "中文",
         content: ["渭城朝雨浥輕塵，", "客舍青青柳色新。", "勸君更盡一杯酒，", "西出陽關無故人。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 18,
@@ -190,8 +156,6 @@ export async function POST() {
         author: "李白",
         language: "中文",
         content: ["眾鳥高飛盡，", "孤雲獨去閒。", "相看兩不厭，", "只有敬亭山。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 19,
@@ -200,8 +164,6 @@ export async function POST() {
         author: "駱賓王",
         language: "中文",
         content: ["鵝鵝鵝，", "曲項向天歌。", "白毛浮綠水，", "紅掌撥清波。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 20,
@@ -210,8 +172,6 @@ export async function POST() {
         author: "李紳",
         language: "中文",
         content: ["鋤禾日當午，", "汗滴禾下土。", "誰知盤中飧，", "粒粒皆辛苦。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 21,
@@ -220,8 +180,6 @@ export async function POST() {
         author: "李紳",
         language: "中文",
         content: ["春種一粒粟，", "秋收萬顆子。", "四海無閒田，", "農夫猶餓死。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 22,
@@ -230,8 +188,6 @@ export async function POST() {
         author: "柳宗元",
         language: "中文",
         content: ["千山鳥飛絕，", "萬徑人蹤滅。", "孤舟蓑笠翁，", "獨釣寒江雪。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 23,
@@ -240,8 +196,6 @@ export async function POST() {
         author: "賈島",
         language: "中文",
         content: ["松下問童子，", "言師採藥去。", "只在此山中，", "雲深不知處。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 24,
@@ -250,8 +204,6 @@ export async function POST() {
         author: "杜牧",
         language: "中文",
         content: ["遠上寒山石徑斜，", "白雲生處有人家。", "停車坐愛楓林晚，", "霜葉紅於二月花。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 25,
@@ -260,8 +212,6 @@ export async function POST() {
         author: "杜牧",
         language: "中文",
         content: ["清明時節雨紛紛，", "路上行人欲斷魂。", "借問酒家何處有，", "牧童遙指杏花村。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 26,
@@ -270,8 +220,6 @@ export async function POST() {
         author: "崔護",
         language: "中文",
         content: ["去年今日此門中，", "人面桃花相映紅。", "人面不知何處去，", "桃花依舊笑春風。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 27,
@@ -280,8 +228,6 @@ export async function POST() {
         author: "王昌齡",
         language: "中文",
         content: ["寒雨連江夜入吳，", "平明送客楚山孤。", "洛陽親友如相問，", "一片冰心在玉壺。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 28,
@@ -290,8 +236,6 @@ export async function POST() {
         author: "王維",
         language: "中文",
         content: ["獨在異鄉為異客，", "每逢佳節倍思親。", "遙知兄弟登高處，", "遍插茱萸少一人。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 29,
@@ -300,8 +244,6 @@ export async function POST() {
         author: "賀知章",
         language: "中文",
         content: ["少小離家老大回，", "鄉音無改鬢毛衰。", "兒童相見不相識，", "笑問客從何處來。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 30,
@@ -310,8 +252,6 @@ export async function POST() {
         author: "賀知章",
         language: "中文",
         content: ["碧玉妝成一樹高，", "萬條垂下綠絲絛。", "不知細葉誰裁出，", "二月春風似剪刀。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 31,
@@ -320,8 +260,6 @@ export async function POST() {
         author: "孟郊",
         language: "中文",
         content: ["慈母手中線，", "遊子身上衣。", "臨行密密縫，", "意恐遲遲歸。", "誰言寸草心，", "報得三春暉。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 32,
@@ -330,8 +268,6 @@ export async function POST() {
         author: "劉禹錫",
         language: "中文",
         content: ["楊柳青青江水平，", "聞郎江上踏歌聲。", "東邊日出西邊雨，", "道是無晴卻有晴。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 33,
@@ -340,8 +276,6 @@ export async function POST() {
         author: "劉禹錫",
         language: "中文",
         content: ["朱雀橋邊野草花，", "烏衣巷口夕陽斜。", "舊時王謝堂前燕，", "飛入尋常百姓家。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 34,
@@ -350,8 +284,6 @@ export async function POST() {
         author: "劉禹錫",
         language: "中文",
         content: ["九曲黃河萬里沙，", "浪淘風簸自天涯。", "如今直上銀河去，", "同到牽牛織女家。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 35,
@@ -360,8 +292,6 @@ export async function POST() {
         author: "杜牧",
         language: "中文",
         content: ["銀燭秋光冷畫屏，", "輕羅小扇撲流螢。", "天階夜色涼如水，", "坐看牽牛織女星。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 36,
@@ -370,8 +300,6 @@ export async function POST() {
         author: "杜牧",
         language: "中文",
         content: ["煙籠寒水月籠沙，", "夜泊秦淮近酒家。", "商女不知亡國恨，", "隔江猶唱後庭花。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 37,
@@ -380,8 +308,6 @@ export async function POST() {
         author: "杜牧",
         language: "中文",
         content: ["千里鶯啼綠映紅，", "水村山郭酒旗風。", "南朝四百八十寺，", "多少樓臺煙雨中。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 38,
@@ -390,8 +316,6 @@ export async function POST() {
         author: "韋應物",
         language: "中文",
         content: ["獨憐幽草澗邊生，", "上有黃鸝深樹鳴。", "春潮帶雨晚來急，", "野渡無人舟自橫。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 39,
@@ -400,8 +324,6 @@ export async function POST() {
         author: "韓愈",
         language: "中文",
         content: ["天街小雨潤如酥，", "草色遙看近卻無。", "最是一年春好處，", "絕勝煙柳滿皇都。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 40,
@@ -410,8 +332,6 @@ export async function POST() {
         author: "李商隱",
         language: "中文",
         content: ["君問歸期未有期，", "巴山夜雨漲秋池。", "何當共剪西窗燭，", "卻話巴山夜雨時。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 41,
@@ -420,8 +340,6 @@ export async function POST() {
         author: "李商隱",
         language: "中文",
         content: ["相見時難別亦難，", "東風無力百花殘。", "春蠶到死絲方盡，", "蠟炬成灰淚始乾。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 42,
@@ -430,8 +348,6 @@ export async function POST() {
         author: "李商隱",
         language: "中文",
         content: ["向晚意不適，", "驅車登古原。", "夕陽無限好，", "只是近黃昏。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 43,
@@ -440,8 +356,6 @@ export async function POST() {
         author: "蘇軾",
         language: "中文",
         content: ["橫看成嶺側成峰，", "遠近高低各不同。", "不識廬山真面目，", "只緣身在此山中。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 44,
@@ -450,8 +364,6 @@ export async function POST() {
         author: "鄭燮",
         language: "中文",
         content: ["咬定青山不放鬆，", "立根原在破岩中。", "千磨萬擊還堅勁，", "任爾東西南北風。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 45,
@@ -460,8 +372,6 @@ export async function POST() {
         author: "白居易",
         language: "中文",
         content: ["離離原上草，", "一歲一枯榮。", "野火燒不盡，", "春風吹又生。", "遠芳侵古道，", "晴翠接荒城。", "又送王孫去，", "萋萋滿別情。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 46,
@@ -470,8 +380,6 @@ export async function POST() {
         author: "白居易",
         language: "中文",
         content: ["小娃撐小艇，", "偷採白蓮回。", "不解藏蹤跡，", "浮萍一道開。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 47,
@@ -480,8 +388,6 @@ export async function POST() {
         author: "白居易",
         language: "中文",
         content: ["江南好，", "風景舊曾諳。", "日出江花紅勝火，", "春來江水綠如藍。", "能不憶江南？"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 48,
@@ -490,8 +396,6 @@ export async function POST() {
         author: "白居易",
         language: "中文",
         content: ["人間四月芳菲盡，", "山寺桃花始盛開。", "長恨春歸無覓處，", "不知轉入此中來。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 49,
@@ -500,8 +404,6 @@ export async function POST() {
         author: "王安石",
         language: "中文",
         content: ["爆竹聲中一歲除，", "春風送暖入屠蘇。", "千門萬戶曈曈日，", "總把新桃換舊符。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 50,
@@ -510,8 +412,6 @@ export async function POST() {
         author: "王安石",
         language: "中文",
         content: ["京口瓜洲一水間，", "鍾山只隔數重山。", "春風又綠江南岸，", "明月何時照我還。"],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -526,8 +426,6 @@ export async function POST() {
           "淫慢則不能勵精，險躁則不能冶性。",
           "年與時馳，意與日去，遂成枯落，多不接世，悲守窮廬，將復何及！",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -548,8 +446,6 @@ export async function POST() {
           "古今多少事，",
           "都付笑談中。",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -572,8 +468,6 @@ export async function POST() {
           "至於斟酌損益，進盡忠言，則攸之、禕、允之任也。願陛下託臣以討賊興復之效，不效，則治臣之罪，以告先帝之靈。",
           "今當遠離，臨表涕泣，不知所云。",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       },
       {
         number: 54,
@@ -588,8 +482,6 @@ export async function POST() {
           "夫難平者，事也。昔先帝敗軍於楚，當此時，曹操拊手，謂天下以定。然後先帝東連吳越，西取巴蜀，舉兵北征，夏侯授首，此操之失計而漢事將成也。然後吳更違盟，關羽毀敗，秭歸蹉跌，曹丕稱帝。凡事如是，難可逆見。",
           "臣鞠躬盡瘁，死而後已。",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -601,8 +493,6 @@ export async function POST() {
         content: [
           "歌詞待補",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -614,8 +504,6 @@ export async function POST() {
         content: [
           "歌詞待補",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -645,8 +533,6 @@ export async function POST() {
           "就像是精靈住錯了森林",
           "那愛情錯的很透明",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
       ,
       {
@@ -658,8 +544,6 @@ export async function POST() {
         content: [
           "歌詞待補",
         ],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
       }
     ];
 
