@@ -541,7 +541,7 @@ export async function POST() {
       {
         number: 55,
         title: "子曰",
-        category: "民國",
+        category: "民",
         author: "卜學亮",
         content: [
           "歌詞待補",
