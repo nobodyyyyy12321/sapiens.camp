@@ -650,12 +650,6 @@ export async function POST() {
       }
     ];
 
-    // Ensure every article has a `language` field; default to Chinese
-    for (const a of testArticles) {
-      if (!Object.prototype.hasOwnProperty.call(a, "language")) {
-        (a as any).language = "中文";
-      }
-    }
 
     let added = 0;
     let skipped = 0;
