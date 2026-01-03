@@ -648,6 +648,19 @@ export async function POST() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
+      ,
+      {
+        number: 58,
+        title: "人質",
+        category: "民",
+        author: "冷玩妹",
+        language: "中文",
+        content: [
+          "歌詞待補",
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
     ];
 
 
