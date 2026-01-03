@@ -29,6 +29,8 @@ export default async function CategoryPage({ params }: Props) {
                   key={a.id}
                   className="flex h-12 items-center justify-center rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100"
                   href={`/${encodeURIComponent(category)}/${a.number}`}
+                  title={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
+                  aria-label={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
                 >
                   <span className="truncate">{a.title}{a.author ? ` - ${a.author}` : ""}</span>
                 </Link>

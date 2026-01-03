@@ -70,6 +70,7 @@ export default async function ArticlePage({ params }: Props) {
         <header className="mb-6 text-center relative">
           <h1 className="text-4xl zen-title">{article.title}</h1>
           {article.author && <p className="mt-2 text-sm zen-subtle">— {article.author}</p>}
+          {article.category && <p className="mt-1 text-sm zen-subtle">分類：{article.category}</p>}
           <div className="absolute top-0 right-0 mt-2 mr-2">
             <AddToListButton articleId={article.id} articleNumber={article.number || number} title={article.title} />
           </div>

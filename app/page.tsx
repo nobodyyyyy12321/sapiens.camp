@@ -226,7 +226,7 @@ function HomeContent({ categories }: HomeContentProps) {
         {/* Search results or link to All Poems */}
         {searchQuery.trim().length >= 2 ? (
           <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
-            {isSearching ? (
+              {isSearching ? (
               <p className="text-sm zen-subtle">搜尋中...</p>
             ) : searchResults.length === 0 ? (
               <p className="text-sm zen-subtle">找不到相關結果</p>
@@ -236,6 +236,8 @@ function HomeContent({ categories }: HomeContentProps) {
                   key={article.id}
                   className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
                   href={`/${encodeURIComponent(article.category || "未分類")}/${article.number}`}
+                  title={`${article.title}${article.author ? ` — ${article.author}` : ""}`}
+                  aria-label={`${article.title}${article.author ? ` — ${article.author}` : ""}`}
                 >
                   {article.title}{article.author ? ` - ${article.author}` : ""}
                 </Link>
