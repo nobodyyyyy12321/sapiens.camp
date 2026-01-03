@@ -79,24 +79,38 @@ export async function POST(request: Request) {
           }
 
           // Append recitation to user's recitations array and update counters
-          const recitations = userData.recitations || [];
-          recitations.push({
-            articleId,
-            articleNumber,
-            title,
-            success,
-            timestamp: timestamp || new Date().toISOString(),
-          });
+          // Use a transaction to avoid double-counting simultaneous successes
+          const userRef = usersCol.doc(userDoc.id);
+          try {
+            await db.runTransaction(async (tx) => {
+              const fresh = await tx.get(userRef);
+              const freshData: any = fresh.exists ? fresh.data() : {};
+              const recitationsFresh = freshData.recitations || [];
+              const hadSuccessBefore = recitationsFresh.some((r: any) => r.articleId === articleId && r.success === true);
 
-          const attemptCountUser = (userData.attemptCount || 0) + 1;
-          const successCountUser = (userData.successCount || 0) + (success ? 1 : 0);
+              const newRec = {
+                articleId,
+                articleNumber,
+                title,
+                success,
+                timestamp: timestamp || new Date().toISOString(),
+              };
 
-          await usersCol.doc(userDoc.id).update({
-            recitations,
-            attemptCount: attemptCountUser,
-            successCount: successCountUser,
-            updatedAt: new Date().toISOString(),
-          });
+              recitationsFresh.push(newRec);
+
+              const attemptCountUser = (freshData.attemptCount || 0) + 1;
+              const successCountUser = (freshData.successCount || 0) + (success && !hadSuccessBefore ? 1 : 0);
+
+              tx.update(userRef, {
+                recitations: recitationsFresh,
+                attemptCount: attemptCountUser,
+                successCount: successCountUser,
+                updatedAt: new Date().toISOString(),
+              });
+            });
+          } catch (txErr) {
+            console.error("Failed to update user recitations in transaction:", txErr);
+          }
         }
       } catch (e) {
         console.error("Failed to update user recitations:", e);

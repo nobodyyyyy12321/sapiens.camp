@@ -549,6 +549,48 @@ export async function POST() {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
+      ,
+      {
+        number: 56,
+        title: "髮如雪",
+        category: "民",
+        author: "方文山",
+        content: [
+          "歌詞待補",
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+      ,
+      {
+        number: 57,
+        title: "親愛的那不是愛情",
+        category: "民",
+        author: "方文山",
+        content: [
+          "教室裡那台風琴叮咚叮咚叮嚀",
+          "像你告白的聲音 動作一直很輕",
+          "微笑看你送完信 轉身離開的背影",
+          "喜歡你字跡清秀的關心",
+          "",
+          "那溫熱的牛奶瓶在我手中握緊",
+          "有你在的地方 我總感覺很窩心",
+          "日子像旋轉木馬 在腦海裡轉不停",
+          "出現那些你對我好的場景",
+          "",
+          "你說過牽了手就算約定",
+          "但親愛的那並不是愛情",
+          "就像來不及許願的流星",
+          "再怎麼美麗也只能是曾經",
+          "",
+          "太美的承諾因為太年輕",
+          "但親愛的那並不是愛情",
+          "就像是精靈住錯了森林",
+          "那愛情錯的很透明",
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
     ];
 
     let added = 0;
