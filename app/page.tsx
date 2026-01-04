@@ -185,7 +185,7 @@ function HomeContent({ categories }: HomeContentProps) {
           </div>
         )}
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-4xl font-bold zen-title">給我背</h1>
+          <h1 className="max-w-xs text-4xl font-bold zen-title">精神糧食</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">不學詩，無以言</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
@@ -259,7 +259,7 @@ export default function Home() {
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
           <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-            <h1 className="max-w-xs text-4xl font-bold zen-title">給我背</h1>
+            <h1 className="max-w-xs text-4xl font-bold zen-title">精神糧食</h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">不學詩，無以言</p>
           </div>
         </main>
