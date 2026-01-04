@@ -260,7 +260,7 @@ export default function Home() {
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
           <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
             <h1 className="max-w-xs text-4xl font-bold zen-title">給我背</h1>
-            <p className="max-w-md text-lg leading-8 zen-subtle">Memorize Guru</p>
+            <p className="max-w-md text-lg leading-8 zen-subtle">不學詩，無以言</p>
           </div>
         </main>
       </div>
