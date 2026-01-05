@@ -67,7 +67,7 @@ export default function RootLayout({
                   全站統計
                 </Link>
                 <Link href="/links" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  上進網站連結
+                  正派網站連結
                 </Link>
               </div>
 
