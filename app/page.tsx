@@ -256,7 +256,10 @@ function HomeContent({ categories }: HomeContentProps) {
             aria-label="advertisement"
             className="w-full h-28 rounded-md border-2 border-dashed border-zinc-200 dark:border-zinc-700 bg-transparent flex items-center justify-center text-sm text-zinc-500"
           >
-            Advertisement
+            <div className="text-center">
+              <div className="font-medium">Advertisement</div>
+              <div className="text-xs">100 USD / month (currently)</div>
+            </div>
           </div>
         </div>
 
