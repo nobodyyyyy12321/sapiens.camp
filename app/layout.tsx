@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Link from "next/link";
 import Providers from "./providers/SessionProvider";
+import VisitPing from "./components/VisitPing";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
             }}
           />
           <header className="w-full py-6 sticky top-0 z-50">
+            <VisitPing />
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">
                 <Link href="/" className="flex items-center gap-2 px-0 py-0">

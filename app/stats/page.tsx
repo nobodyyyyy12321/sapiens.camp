@@ -6,19 +6,21 @@ export default function SiteStatsPage() {
   const [loading, setLoading] = useState(true);
   const [totalAttempts, setTotalAttempts] = useState<number | null>(null);
   const [totalSuccesses, setTotalSuccesses] = useState<number | null>(null);
+  const [visits, setVisits] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [records, setRecords] = useState<any[] | null>(null);
 
   useEffect(() => {
     let mounted = true;
     setLoading(true);
-    fetch("/api/stats?records=1")
+        fetch("/api/stats?records=1")
       .then((res) => res.json())
       .then((data) => {
         if (!mounted) return;
         if (data && data.success) {
           setTotalAttempts(Number(data.totalAttempts || 0));
           setTotalSuccesses(Number(data.totalSuccesses || 0));
+              setVisits(Number(data.visits || 0));
           setRecords(Array.isArray(data.records) ? data.records : []);
         } else {
           setError("無法取得統計資料");
@@ -45,7 +47,7 @@ export default function SiteStatsPage() {
         ) : (
           <div>
             <div className="w-full flex items-center justify-center mb-4">
-              <p className="text-base zen-subtle">全站累計：嘗試 {totalAttempts} 次 ・ 成功 {totalSuccesses} 次</p>
+              <p className="text-base zen-subtle">全站累計：嘗試 {totalAttempts} 次 ・ 成功 {totalSuccesses} 次 ・ 造訪 {visits} 次</p>
             </div>
 
             <div className="w-full">

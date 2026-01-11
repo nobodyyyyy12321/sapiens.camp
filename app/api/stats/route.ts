@@ -21,8 +21,20 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const wantRecords = url.searchParams.get("records") === "1";
 
+    // Read global site visits if present
+    let visits = 0;
+    try {
+      const statsDoc = await db.collection("siteStats").doc("global").get();
+      if (statsDoc.exists) {
+        const sdata: any = statsDoc.data() || {};
+        visits = Number(sdata.visits || 0);
+      }
+    } catch (vErr) {
+      console.error("Failed to read site visits:", vErr);
+    }
+
     if (!wantRecords) {
-      return NextResponse.json({ success: true, totalAttempts, totalSuccesses });
+      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits });
     }
 
     // Return recent recitationRecords (most recent first). Limit to 500.
@@ -68,7 +80,7 @@ export async function GET(request: Request) {
         records.push(record);
       }
 
-      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, records });
+      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits, records });
     } catch (recErr: any) {
       console.error("Failed to fetch recitationRecords:", recErr);
       return NextResponse.json({ success: true, totalAttempts, totalSuccesses, records: [] });
