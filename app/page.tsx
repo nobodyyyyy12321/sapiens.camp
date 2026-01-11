@@ -248,6 +248,18 @@ function HomeContent({ categories }: HomeContentProps) {
           <div className="flex w-full max-w-md items-center gap-3 text-base font-medium flex-wrap justify-center" style={{ marginTop: "1cm" }}>
           </div>
         )}
+
+        {/* Advertisement placeholder at bottom of homepage */}
+        <div className="w-full max-w-3xl mt-12 flex items-center justify-center" style={{ marginTop: "calc(3rem + 2cm)" }}>
+          <div
+            role="complementary"
+            aria-label="advertisement"
+            className="w-full h-28 rounded-md border-2 border-dashed border-zinc-200 dark:border-zinc-700 bg-transparent flex items-center justify-center text-sm text-zinc-500"
+          >
+            Advertisement
+          </div>
+        </div>
+
       </main>
     </div>
   );
