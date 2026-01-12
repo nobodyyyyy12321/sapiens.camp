@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function SiteStatsPage() {
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,15 @@ export default function SiteStatsPage() {
                     <div key={r.id} className="flex items-center justify-between p-3 border rounded">
                       <div className="flex-1">
                         <div className="font-medium">{r.title || "(無標題)"}</div>
-                        <div className="text-sm zen-subtle">{r.userName ? r.userName : "匿名"}</div>
+                        <div className="text-sm zen-subtle">
+                          {r.userName ? (
+                            <Link href={`/account/${encodeURIComponent(r.userName)}/record`} className="text-zen-link hover:underline">
+                              {r.userName}
+                            </Link>
+                          ) : (
+                            "匿名"
+                          )}
+                        </div>
                       </div>
                       <div className="w-56 text-right text-sm">
                         <div>{new Date(r.timestamp || r.createdAt).toLocaleString("zh-TW")}</div>

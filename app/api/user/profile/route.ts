@@ -15,11 +15,24 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: "Not found" }, { status: 404 });
       }
 
-      // Return limited public data
+      // Determine if the requester is the owner (authenticated and same email)
+      let isOwner = false;
+      try {
+        const session = (await auth()) as unknown as Session | null;
+        if (session?.user?.email) {
+          const found = await findUserByEmail(session.user.email as string);
+          if (found && found.id === user.id) isOwner = true;
+        }
+      } catch (e) {
+        // ignore auth errors — treat as not owner
+      }
+
+      // Return data: include recitations only if owner or public
       const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
+      const outRecitations = isOwner ? recitations : (recitationsPublic ? recitations : []);
       return NextResponse.json({ 
         ok: true, 
-        user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } 
+        user: { id, name, email, bio, avatarUrl, socialLinks, recitations: outRecitations, recitationsPublic, emailPublic, isOwner } 
       });
     }
 

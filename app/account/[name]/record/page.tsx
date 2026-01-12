@@ -38,10 +38,10 @@ export default function RecordsPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
-          const owner = session?.user?.name === decodedName;
+          const owner = session?.user?.name === decodedName || Boolean(data.user.isOwner);
           setIsOwner(owner);
           setRecitationsPublic(data.user.recitationsPublic ?? false);
-          
+
           // Show records if owner or if public
           if (owner || data.user.recitationsPublic) {
             setRecitations(data.user.recitations || []);

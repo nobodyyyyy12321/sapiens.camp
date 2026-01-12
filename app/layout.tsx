@@ -63,7 +63,7 @@ export default function RootLayout({
                   所有詩文
                 </Link>
                 <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  榜單
+                  榜
                 </Link>
                 <Link href="/stats" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
                   全站統計
