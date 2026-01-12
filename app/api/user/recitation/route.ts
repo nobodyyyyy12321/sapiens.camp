@@ -189,9 +189,10 @@ export async function POST(request: Request) {
             title,
             success,
             timestamp: timestamp || new Date().toISOString(),
-            userEmail: session?.user?.email || null,
+            // For privacy, do not store user email in recitation records by default.
+            userEmail: null,
             userName: session?.user?.name || null,
-            anonymous: !session?.user?.email,
+            anonymous: true,
             createdAt: new Date().toISOString(),
           };
           await recordsCol.add(record);
