@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import Resend from "resend";
+import { Resend } from "resend";
 
 type Body = {
   contact: string;
