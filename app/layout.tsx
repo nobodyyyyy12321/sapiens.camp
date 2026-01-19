@@ -5,6 +5,7 @@ import AuthNav from "./components/AuthNav";
 import Link from "next/link";
 import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,6 +75,7 @@ export default function RootLayout({
               </div>
 
               <div className="flex items-center gap-3">
+                <LanguageSwitcher />
                 <AuthNav />
               </div>
             </nav>

@@ -239,7 +239,7 @@ function HomeContent({ categories }: HomeContentProps) {
                   title={`${article.title}${article.author ? ` — ${article.author}` : ""}`}
                   aria-label={`${article.title}${article.author ? ` — ${article.author}` : ""}`}
                 >
-                  {article.title}{article.author ? ` - ${article.author}` : ""}
+                  {article.number ? `${article.number} · ` : ""}{article.title}{article.author ? ` - ${article.author}` : ""}
                 </Link>
               ))
             )}

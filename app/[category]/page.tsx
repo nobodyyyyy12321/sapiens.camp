@@ -32,7 +32,7 @@ export default async function CategoryPage({ params }: Props) {
                   title={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
                   aria-label={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
                 >
-                  <span className="truncate">{a.title}{a.author ? ` - ${a.author}` : ""}</span>
+                  <span className="truncate">{a.number ? `${a.number} · ` : ""}{a.title}{a.author ? ` - ${a.author}` : ""}</span>
                 </Link>
               ))}
             </div>

@@ -81,6 +81,17 @@ body {
   border-radius: 10px;
 }
 
+/* Language select: show white text on black control; options try to match where browsers allow */
+.language-select {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+.language-select option {
+  background: #000 !important;
+  color: #fff !important;
+}
+
 /* small screens center */
 @media (max-width: 640px) {
   .zen-card { padding: 2rem; margin: 1rem; }
