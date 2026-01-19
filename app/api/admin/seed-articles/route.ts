@@ -320,7 +320,7 @@ export async function POST() {
       {
         number: 39,
         title: "早春呈水部張十八員外",
-        category: "唐",
+        category: "宋",
         author: "韓愈",
         language: "中文",
         content: ["天街小雨潤如酥，", "草色遙看近卻無。", "最是一年春好處，", "絕勝煙柳滿皇都。"],
@@ -352,7 +352,7 @@ export async function POST() {
       {
         number: 43,
         title: "題西林壁",
-        category: "唐",
+        category: "宋",
         author: "蘇軾",
         language: "中文",
         content: ["橫看成嶺側成峰，", "遠近高低各不同。", "不識廬山真面目，", "只緣身在此山中。"],
@@ -360,7 +360,7 @@ export async function POST() {
       {
         number: 44,
         title: "竹石",
-        category: "唐",
+        category: "清",
         author: "鄭燮",
         language: "中文",
         content: ["咬定青山不放鬆，", "立根原在破岩中。", "千磨萬擊還堅勁，", "任爾東西南北風。"],
@@ -400,7 +400,7 @@ export async function POST() {
       {
         number: 49,
         title: "元日",
-        category: "唐",
+        category: "宋",
         author: "王安石",
         language: "中文",
         content: ["爆竹聲中一歲除，", "春風送暖入屠蘇。", "千門萬戶曈曈日，", "總把新桃換舊符。"],
@@ -408,7 +408,7 @@ export async function POST() {
       {
         number: 50,
         title: "泊船瓜洲",
-        category: "唐",
+        category: "宋",
         author: "王安石",
         language: "中文",
         content: ["京口瓜洲一水間，", "鍾山只隔數重山。", "春風又綠江南岸，", "明月何時照我還。"],
