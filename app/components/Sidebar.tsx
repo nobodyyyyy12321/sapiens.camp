@@ -43,7 +43,7 @@ export default function Sidebar() {
 
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
-            <Link href="/all" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
+            <Link href="/recitation" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
             <Link href="/ranking" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">榜</Link>
             <Link href="/stats" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">全站統計</Link>
             <Link href="/links" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">正派網站連結</Link>
