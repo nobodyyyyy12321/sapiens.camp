@@ -24,7 +24,7 @@ export default function Sidebar() {
       <button
         aria-label="Toggle menu"
         onClick={() => setOpen((s) => !s)}
-        className="fixed top-4 left-4 z-50 p-2 bg-white dark:bg-zinc-900 rounded-md shadow-md"
+        className="fixed top-4 left-4 z-60 p-2 bg-white dark:bg-zinc-900 rounded-md shadow-md"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           {open ? (
@@ -35,21 +35,11 @@ export default function Sidebar() {
         </svg>
       </button>
 
-      {/* Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        onClick={() => setOpen(false)}
-      />
+      {/* no overlay: sidebar should not cover content; main will shift */}
 
       {/* Sidebar panel */}
       <aside className={`fixed top-0 left-0 h-full bg-zen-paper dark:bg-zinc-900 z-50 transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"}`} style={{ width: 260 }}>
-        <div className="h-full p-6 flex flex-col">
-          <div className="mb-6">
-            <Link href="/" className="flex items-center gap-2">
-              <img src="/logo.svg" alt="邁可背" className="h-8 w-8" />
-              <span className="text-lg font-semibold zen-title">邁可背</span>
-            </Link>
-          </div>
+        <div className="h-full p-6 pt-14 flex flex-col">
 
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>

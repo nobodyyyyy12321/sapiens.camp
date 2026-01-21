@@ -96,3 +96,8 @@ body {
 @media (max-width: 640px) {
   .zen-card { padding: 2rem; margin: 1rem; }
 }
+
+/* Ensure hamburger stays above sidebar */
+.z-60 {
+  z-index: 60 !important;
+}

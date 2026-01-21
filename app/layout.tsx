@@ -52,13 +52,13 @@ export default function RootLayout({
             }}
           />
           <Sidebar />
-          <header className="w-full py-6 sticky top-0 z-40">
+          <header
+            className="w-full py-6 sticky top-0 z-40"
+            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+          >
             <VisitPing />
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">
-                <Link href="/" className="flex items-center gap-2 px-0 py-0">
-                  <img src="/logo.svg" alt="邁可背" className="h-8 w-8" />
-                </Link>
               </div>
 
               <div className="flex items-center gap-3">
