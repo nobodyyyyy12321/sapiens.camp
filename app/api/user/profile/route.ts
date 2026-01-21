@@ -76,7 +76,19 @@ export async function PATCH(req: Request) {
     // 安全檢查並整理更新欄位
     if (typeof body.bio === "string") updates.bio = body.bio;
     if (typeof body.avatarUrl === "string") updates.avatarUrl = body.avatarUrl;
-    if (typeof body.name === "string") updates.name = body.name;
+    // Enforce name-change cooldown: only allow changing display name once per 7 days
+    if (typeof body.name === "string" && body.name !== user.name) {
+      const now = Date.now();
+      const lastNameChange = (user as any).nameUpdatedAt || (user as any).nameChangedAt || (user as any).updatedAt || null;
+      if (lastNameChange) {
+        const lastTs = Date.parse(String(lastNameChange));
+        if (!isNaN(lastTs) && now - lastTs < 7 * 24 * 60 * 60 * 1000) {
+          return NextResponse.json({ error: "顯示名稱一週只能修改一次" }, { status: 429 });
+        }
+      }
+      updates.name = body.name;
+      updates.nameUpdatedAt = new Date().toISOString();
+    }
     if (body.socialLinks && typeof body.socialLinks === "object") {
       updates.socialLinks = body.socialLinks;
     }
