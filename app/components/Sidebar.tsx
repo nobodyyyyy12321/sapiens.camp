@@ -45,6 +45,7 @@ export default function Sidebar() {
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
             <Link href="/recitation" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
             <Link href="/math" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">數學題庫</Link>
+            <Link href="/traffic" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">交通題庫</Link>
             <Link href="/ranking" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">榜</Link>
             <Link href="/stats" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">全站統計</Link>
             <Link href="/links" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">正派網站連結</Link>
