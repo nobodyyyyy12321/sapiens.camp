@@ -24,7 +24,7 @@ const notoSerif = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
-  title: "經典詩文背誦",
+  title: "智人",
   description: "語音背誦詩文輔助",
 };
 
@@ -45,7 +45,7 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "經典詩文背誦",
+                "name": "智人",
                 "url": "https://memorize.guru",
                 "logo": "https://memorize.guru/logo.svg"
               }),

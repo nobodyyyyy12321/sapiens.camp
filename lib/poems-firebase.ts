@@ -30,7 +30,7 @@ function docToPoem(doc: any): Poem {
   } as Poem;
 }
 
-// 取得所有詩文
+// 取得詩文背誦
 export async function getPoems(filters?: {
   category?: string;
   author?: string;
