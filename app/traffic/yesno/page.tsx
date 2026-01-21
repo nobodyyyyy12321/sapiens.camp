@@ -14,8 +14,8 @@ export default function TrafficYesNoPage() {
           <div className="p-6 border rounded">問題：紅燈時可以右轉？</div>
 
           <div className="flex items-center gap-3">
-            <button className="zen-button" onClick={() => setAnswer("是")}>是</button>
-            <button className="zen-ghost" onClick={() => setAnswer("否")}>否</button>
+            <button className="px-4 py-2 border border-white bg-black text-white rounded" onClick={() => setAnswer("是")}>是</button>
+            <button className="px-4 py-2 border border-white bg-black text-white rounded" onClick={() => setAnswer("否")}>否</button>
           </div>
 
           {answer && (
