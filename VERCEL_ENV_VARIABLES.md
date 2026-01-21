@@ -39,7 +39,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 **用途：** 應用程式的完整 URL，用於生成認證回調 URL
 
 **值範例：**
-- 生產環境：`https://memorize.guru`
+- 生產環境：`https://sapiens.camp`
 - 預覽環境：`https://your-preview-url.vercel.app`
 - 本地開發：`http://localhost:3000`
 
@@ -98,7 +98,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
 
 **值範例：** 
 - 使用 Resend 預設：`onboarding@resend.dev`
-- 使用自訂域名：`noreply@memorize.guru`
+- 使用自訂域名：`noreply@sapiens.camp`
 
 ---
 

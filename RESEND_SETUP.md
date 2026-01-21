@@ -17,20 +17,18 @@
 1. 登入 Resend Dashboard
 2. 前往 **API Keys** 頁面
 3. 點擊 **Create API Key**
-4. 輸入名稱（例如：`memorize-guru-production`）
+4. 輸入名稱（例如：`sapiens-camp-production`）
 5. 選擇權限（選擇 **Sending access**）
 6. 複製 API Key（只會顯示一次，請妥善保存）
 
 ### 3. 設定發送域名（可選，但建議）
 
 **使用預設域名（快速開始）：**
-- Resend 提供 `onboarding@resend.dev` 作為測試域名
-- 可以直接使用，但郵件可能進入垃圾郵件夾
 
 **設定自訂域名（生產環境推薦）：**
 1. 在 Resend Dashboard 前往 **Domains**
 2. 點擊 **Add Domain**
-3. 輸入您的域名（例如：`memorize.guru`）
+3. 輸入您的域名（例如：`sapiens.camp`）
 4. 按照指示設定 DNS 記錄（SPF、DKIM、DMARC）
 5. 等待驗證完成（通常幾分鐘內）
 

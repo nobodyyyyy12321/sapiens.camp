@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://memorize.guru/</loc>
+    <loc>https://sapiens.camp/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://memorize.guru/links</loc>
+    <loc>https://sapiens.camp/links</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://memorize.guru/ranking</loc>
+    <loc>https://sapiens.camp/ranking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://memorize.guru/stats</loc>
+    <loc>https://sapiens.camp/stats</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

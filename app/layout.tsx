@@ -46,8 +46,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Organization",
                 "name": "智人",
-                "url": "https://memorize.guru",
-                "logo": "https://memorize.guru/logo.svg"
+                "url": "https://sapiens.camp",
+                "logo": "https://sapiens.camp/logo.svg"
               }),
             }}
           />
