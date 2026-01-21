@@ -29,27 +29,35 @@ export default function SettingsPage() {
 
     const decodedName = decodeURIComponent(nameParam);
 
-    // Only allow users to access their own settings
-    if (status === "authenticated" && session?.user?.name !== decodedName) {
-      router.push("/");
-      return;
-    }
+    // Fetch the profile for the requested name and allow access if the API marks the requester as owner
+    (async () => {
+      try {
+        const res = await fetch(`/api/user/profile?name=${encodeURIComponent(decodedName)}`);
+        if (!res.ok) {
+          router.push("/");
+          return;
+        }
+        const data = await res.json();
+        if (!data?.user) {
+          router.push("/");
+          return;
+        }
 
-    if (status === "authenticated" && session?.user?.email) {
-      fetch("/api/user/profile")
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.user) {
-            setRecitationsPublic(data.user.recitationsPublic ?? false);
-            setEmailPublic(data.user.emailPublic ?? false);
-          }
+        // If API indicates this requester is the owner, allow and load settings
+        if (data.user.isOwner) {
+          setRecitationsPublic(data.user.recitationsPublic ?? false);
+          setEmailPublic(data.user.emailPublic ?? false);
           setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Failed to fetch profile:", err);
-          setLoading(false);
-        });
-    }
+          return;
+        }
+
+        // Not owner — redirect away
+        router.push("/");
+      } catch (err) {
+        console.error("Failed to fetch profile:", err);
+        router.push("/");
+      }
+    })();
   }, [status, session, router, params]);
 
   async function handleSave() {
