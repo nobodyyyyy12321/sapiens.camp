@@ -3,7 +3,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
-import Link from "next/link";
 
 type SocialLinks = { x?: string;facebook?: string; instagram?: string; website?: string };
 
