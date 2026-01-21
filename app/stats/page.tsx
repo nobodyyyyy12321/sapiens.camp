@@ -70,9 +70,12 @@ export default function SiteStatsPage() {
                         </div>
                       </div>
                       <div className="w-56 text-right text-sm">
-                        <div>{new Date(r.timestamp || r.createdAt).toLocaleString("zh-TW")}</div>
+                        <div>{new Date(r.timestamp || r.createdAt).toLocaleDateString("zh-TW", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        })}</div>
                         <div className={`mt-1 ${r.success ? "text-green-700" : "text-red-700"}`}>{r.success ? "成功" : "失敗"}</div>
-                        
                       </div>
                     </div>
                   ))}
