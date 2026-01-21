@@ -7,6 +7,7 @@ import Link from "next/link";
 export default function AuthNav() {
   const { data: session, status } = useSession();
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -31,18 +32,27 @@ export default function AuthNav() {
         const res = await fetch('/api/user/profile');
         if (!res.ok) return;
         const j = await res.json();
-        if (j?.ok && j.user?.avatarUrl && mounted) setAvatarUrl(j.user.avatarUrl);
+        if (j?.ok && mounted) {
+          if (j.user?.avatarUrl) setAvatarUrl(j.user.avatarUrl);
+          if (j.user?.name) setDisplayName(j.user.name);
+        }
       } catch (e) {
         // ignore
       }
     }
 
+    function onProfileUpdated() {
+      loadProfile();
+    }
+
     if (session?.user) loadProfile();
+    window.addEventListener('profile:updated', onProfileUpdated);
     return () => { 
       mounted = false;
       if (closeTimeoutRef.current) {
         clearTimeout(closeTimeoutRef.current);
       }
+      window.removeEventListener('profile:updated', onProfileUpdated);
     };
   }, [session]);
 
@@ -59,7 +69,7 @@ export default function AuthNav() {
     );
   }
 
-  const name = session.user.name || session.user.email || "使用者";
+  const name = displayName || session.user.name || session.user.email || "使用者";
   const encodedName = encodeURIComponent(name);
 
   return (

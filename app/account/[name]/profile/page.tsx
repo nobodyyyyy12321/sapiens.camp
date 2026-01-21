@@ -112,6 +112,14 @@ export default function ProfilePage() {
     // optionally reload or show success
     setEditing(false);
     router.refresh();
+    try {
+      // notify other UI components (AuthNav) to refresh profile info
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event('profile:updated'));
+      }
+    } catch (e) {
+      // ignore
+    }
   }
 
   function makeSocialHref(platform: string, value?: string) {
