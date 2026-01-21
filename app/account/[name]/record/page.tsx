@@ -38,7 +38,9 @@ export default function RecordsPage() {
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
-          const owner = session?.user?.name === decodedName || Boolean(data.user.isOwner);
+          // Consider owner true if server marked isOwner, or session email matches profile email,
+          // or session name matches the decoded name (fallback)
+          const owner = Boolean(data.user.isOwner) || (session?.user?.email && session.user.email === data.user.email) || session?.user?.name === decodedName;
           setIsOwner(owner);
           setRecitationsPublic(data.user.recitationsPublic ?? false);
 

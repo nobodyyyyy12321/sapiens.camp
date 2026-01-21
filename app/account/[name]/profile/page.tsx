@@ -119,7 +119,7 @@ export default function ProfilePage() {
     <div className="flex min-h-screen items-center justify-center">
       <main className="w-full max-w-2xl zen-card p-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl zen-title mb-4">我的檔案</h1>
+          <h1 className="text-2xl zen-title mb-4">個人檔案</h1>
           <div className="flex items-center gap-2">
             <button className="zen-ghost" onClick={handleShare}>
               {shareCopied ? "已複製" : "分享連結"}
