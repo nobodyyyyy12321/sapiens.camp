@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type SocialLinks = { x?: string;facebook?: string; instagram?: string; website?: string };
 
@@ -121,6 +122,7 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl zen-title mb-4">個人檔案</h1>
           <div className="flex items-center gap-2">
+            <Link href={`/account/${encodeURIComponent(name)}/record`} className="zen-ghost">紀錄</Link>
             <button className="zen-ghost" onClick={handleShare}>
               {shareCopied ? "已複製" : "分享連結"}
             </button>

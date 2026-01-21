@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
+import Link from "next/link";
 
 type RecitationRecord = {
   articleId: string;
@@ -93,11 +94,16 @@ export default function RecordsPage() {
           <h1 className="text-4xl font-bold zen-title">
             {userName ? `${userName} 的紀錄` : "紀錄"}
           </h1>
-          {isOwner && (
-            <button className="zen-ghost" onClick={handleShare}>
-              {shareCopied ? "已複製" : "分享連結"}
-            </button>
-          )}
+          <div className="flex items-center gap-2">
+            {userName && (
+              <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="zen-ghost">個人檔案</Link>
+            )}
+            {isOwner && (
+              <button className="zen-ghost" onClick={handleShare}>
+                {shareCopied ? "已複製" : "分享連結"}
+              </button>
+            )}
+          </div>
         </div>
 
         {!isOwner && !recitationsPublic ? (
