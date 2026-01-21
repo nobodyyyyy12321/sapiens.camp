@@ -16,6 +16,7 @@ export default function ProfilePage() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [emailPublic, setEmailPublic] = useState(false);
   const [bio, setBio] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [socialLinks, setSocialLinks] = useState<SocialLinks>({});
@@ -61,6 +62,7 @@ export default function ProfilePage() {
 
         setName(u.name || "");
         setEmail(u.email || "");
+        setEmailPublic(Boolean(u.emailPublic));
         setBio(u.bio || "");
         setAvatarUrl(u.avatarUrl || "");
         setSocialLinks(u.socialLinks || {});
@@ -201,7 +203,13 @@ export default function ProfilePage() {
             )}
 
             <label className="block mb-2">Email</label>
-            <div className="mb-3">{email}</div>
+            <div className="mb-3">
+              {isOwner || emailPublic ? (
+                email || <span className="text-gray-500">尚未設定</span>
+              ) : (
+                <span className="text-gray-500">未公開</span>
+              )}
+            </div>
 
             <label className="block mb-2">自我介紹</label>
             {editing ? (

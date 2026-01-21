@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { findUserByEmail, findUserByName, updateUser } from "../../../../lib/users";
+import { getFirestoreDB } from "../../../../lib/firebase-admin";
 import type { Session } from "next-auth";
 import { auth } from "../../../../auth";
 
@@ -87,7 +88,29 @@ export async function PATCH(req: Request) {
     }
 
     const updated = await updateUser(user.id, updates);
-    
+    // If the display name changed, update any recitationRecords that stored the old name.
+    if (updates.name && updates.name !== user.name) {
+      try {
+        const db = getFirestoreDB();
+        const recordsCol = db.collection("recitationRecords");
+        const q = await recordsCol.where("userName", "==", user.name).get();
+        const batch = db.batch ? db.batch() : null;
+        if (q && !q.empty) {
+          q.docs.forEach((doc) => {
+            try {
+              if (batch) batch.update(doc.ref, { userName: updates.name });
+              else doc.ref.update({ userName: updates.name });
+            } catch (e) {
+              console.error("Failed updating recitation record name for doc", doc.id, e);
+            }
+          });
+          if (batch) await batch.commit();
+        }
+      } catch (e) {
+        console.error("Failed to update recitationRecords for renamed user:", e);
+      }
+    }
+
     return NextResponse.json({ ok: true, user: updated });
   } catch (e) {
     console.error("PATCH User Error:", e);
