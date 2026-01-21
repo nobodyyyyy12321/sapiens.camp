@@ -22,6 +22,10 @@ export default function LinksPage() {
             <div className="text-lg font-medium">World Population Review</div>
             <a href="https://worldpopulationreview.com/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://worldpopulationreview.com/</a>
           </div>
+                    <div className="flex items-center gap-2">
+            <div className="text-lg font-medium">Instagram Page</div>
+            <a href="https://www.instagram.com/sapiens.camp/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://www.instagram.com/sapiens.camp/</a>
+          </div>
         </div>
       </main>
     </div>
