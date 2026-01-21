@@ -70,7 +70,7 @@ export default function RegisterPage() {
               <p className="mt-2 break-words">驗證連結：<a className="text-accent underline" href={verificationUrl}>{verificationUrl}</a></p>
             )}
             <div className="mt-4">
-              <button className="zen-button border border-gray-300" onClick={() => router.push('/auth/login')}>前往登入</button>
+              <button className="zen-button" onClick={() => router.push('/auth/login')}>前往登入</button>
             </div>
           </div>
         ) : (
@@ -78,14 +78,14 @@ export default function RegisterPage() {
           <input className="p-2 rounded-md" placeholder="顯示名稱（必填）" value={nameOnly} onChange={(e) => setNameOnly(e.target.value)} />
           <input className="p-2 rounded-md" placeholder="Email（必填）" required value={email} onChange={(e) => setEmail(e.target.value)} />
           <input className="p-2 rounded-md" placeholder="密碼（必填）" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button className="zen-button border border-gray-300" disabled={loading}>{loading ? '建立中...' : '註冊'}</button>
+          <button className="zen-button" disabled={loading}>{loading ? '建立中...' : '註冊'}</button>
           <div className="mt-2">
             <div className="flex items-center gap-2 my-2">
               <hr className="flex-1" />
               <span className="text-sm text-zen-subtle">或</span>
               <hr className="flex-1" />
             </div>
-            <button type="button" className="w-full zen-button border border-gray-300" onClick={() => signIn("google", { callbackUrl: "/" })}>
+            <button type="button" className="w-full zen-button" onClick={() => signIn("google", { callbackUrl: "/" })}>
               使用 Google 帳號登入
             </button>
           </div>
