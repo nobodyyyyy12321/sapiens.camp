@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import Link from "next/link";
 import Link from "next/link";
 
 type SocialLinks = { x?: string;facebook?: string; instagram?: string; website?: string };
@@ -21,26 +22,50 @@ export default function ProfilePage() {
 
   const router = useRouter();
 
+  const params = useParams();
+
   useEffect(() => {
     async function load() {
       setLoading(true);
-      const res = await fetch("/api/user/profile");
-      if (!res.ok) {
-        setError("無法載入使用者資料（請先登入）");
+      try {
+        const nameParam = params?.name;
+        const url = nameParam ? `/api/user/profile?name=${encodeURIComponent(nameParam)}` : "/api/user/profile";
+        const res = await fetch(url);
+        if (!res.ok) {
+          // If fetching by name and not found, show not found message
+          if (nameParam && res.status === 404) {
+            setError("此使用者不存在");
+          } else {
+            setError("無法載入使用者資料（請先登入）");
+          }
+          setLoading(false);
+          return;
+        }
+
+        const data = await res.json();
+        const u = data.user;
+
+        // If viewing another user's profile and it's not public, show message
+        const viewingOther = Boolean(params?.name && params.name !== u.name);
+        if (viewingOther && !u.profilePublic && !u.isOwner) {
+          setError("個人資料不公開");
+          setLoading(false);
+          return;
+        }
+
+        setName(u.name || "");
+        setEmail(u.email || "");
+        setBio(u.bio || "");
+        setAvatarUrl(u.avatarUrl || "");
+        setSocialLinks(u.socialLinks || {});
         setLoading(false);
-        return;
+      } catch (e) {
+        setError("無法載入使用者資料");
+        setLoading(false);
       }
-      const data = await res.json();
-      const u = data.user;
-      setName(u.name || "");
-      setEmail(u.email || "");
-      setBio(u.bio || "");
-      setAvatarUrl(u.avatarUrl || "");
-      setSocialLinks(u.socialLinks || {});
-      setLoading(false);
     }
     load();
-  }, []);
+  }, [params]);
 
   async function uploadAvatar(file: File) {
     const reader = new FileReader();

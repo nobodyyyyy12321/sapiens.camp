@@ -30,9 +30,12 @@ export async function GET(request: Request) {
       // Return data: include recitations only if owner or public
       const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
       const outRecitations = isOwner ? recitations : (recitationsPublic ? recitations : []);
+      // Decide whether the profile is publicly visible. Currently treat profile as public
+      // if either recitations or email are marked public. This can be adjusted later.
+      const profilePublic = Boolean(recitationsPublic || emailPublic);
       return NextResponse.json({ 
         ok: true, 
-        user: { id, name, email, bio, avatarUrl, socialLinks, recitations: outRecitations, recitationsPublic, emailPublic, isOwner } 
+        user: { id, name, email, bio, avatarUrl, socialLinks, recitations: outRecitations, recitationsPublic, emailPublic, isOwner, profilePublic } 
       });
     }
 
