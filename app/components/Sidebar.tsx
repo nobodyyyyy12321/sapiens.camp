@@ -1,0 +1,67 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+
+export default function Sidebar() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      const v = localStorage.getItem("sidebar-open");
+      if (v !== null) setOpen(v === "1");
+    } catch (e) {}
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("sidebar-open", open ? "1" : "0");
+    } catch (e) {}
+  }, [open]);
+
+  return (
+    <>
+      {/* Toggle button */}
+      <button
+        aria-label="Toggle menu"
+        onClick={() => setOpen((s) => !s)}
+        className="fixed top-4 left-4 z-50 p-2 bg-white dark:bg-zinc-900 rounded-md shadow-md"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          {open ? (
+            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+          ) : (
+            <path fillRule="evenodd" d="M3 5h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2zm0 4h14a1 1 0 110 2H3a1 1 0 110-2z" clipRule="evenodd" />
+          )}
+        </svg>
+      </button>
+
+      {/* Overlay */}
+      <div
+        className={`fixed inset-0 bg-black/40 z-40 transition-opacity ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setOpen(false)}
+      />
+
+      {/* Sidebar panel */}
+      <aside className={`fixed top-0 left-0 h-full bg-zen-paper dark:bg-zinc-900 z-50 transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"}`} style={{ width: 260 }}>
+        <div className="h-full p-6 flex flex-col">
+          <div className="mb-6">
+            <Link href="/" className="flex items-center gap-2">
+              <img src="/logo.svg" alt="邁可背" className="h-8 w-8" />
+              <span className="text-lg font-semibold zen-title">邁可背</span>
+            </Link>
+          </div>
+
+          <nav className="flex flex-col gap-2">
+            <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
+            <Link href="/all" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">所有詩文</Link>
+            <Link href="/ranking" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">榜</Link>
+            <Link href="/stats" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">全站統計</Link>
+            <Link href="/links" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">正派網站連結</Link>
+          </nav>
+
+          <div className="mt-auto text-sm zen-subtle">&copy; 邁可背</div>
+        </div>
+      </aside>
+    </>
+  );
+}

@@ -6,6 +6,7 @@ import Link from "next/link";
 import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import Sidebar from "./components/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,27 +51,13 @@ export default function RootLayout({
               }),
             }}
           />
-          <header className="w-full py-6 sticky top-0 z-50">
+          <Sidebar />
+          <header className="w-full py-6 sticky top-0 z-40">
             <VisitPing />
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
               <div className="flex items-center gap-4 flex-nowrap">
                 <Link href="/" className="flex items-center gap-2 px-0 py-0">
                   <img src="/logo.svg" alt="邁可背" className="h-8 w-8" />
-                </Link>
-                <Link href="/" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  首頁
-                </Link>
-                <Link href="/all" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  所有詩文
-                </Link>
-                <Link href="/ranking" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  榜
-                </Link>
-                <Link href="/stats" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  全站統計
-                </Link>
-                <Link href="/links" className="flex items-center gap-2 zen-ghost px-3 py-1 rounded whitespace-nowrap">
-                  正派網站連結
                 </Link>
               </div>
 
