@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useSession } from "next-auth/react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 
@@ -22,6 +23,8 @@ export default function ProfilePage() {
   const router = useRouter();
 
   const params = useParams();
+  const { data: session, status } = useSession();
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -44,9 +47,13 @@ export default function ProfilePage() {
         const data = await res.json();
         const u = data.user;
 
+        // determine owner: server flag OR session matches email/name
+        const owner = Boolean(u.isOwner) || (session?.user?.email && session.user.email === u.email) || (session?.user?.name && session.user.name === u.name);
+        setIsOwner(Boolean(owner));
+
         // If viewing another user's profile and it's not public, show message
         const viewingOther = Boolean(params?.name && params.name !== u.name);
-        if (viewingOther && !u.profilePublic && !u.isOwner) {
+        if (viewingOther && !u.profilePublic && !owner) {
           setError("個人資料不公開");
           setLoading(false);
           return;
@@ -64,7 +71,7 @@ export default function ProfilePage() {
       }
     }
     load();
-  }, [params]);
+  }, [params, session, status]);
 
   async function uploadAvatar(file: File) {
     const reader = new FileReader();
@@ -150,13 +157,15 @@ export default function ProfilePage() {
             <button className="zen-ghost" onClick={handleShare}>
               {shareCopied ? "已複製" : "分享連結"}
             </button>
-            {!editing ? (
-              <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
-            ) : (
-              <div className="flex items-center gap-2">
-                <button className="zen-button" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
-                <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
-              </div>
+            {isOwner && (
+              !editing ? (
+                <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <button className="zen-button" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
+                  <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
+                </div>
+              )
             )}
           </div>
         </div>
