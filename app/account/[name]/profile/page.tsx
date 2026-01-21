@@ -28,7 +28,7 @@ export default function ProfilePage() {
       setLoading(true);
       try {
         const nameParam = params?.name;
-        const url = nameParam ? `/api/user/profile?name=${encodeURIComponent(nameParam)}` : "/api/user/profile";
+        const url = nameParam ? "/api/user/profile?name=" + encodeURIComponent(String(nameParam)) : "/api/user/profile";
         const res = await fetch(url);
         if (!res.ok) {
           // If fetching by name and not found, show not found message
