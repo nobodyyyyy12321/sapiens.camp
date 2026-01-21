@@ -38,7 +38,7 @@ export default function Sidebar() {
       {/* no overlay: sidebar should not cover content; main will shift */}
 
       {/* Sidebar panel */}
-      <aside className={`fixed top-0 left-0 h-full bg-zen-paper dark:bg-zinc-900 z-50 transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"}`} style={{ width: 260 }}>
+      <aside className={`fixed top-0 left-0 h-full bg-zen-paper dark:bg-zinc-900 z-50 transform ${open ? "translate-x-0" : "-translate-x-full"}`} style={{ width: 260 }}>
         <div className="h-full p-6 pt-14 flex flex-col">
 
           <nav className="flex flex-col gap-2">
