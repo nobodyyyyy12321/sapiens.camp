@@ -64,10 +64,6 @@ export default function TrafficYesNoPage() {
           {answer && (
             <div className="mt-2 text-sm">您的答案：{answer}</div>
           )}
-
-          {status && (
-            <div className="mt-2 text-sm text-zinc-400">{status}</div>
-          )}
         </div>
       </main>
     </div>
