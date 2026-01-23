@@ -7,6 +7,7 @@ import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import Sidebar from "./components/Sidebar";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,6 +71,7 @@ export default function RootLayout({
 
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
