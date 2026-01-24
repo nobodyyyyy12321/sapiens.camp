@@ -72,20 +72,6 @@ function HomeContent({ categories }: HomeContentProps) {
           <p className="max-w-md text-lg leading-8 zen-subtle">Homo Sapiens Learning</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
-
-        {/* Advertisement placeholder at bottom of homepage */}
-        <div className="w-full max-w-3xl mt-12 flex items-center justify-center" style={{ marginTop: "calc(3rem + 2cm)" }}>
-          <div
-            role="complementary"
-            aria-label="advertisement"
-            className="w-full h-28 rounded-md border-2 border-dashed border-zinc-200 dark:border-zinc-700 bg-transparent flex items-center justify-center text-sm text-zinc-500"
-          >
-            <div className="text-center">
-              <div className="font-medium">AD</div>
-              <div className="text-xs">100 USD / month (currently)</div>
-            </div>
-          </div>
-        </div>
       </main>
     </div>
   );
