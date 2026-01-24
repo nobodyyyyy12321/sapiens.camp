@@ -69,7 +69,7 @@ function HomeContent({ categories }: HomeContentProps) {
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-4xl font-bold zen-title">智人</h1>
-          <p className="max-w-md text-lg leading-8 zen-subtle">Homo Sapiens Learning</p>
+          <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
       </main>
@@ -84,7 +84,7 @@ export default function Home() {
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
           <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
             <h1 className="max-w-xs text-4xl font-bold zen-title">智人</h1>
-            <p className="max-w-md text-lg leading-8 zen-subtle">Homo Sapiens Learning</p>
+            <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           </div>
         </main>
       </div>
