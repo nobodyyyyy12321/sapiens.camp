@@ -113,6 +113,16 @@ export default function StudyChineseSetPage() {
     setShowResults(true);
   };
 
+  const speakQuestion = (text: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "zh-TW";
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
+
   const resetQuiz = () => {
     setCurrentIndex(0);
     setUserAnswers(new Array(questions.length).fill(null));
@@ -157,7 +167,18 @@ export default function StudyChineseSetPage() {
           <div className="mt-6 space-y-4 w-full">
             <div className="text-sm text-zinc-400">第 {currentIndex + 1} 題</div>
 
-            <div className="p-6 border rounded text-lg">{currentQuestion.title}</div>
+            <div className="p-6 border rounded text-lg flex items-center justify-between gap-3">
+              <span>{currentQuestion.title}</span>
+              <button
+                type="button"
+                onClick={() => speakQuestion(currentQuestion.title)}
+                className="h-9 w-9 shrink-0 rounded-full border border-zinc-300 bg-white text-lg leading-none hover:bg-zinc-100"
+                aria-label="朗讀題目"
+                title="朗讀題目"
+              >
+                🔊
+              </button>
+            </div>
 
             <div className="flex gap-3">
               {currentQuestion.options.map((option) => (
