@@ -144,27 +144,29 @@ export default function RecordsPage() {
               ))}
             </div>
 
-            {/* Statistics Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
-                <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
-                <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{filteredAttempts}</p>
-              </div>
+            {(selectedSubject === "詩文背誦" || selectedSubject === "全部") && (
+              <>
+                {/* Statistics Cards */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
+                    <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
+                    <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{filteredAttempts}</p>
+                  </div>
 
-              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
-                <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
-                <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{filteredSuccessCount}</p>
-              </div>
-            </div>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
+                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
+                    <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{filteredSuccessCount}</p>
+                  </div>
+                </div>
 
-            {/* Records List */}
-            <div className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">背誦歷史</h2>
-              {filteredRecitations.length === 0 ? (
-              <p className="text-center text-gray-500 py-8">尚無背誦紀錄</p>
-            ) : (
-              <div className="space-y-3">
-                {filteredRecitations.slice().reverse().map((record, index) => (
+                {/* Records List */}
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">背誦歷史</h2>
+                  {filteredRecitations.length === 0 ? (
+                  <p className="text-center text-gray-500 py-8">尚無背誦紀錄</p>
+                ) : (
+                  <div className="space-y-3">
+                    {filteredRecitations.slice().reverse().map((record, index) => (
                   <div
                     key={index}
                     className={`border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors ${
@@ -197,6 +199,9 @@ export default function RecordsPage() {
                   </div>
                 ))}
               </div>
+            )}
+            </div>
+              </>
             )}
           </div>
         </div>
