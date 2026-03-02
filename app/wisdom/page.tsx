@@ -100,12 +100,28 @@ export default function WisdomPage() {
         <div className="flex items-center justify-between w-full">
           <h1 className="text-3xl font-bold zen-title">名言佳句</h1>
           {!showResults && (
-            <button
-              onClick={checkAnswers}
-              className="px-4 py-2 border rounded-full bg-white text-black dark:bg-white dark:text-black text-sm"
-            >
-              交卷
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
+                disabled={currentIndex === 0}
+                className={`px-4 py-2 border rounded bg-white text-black text-sm ${currentIndex === 0 ? "opacity-30 pointer-events-none" : ""}`}
+              >
+                ←
+              </button>
+              <button
+                onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
+                disabled={currentIndex === questions.length - 1}
+                className={`px-4 py-2 border rounded bg-white text-black text-sm ${currentIndex === questions.length - 1 ? "opacity-30 pointer-events-none" : ""}`}
+              >
+                →
+              </button>
+              <button
+                onClick={checkAnswers}
+                className="px-4 py-2 border rounded bg-white text-black text-sm"
+              >
+                交卷
+              </button>
+            </div>
           )}
         </div>
 
@@ -133,29 +149,6 @@ export default function WisdomPage() {
                   <span className="font-semibold">{option.label}</span> {option.text}
                 </button>
               ))}
-            </div>
-
-            <div className="flex gap-3 mt-6 items-center justify-center">
-                <button
-                  onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
-                  disabled={currentIndex === 0}
-                  className={`px-4 py-2 border rounded zen-button ${currentIndex === 0 ? "opacity-0 pointer-events-none" : ""}`}
-                >
-                  ←
-                </button>
-                <button
-                  onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
-                  disabled={currentIndex === questions.length - 1}
-                  className={`px-4 py-2 border rounded zen-button ${currentIndex === questions.length - 1 ? "opacity-0 pointer-events-none" : ""}`}
-                >
-                  →
-                </button>
-                <button
-                  onClick={checkAnswers}
-                  className="px-4 py-2 border rounded zen-button"
-                >
-                  交卷
-                </button>
             </div>
           </div>
         ) : (
