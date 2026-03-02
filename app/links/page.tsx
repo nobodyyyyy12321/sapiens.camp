@@ -26,6 +26,15 @@ export default function LinksPage() {
             <div className="text-lg font-medium">Instagram Page</div>
             <a href="https://www.instagram.com/sapiens.camp/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://www.instagram.com/sapiens.camp/</a>
           </div>
+          <div className="flex items-center gap-2">
+            <div className="text-lg font-medium">阿摩線上測驗</div>
+            <a href="https://yamol.tw/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://yamol.tw/</a>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="text-lg font-medium">均一教育平台</div>
+            <a href="https://www.junyiacademy.org/" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline whitespace-nowrap">https://www.junyiacademy.org/</a>
+          </div>
+          
         </div>
       </main>
     </div>
