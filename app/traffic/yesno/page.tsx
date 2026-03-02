@@ -45,6 +45,12 @@ export default function TrafficYesNoPage() {
       if (k === "enter" && userAnswers.every(a => a !== null)) {
         checkAnswers();
       }
+      if (k === "arrowleft") {
+        setCurrentIndex(Math.max(0, currentIndex - 1));
+      }
+      if (k === "arrowright") {
+        setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1));
+      }
     };
 
     window.addEventListener("keydown", onKey);
