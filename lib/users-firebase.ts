@@ -25,6 +25,13 @@ export type User = {
   }>;
   recitationsPublic?: boolean;
   emailPublic?: boolean;
+  quoteRecords?: Array<{
+    answered: number;
+    correct: number;
+    set: string;
+    timestamp: string;
+    category: "名言佳句";
+  }>;
 };
 
 const COLLECTION_NAME = "users";
