@@ -11,7 +11,7 @@ export default function TrafficPage() {
 
         <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
           <Link href="/traffic/yesno" className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
-            汽車是非題1
+            汽車是非題
           </Link>
         </div>
       </main>
