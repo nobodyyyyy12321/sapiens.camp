@@ -140,7 +140,6 @@ export default function WisdomPage() {
                 >
                   交卷
                 </button>
-              </div>
             </div>
           </div>
         ) : (
