@@ -89,40 +89,37 @@ export default function WisdomPage() {
   const correctCount = userAnswers.filter((answer, idx) => answer === questions[idx]?.answer).length;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-2xl flex-col items-center justify-start py-20 px-6 bg-transparent dark:bg-black">
+    <div className="flex min-h-screen items-start justify-center bg-transparent font-sans dark:bg-black">
+      <main className="flex w-full max-w-3xl flex-col items-start justify-start py-8 px-16 bg-transparent dark:bg-black sm:items-start">
+        <h1 className="text-3xl font-bold zen-title">名言佳句</h1>
+
         {!showResults ? (
-          <>
-            <div className="w-full mb-8">
-              <h1 className="text-3xl font-bold zen-title mb-4">名言佳句</h1>
+          <div className="mt-6 space-y-4 w-full">
+            <div className="text-sm text-zinc-400">
+              第 {currentIndex + 1} 題
             </div>
 
-            <div className="w-full max-w-md">
-              <div className="text-sm text-zinc-400 mb-4">
-                第 {currentIndex + 1} 題
-              </div>
-
-              <div className="p-6 border rounded text-lg mb-6">
-                {currentQuestion.title}
-              </div>
+            <div className="p-6 border rounded text-lg">
+              {currentQuestion.title}
+            </div>
                 
-              <div className="flex gap-3 mb-6">
-                {currentQuestion.options.map((option) => (
-                  <button
-                    key={option.label}
-                    onClick={() => handleAnswer(option.label)}
-                    className={`flex-1 p-4 text-center rounded border transition-colors ${
-                      userAnswers[currentIndex] === option.label
-                        ? "bg-white text-black border-black"
-                        : "bg-black text-white border-white"
-                    }`}
-                  >
-                    <span className="font-semibold">{option.label}</span> {option.text}
-                  </button>
-                ))}
-              </div>
+            <div className="flex gap-3">
+              {currentQuestion.options.map((option) => (
+                <button
+                  key={option.label}
+                  onClick={() => handleAnswer(option.label)}
+                  className={`flex-1 px-6 py-3 border rounded transition-colors ${
+                    userAnswers[currentIndex] === option.label
+                      ? "bg-white text-black border-black"
+                      : "bg-black text-white border-white"
+                  }`}
+                >
+                  <span className="font-semibold">{option.label}</span> {option.text}
+                </button>
+              ))}
+            </div>
 
-              <div className="flex gap-3 mb-6">
+            <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                   disabled={currentIndex === 0}
@@ -145,7 +142,7 @@ export default function WisdomPage() {
                 </button>
               </div>
             </div>
-          </>
+          </div>
         ) : (
           <>
             <div className="w-full mb-8">
