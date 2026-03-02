@@ -80,7 +80,7 @@ export default function RecordsPage() {
   const subjects: Subject[] = ["詩文背誦", "學中文", "小格言", "數學題庫", "交通題庫"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
-    return records.filter(r => r.category === selectedSubject);
+    return records.filter(r => (r.category || "詩文背誦") === selectedSubject);
   };
 
   const filteredRecitations = filterRecitations(recitations);

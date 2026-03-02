@@ -94,6 +94,7 @@ export async function POST(request: Request) {
                 title,
                 success,
                 timestamp: timestamp || new Date().toISOString(),
+                category: "詩文背誦",
               };
 
               recitationsFresh.push(newRec);
