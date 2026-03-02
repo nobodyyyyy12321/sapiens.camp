@@ -6,7 +6,6 @@ export async function GET() {
     const db = getFirestoreDB();
     const snapshot = await db.collection("trafficQuestions")
       .where("number", ">=", 1)
-      .where("number", "<=", 10)
       .orderBy("number", "asc")
       .get();
 
