@@ -148,8 +148,16 @@ export default function WisdomPage() {
           </div>
         ) : (
           <div className="mt-6 space-y-4 w-full">
-            <div className="text-2xl font-bold">
-              寫 {answeredCount} 題，對 {correctCount} 題
+            <div className="flex items-center justify-between">
+              <div className="text-2xl font-bold">
+                寫 {answeredCount} 題，對 {correctCount} 題
+              </div>
+              <button
+                onClick={resetQuiz}
+                className="px-4 py-2 border rounded-full bg-white text-black dark:bg-white dark:text-black text-sm"
+              >
+                重新開始
+              </button>
             </div>
             <h2 className="text-2xl font-bold mt-6">答題結果</h2>
             <div className="space-y-3">
@@ -180,13 +188,6 @@ export default function WisdomPage() {
                 );
               })}
             </div>
-
-            <button
-              onClick={resetQuiz}
-              className="px-4 py-2 border rounded-full bg-white text-black dark:bg-white dark:text-black text-sm"
-            >
-              重新開始
-            </button>
           </div>
         )}
       </main>
