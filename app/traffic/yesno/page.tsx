@@ -178,11 +178,11 @@ export default function TrafficYesNoPage() {
                   >
                     <p className="font-medium mb-2">第 {q.number} 題：{q.question}</p>
                     <div className="text-sm space-y-1">
-                      <p>你的答案：<span className={correct ? "text-green-700 dark:text-green-400" : "text-red-700 dark:text-red-400"}>
+                      <p>你的答案：<span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${correct ? "bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400" : "bg-red-200 text-red-700 dark:bg-red-900/50 dark:text-red-400"}`}>
                         {userAns}
                       </span></p>
                       {!correct && (
-                        <p>正確答案：<span className="text-green-700 dark:text-green-400">{q.answer}</span></p>
+                        <p>正確答案：<span className="inline-block px-2 py-0.5 rounded text-xs font-semibold bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400">{q.answer}</span></p>
                       )}
                     </div>
                   </div>

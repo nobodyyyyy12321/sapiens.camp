@@ -191,6 +191,9 @@ export default function QuotePage() {
                 if (userAns === null) return null;
 
                 const isCorrect = userAns === question.answer;
+                const userOption = question.options.find(opt => opt.label === userAns);
+                const correctOption = question.options.find(opt => opt.label === question.answer);
+                
                 return (
                   <div
                     key={idx}
@@ -202,11 +205,11 @@ export default function QuotePage() {
                   >
                     <p className="font-medium mb-2">第 {question.number} 題：{question.title}</p>
                     <div className="text-sm space-y-1">
-                      <p>你的答案：<span className={isCorrect ? "text-green-700 dark:text-green-400" : "text-red-700 dark:text-red-400"}>
-                        {userAns}
+                      <p>你的答案：<span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${isCorrect ? "bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400" : "bg-red-200 text-red-700 dark:bg-red-900/50 dark:text-red-400"}`}>
+                        {userAns} {userOption?.text}
                       </span></p>
                       {!isCorrect && (
-                        <p>正確答案：<span className="text-green-700 dark:text-green-400">{question.answer}</span></p>
+                        <p>正確答案：<span className="inline-block px-2 py-0.5 rounded text-xs font-semibold bg-green-200 text-green-700 dark:bg-green-900/50 dark:text-green-400">{question.answer} {correctOption?.text}</span></p>
                       )}
                     </div>
                   </div>
