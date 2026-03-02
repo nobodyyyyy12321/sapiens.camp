@@ -102,49 +102,52 @@ export default function WisdomPage() {
             </div>
 
             <div className="w-full max-w-md">
-              <div className="mb-8 p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-lg">
-                <p className="text-lg font-medium mb-6">{currentQuestion.title}</p>
+              <div className="text-sm text-zinc-400 mb-4">
+                第 {currentIndex + 1} 題
+              </div>
+
+              <div className="p-6 border rounded text-lg mb-6">
+                {currentQuestion.title}
+              </div>
                 
-                <div className="space-y-3">
-                  {currentQuestion.options.map((option) => (
-                    <button
-                      key={option.label}
-                      onClick={() => handleAnswer(option.label)}
-                      className={`w-full p-4 text-left rounded-lg border-2 transition-colors ${
-                        userAnswers[currentIndex] === option.label
-                          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                          : "border-zinc-200 dark:border-zinc-700 hover:border-blue-300 dark:hover:border-blue-700"
-                      }`}
-                    >
-                      <span className="font-semibold">{option.label}</span> {option.text}
-                    </button>
-                  ))}
-                </div>
+              <div className="space-y-3 mb-6">
+                {currentQuestion.options.map((option) => (
+                  <button
+                    key={option.label}
+                    onClick={() => handleAnswer(option.label)}
+                    className={`w-full p-4 text-left rounded border transition-colors ${
+                      userAnswers[currentIndex] === option.label
+                        ? "bg-white text-black border-black"
+                        : "bg-black text-white border-white"
+                    }`}
+                  >
+                    <span className="font-semibold">{option.label}</span> {option.text}
+                  </button>
+                ))}
               </div>
 
               <div className="flex gap-3 mb-6">
                 <button
                   onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                   disabled={currentIndex === 0}
-                  className="flex-1 px-4 py-2 rounded border border-zinc-300 dark:border-zinc-600 disabled:opacity-50"
+                  className={`px-4 py-2 border rounded zen-button ${currentIndex === 0 ? "opacity-0 pointer-events-none" : ""}`}
                 >
                   上一題
                 </button>
                 <button
                   onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
                   disabled={currentIndex === questions.length - 1}
-                  className="flex-1 px-4 py-2 rounded border border-zinc-300 dark:border-zinc-600 disabled:opacity-50"
+                  className={`px-4 py-2 border rounded zen-button ${currentIndex === questions.length - 1 ? "opacity-0 pointer-events-none" : ""}`}
                 >
                   下一題
                 </button>
+                <button
+                  onClick={checkAnswers}
+                  className="px-4 py-2 border rounded bg-white text-black dark:bg-white dark:text-black"
+                >
+                  交卷
+                </button>
               </div>
-
-              <button
-                onClick={checkAnswers}
-                className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
-              >
-                交卷
-              </button>
             </div>
           </>
         ) : (
