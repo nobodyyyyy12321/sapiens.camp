@@ -91,7 +91,17 @@ export default function WisdomPage() {
   return (
     <div className="flex min-h-screen items-start justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex w-full max-w-3xl flex-col items-start justify-start py-8 px-16 bg-transparent dark:bg-black sm:items-start">
-        <h1 className="text-3xl font-bold zen-title">名言佳句</h1>
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-3xl font-bold zen-title">名言佳句</h1>
+          {!showResults && (
+            <button
+              onClick={checkAnswers}
+              className="px-6 py-3 border rounded-full bg-white text-black dark:bg-white dark:text-black"
+            >
+              交卷
+            </button>
+          )}
+        </div>
 
         {!showResults ? (
           <div className="mt-6 space-y-4 w-full">
@@ -133,12 +143,6 @@ export default function WisdomPage() {
                   className={`px-4 py-2 border rounded zen-button ${currentIndex === questions.length - 1 ? "opacity-0 pointer-events-none" : ""}`}
                 >
                   下一題
-                </button>
-                <button
-                  onClick={checkAnswers}
-                  className="px-4 py-2 border rounded bg-white text-black dark:bg-white dark:text-black"
-                >
-                  交卷
                 </button>
             </div>
           </div>
