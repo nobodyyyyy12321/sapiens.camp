@@ -39,7 +39,16 @@ export default function StudyChineseSetPage() {
       .then((data) => {
         if (data.questions) {
           const normalizedQuestions: Question[] = (data.questions as RawQuestion[]).map((q, idx) => {
-            const normalizedOptions: Option[] = (q.options || []).map((opt, optionIndex) => {
+            const rawOptions = q.options || [];
+            const rotatedOptions =
+              rawOptions.length > 0 && typeof rawOptions[0] === "string"
+                ? [
+                    ...rawOptions.slice(idx % rawOptions.length),
+                    ...rawOptions.slice(0, idx % rawOptions.length),
+                  ]
+                : rawOptions;
+
+            const normalizedOptions: Option[] = rotatedOptions.map((opt, optionIndex) => {
               if (typeof opt === "string") {
                 return { label: OPTION_LABELS[optionIndex] ?? String(optionIndex + 1), text: opt };
               }
