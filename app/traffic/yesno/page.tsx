@@ -97,6 +97,10 @@ export default function TrafficYesNoPage() {
 
         {!showResults ? (
           <div className="mt-6 space-y-4 w-full">
+            <div className="text-sm text-zinc-400">
+              第 {currentIndex + 1} 題
+            </div>
+            
             <div className="p-6 border rounded text-lg">
               {currentQ.question}
             </div>
