@@ -1,28 +1,40 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import studyChineseQuestions from "../../data/study-chinese.json";
+import React, { useEffect, useMemo, useState } from "react";
 
 type Question = {
-  id: number;
+  id: string;
   chinese: string;
   options: string[];
   answer: string;
 };
 
-const QUESTIONS: Question[] = studyChineseQuestions as Question[];
-
 export default function StudyChineseSetPage() {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<(string | null)[]>(new Array(QUESTIONS.length).fill(null));
+  const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const currentQuestion = QUESTIONS[currentIndex];
+  useEffect(() => {
+    fetch("/api/study-chinese/questions")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.questions) {
+          setQuestions(data.questions);
+          setUserAnswers(new Array(data.questions.length).fill(null));
+        }
+      })
+      .catch((err) => console.error("Failed to load study-chinese questions:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const currentQuestion = questions[currentIndex];
 
   const answeredCount = useMemo(() => userAnswers.filter(Boolean).length, [userAnswers]);
   const correctCount = useMemo(
-    () => QUESTIONS.filter((q, i) => userAnswers[i] === q.answer).length,
-    [userAnswers]
+    () => questions.filter((q, i) => userAnswers[i] === q.answer).length,
+    [questions, userAnswers]
   );
 
   const chooseAnswer = (answer: string) => {
@@ -34,7 +46,7 @@ export default function StudyChineseSetPage() {
 
   const resetQuiz = () => {
     setCurrentIndex(0);
-    setUserAnswers(new Array(QUESTIONS.length).fill(null));
+    setUserAnswers(new Array(questions.length).fill(null));
     setShowResults(false);
   };
 
@@ -44,11 +56,17 @@ export default function StudyChineseSetPage() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">Learn Chinese</h1>
         <p className="mt-4 text-sm zen-subtle">20題四選一（中文 → 英文）</p>
 
-        {!showResults ? (
+        {loading && <p className="mt-8 text-sm zen-subtle">載入中...</p>}
+
+        {!loading && questions.length === 0 && (
+          <p className="mt-8 text-sm text-red-600">沒有題目可顯示</p>
+        )}
+
+        {!loading && questions.length > 0 && !showResults ? (
           <div className="mt-8 w-full max-w-2xl">
             <div className="mb-6 flex items-center justify-between">
               <p className="text-sm zen-subtle">
-                第 {currentIndex + 1} 題 / {QUESTIONS.length}
+                第 {currentIndex + 1} 題 / {questions.length}
               </p>
               <p className="text-sm zen-subtle">已作答：{answeredCount}</p>
             </div>
@@ -85,8 +103,8 @@ export default function StudyChineseSetPage() {
                 ←
               </button>
               <button
-                onClick={() => setCurrentIndex(i => Math.min(QUESTIONS.length - 1, i + 1))}
-                disabled={currentIndex === QUESTIONS.length - 1}
+                onClick={() => setCurrentIndex(i => Math.min(questions.length - 1, i + 1))}
+                disabled={currentIndex === questions.length - 1}
                 className="h-10 rounded-full border border-zinc-200 px-4 disabled:opacity-40"
               >
                 →
@@ -99,21 +117,21 @@ export default function StudyChineseSetPage() {
               </button>
             </div>
           </div>
-        ) : (
+        ) : !loading && questions.length > 0 ? (
           <div className="mt-8 w-full max-w-2xl">
             <h2 className="mb-2 text-2xl font-bold">結果</h2>
             <p className="mb-5 zen-subtle">
-              答對 {correctCount} / {QUESTIONS.length}
+              答對 {correctCount} / {questions.length}
             </p>
 
             <div className="space-y-3">
-              {QUESTIONS.map((q, i) => {
+              {questions.map((q, i) => {
                 const userAns = userAnswers[i];
                 const isCorrect = userAns === q.answer;
                 return (
                   <div key={q.id} className="rounded-xl border border-zinc-200 p-4">
                     <p className="font-semibold">
-                      {q.id}. {q.chinese}
+                      {i + 1}. {q.chinese}
                     </p>
                     <p className="mt-1 text-sm">
                       你的答案：
@@ -131,7 +149,7 @@ export default function StudyChineseSetPage() {
               重新作答
             </button>
           </div>
-        )}
+        ) : null}
       </main>
     </div>
   );
