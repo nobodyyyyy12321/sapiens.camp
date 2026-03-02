@@ -96,7 +96,7 @@ export default function WisdomPage() {
           {!showResults && (
             <button
               onClick={checkAnswers}
-              className="px-6 py-3 border rounded-full bg-white text-black dark:bg-white dark:text-black"
+              className="px-4 py-2 border rounded-full bg-white text-black dark:bg-white dark:text-black text-sm"
             >
               交卷
             </button>
