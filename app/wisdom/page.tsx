@@ -95,10 +95,6 @@ export default function WisdomPage() {
           <>
             <div className="w-full mb-8">
               <h1 className="text-3xl font-bold zen-title mb-4">名言佳句</h1>
-              <div className="flex justify-between items-center text-sm zen-subtle mb-4">
-                <span>第 {currentIndex + 1} 題</span>
-                <span>{answeredCount} / {questions.length} 已作答</span>
-              </div>
             </div>
 
             <div className="w-full max-w-md">
