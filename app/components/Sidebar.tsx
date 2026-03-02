@@ -43,7 +43,10 @@ export default function Sidebar() {
 
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
-            <Link href="/recitation" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
+            <div className="flex gap-2">
+              <Link href="/recitation" className="flex-1 px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
+              <Link href="/study-chinese" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-medium" title="學中文">中</Link>
+            </div>
             <Link href="/math" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">數學題庫</Link>
             <Link href="/traffic" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">交通題庫</Link>
             <Link href="/ranking" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">智人榜</Link>
