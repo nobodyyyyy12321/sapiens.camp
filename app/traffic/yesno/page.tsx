@@ -97,10 +97,6 @@ export default function TrafficYesNoPage() {
 
         {!showResults ? (
           <div className="mt-6 space-y-4 w-full">
-            <div className="text-sm text-zinc-400">
-              第 {currentIndex + 1} / {questions.length} 題
-            </div>
-
             <div className="p-6 border rounded text-lg">
               {currentQ.question}
             </div>
@@ -114,24 +110,6 @@ export default function TrafficYesNoPage() {
                 className={`px-6 py-3 border rounded transition-transform duration-150 ${answer === "否" ? "bg-white text-black border-black" : "bg-black text-white border-white"} ${recognizedToken === "否" ? "ring-2 ring-white scale-95" : ""}`}
                 onClick={() => handleAnswer("否")}
               >否 (N)</button>
-            </div>
-
-            <div className="flex gap-2 mt-6">
-              {questions.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`w-8 h-8 rounded border text-sm ${
-                    idx === currentIndex 
-                      ? "bg-white text-black border-white" 
-                      : userAnswers[idx] 
-                      ? "bg-zinc-700 border-zinc-600" 
-                      : "bg-black border-zinc-600"
-                  }`}
-                >
-                  {idx + 1}
-                </button>
-              ))}
             </div>
 
             <div className="flex gap-3 mt-6">
@@ -151,19 +129,20 @@ export default function TrafficYesNoPage() {
                   下一題
                 </button>
               )}
-              {userAnswers.every(a => a !== null) && (
-                <button
-                  onClick={checkAnswers}
-                  className="px-4 py-2 border rounded bg-white text-black"
-                >
-                  對答案 (Enter)
-                </button>
-              )}
+              <button
+                onClick={checkAnswers}
+                className="px-4 py-2 border rounded bg-white text-black"
+              >
+                交卷
+              </button>
             </div>
           </div>
         ) : (
           <div className="mt-6 space-y-4 w-full">
-            <h2 className="text-2xl font-bold">答題結果</h2>
+            <div className="text-2xl font-bold">
+              寫 {questions.length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
+            </div>
+            <h2 className="text-2xl font-bold mt-6">答題結果</h2>
             <div className="space-y-3">
               {questions.map((q, idx) => {
                 const userAns = userAnswers[idx];
@@ -187,9 +166,6 @@ export default function TrafficYesNoPage() {
                   </div>
                 );
               })}
-            </div>
-            <div className="text-lg font-bold mt-4">
-              得分：{userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} / {questions.length}
             </div>
             <button
               onClick={restart}
