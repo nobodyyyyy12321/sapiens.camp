@@ -14,7 +14,7 @@ type RecitationRecord = {
   category?: string;
 };
 
-type Subject = "詩文背誦" | "學中文" | "小格言" | "數學題庫" | "交通題庫" | "全部";
+type Subject = "詩文背誦" | "學中文" | "小格言" | "數學題庫" | "交通題庫";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -26,7 +26,7 @@ export default function RecordsPage() {
   const [recitationsPublic, setRecitationsPublic] = useState(false);
   const [userName, setUserName] = useState("");
   const [isOwner, setIsOwner] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState<Subject>("全部");
+  const [selectedSubject, setSelectedSubject] = useState<Subject>("詩文背誦");
 
   useEffect(() => {
     const nameParam = params?.name;
@@ -77,10 +77,9 @@ export default function RecordsPage() {
   const uniqueArticles = new Set(recitations.filter(r => r.success).map(r => r.articleId));
   const uniqueSuccessCount = uniqueArticles.size;
 
-  const subjects: Subject[] = ["全部", "詩文背誦", "學中文", "小格言", "數學題庫", "交通題庫"];
+  const subjects: Subject[] = ["詩文背誦", "學中文", "小格言", "數學題庫", "交通題庫"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
-    if (selectedSubject === "全部") return records;
     return records.filter(r => r.category === selectedSubject);
   };
 
@@ -144,7 +143,7 @@ export default function RecordsPage() {
               ))}
             </div>
 
-            {(selectedSubject === "詩文背誦" || selectedSubject === "全部") && (
+            {selectedSubject === "詩文背誦" && (
               <>
                 {/* Statistics Cards */}
                 <div className="grid grid-cols-2 gap-4">
