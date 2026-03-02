@@ -182,9 +182,9 @@ export default function WisdomPage() {
 
             <button
               onClick={resetQuiz}
-              className="mt-8 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+              className="px-6 py-3 border rounded bg-white text-black dark:bg-white dark:text-black"
             >
-              重新作答
+              重新開始
             </button>
           </>
         )}
