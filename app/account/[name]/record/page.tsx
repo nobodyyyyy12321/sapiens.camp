@@ -200,6 +200,7 @@ export default function RecordsPage() {
                 ))}
               </div>
             )}
+            </div>
             </>
             )}
           </div>
