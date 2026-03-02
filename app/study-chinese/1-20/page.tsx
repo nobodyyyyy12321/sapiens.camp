@@ -128,7 +128,7 @@ export default function StudyChineseSetPage() {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "zh-TW";
-    utterance.rate = 0.9;
+    utterance.rate = 0.6;
     window.speechSynthesis.speak(utterance);
   };
 
