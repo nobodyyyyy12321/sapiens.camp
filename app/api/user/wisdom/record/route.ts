@@ -4,6 +4,7 @@ import { getFirestoreDB } from "@/lib/firebase-admin";
 type WisdomRecord = {
   answered: number;
   correct: number;
+  set: string;
   timestamp: string;
   category: "名言佳句";
 };
@@ -19,9 +20,9 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { answered, correct } = body;
+    const { answered, correct, set } = body;
 
-    if (typeof answered !== "number" || typeof correct !== "number") {
+    if (typeof answered !== "number" || typeof correct !== "number" || typeof set !== "string") {
       return Response.json(
         { error: "Invalid data" },
         { status: 400 }
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
     const record: WisdomRecord = {
       answered,
       correct,
+      set,
       timestamp: new Date().toISOString(),
       category: "名言佳句",
     };

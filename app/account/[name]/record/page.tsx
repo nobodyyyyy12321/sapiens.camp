@@ -14,6 +14,14 @@ type RecitationRecord = {
   category?: string;
 };
 
+type WisdomRecord = {
+  answered: number;
+  correct: number;
+  set: string;
+  timestamp: string;
+  category: "名言佳句";
+};
+
 type Subject = "詩文背誦" | "學中文" | "名言佳句" | "數學題庫" | "交通題庫";
 
 export default function RecordsPage() {
@@ -21,6 +29,7 @@ export default function RecordsPage() {
   const router = useRouter();
   const params = useParams();
   const [recitations, setRecitations] = useState<RecitationRecord[]>([]);
+  const [wisdomRecords, setWisdomRecords] = useState<WisdomRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [shareCopied, setShareCopied] = useState(false);
   const [recitationsPublic, setRecitationsPublic] = useState(false);
@@ -52,6 +61,7 @@ export default function RecordsPage() {
           // Show records if owner or if public
           if (owner || data.user.recitationsPublic) {
             setRecitations(data.user.recitations || []);
+            setWisdomRecords(data.user.wisdomRecords || []);
           }
         }
         setLoading(false);
@@ -202,7 +212,59 @@ export default function RecordsPage() {
             </div>
             </>
             )}
-          </div>
+            {selectedSubject === "名言佳句" && (
+              <>
+                {/* Statistics Cards */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6 text-center">
+                    <p className="text-sm text-amber-600 dark:text-amber-400 mb-2">練習次數</p>
+                    <p className="text-4xl font-bold text-amber-700 dark:text-amber-300">{wisdomRecords.length}</p>
+                  </div>
+
+                  <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6 text-center">
+                    <p className="text-sm text-orange-600 dark:text-orange-400 mb-2">總正確題數</p>
+                    <p className="text-4xl font-bold text-orange-700 dark:text-orange-300">
+                      {wisdomRecords.reduce((sum, record) => sum + record.correct, 0)}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Records List */}
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
+                  {wisdomRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {wisdomRecords.slice().reverse().map((record, index) => (
+                        <div
+                          key={index}
+                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-900/10"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-medium">名言佳句 {record.set}</p>
+                              <p className="text-sm mt-1">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                                  寫 {record.answered} 題，對 {record.correct} 題
+                                </span>
+                              </p>
+                            </div>
+                            <p className="text-xs text-gray-400">
+                              {new Date(record.timestamp).toLocaleDateString("zh-TW", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}          </div>
         )}
       </main>
     </div>

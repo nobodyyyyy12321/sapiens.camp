@@ -88,6 +88,7 @@ export default function WisdomPage() {
         body: JSON.stringify({
           answered: answeredCount,
           correct: correctCount,
+          set: "第1份",
         }),
       }).catch(err => console.error("Failed to save record:", err));
     }
