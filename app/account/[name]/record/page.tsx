@@ -214,21 +214,6 @@ export default function RecordsPage() {
             )}
             {selectedSubject === "名言佳句" && (
               <>
-                {/* Statistics Cards */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-6 text-center">
-                    <p className="text-sm text-amber-600 dark:text-amber-400 mb-2">練習次數</p>
-                    <p className="text-4xl font-bold text-amber-700 dark:text-amber-300">{wisdomRecords.length}</p>
-                  </div>
-
-                  <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6 text-center">
-                    <p className="text-sm text-orange-600 dark:text-orange-400 mb-2">總正確題數</p>
-                    <p className="text-4xl font-bold text-orange-700 dark:text-orange-300">
-                      {wisdomRecords.reduce((sum, record) => sum + record.correct, 0)}
-                    </p>
-                  </div>
-                </div>
-
                 {/* Records List */}
                 <div className="mt-8">
                   <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
