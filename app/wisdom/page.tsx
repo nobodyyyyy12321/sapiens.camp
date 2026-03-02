@@ -110,12 +110,12 @@ export default function WisdomPage() {
                 {currentQuestion.title}
               </div>
                 
-              <div className="space-y-3 mb-6">
+              <div className="flex gap-3 mb-6">
                 {currentQuestion.options.map((option) => (
                   <button
                     key={option.label}
                     onClick={() => handleAnswer(option.label)}
-                    className={`w-full p-4 text-left rounded border transition-colors ${
+                    className={`flex-1 p-4 text-center rounded border transition-colors ${
                       userAnswers[currentIndex] === option.label
                         ? "bg-white text-black border-black"
                         : "bg-black text-white border-white"
