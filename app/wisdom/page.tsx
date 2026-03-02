@@ -143,15 +143,12 @@ export default function WisdomPage() {
             </div>
           </div>
         ) : (
-          <>
-            <div className="w-full mb-8">
-              <h1 className="text-3xl font-bold zen-title mb-4">名言佳句</h1>
-              <div className="text-center">
-                <p className="text-sm zen-subtle mb-4">寫 {answeredCount} 題，對 {correctCount} 題</p>
-              </div>
+          <div className="mt-6 space-y-4 w-full">
+            <div className="text-2xl font-bold">
+              寫 {answeredCount} 題，對 {correctCount} 題
             </div>
-
-            <div className="w-full max-w-md space-y-4">
+            <h2 className="text-2xl font-bold mt-6">答題結果</h2>
+            <div className="space-y-3">
               {questions.map((question, idx) => {
                 const userAns = userAnswers[idx];
                 if (userAns === null) return null;
@@ -186,7 +183,7 @@ export default function WisdomPage() {
             >
               重新開始
             </button>
-          </>
+          </div>
         )}
       </main>
     </div>
