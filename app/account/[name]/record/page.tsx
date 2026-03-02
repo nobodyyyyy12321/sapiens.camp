@@ -14,7 +14,7 @@ type RecitationRecord = {
   category?: string;
 };
 
-type Subject = "詩文背誦" | "學中文" | "小格言" | "數學題庫" | "交通題庫";
+type Subject = "詩文背誦" | "學中文" | "名言佳句" | "數學題庫" | "交通題庫";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -77,7 +77,7 @@ export default function RecordsPage() {
   const uniqueArticles = new Set(recitations.filter(r => r.success).map(r => r.articleId));
   const uniqueSuccessCount = uniqueArticles.size;
 
-  const subjects: Subject[] = ["詩文背誦", "學中文", "小格言", "數學題庫", "交通題庫"];
+  const subjects: Subject[] = ["詩文背誦", "學中文", "名言佳句", "數學題庫", "交通題庫"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
     return records.filter(r => (r.category || "詩文背誦") === selectedSubject);

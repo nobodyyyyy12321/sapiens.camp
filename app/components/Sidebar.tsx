@@ -44,7 +44,7 @@ export default function Sidebar() {
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
             <Link href="/study-chinese" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">學中文</Link>
-            <Link href="/wisdom" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">小格言</Link>
+            <Link href="/wisdom" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">名言佳句</Link>
             <Link href="/recitation" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">詩文背誦</Link>
             <Link href="/math" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">數學題庫</Link>
             <Link href="/traffic" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">交通題庫</Link>
