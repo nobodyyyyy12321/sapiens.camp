@@ -14,7 +14,7 @@ type RecitationRecord = {
   category?: string;
 };
 
-type WisdomRecord = {
+type QuoteRecord = {
   answered: number;
   correct: number;
   set: string;
@@ -29,7 +29,7 @@ export default function RecordsPage() {
   const router = useRouter();
   const params = useParams();
   const [recitations, setRecitations] = useState<RecitationRecord[]>([]);
-  const [wisdomRecords, setWisdomRecords] = useState<WisdomRecord[]>([]);
+  const [quoteRecords, setQuoteRecords] = useState<QuoteRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [shareCopied, setShareCopied] = useState(false);
   const [recitationsPublic, setRecitationsPublic] = useState(false);
@@ -61,7 +61,7 @@ export default function RecordsPage() {
           // Show records if owner or if public
           if (owner || data.user.recitationsPublic) {
             setRecitations(data.user.recitations || []);
-            setWisdomRecords(data.user.wisdomRecords || []);
+            setQuoteRecords(data.user.quoteRecords || []);
           }
         }
         setLoading(false);
@@ -217,11 +217,11 @@ export default function RecordsPage() {
                 {/* Records List */}
                 <div className="mt-8">
                   <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
-                  {wisdomRecords.length === 0 ? (
+                  {quoteRecords.length === 0 ? (
                     <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
                   ) : (
                     <div className="space-y-3">
-                      {wisdomRecords.slice().reverse().map((record, index) => (
+                      {quoteRecords.slice().reverse().map((record, index) => (
                         <div
                           key={index}
                           className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-900/10"

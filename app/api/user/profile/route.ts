@@ -29,14 +29,15 @@ export async function GET(request: Request) {
       }
 
       // Return data: include recitations only if owner or public
-      const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
+      const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic, quoteRecords } = user;
       const outRecitations = isOwner ? recitations : (recitationsPublic ? recitations : []);
+      const outQuoteRecords = isOwner ? quoteRecords : (recitationsPublic ? quoteRecords : []);
       // Decide whether the profile is publicly visible. Currently treat profile as public
       // if either recitations or email are marked public. This can be adjusted later.
       const profilePublic = Boolean(recitationsPublic || emailPublic);
       return NextResponse.json({ 
         ok: true, 
-        user: { id, name, email, bio, avatarUrl, socialLinks, recitations: outRecitations, recitationsPublic, emailPublic, isOwner, profilePublic } 
+        user: { id, name, email, bio, avatarUrl, socialLinks, recitations: outRecitations, recitationsPublic, emailPublic, isOwner, profilePublic, quoteRecords: outQuoteRecords } 
       });
     }
 
@@ -51,8 +52,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } = user;
-    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic } });
+    const { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic, quoteRecords } = user;
+    return NextResponse.json({ ok: true, user: { id, name, email, bio, avatarUrl, socialLinks, recitations, recitationsPublic, emailPublic, quoteRecords } });
   } catch (e) {
     console.error("GET User Error:", e);
     return NextResponse.json({ error: "Internal error" }, { status: 500 });
