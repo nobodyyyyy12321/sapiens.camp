@@ -140,12 +140,13 @@ export default function TrafficYesNoPage() {
         ) : (
           <div className="mt-6 space-y-4 w-full">
             <div className="text-2xl font-bold">
-              寫 {questions.length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
+              寫 {userAnswers.filter(ans => ans !== null).length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
             </div>
             <h2 className="text-2xl font-bold mt-6">答題結果</h2>
             <div className="space-y-3">
               {questions.map((q, idx) => {
                 const userAns = userAnswers[idx];
+                if (userAns === null) return null;
                 const correct = userAns === q.answer;
                 return (
                   <div key={q.id} className={`p-4 border rounded ${correct ? "border-green-500" : "border-red-500"}`}>
