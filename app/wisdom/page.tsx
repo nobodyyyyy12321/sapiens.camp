@@ -46,6 +46,12 @@ export default function WisdomPage() {
       if (k === "ENTER") {
         checkAnswers();
       }
+      if (k === "ARROWLEFT") {
+        setCurrentIndex(Math.max(0, currentIndex - 1));
+      }
+      if (k === "ARROWRIGHT") {
+        setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1));
+      }
     };
 
     window.addEventListener("keydown", onKey);
@@ -129,20 +135,26 @@ export default function WisdomPage() {
               ))}
             </div>
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-6 items-center justify-center">
                 <button
                   onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                   disabled={currentIndex === 0}
                   className={`px-4 py-2 border rounded zen-button ${currentIndex === 0 ? "opacity-0 pointer-events-none" : ""}`}
                 >
-                  上一題
+                  ←
                 </button>
                 <button
                   onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
                   disabled={currentIndex === questions.length - 1}
                   className={`px-4 py-2 border rounded zen-button ${currentIndex === questions.length - 1 ? "opacity-0 pointer-events-none" : ""}`}
                 >
-                  下一題
+                  →
+                </button>
+                <button
+                  onClick={checkAnswers}
+                  className="px-4 py-2 border rounded zen-button"
+                >
+                  交卷
                 </button>
             </div>
           </div>
