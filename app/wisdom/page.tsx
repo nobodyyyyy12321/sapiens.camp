@@ -10,8 +10,8 @@ export default function QuotePage() {
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
         <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
-          <Link href="/quote/第1份" className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
-            第1份
+          <Link href="/quote/1-20" className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
+            1-20
           </Link>
         </div>
       </main>
