@@ -1,0 +1,70 @@
+import { auth } from "@/auth";
+import { getFirestoreDB } from "@/lib/firebase-admin";
+
+type WisdomRecord = {
+  answered: number;
+  correct: number;
+  timestamp: string;
+  category: "名言佳句";
+};
+
+export async function POST(request: Request) {
+  try {
+    const session = await auth();
+    if (!session?.user?.email) {
+      return Response.json(
+        { error: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { answered, correct } = body;
+
+    if (typeof answered !== "number" || typeof correct !== "number") {
+      return Response.json(
+        { error: "Invalid data" },
+        { status: 400 }
+      );
+    }
+
+    const userEmail = session.user.email;
+    const record: WisdomRecord = {
+      answered,
+      correct,
+      timestamp: new Date().toISOString(),
+      category: "名言佳句",
+    };
+
+    // Save to Firestore
+    const db = getFirestoreDB();
+    const userRef = db.collection("users").doc(userEmail);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return Response.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    const userData = userDoc.data();
+    const wisdomRecords = userData?.wisdomRecords || [];
+    wisdomRecords.push(record);
+
+    await userRef.update({
+      wisdomRecords,
+    });
+
+    return Response.json({
+      success: true,
+      record,
+    });
+  } catch (error) {
+    console.error("Error saving wisdom record:", error);
+    return Response.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
