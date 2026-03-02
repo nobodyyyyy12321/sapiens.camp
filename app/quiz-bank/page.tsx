@@ -7,8 +7,8 @@ export default function QuizBankPage() {
     { name: "詩文背誦", href: "/recitation" },
     { name: "學中文", href: "/study-chinese" },
     { name: "名言佳句", href: "/wisdom" },
-    { name: "數學題庫", href: "/math" },
-    { name: "交通題庫", href: "/traffic" },
+    { name: "數學", href: "/math" },
+    { name: "交通", href: "/traffic" },
   ];
 
   return (
