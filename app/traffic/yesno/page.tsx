@@ -93,7 +93,33 @@ export default function TrafficYesNoPage() {
   return (
     <div className="flex min-h-screen items-start justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex w-full max-w-3xl flex-col items-start justify-start py-8 px-16 bg-transparent dark:bg-black sm:items-start">
-        <h1 className="text-3xl font-bold zen-title">汽車是非題</h1>
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-3xl font-bold zen-title">汽車是非題</h1>
+          {!showResults && (
+            <div className="flex gap-3">
+              <button
+                onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
+                disabled={currentIndex === 0}
+                className={`px-4 py-2 border rounded-full bg-white text-black text-sm transition-opacity ${currentIndex === 0 ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}`}
+              >
+                ←
+              </button>
+              <button
+                onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
+                disabled={currentIndex === questions.length - 1}
+                className={`px-4 py-2 border rounded-full bg-white text-black text-sm transition-opacity ${currentIndex === questions.length - 1 ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}`}
+              >
+                →
+              </button>
+              <button
+                onClick={checkAnswers}
+                className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                交卷
+              </button>
+            </div>
+          )}
+        </div>
 
         {!showResults ? (
           <div className="mt-6 space-y-4 w-full">
@@ -115,36 +141,19 @@ export default function TrafficYesNoPage() {
                 onClick={() => handleAnswer("否")}
               >否 (N)</button>
             </div>
-
-            <div className="flex gap-3 mt-6">
-              {currentIndex > 0 && (
-                <button
-                  onClick={() => setCurrentIndex(currentIndex - 1)}
-                  className="px-4 py-2 border rounded zen-button"
-                >
-                  上一題
-                </button>
-              )}
-              {currentIndex < questions.length - 1 && (
-                <button
-                  onClick={() => setCurrentIndex(currentIndex + 1)}
-                  className="px-4 py-2 border rounded zen-button"
-                >
-                  下一題
-                </button>
-              )}
-              <button
-                onClick={checkAnswers}
-                className="px-4 py-2 border rounded bg-white text-black"
-              >
-                交卷
-              </button>
-            </div>
           </div>
         ) : (
           <div className="mt-6 space-y-4 w-full">
-            <div className="text-2xl font-bold">
-              寫 {userAnswers.filter(ans => ans !== null).length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
+            <div className="flex items-center justify-between">
+              <div className="text-2xl font-bold">
+                寫 {userAnswers.filter(ans => ans !== null).length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
+              </div>
+              <button
+                onClick={restart}
+                className="px-4 py-2 border rounded-full bg-white text-black text-sm"
+              >
+                重新開始
+              </button>
             </div>
             <h2 className="text-2xl font-bold mt-6">答題結果</h2>
             <div className="space-y-3">
@@ -153,31 +162,27 @@ export default function TrafficYesNoPage() {
                 if (userAns === null) return null;
                 const correct = userAns === q.answer;
                 return (
-                  <div key={q.id} className={`p-4 border rounded ${correct ? "border-green-500" : "border-red-500"}`}>
-                    <div className="font-bold">
-                      第 {idx + 1} 題 {correct ? "✓" : "✗"}
-                    </div>
-                    <div className="text-sm mt-1">{q.question}</div>
-                    <div className="text-sm mt-2">
-                      <span className={correct ? "text-green-400" : "text-red-400"}>
-                        您的答案：{userAns}
-                      </span>
+                  <div
+                    key={q.id}
+                    className={`p-4 rounded-lg border-2 ${
+                      correct
+                        ? "border-green-500 bg-green-50 dark:bg-green-900/10"
+                        : "border-red-500 bg-red-50 dark:bg-red-900/10"
+                    }`}
+                  >
+                    <p className="font-medium mb-2">第 {q.number} 題：{q.question}</p>
+                    <div className="text-sm space-y-1">
+                      <p>你的答案：<span className={correct ? "text-green-700 dark:text-green-400" : "text-red-700 dark:text-red-400"}>
+                        {userAns}
+                      </span></p>
                       {!correct && (
-                        <span className="ml-4 text-green-400">
-                          正確答案：{q.answer}
-                        </span>
+                        <p>正確答案：<span className="text-green-700 dark:text-green-400">{q.answer}</span></p>
                       )}
                     </div>
                   </div>
                 );
               })}
             </div>
-            <button
-              onClick={restart}
-              className="px-6 py-3 border rounded bg-white text-black"
-            >
-              重新開始
-            </button>
           </div>
         )}
       </main>
