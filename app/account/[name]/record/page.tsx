@@ -11,7 +11,10 @@ type RecitationRecord = {
   title: string;
   success: boolean;
   timestamp: string;
+  category?: string;
 };
+
+type Subject = "詩文背誦" | "學中文" | "小格言" | "數學題庫" | "交通題庫" | "全部";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -23,6 +26,7 @@ export default function RecordsPage() {
   const [recitationsPublic, setRecitationsPublic] = useState(false);
   const [userName, setUserName] = useState("");
   const [isOwner, setIsOwner] = useState(false);
+  const [selectedSubject, setSelectedSubject] = useState<Subject>("全部");
 
   useEffect(() => {
     const nameParam = params?.name;
@@ -73,6 +77,17 @@ export default function RecordsPage() {
   const uniqueArticles = new Set(recitations.filter(r => r.success).map(r => r.articleId));
   const uniqueSuccessCount = uniqueArticles.size;
 
+  const subjects: Subject[] = ["全部", "詩文背誦", "學中文", "小格言", "數學題庫", "交通題庫"];
+
+  const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
+    if (selectedSubject === "全部") return records;
+    return records.filter(r => r.category === selectedSubject);
+  };
+
+  const filteredRecitations = filterRecitations(recitations);
+  const filteredAttempts = filteredRecitations.length;
+  const filteredSuccessCount = filteredRecitations.filter(r => r.success).length;
+
   function handleShare() {
     const url = window.location.href;
     if (navigator?.clipboard?.writeText) {
@@ -112,27 +127,44 @@ export default function RecordsPage() {
           </div>
         ) : (
           <div className="w-full max-w-md space-y-6">
+            {/* Subject Tabs */}
+            <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800">
+              {subjects.map((subject) => (
+                <button
+                  key={subject}
+                  onClick={() => setSelectedSubject(subject)}
+                  className={`px-4 py-2 font-medium transition-colors ${
+                    selectedSubject === subject
+                      ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
+                  }`}
+                >
+                  {subject}
+                </button>
+              ))}
+            </div>
+
             {/* Statistics Cards */}
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
                 <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
-                <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{totalAttempts}</p>
+                <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{filteredAttempts}</p>
               </div>
 
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
                 <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
-                <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{successCount}</p>
+                <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{filteredSuccessCount}</p>
               </div>
             </div>
 
             {/* Records List */}
             <div className="mt-8">
               <h2 className="text-xl font-semibold mb-4">背誦歷史</h2>
-              {recitations.length === 0 ? (
+              {filteredRecitations.length === 0 ? (
               <p className="text-center text-gray-500 py-8">尚無背誦紀錄</p>
             ) : (
               <div className="space-y-3">
-                {recitations.slice().reverse().map((record, index) => (
+                {filteredRecitations.slice().reverse().map((record, index) => (
                   <div
                     key={index}
                     className={`border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors ${
