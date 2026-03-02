@@ -181,11 +181,23 @@ export default function StudyChineseSetPage() {
               <button
                 type="button"
                 onClick={() => speakQuestion(currentQuestion.title)}
-                className="h-9 w-9 shrink-0 rounded-full border border-zinc-300 bg-white text-lg leading-none hover:bg-zinc-100"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black bg-white text-black transition-colors hover:bg-zinc-100"
                 aria-label="朗讀題目"
                 title="朗讀題目"
               >
-                🔊
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                >
+                  <path d="M11 5 6 9H3v6h3l5 4V5z" />
+                  <path d="M15 9a5 5 0 0 1 0 6" />
+                </svg>
               </button>
             </div>
 
