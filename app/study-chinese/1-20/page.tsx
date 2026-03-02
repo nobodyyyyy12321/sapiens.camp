@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import studyChineseQuestions from "@/app/data/study-chinese.json";
+import studyChineseQuestions from "../../data/study-chinese.json";
 
 type Question = {
   id: number;
