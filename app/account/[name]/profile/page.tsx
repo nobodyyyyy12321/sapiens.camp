@@ -77,36 +77,73 @@ export default function ProfilePage() {
 
   async function uploadAvatar(file: File) {
     setError(null);
-    const maxBytes = 5 * 1024 * 1024;
-    if (file.size > maxBytes) {
-      setError("圖片過大，請上傳 5MB 以下檔案");
+    const hardLimitBytes = 15 * 1024 * 1024;
+    if (file.size > hardLimitBytes) {
+      setError("圖片過大，請選擇 15MB 以下檔案");
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = async () => {
-      try {
-        const data = reader.result as string;
-        const res = await fetch("/api/user/avatar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ data }),
-        });
+    function fileToDataUrl(input: File): Promise<string> {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ""));
+        reader.onerror = () => reject(new Error("read failed"));
+        reader.readAsDataURL(input);
+      });
+    }
 
-        const j = await res.json().catch(() => ({}));
-        if (res.ok && j.url) {
-          setAvatarUrl(j.url);
-          if (typeof window !== "undefined") {
-            window.dispatchEvent(new Event("profile:updated"));
-          }
-        } else {
-          setError(j?.error || "頭像上傳失敗");
-        }
-      } catch (e) {
-        setError("頭像上傳失敗");
+    function loadImage(src: string): Promise<HTMLImageElement> {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error("image load failed"));
+        img.src = src;
+      });
+    }
+
+    async function makeAvatarDataUrl(input: File): Promise<string> {
+      const src = await fileToDataUrl(input);
+      const img = await loadImage(src);
+      const maxSide = 512;
+      const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+      const width = Math.max(1, Math.round(img.width * scale));
+      const height = Math.max(1, Math.round(img.height * scale));
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return src;
+      ctx.drawImage(img, 0, 0, width, height);
+
+      let data = canvas.toDataURL("image/jpeg", 0.82);
+      const maxPayloadBytes = 2.5 * 1024 * 1024;
+      if (data.length > maxPayloadBytes) {
+        data = canvas.toDataURL("image/jpeg", 0.7);
       }
-    };
-    reader.readAsDataURL(file);
+      return data;
+    }
+
+    try {
+      const data = await makeAvatarDataUrl(file);
+      const res = await fetch("/api/user/avatar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data }),
+      });
+
+      const j = await res.json().catch(() => ({}));
+      if (res.ok && j.url) {
+        setAvatarUrl(j.url);
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("profile:updated"));
+        }
+      } else {
+        setError(j?.error || "頭像上傳失敗");
+      }
+    } catch (e) {
+      setError("頭像上傳失敗");
+    }
   }
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);

@@ -2,15 +2,20 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import { getStorageBucket } from "../../../../lib/firebase-admin";
 import { auth } from "../../../../auth";
-import { findUserByEmail, updateUser } from "../../../../lib/users";
+import { findUserByEmail, findUserByName, updateUser } from "../../../../lib/users";
 
 export async function POST(req: Request) {
   try {
     // require authenticated user
     const session = (await auth()) as any | null;
-    if (!session?.user?.email) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const sessionEmail = session?.user?.email as string | undefined;
+    const sessionName = session?.user?.name as string | undefined;
+    if (!sessionEmail && !sessionName) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-    const user = await findUserByEmail(session.user.email as string);
+    let user = sessionEmail ? await findUserByEmail(sessionEmail) : undefined;
+    if (!user && sessionName) user = await findUserByName(sessionName);
     if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
     const body = await req.json();

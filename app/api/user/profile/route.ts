@@ -46,11 +46,16 @@ export async function GET(request: Request) {
 
     // Otherwise, return the authenticated user's own profile
     const session = (await auth()) as unknown as Session | null;
-    if (!session?.user?.email) {
+    const sessionEmail = session?.user?.email as string | undefined;
+    const sessionName = session?.user?.name as string | undefined;
+    if (!sessionEmail && !sessionName) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = await findUserByEmail(session.user.email as string);
+    let user = sessionEmail ? await findUserByEmail(sessionEmail) : undefined;
+    if (!user && sessionName) {
+      user = await findUserByName(sessionName);
+    }
     if (!user) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
@@ -66,10 +71,15 @@ export async function GET(request: Request) {
 export async function PATCH(req: Request) {
   try {
     const session = (await auth()) as unknown as Session | null;
-    if (!session?.user?.email) {
+    const sessionEmail = session?.user?.email as string | undefined;
+    const sessionName = session?.user?.name as string | undefined;
+    if (!sessionEmail && !sessionName) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const user = await findUserByEmail(session.user.email as string);
+    let user = sessionEmail ? await findUserByEmail(sessionEmail) : undefined;
+    if (!user && sessionName) {
+      user = await findUserByName(sessionName);
+    }
     if (!user) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
