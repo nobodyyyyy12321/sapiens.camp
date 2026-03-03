@@ -129,10 +129,10 @@ export default function RecordsPage() {
           </h1>
           <div className="flex items-center gap-2 whitespace-nowrap">
             {userName && (
-              <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="zen-ghost">個人檔案</Link>
+              <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity">個人檔案</Link>
             )}
             {isOwner && (
-              <button className="zen-ghost" onClick={handleShare}>
+              <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={handleShare}>
                 {shareCopied ? "已複製" : "分享連結"}
               </button>
             )}
