@@ -100,6 +100,16 @@ export default function QuotePage() {
     setUserAnswers(new Array(questions.length).fill(null));
   };
 
+  const speakQuestion = (text: string) => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.rate = 0.8;
+    window.speechSynthesis.speak(utterance);
+  };
+
   if (questions.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-transparent dark:bg-black">
@@ -151,8 +161,29 @@ export default function QuotePage() {
               第 {currentIndex + 1} 題
             </div>
 
-            <div className="p-6 border rounded text-lg">
-              {currentQuestion.title}
+            <div className="p-6 border rounded text-lg flex items-center justify-between gap-3">
+              <span>{currentQuestion.title}</span>
+              <button
+                type="button"
+                onClick={() => speakQuestion(currentQuestion.title)}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black bg-white text-black transition-colors hover:bg-zinc-100"
+                aria-label="朗讀英文"
+                title="朗讀英文"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                >
+                  <path d="M11 5 6 9H3v6h3l5 4V5z" />
+                  <path d="M15 9a5 5 0 0 1 0 6" />
+                </svg>
+              </button>
             </div>
                 
             <div className="flex gap-3">
