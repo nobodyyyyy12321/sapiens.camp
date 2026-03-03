@@ -158,7 +158,7 @@ export default function ProfilePage() {
   if (loading) return <div className="p-12">載入中…</div>;
 
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex min-h-screen items-start justify-center pt-8">
       <main className="w-full max-w-2xl zen-card p-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl zen-title">個人檔案</h1>
