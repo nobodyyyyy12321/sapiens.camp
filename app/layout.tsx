@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   title: "智人系統",
   description: "多方位學習管理平台",
   icons: {
-    icon: "/logo.webp",
-    shortcut: "/logo.webp",
-    apple: "/logo.webp",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
 };
 
