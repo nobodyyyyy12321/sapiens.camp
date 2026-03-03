@@ -73,13 +73,7 @@ export default function AuthNav() {
   const encodedName = encodeURIComponent(name);
 
   return (
-    <div className="flex items-center gap-3">
-      {avatarUrl ? (
-        <img src={avatarUrl} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
-      ) : session.user.image ? (
-        <img src={session.user.image} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
-      ) : null}
-
+    <div className="flex items-center">
       <div 
         className="relative"
         onMouseEnter={handleMouseEnter}
@@ -87,18 +81,25 @@ export default function AuthNav() {
       >
         <button 
           aria-haspopup="true" 
-          className="zen-subtle flex items-center gap-2"
+          aria-label="開啟個人選單"
+          className="flex items-center"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <span>{name}</span>
-          <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
-            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
-          </svg>
+          {avatarUrl ? (
+            <img src={avatarUrl} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+          ) : session.user.image ? (
+            <img src={session.user.image} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+          ) : (
+            <span className="w-8 h-8 rounded-full bg-gray-600 text-white text-sm font-semibold flex items-center justify-center">
+              {name.slice(0, 1).toUpperCase()}
+            </span>
+          )}
         </button>
 
         {isMenuOpen && (
           <div className="absolute right-0 mt-2 w-44 bg-gray-800 text-white rounded shadow-md z-20 border border-gray-700">
             <div className="py-1">
+              <div className="px-4 py-3 text-sm text-gray-200 border-b border-gray-700 truncate" title={name}>{name}</div>
               <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-gray-700">檔案</Link>
               <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-gray-700">紀錄</Link>
               <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-700">設定</Link>
