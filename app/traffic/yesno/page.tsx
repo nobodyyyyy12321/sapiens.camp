@@ -3,10 +3,15 @@
 import Link from "next/link";
 
 export default function TrafficYesNoPage() {
-  const paperRanges = Array.from({ length: 7 }, (_, i) => ({
-    start: i * 100 + 1,
-    end: (i + 1) * 100,
-  }));
+  const paperRanges = [
+    { start: 1, end: 100 },
+    { start: 101, end: 200 },
+    { start: 201, end: 300 },
+    { start: 301, end: 400 },
+    { start: 401, end: 500 },
+    { start: 501, end: 600 },
+    { start: 601, end: 662 },
+  ];
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">

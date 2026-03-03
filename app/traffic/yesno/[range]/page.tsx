@@ -18,12 +18,16 @@ function parseRange(input: string): { start: number; end: number } | null {
   const start = Number(match[1]);
   const end = Number(match[2]);
   if (!Number.isInteger(start) || !Number.isInteger(end) || start <= 0 || end <= start) return null;
-  const valid =
-    start % 100 === 1 &&
-    end === start + 99 &&
-    start >= 1 &&
-    end <= 700;
-  if (!valid) return null;
+  const validRanges = new Set([
+    "1-100",
+    "101-200",
+    "201-300",
+    "301-400",
+    "401-500",
+    "501-600",
+    "601-662",
+  ]);
+  if (!validRanges.has(`${start}-${end}`)) return null;
   return { start, end };
 }
 
