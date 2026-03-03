@@ -21,23 +21,45 @@ export async function POST(req: Request) {
     if (!matches) return NextResponse.json({ error: "Invalid data" }, { status: 400 });
 
     const mime = matches[1];
+    const allowedMimes = new Set(["image/png", "image/jpeg", "image/webp", "image/gif"]);
+    if (!allowedMimes.has(mime)) {
+      return NextResponse.json({ error: "Unsupported image type" }, { status: 400 });
+    }
+
     const ext = mime.split("/")[1] || "png";
     const buffer = Buffer.from(matches[2], "base64");
+    const maxBytes = 5 * 1024 * 1024;
+    if (buffer.length > maxBytes) {
+      return NextResponse.json({ error: "Image too large (max 5MB)" }, { status: 413 });
+    }
 
     const filename = `avatars/${uuidv4()}.${ext}`;
 
     // upload to firebase storage
     const bucket = getStorageBucket();
     const file = bucket.file(filename);
-    await file.save(buffer, { metadata: { contentType: mime } });
-    // make public so it can be used as img src (alternatively use signed URLs)
+    await file.save(buffer, {
+      metadata: {
+        contentType: mime,
+        cacheControl: "public, max-age=31536000, immutable",
+      },
+    });
+
+    let url = "";
+    // Try public URL first
     try {
       await file.makePublic();
+      url = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(filename)}`;
     } catch (e) {
-      console.warn("makePublic failed (check bucket permissions):", e);
+      // Buckets with uniform access often disallow makePublic().
+      // Fall back to a long-lived signed URL so avatar still works.
+      console.warn("makePublic failed, fallback to signed URL:", e);
+      const [signedUrl] = await file.getSignedUrl({
+        action: "read",
+        expires: "03-01-2491",
+      });
+      url = signedUrl;
     }
-
-    const url = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(filename)}`;
 
     // update user record
     await updateUser(user.id, { avatarUrl: url });

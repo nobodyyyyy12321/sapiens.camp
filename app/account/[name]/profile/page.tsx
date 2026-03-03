@@ -76,18 +76,35 @@ export default function ProfilePage() {
   }, [params, session, status]);
 
   async function uploadAvatar(file: File) {
+    setError(null);
+    const maxBytes = 5 * 1024 * 1024;
+    if (file.size > maxBytes) {
+      setError("圖片過大，請上傳 5MB 以下檔案");
+      return;
+    }
+
     const reader = new FileReader();
     reader.onload = async () => {
-      const data = reader.result as string;
-      // send base64 data to server
-      const res = await fetch("/api/user/avatar", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data }),
-      });
-      const j = await res.json();
-      if (res.ok && j.url) setAvatarUrl(j.url);
-      else setError(j?.error || "Upload failed");
+      try {
+        const data = reader.result as string;
+        const res = await fetch("/api/user/avatar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data }),
+        });
+
+        const j = await res.json().catch(() => ({}));
+        if (res.ok && j.url) {
+          setAvatarUrl(j.url);
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(new Event("profile:updated"));
+          }
+        } else {
+          setError(j?.error || "頭像上傳失敗");
+        }
+      } catch (e) {
+        setError("頭像上傳失敗");
+      }
     };
     reader.readAsDataURL(file);
   }
