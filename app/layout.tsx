@@ -25,11 +25,6 @@ const notoSerif = Noto_Serif_TC({
 export const metadata: Metadata = {
   title: "智人系統",
   description: "多方位學習管理平台",
-  icons: {
-    icon: "public/book-svgrepo-com.svg",
-    shortcut: "public/book-svgrepo-com.svg",
-    apple: "public/book-svgrepo-com.svg",
-  },
 };
 
 export default function RootLayout({
