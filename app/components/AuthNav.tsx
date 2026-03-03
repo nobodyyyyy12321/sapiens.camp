@@ -102,8 +102,8 @@ export default function AuthNav() {
               <div className="px-4 py-3 text-sm text-gray-200 border-b border-gray-700 truncate" title={name}>{name}</div>
               <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-gray-700">檔案</Link>
               <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-gray-700">紀錄</Link>
-              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-700">設定</Link>
-              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-gray-700">清單</Link>
+              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-700">清單</Link>
+              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-gray-700">設定</Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="w-full text-left px-4 py-3 text-sm hover:bg-gray-700"
