@@ -22,7 +22,15 @@ type QuoteRecord = {
   category: "名言佳句";
 };
 
-type Subject = "詩文背誦" | "學中文" | "名言佳句" | "數學題庫" | "交通題庫";
+type QuizRecord = {
+  answered: number;
+  correct: number;
+  set: string;
+  timestamp: string;
+  category: "英文" | "學中文" | "交通題庫";
+};
+
+type Subject = "詩文背誦" | "英文" | "學中文" | "名言佳句" | "數學題庫" | "交通題庫";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -30,6 +38,9 @@ export default function RecordsPage() {
   const params = useParams();
   const [recitations, setRecitations] = useState<RecitationRecord[]>([]);
   const [quoteRecords, setQuoteRecords] = useState<QuoteRecord[]>([]);
+  const [englishRecords, setEnglishRecords] = useState<QuizRecord[]>([]);
+  const [studyChineseRecords, setStudyChineseRecords] = useState<QuizRecord[]>([]);
+  const [trafficRecords, setTrafficRecords] = useState<QuizRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [shareCopied, setShareCopied] = useState(false);
   const [recitationsPublic, setRecitationsPublic] = useState(false);
@@ -62,6 +73,9 @@ export default function RecordsPage() {
           if (owner || data.user.recitationsPublic) {
             setRecitations(data.user.recitations || []);
             setQuoteRecords(data.user.quoteRecords || []);
+            setEnglishRecords(data.user.englishRecords || []);
+            setStudyChineseRecords(data.user.studyChineseRecords || []);
+            setTrafficRecords(data.user.trafficRecords || []);
           }
         }
         setLoading(false);
@@ -82,12 +96,7 @@ export default function RecordsPage() {
     );
   }
 
-  const totalAttempts = recitations.length;
-  const successCount = recitations.filter(r => r.success).length;
-  const uniqueArticles = new Set(recitations.filter(r => r.success).map(r => r.articleId));
-  const uniqueSuccessCount = uniqueArticles.size;
-
-  const subjects: Subject[] = ["詩文背誦", "學中文", "名言佳句", "數學題庫", "交通題庫"];
+  const subjects: Subject[] = ["詩文背誦", "英文", "學中文", "名言佳句", "數學題庫", "交通題庫"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
     return records.filter(r => (r.category || "詩文背誦") === selectedSubject);
@@ -249,7 +258,122 @@ export default function RecordsPage() {
                   )}
                 </div>
               </>
-            )}          </div>
+            )}
+
+            {selectedSubject === "英文" && (
+              <>
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
+                  {englishRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {englishRecords.slice().reverse().map((record, index) => (
+                        <div
+                          key={index}
+                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-indigo-200 dark:border-indigo-800 bg-indigo-50/30 dark:bg-indigo-900/10"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-medium">英文 {record.set}</p>
+                              <p className="text-sm mt-1">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
+                                  寫 {record.answered} 題，對 {record.correct} 題
+                                </span>
+                              </p>
+                            </div>
+                            <p className="text-xs text-gray-400">
+                              {new Date(record.timestamp).toLocaleDateString("zh-TW", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
+            {selectedSubject === "學中文" && (
+              <>
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
+                  {studyChineseRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {studyChineseRecords.slice().reverse().map((record, index) => (
+                        <div
+                          key={index}
+                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-cyan-200 dark:border-cyan-800 bg-cyan-50/30 dark:bg-cyan-900/10"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-medium">學中文 {record.set}</p>
+                              <p className="text-sm mt-1">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+                                  寫 {record.answered} 題，對 {record.correct} 題
+                                </span>
+                              </p>
+                            </div>
+                            <p className="text-xs text-gray-400">
+                              {new Date(record.timestamp).toLocaleDateString("zh-TW", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
+            {selectedSubject === "交通題庫" && (
+              <>
+                <div className="mt-8">
+                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
+                  {trafficRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {trafficRecords.slice().reverse().map((record, index) => (
+                        <div
+                          key={index}
+                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-emerald-200 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-900/10"
+                        >
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <p className="font-medium">交通題庫 {record.set}</p>
+                              <p className="text-sm mt-1">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                                  寫 {record.answered} 題，對 {record.correct} 題
+                                </span>
+                              </p>
+                            </div>
+                            <p className="text-xs text-gray-400">
+                              {new Date(record.timestamp).toLocaleDateString("zh-TW", {
+                                year: "numeric",
+                                month: "2-digit",
+                                day: "2-digit",
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
         )}
       </main>
     </div>

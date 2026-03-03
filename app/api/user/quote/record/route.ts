@@ -40,15 +40,21 @@ export async function POST(request: Request) {
 
     // Save to Firestore
     const db = getFirestoreDB();
-    const userRef = db.collection("users").doc(userEmail);
-    const userDoc = await userRef.get();
+    const userSnapshot = await db
+      .collection("users")
+      .where("email", "==", userEmail.toLowerCase())
+      .limit(1)
+      .get();
 
-    if (!userDoc.exists) {
+    if (userSnapshot.empty) {
       return Response.json(
         { error: "User not found" },
         { status: 404 }
       );
     }
+
+    const userRef = userSnapshot.docs[0].ref;
+    const userDoc = await userRef.get();
 
     const userData = userDoc.data();
     const quoteRecords = userData?.quoteRecords || [];

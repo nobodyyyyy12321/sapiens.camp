@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 type Option = {
   label: string;
@@ -27,6 +28,7 @@ type RawQuestion = {
 const OPTION_LABELS = ["A", "B", "C", "D"];
 
 export default function StudyChineseSetPage() {
+  const { data: session } = useSession();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
@@ -120,6 +122,23 @@ export default function StudyChineseSetPage() {
 
   const checkAnswers = () => {
     setShowResults(true);
+
+    if (session?.user?.email) {
+      const answered = userAnswers.filter((a) => a !== null).length;
+      const correct = userAnswers.filter((answer, idx) => answer === questions[idx]?.answer).length;
+
+      fetch("/api/user/study-chinese/record", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answered,
+          correct,
+          set: "1-20",
+        }),
+      }).catch((err) => console.error("Failed to save study-chinese record:", err));
+    }
   };
 
   const speakQuestion = (text: string) => {

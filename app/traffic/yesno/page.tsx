@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
 
 type Question = {
   id: string;
@@ -10,6 +11,7 @@ type Question = {
 };
 
 export default function TrafficYesNoPage() {
+  const { data: session } = useSession();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
@@ -77,6 +79,23 @@ export default function TrafficYesNoPage() {
 
   function checkAnswers() {
     setShowResults(true);
+
+    if (session?.user?.email) {
+      const answered = userAnswers.filter((ans) => ans !== null).length;
+      const correct = userAnswers.filter((ans, idx) => ans === questions[idx]?.answer).length;
+
+      fetch("/api/user/traffic/record", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answered,
+          correct,
+          set: "yesno",
+        }),
+      }).catch((err) => console.error("Failed to save traffic record:", err));
+    }
   }
 
   function restart() {
