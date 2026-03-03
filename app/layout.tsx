@@ -26,7 +26,7 @@ const notoSerif = Noto_Serif_TC({
 
 export const metadata: Metadata = {
   title: "智人題庫",
-  description: "多方位題庫",
+  description: "多方位練習平台",
 };
 
 export default function RootLayout({
