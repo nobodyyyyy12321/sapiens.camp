@@ -6,6 +6,7 @@ export default function QuizBankPage() {
   const subjects = [
     { name: "詩文背誦", href: "/recitation" },
     { name: "Learn Chinese", href: "/study-chinese" },
+    { name: "英文", href: "/english" },
     { name: "名言佳句", href: "/quote" },
     { name: "數學", href: "/math" },
     { name: "交通", href: "/traffic" },
