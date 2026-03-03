@@ -97,15 +97,15 @@ export default function AuthNav() {
         </button>
 
         {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-44 bg-gray-700 text-white rounded shadow-md z-20 border border-gray-600">
+          <div className="absolute right-0 mt-2 w-44 bg-gray-800 text-white rounded shadow-md z-20 border border-gray-700">
             <div className="py-1">
-              <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-gray-600">檔案</Link>
-              <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-gray-600">紀錄</Link>
-              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-600">設定</Link>
-              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-gray-600">清單</Link>
+              <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-gray-700">檔案</Link>
+              <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-gray-700">紀錄</Link>
+              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-700">設定</Link>
+              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-gray-700">清單</Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="w-full text-left px-4 py-3 text-sm hover:bg-gray-600"
+                className="w-full text-left px-4 py-3 text-sm hover:bg-gray-700"
               >
                 登出
               </button>
