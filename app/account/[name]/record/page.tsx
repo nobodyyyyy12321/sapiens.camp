@@ -30,7 +30,7 @@ type QuizRecord = {
   category: "英文" | "Learn Chinese" | "交通";
 };
 
-type Subject = "詩文背誦" | "英文" | "Learn Chinese" | "名言佳句" | "數學" | "交通";
+type Subject = "綜合紀錄" | "詩文背誦" | "英文" | "Learn Chinese" | "名言佳句" | "數學" | "交通";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -46,7 +46,7 @@ export default function RecordsPage() {
   const [recitationsPublic, setRecitationsPublic] = useState(false);
   const [userName, setUserName] = useState("");
   const [isOwner, setIsOwner] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState<Subject>("詩文背誦");
+  const [selectedSubject, setSelectedSubject] = useState<Subject>("綜合紀錄");
 
   useEffect(() => {
     const nameParam = params?.name;
@@ -96,7 +96,7 @@ export default function RecordsPage() {
     );
   }
 
-  const subjects: Subject[] = ["詩文背誦", "英文", "Learn Chinese", "名言佳句", "數學", "交通"];
+  const subjects: Subject[] = ["綜合紀錄", "詩文背誦", "英文", "Learn Chinese", "名言佳句", "數學", "交通"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
     return records.filter(r => (r.category || "詩文背誦") === selectedSubject);
@@ -145,22 +145,154 @@ export default function RecordsPage() {
           </div>
         ) : (
           <div className="w-full max-w-md space-y-6">
-            {/* Subject Tabs */}
-            <div className="flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800">
-              {subjects.map((subject) => (
-                <button
-                  key={subject}
-                  onClick={() => setSelectedSubject(subject)}
-                  className={`px-4 py-2 font-medium transition-colors ${
-                    selectedSubject === subject
-                      ? "border-b-2 border-white text-white"
-                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-                  }`}
-                >
-                  {subject}
-                </button>
-              ))}
+            {/* Subject Dropdown */}
+            <div className="flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-400">選擇科目：</label>
+              <select
+                value={selectedSubject}
+                onChange={(e) => setSelectedSubject(e.target.value as Subject)}
+                className="px-4 py-2 rounded border border-white bg-black text-white text-sm font-medium cursor-pointer hover:bg-gray-900 transition-colors"
+              >
+                {subjects.map((subject) => (
+                  <option key={subject} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
             </div>
+
+            {selectedSubject === "綜合紀錄" && (
+              <>
+                {/* Combined Records */}
+                <div className="mt-8">
+                  {recitations.length + quoteRecords.length + englishRecords.length + studyChineseRecords.length + trafficRecords.length === 0 ? (
+                    <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
+                  ) : (
+                    <div className="space-y-3">
+                      {/* Recitation Records */}
+                      {recitations.length > 0 && (
+                        <>
+                          <h3 className="text-lg font-semibold mt-4">詩文背誦</h3>
+                          {recitations.slice().reverse().map((record, index) => (
+                            <div key={`recitation-${index}`} className="border border-white rounded-lg p-4 bg-black transition-colors">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-white">{record.title}</p>
+                                  <p className="text-sm mt-1">
+                                    <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
+                                      {record.success ? "✓ 成功" : "✗ 失敗"}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(record.timestamp).toLocaleDateString("zh-TW", { year: "numeric", month: "2-digit", day: "2-digit" })}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Quote Records */}
+                      {quoteRecords.length > 0 && (
+                        <>
+                          <h3 className="text-lg font-semibold mt-4">名言佳句</h3>
+                          {quoteRecords.slice().reverse().map((record, index) => (
+                            <div key={`quote-${index}`} className="border border-white rounded-lg p-4 bg-black transition-colors">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-white">名言佳句 {record.set}</p>
+                                  <p className="text-sm mt-1">
+                                    <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
+                                      {record.correct}/{record.answered}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(record.timestamp).toLocaleDateString("zh-TW", { year: "numeric", month: "2-digit", day: "2-digit" })}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* English Records */}
+                      {englishRecords.length > 0 && (
+                        <>
+                          <h3 className="text-lg font-semibold mt-4">英文</h3>
+                          {englishRecords.slice().reverse().map((record, index) => (
+                            <div key={`english-${index}`} className="border border-white rounded-lg p-4 bg-black transition-colors">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-white">英文 {record.set}</p>
+                                  <p className="text-sm mt-1">
+                                    <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
+                                      {record.correct}/{record.answered}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(record.timestamp).toLocaleDateString("zh-TW", { year: "numeric", month: "2-digit", day: "2-digit" })}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Study Chinese Records */}
+                      {studyChineseRecords.length > 0 && (
+                        <>
+                          <h3 className="text-lg font-semibold mt-4">學中文</h3>
+                          {studyChineseRecords.slice().reverse().map((record, index) => (
+                            <div key={`studychinese-${index}`} className="border border-white rounded-lg p-4 bg-black transition-colors">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-white">學中文 {record.set}</p>
+                                  <p className="text-sm mt-1">
+                                    <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
+                                      {record.correct}/{record.answered}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(record.timestamp).toLocaleDateString("zh-TW", { year: "numeric", month: "2-digit", day: "2-digit" })}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+
+                      {/* Traffic Records */}
+                      {trafficRecords.length > 0 && (
+                        <>
+                          <h3 className="text-lg font-semibold mt-4">交通題庫</h3>
+                          {trafficRecords.slice().reverse().map((record, index) => (
+                            <div key={`traffic-${index}`} className="border border-white rounded-lg p-4 bg-black transition-colors">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <p className="font-medium text-white">交通題庫 {record.set}</p>
+                                  <p className="text-sm mt-1">
+                                    <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
+                                      {record.correct}/{record.answered}
+                                    </span>
+                                  </p>
+                                </div>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(record.timestamp).toLocaleDateString("zh-TW", { year: "numeric", month: "2-digit", day: "2-digit" })}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
 
             {selectedSubject === "詩文背誦" && (
               <>
