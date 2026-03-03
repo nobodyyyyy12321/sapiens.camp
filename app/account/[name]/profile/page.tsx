@@ -160,27 +160,17 @@ export default function ProfilePage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <main className="w-full max-w-2xl zen-card p-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl zen-title mb-4">個人檔案</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl zen-title">個人檔案</h1>
           <div className="flex items-center gap-2">
             <Link href={`/account/${encodeURIComponent(name)}/record`} className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity">紀錄</Link>
             <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={handleShare}>
               {shareCopied ? "已複製" : "分享連結"}
             </button>
-            {isOwner && (
-              !editing ? (
-                <button className="zen-button" onClick={() => setEditing(true)}>編輯</button>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <button className="zen-button" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
-                  <button className="zen-ghost" onClick={() => setEditing(false)}>取消</button>
-                </div>
-              )
-            )}
           </div>
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex gap-6"
           <div className="w-40 flex flex-col items-center">
             <div className="mb-2">
               <img src={avatarUrl || "/avatar-placeholder.svg"} alt="avatar" className="w-40 h-40 rounded-md object-cover" />
@@ -303,6 +293,19 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
+
+        {isOwner && (
+          !editing ? (
+            <div className="mt-6 flex justify-start">
+              <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setEditing(true)}>編輯</button>
+            </div>
+          ) : (
+            <div className="mt-6 flex justify-start gap-2">
+              <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={save} disabled={saving}>{saving ? '儲存中...' : '儲存'}</button>
+              <button className="px-4 py-2 border rounded-full border-white text-white text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setEditing(false)}>取消</button>
+            </div>
+          )
+        )}
       </main>
     </div>
   );

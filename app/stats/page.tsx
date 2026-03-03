@@ -75,7 +75,7 @@ export default function SiteStatsPage() {
                           month: "2-digit",
                           day: "2-digit",
                         })}</div>
-                        <div className={`mt-1 ${r.success ? "text-green-700" : "text-red-700"}`}>{r.success ? "成功" : "失敗"}</div>
+                        <div className="mt-1 text-white">{r.success ? "成功" : "失敗"}</div>
                       </div>
                     </div>
                   ))}
