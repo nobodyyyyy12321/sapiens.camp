@@ -123,16 +123,16 @@ export default function RecordsPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
-        <div className="flex items-center justify-between gap-4 w-full mb-8">
-          <h1 className="text-2xl font-bold zen-title whitespace-nowrap">
+        <div className="mb-8 flex flex-wrap items-center gap-3 self-start">
+          <h1 className="text-3xl font-bold zen-title whitespace-nowrap">
             {userName ? `${userName} 的紀錄` : "紀錄"}
           </h1>
           <div className="flex items-center gap-2 whitespace-nowrap">
             {userName && (
-              <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity">個人檔案</Link>
+              <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="px-3 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity">個人檔案</Link>
             )}
             {isOwner && (
-              <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={handleShare}>
+              <button className="px-3 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={handleShare}>
                 {shareCopied ? "已複製" : "分享連結"}
               </button>
             )}
