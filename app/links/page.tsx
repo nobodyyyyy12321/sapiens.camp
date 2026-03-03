@@ -2,7 +2,7 @@ export default function LinksPage() {
   return (
     <div className="flex min-h-screen items-start justify-center bg-transparent font-sans dark:bg-black">
       <main className="w-full max-w-3xl py-12 px-16">
-        <h1 className="text-3xl font-bold zen-title mb-4">正派網站連結</h1>
+        <h1 className="text-3xl font-bold zen-title mb-4">正派連結</h1>
 
         <div className="space-y-4 mt-10">
           <div className="flex items-center gap-2">
