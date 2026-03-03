@@ -13,11 +13,21 @@ type Question = {
 export default function TrafficYesNoPage() {
   const { data: session } = useSession();
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [selectedPaper, setSelectedPaper] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [recognizedToken, setRecognizedToken] = useState<string | null>(null);
   const recognizedTimerRef = useRef<number | null>(null);
+
+  const paperRanges = Array.from({ length: 7 }, (_, i) => ({
+    start: i * 100 + 1,
+    end: (i + 1) * 100,
+  }));
+  const selectedRange = paperRanges[selectedPaper];
+  const paperQuestions = questions.filter(
+    (q) => q.number >= selectedRange.start && q.number <= selectedRange.end
+  );
 
   useEffect(() => {
     fetch("/api/traffic/questions")
@@ -25,11 +35,17 @@ export default function TrafficYesNoPage() {
       .then(data => {
         if (data.questions) {
           setQuestions(data.questions);
-          setUserAnswers(new Array(data.questions.length).fill(null));
         }
       })
       .catch(err => console.error("Failed to load questions:", err));
   }, []);
+
+  useEffect(() => {
+    setUserAnswers(new Array(paperQuestions.length).fill(null));
+    setCurrentIndex(0);
+    setShowResults(false);
+    setRecognizedToken(null);
+  }, [selectedPaper, questions]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -51,13 +67,13 @@ export default function TrafficYesNoPage() {
         setCurrentIndex(Math.max(0, currentIndex - 1));
       }
       if (k === "arrowright") {
-        setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1));
+        setCurrentIndex(Math.min(paperQuestions.length - 1, currentIndex + 1));
       }
     };
 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [currentIndex, showResults, userAnswers]);
+  }, [currentIndex, showResults, userAnswers, paperQuestions.length]);
 
   function handleAnswer(ans: string) {
     const newAnswers = [...userAnswers];
@@ -67,7 +83,7 @@ export default function TrafficYesNoPage() {
     clearRecognizedLater();
 
     // 自動跳下一題
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < paperQuestions.length - 1) {
       setTimeout(() => setCurrentIndex(currentIndex + 1), 500);
     }
   }
@@ -82,7 +98,7 @@ export default function TrafficYesNoPage() {
 
     if (session?.user?.email) {
       const answered = userAnswers.filter((ans) => ans !== null).length;
-      const correct = userAnswers.filter((ans, idx) => ans === questions[idx]?.answer).length;
+      const correct = userAnswers.filter((ans, idx) => ans === paperQuestions[idx]?.answer).length;
 
       fetch("/api/user/traffic/record", {
         method: "POST",
@@ -92,14 +108,14 @@ export default function TrafficYesNoPage() {
         body: JSON.stringify({
           answered,
           correct,
-          set: "yesno",
+          set: `yesno-${selectedRange.start}-${selectedRange.end}`,
         }),
       }).catch((err) => console.error("Failed to save traffic record:", err));
     }
   }
 
   function restart() {
-    setUserAnswers(new Array(questions.length).fill(null));
+    setUserAnswers(new Array(paperQuestions.length).fill(null));
     setCurrentIndex(0);
     setShowResults(false);
   }
@@ -112,7 +128,7 @@ export default function TrafficYesNoPage() {
     );
   }
 
-  const currentQ = questions[currentIndex];
+  const currentQ = paperQuestions[currentIndex];
   const answer = userAnswers[currentIndex];
 
   return (
@@ -130,9 +146,9 @@ export default function TrafficYesNoPage() {
                 ←
               </button>
               <button
-                onClick={() => setCurrentIndex(Math.min(questions.length - 1, currentIndex + 1))}
-                disabled={currentIndex === questions.length - 1}
-                className={`px-4 py-2 border rounded-full bg-white text-black text-sm transition-opacity ${currentIndex === questions.length - 1 ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}`}
+                onClick={() => setCurrentIndex(Math.min(paperQuestions.length - 1, currentIndex + 1))}
+                disabled={currentIndex === paperQuestions.length - 1}
+                className={`px-4 py-2 border rounded-full bg-white text-black text-sm transition-opacity ${currentIndex === paperQuestions.length - 1 ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:opacity-90"}`}
               >
                 →
               </button>
@@ -146,10 +162,29 @@ export default function TrafficYesNoPage() {
           )}
         </div>
 
-        {!showResults ? (
+        <div className="mt-6 flex flex-wrap gap-2 w-full">
+          {paperRanges.map((range, index) => {
+            const count = questions.filter((q) => q.number >= range.start && q.number <= range.end).length;
+            const active = selectedPaper === index;
+            return (
+              <button
+                key={`${range.start}-${range.end}`}
+                type="button"
+                onClick={() => setSelectedPaper(index)}
+                className={`px-4 py-2 border rounded-full text-sm transition-opacity ${active ? "bg-white text-black border-black" : "bg-black text-white border-white hover:opacity-90"}`}
+              >
+                第 {index + 1} 卷 ({range.start}-{range.end}) {count > 0 ? `· ${count}題` : "· 0題"}
+              </button>
+            );
+          })}
+        </div>
+
+        {paperQuestions.length === 0 ? (
+          <div className="mt-6 text-sm zen-subtle">此試卷目前沒有題目</div>
+        ) : !showResults ? (
           <div className="mt-6 space-y-4 w-full">
             <div className="text-sm text-zinc-400">
-              第 {currentIndex + 1} 題
+              第 {selectedPaper + 1} 卷｜第 {currentIndex + 1} 題
             </div>
             
             <div className="p-6 border rounded text-lg">
@@ -171,7 +206,7 @@ export default function TrafficYesNoPage() {
           <div className="mt-6 space-y-4 w-full">
             <div className="flex items-center justify-between">
               <div className="text-2xl font-bold">
-                寫 {userAnswers.filter(ans => ans !== null).length} 題，對 {userAnswers.filter((ans, idx) => ans === questions[idx].answer).length} 題
+                寫 {userAnswers.filter(ans => ans !== null).length} 題，對 {userAnswers.filter((ans, idx) => ans === paperQuestions[idx].answer).length} 題
               </div>
               <button
                 onClick={restart}
@@ -182,7 +217,7 @@ export default function TrafficYesNoPage() {
             </div>
             <h2 className="text-2xl font-bold mt-6">答題結果</h2>
             <div className="space-y-3">
-              {questions.map((q, idx) => {
+              {paperQuestions.map((q, idx) => {
                 const userAns = userAnswers[idx];
                 if (userAns === null) return null;
                 const correct = userAns === q.answer;

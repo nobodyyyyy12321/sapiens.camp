@@ -18,7 +18,7 @@ export default function TrafficRegionPage() {
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         const records: TrafficRecord[] = data?.user?.trafficRecords || [];
-        const setRecords = records.filter((r) => r?.set === "yesno");
+        const setRecords = records.filter((r) => typeof r?.set === "string" && r.set.startsWith("yesno"));
         if (setRecords.length === 0) {
           setTooltip("尚無作答紀錄");
           return;
