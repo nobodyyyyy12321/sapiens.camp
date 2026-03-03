@@ -75,7 +75,12 @@ export default function SiteStatsPage() {
                           month: "2-digit",
                           day: "2-digit",
                         })}</div>
-                        <div className="mt-1 zen-subtle">{r.success ? "成功" : "失敗"}</div>
+                        <div className="mt-1 zen-subtle">
+                          {r.type === 'quiz' 
+                            ? `寫 ${r.answered} 題，對 ${r.correct} 題`
+                            : (r.success ? "成功" : "失敗")
+                          }
+                        </div>
                       </div>
                     </div>
                   ))}

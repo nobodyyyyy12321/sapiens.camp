@@ -37,18 +37,19 @@ export async function GET(request: Request) {
       return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits });
     }
 
-    // Return recent recitationRecords (most recent first). Limit to 10.
+    // Return recent records (recitation + quiz records). Limit to 10.
     try {
-      const recCol = db.collection("recitationRecords");
-      const recSnap = await recCol.orderBy("createdAt", "desc").limit(10).get();
       const records: any[] = [];
+
+      // Fetch recitation records
+      const recCol = db.collection("recitationRecords");
+      const recSnap = await recCol.orderBy("createdAt", "desc").limit(50).get();
 
       for (const d of recSnap.docs) {
         const data = d.data() || {};
-        const record: any = { id: d.id, ...data };
+        const record: any = { id: d.id, type: 'recitation', ...data };
 
         try {
-          // Try to construct an article URL for the record so the UI can link to the original article
           let articleUrl: string | null = null;
 
           if (data.articleId) {
@@ -80,10 +81,100 @@ export async function GET(request: Request) {
         records.push(record);
       }
 
-      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits, records });
+      // Fetch quiz records from all users
+      const usersCol = db.collection("users");
+      const usersSnap = await usersCol.get();
+
+      for (const userDoc of usersSnap.docs) {
+        const userData = userDoc.data() || {};
+        const userName = userData.name || "匿名";
+        const userId = userDoc.id;
+
+        // English records
+        if (Array.isArray(userData.englishRecords)) {
+          userData.englishRecords.forEach((rec: any) => {
+            records.push({
+              id: `${userId}-english-${rec.timestamp}`,
+              type: 'quiz',
+              category: '英文',
+              userName,
+              userId,
+              answered: rec.answered,
+              correct: rec.correct,
+              set: rec.set,
+              timestamp: rec.timestamp,
+              title: `英文 ${rec.set}`,
+            });
+          });
+        }
+
+        // Study Chinese records
+        if (Array.isArray(userData.studyChineseRecords)) {
+          userData.studyChineseRecords.forEach((rec: any) => {
+            records.push({
+              id: `${userId}-studychinese-${rec.timestamp}`,
+              type: 'quiz',
+              category: '學中文',
+              userName,
+              userId,
+              answered: rec.answered,
+              correct: rec.correct,
+              set: rec.set,
+              timestamp: rec.timestamp,
+              title: `學中文 ${rec.set}`,
+            });
+          });
+        }
+
+        // Traffic records
+        if (Array.isArray(userData.trafficRecords)) {
+          userData.trafficRecords.forEach((rec: any) => {
+            records.push({
+              id: `${userId}-traffic-${rec.timestamp}`,
+              type: 'quiz',
+              category: '交通題庫',
+              userName,
+              userId,
+              answered: rec.answered,
+              correct: rec.correct,
+              set: rec.set,
+              timestamp: rec.timestamp,
+              title: `交通 ${rec.set}`,
+            });
+          });
+        }
+
+        // Quote records
+        if (Array.isArray(userData.quoteRecords)) {
+          userData.quoteRecords.forEach((rec: any) => {
+            records.push({
+              id: `${userId}-quote-${rec.timestamp}`,
+              type: 'quiz',
+              category: '名言佳句',
+              userName,
+              userId,
+              answered: rec.answered,
+              correct: rec.correct,
+              set: rec.set,
+              timestamp: rec.timestamp,
+              title: `名言佳句 ${rec.set}`,
+            });
+          });
+        }
+      }
+
+      // Sort all records by timestamp (most recent first)
+      records.sort((a, b) => {
+        const timeA = a.timestamp || a.createdAt || '';
+        const timeB = b.timestamp || b.createdAt || '';
+        return timeB.localeCompare(timeA);
+      });
+
+      // Return top 10
+      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits, records: records.slice(0, 10) });
     } catch (recErr: any) {
-      console.error("Failed to fetch recitationRecords:", recErr);
-      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, records: [] });
+      console.error("Failed to fetch records:", recErr);
+      return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits, records: [] });
     }
   } catch (err: any) {
     console.error("Failed to compute stats:", err);
