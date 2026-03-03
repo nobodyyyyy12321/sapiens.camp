@@ -27,10 +27,10 @@ type QuizRecord = {
   correct: number;
   set: string;
   timestamp: string;
-  category: "英文" | "學中文" | "交通題庫";
+  category: "英文" | "Learn Chinese" | "交通";
 };
 
-type Subject = "詩文背誦" | "英文" | "學中文" | "名言佳句" | "數學題庫" | "交通題庫";
+type Subject = "詩文背誦" | "英文" | "Learn Chinese" | "名言佳句" | "數學" | "交通";
 
 export default function RecordsPage() {
   const { data: session, status } = useSession();
@@ -96,7 +96,7 @@ export default function RecordsPage() {
     );
   }
 
-  const subjects: Subject[] = ["詩文背誦", "英文", "學中文", "名言佳句", "數學題庫", "交通題庫"];
+  const subjects: Subject[] = ["詩文背誦", "英文", "Learn Chinese", "名言佳句", "數學", "交通"];
 
   const filterRecitations = (records: RecitationRecord[]): RecitationRecord[] => {
     return records.filter(r => (r.category || "詩文背誦") === selectedSubject);
@@ -225,7 +225,6 @@ export default function RecordsPage() {
               <>
                 {/* Records List */}
                 <div className="mt-8">
-                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
                   {quoteRecords.length === 0 ? (
                     <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
                   ) : (
@@ -263,7 +262,6 @@ export default function RecordsPage() {
             {selectedSubject === "英文" && (
               <>
                 <div className="mt-8">
-                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
                   {englishRecords.length === 0 ? (
                     <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
                   ) : (
@@ -298,10 +296,9 @@ export default function RecordsPage() {
               </>
             )}
 
-            {selectedSubject === "學中文" && (
+            {selectedSubject === "Learn Chinese" && (
               <>
                 <div className="mt-8">
-                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
                   {studyChineseRecords.length === 0 ? (
                     <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
                   ) : (
@@ -336,10 +333,9 @@ export default function RecordsPage() {
               </>
             )}
 
-            {selectedSubject === "交通題庫" && (
+            {selectedSubject === "交通" && (
               <>
                 <div className="mt-8">
-                  <h2 className="text-xl font-semibold mb-4">練習歷史</h2>
                   {trafficRecords.length === 0 ? (
                     <p className="text-center text-gray-500 py-8">尚無練習紀錄</p>
                   ) : (

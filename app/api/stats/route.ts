@@ -37,10 +37,10 @@ export async function GET(request: Request) {
       return NextResponse.json({ success: true, totalAttempts, totalSuccesses, visits });
     }
 
-    // Return recent recitationRecords (most recent first). Limit to 500.
+    // Return recent recitationRecords (most recent first). Limit to 10.
     try {
       const recCol = db.collection("recitationRecords");
-      const recSnap = await recCol.orderBy("createdAt", "desc").limit(500).get();
+      const recSnap = await recCol.orderBy("createdAt", "desc").limit(10).get();
       const records: any[] = [];
 
       for (const d of recSnap.docs) {

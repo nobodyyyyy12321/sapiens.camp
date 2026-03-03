@@ -52,10 +52,10 @@ export default function SiteStatsPage() {
             </div>
 
             <div className="w-full">
-              <h2 className="text-lg font-medium mb-2">最近嘗試紀錄</h2>
+              <h2 className="text-lg font-medium mb-2">最近 10 筆嘗試紀錄</h2>
               {records && records.length > 0 ? (
                 <div className="space-y-2">
-                  {records.map((r) => (
+                  {records.slice(0, 10).map((r) => (
                     <div key={r.id} className="flex items-center justify-between p-3 border rounded">
                       <div className="flex-1">
                         <div className="font-medium">{r.title || "(無標題)"}</div>
