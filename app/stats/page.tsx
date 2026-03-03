@@ -48,7 +48,7 @@ export default function SiteStatsPage() {
         ) : (
           <div>
             <div className="w-full flex items-center justify-center mb-4">
-              <p className="text-base zen-subtle">全站累計：嘗試 {totalAttempts} 次 ・ 成功 {totalSuccesses} 次 ・ 造訪 {visits} 次</p>
+              <p className="text-base zen-subtle">全站累計：造訪 {visits} 次</p>
             </div>
 
             <div className="w-full">
