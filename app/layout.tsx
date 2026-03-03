@@ -46,9 +46,8 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "智人",
+                "name": "智人系統",
                 "url": "https://sapiens.camp",
-                "logo": "https://sapiens.camp/logo.svg"
               }),
             }}
           />

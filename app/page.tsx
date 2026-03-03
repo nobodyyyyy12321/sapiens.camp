@@ -68,7 +68,7 @@ function HomeContent({ categories }: HomeContentProps) {
         )}
 
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-4xl font-bold zen-title">智人題庫</h1>
+          <h1 className="max-w-xs text-4xl font-bold zen-title">智人系統</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
