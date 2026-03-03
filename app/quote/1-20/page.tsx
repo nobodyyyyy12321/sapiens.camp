@@ -175,7 +175,7 @@ export default function QuotePage() {
           <div className="mt-6 space-y-4 w-full">
             <div className="flex items-center justify-between">
               <div className="text-2xl font-bold">
-                寫 {answeredCount} 題，對 {correctCount} 題
+                寫 {correctCount}/{answeredCount}
               </div>
               <button
                 onClick={resetQuiz}

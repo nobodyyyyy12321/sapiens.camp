@@ -239,7 +239,7 @@ export default function StudyChineseSetPage() {
         ) : !loading && questions.length > 0 ? (
           <div className="mt-6 space-y-4 w-full">
             <div className="flex items-center justify-between">
-              <div className="text-2xl font-bold">寫 {answeredCount} 題，對 {correctCount} 題</div>
+              <div className="text-2xl font-bold">{correctCount}/{answeredCount}</div>
               <button
                 onClick={resetQuiz}
                 className="px-4 py-2 border rounded-full bg-white text-black dark:bg-white dark:text-black text-sm"

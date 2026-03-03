@@ -46,7 +46,7 @@ export default function EnglishSetsPage() {
             month: "2-digit",
             day: "2-digit",
           });
-          tooltipMap[set] = `最近：${date}，寫 ${r.answered} 題，對 ${r.correct} 題`;
+          tooltipMap[set] = `最近：${date}，${r.correct}/${r.answered}`;
         });
         setLatestBySet(tooltipMap);
       })

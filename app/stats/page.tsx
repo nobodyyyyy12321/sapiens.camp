@@ -77,7 +77,7 @@ export default function SiteStatsPage() {
                         })}</div>
                         <div className="mt-1 zen-subtle">
                           {r.type === 'quiz' 
-                            ? `寫 ${r.answered} 題，對 ${r.correct} 題`
+                            ? `${r.correct}/${r.answered}`
                             : (r.success ? "成功" : "失敗")
                           }
                         </div>

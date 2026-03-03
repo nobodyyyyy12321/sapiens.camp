@@ -29,7 +29,7 @@ export default function TrafficRegionPage() {
           month: "2-digit",
           day: "2-digit",
         });
-        setTooltip(`最近：${date}，寫 ${latest.answered} 題，對 ${latest.correct} 題`);
+        setTooltip(`最近：${date}，${latest.correct}/${latest.answered}`);
       })
       .catch(() => setTooltip("尚無作答紀錄"));
   }, []);

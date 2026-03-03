@@ -231,7 +231,7 @@ export default function RecordsPage() {
                               <p className="font-medium text-white">名言佳句 {record.set}</p>
                               <p className="text-sm mt-1">
                                 <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
-                                  寫 {record.answered} 題，對 {record.correct} 題
+                                  {record.correct}/{record.answered}
                                 </span>
                               </p>
                             </div>
@@ -268,7 +268,7 @@ export default function RecordsPage() {
                               <p className="font-medium text-white">英文 {record.set}</p>
                               <p className="text-sm mt-1">
                                 <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
-                                  寫 {record.answered} 題，對 {record.correct} 題
+                                  {record.correct}/{record.answered}
                                 </span>
                               </p>
                             </div>
@@ -305,7 +305,7 @@ export default function RecordsPage() {
                               <p className="font-medium text-white">學中文 {record.set}</p>
                               <p className="text-sm mt-1">
                                 <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
-                                  寫 {record.answered} 題，對 {record.correct} 題
+                                  {record.correct}/{record.answered}
                                 </span>
                               </p>
                             </div>
@@ -342,7 +342,7 @@ export default function RecordsPage() {
                               <p className="font-medium text-white">交通題庫 {record.set}</p>
                               <p className="text-sm mt-1">
                                 <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
-                                  寫 {record.answered} 題，對 {record.correct} 題
+                                  {record.correct}/{record.answered}
                                 </span>
                               </p>
                             </div>
