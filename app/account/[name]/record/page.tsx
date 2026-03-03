@@ -153,7 +153,7 @@ export default function RecordsPage() {
                   onClick={() => setSelectedSubject(subject)}
                   className={`px-4 py-2 font-medium transition-colors ${
                     selectedSubject === subject
-                      ? "border-b-2 border-blue-600 text-blue-600 dark:text-blue-400"
+                      ? "border-b-2 border-white text-white"
                       : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
                   }`}
                 >
@@ -166,14 +166,14 @@ export default function RecordsPage() {
               <>
                 {/* Statistics Cards */}
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6 text-center">
-                    <p className="text-sm text-purple-600 dark:text-purple-400 mb-2">背誦嘗試次數</p>
-                    <p className="text-4xl font-bold text-purple-700 dark:text-purple-300">{filteredAttempts}</p>
+                  <div className="bg-black border border-white rounded-lg p-6 text-center">
+                    <p className="text-sm text-white mb-2">背誦嘗試次數</p>
+                    <p className="text-4xl font-bold text-white">{filteredAttempts}</p>
                   </div>
 
-                  <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 text-center">
-                    <p className="text-sm text-blue-600 dark:text-blue-400 mb-2">背誦成功次數</p>
-                    <p className="text-4xl font-bold text-blue-700 dark:text-blue-300">{filteredSuccessCount}</p>
+                  <div className="bg-black border border-white rounded-lg p-6 text-center">
+                    <p className="text-sm text-white mb-2">背誦成功次數</p>
+                    <p className="text-4xl font-bold text-white">{filteredSuccessCount}</p>
                   </div>
                 </div>
 
@@ -187,21 +187,13 @@ export default function RecordsPage() {
                     {filteredRecitations.slice().reverse().map((record, index) => (
                   <div
                     key={index}
-                    className={`border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors ${
-                      record.success 
-                        ? "border-green-200 dark:border-green-800 bg-green-50/30 dark:bg-green-900/10" 
-                        : "border-red-200 dark:border-red-800 bg-red-50/30 dark:bg-red-900/10"
-                    }`}
+                    className="border border-white rounded-lg p-4 bg-black transition-colors"
                   >
                     <div className="flex justify-between items-start">
                       <div>
-                        <p className="font-medium">{record.title}</p>
+                        <p className="font-medium text-white">{record.title}</p>
                         <p className="text-sm mt-1">
-                          <span className={`inline-block px-2 py-0.5 rounded text-xs ${
-                            record.success 
-                              ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" 
-                              : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
-                          }`}>
+                          <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
                             {record.success ? "✓ 成功" : "✗ 失敗"}
                           </span>
                         </p>
@@ -232,13 +224,13 @@ export default function RecordsPage() {
                       {quoteRecords.slice().reverse().map((record, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-amber-200 dark:border-amber-800 bg-amber-50/30 dark:bg-amber-900/10"
+                          className="border border-white rounded-lg p-4 bg-black transition-colors"
                         >
                           <div className="flex justify-between items-start">
                             <div>
-                              <p className="font-medium">名言佳句 {record.set}</p>
+                              <p className="font-medium text-white">名言佳句 {record.set}</p>
                               <p className="text-sm mt-1">
-                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
                                   寫 {record.answered} 題，對 {record.correct} 題
                                 </span>
                               </p>
@@ -269,13 +261,13 @@ export default function RecordsPage() {
                       {englishRecords.slice().reverse().map((record, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-indigo-200 dark:border-indigo-800 bg-indigo-50/30 dark:bg-indigo-900/10"
+                          className="border border-white rounded-lg p-4 bg-black transition-colors"
                         >
                           <div className="flex justify-between items-start">
                             <div>
-                              <p className="font-medium">英文 {record.set}</p>
+                              <p className="font-medium text-white">英文 {record.set}</p>
                               <p className="text-sm mt-1">
-                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
                                   寫 {record.answered} 題，對 {record.correct} 題
                                 </span>
                               </p>
@@ -306,13 +298,13 @@ export default function RecordsPage() {
                       {studyChineseRecords.slice().reverse().map((record, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-cyan-200 dark:border-cyan-800 bg-cyan-50/30 dark:bg-cyan-900/10"
+                          className="border border-white rounded-lg p-4 bg-black transition-colors"
                         >
                           <div className="flex justify-between items-start">
                             <div>
-                              <p className="font-medium">學中文 {record.set}</p>
+                              <p className="font-medium text-white">學中文 {record.set}</p>
                               <p className="text-sm mt-1">
-                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
                                   寫 {record.answered} 題，對 {record.correct} 題
                                 </span>
                               </p>
@@ -343,13 +335,13 @@ export default function RecordsPage() {
                       {trafficRecords.slice().reverse().map((record, index) => (
                         <div
                           key={index}
-                          className="border rounded-lg p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors border-emerald-200 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-900/10"
+                          className="border border-white rounded-lg p-4 bg-black transition-colors"
                         >
                           <div className="flex justify-between items-start">
                             <div>
-                              <p className="font-medium">交通題庫 {record.set}</p>
+                              <p className="font-medium text-white">交通題庫 {record.set}</p>
                               <p className="text-sm mt-1">
-                                <span className="inline-block px-2 py-0.5 rounded text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+                                <span className="inline-block px-2 py-0.5 rounded text-xs border border-white bg-black text-white">
                                   寫 {record.answered} 題，對 {record.correct} 題
                                 </span>
                               </p>
