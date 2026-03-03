@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
 import AuthNav from "./components/AuthNav";
-import Link from "next/link";
 import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
-import LanguageSwitcher from "./components/LanguageSwitcher";
 import Sidebar from "./components/Sidebar";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -62,7 +60,6 @@ export default function RootLayout({
               </div>
 
               <div className="flex items-center gap-3">
-                <LanguageSwitcher />
                 <AuthNav />
               </div>
             </nav>
