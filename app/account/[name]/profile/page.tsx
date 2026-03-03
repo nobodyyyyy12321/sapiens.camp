@@ -139,7 +139,8 @@ export default function ProfilePage() {
           window.dispatchEvent(new Event("profile:updated"));
         }
       } else {
-        setError(j?.error || "頭像上傳失敗");
+        const message = j?.error || "頭像上傳失敗";
+        setError(`${message} (${res.status})`);
       }
     } catch (e) {
       setError("頭像上傳失敗");

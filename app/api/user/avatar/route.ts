@@ -49,32 +49,46 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Image too large (max 5MB)" }, { status: 413 });
     }
 
+    let url = "";
     const filename = `avatars/${uuidv4()}.${ext}`;
 
-    // upload to firebase storage
-    const bucket = getStorageBucket();
-    const file = bucket.file(filename);
-    await file.save(buffer, {
-      metadata: {
-        contentType: mime,
-        cacheControl: "public, max-age=31536000, immutable",
-      },
-    });
-
-    let url = "";
-    // Try public URL first
     try {
-      await file.makePublic();
-      url = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(filename)}`;
-    } catch (e) {
-      // Buckets with uniform access often disallow makePublic().
-      // Fall back to a long-lived signed URL so avatar still works.
-      console.warn("makePublic failed, fallback to signed URL:", e);
-      const [signedUrl] = await file.getSignedUrl({
-        action: "read",
-        expires: "03-01-2491",
+      const bucket = getStorageBucket();
+      const file = bucket.file(filename);
+      await file.save(buffer, {
+        metadata: {
+          contentType: mime,
+          cacheControl: "public, max-age=31536000, immutable",
+        },
       });
-      url = signedUrl;
+
+      // Try public URL first
+      try {
+        await file.makePublic();
+        url = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(filename)}`;
+      } catch (e) {
+        // Buckets with uniform access often disallow makePublic().
+        // Fall back to a long-lived signed URL so avatar still works.
+        console.warn("makePublic failed, fallback to signed URL:", e);
+        const [signedUrl] = await file.getSignedUrl({
+          action: "read",
+          expires: "03-01-2491",
+        });
+        url = signedUrl;
+      }
+    } catch (storageError) {
+      // Fallback path: save compact data URL directly when storage is not configured or upload fails.
+      // Keep it small to avoid hitting Firestore document size limits.
+      const maxFallbackChars = 350_000;
+      if (rawData.length > maxFallbackChars) {
+        console.error("Storage upload failed and fallback payload too large:", storageError);
+        return NextResponse.json(
+          { error: "Storage upload failed and image is too large for fallback storage" },
+          { status: 500 }
+        );
+      }
+      console.warn("Storage upload failed, using data URL fallback:", storageError);
+      url = rawData;
     }
 
     // update user record
@@ -82,7 +96,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, url });
   } catch (e) {
-    console.error(e);
-    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+    console.error("avatar upload internal error:", e);
+    return NextResponse.json({ error: "Internal error: avatar upload failed" }, { status: 500 });
   }
 }
