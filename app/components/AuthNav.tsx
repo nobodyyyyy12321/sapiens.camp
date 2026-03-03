@@ -97,16 +97,23 @@ export default function AuthNav() {
         </button>
 
         {isMenuOpen && (
-          <div className="absolute right-0 mt-2 w-44 bg-gray-800 text-white rounded shadow-md z-20 border border-gray-700">
+          <div
+            className="absolute right-0 mt-2 w-44 rounded shadow-md z-20 border"
+            style={{
+              backgroundColor: "var(--zen-bg)",
+              color: "var(--zen-ink)",
+              borderColor: "rgba(27,27,27,0.12)",
+            }}
+          >
             <div className="py-1">
-              <div className="px-4 py-3 text-sm text-gray-200 border-b border-gray-700 truncate" title={name}>{name}</div>
-              <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-gray-700">檔案</Link>
-              <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-gray-700">紀錄</Link>
-              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-gray-700">清單</Link>
-              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-gray-700">設定</Link>
+              <div className="px-4 py-3 text-sm truncate border-b border-black/10" title={name}>{name}</div>
+              <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/10">檔案</Link>
+              <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/10">紀錄</Link>
+              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/10">清單</Link>
+              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/10">設定</Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="w-full text-left px-4 py-3 text-sm hover:bg-gray-700"
+                className="w-full text-left px-4 py-3 text-sm hover:bg-black/5 dark:hover:bg-white/10"
               >
                 登出
               </button>
