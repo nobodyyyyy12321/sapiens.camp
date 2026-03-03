@@ -123,11 +123,11 @@ export default function RecordsPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
-        <div className="flex items-center justify-between w-full max-w-md mb-8">
-          <h1 className="text-4xl font-bold zen-title">
+        <div className="flex items-center justify-between gap-4 w-full mb-8">
+          <h1 className="text-2xl font-bold zen-title whitespace-nowrap">
             {userName ? `${userName} 的紀錄` : "紀錄"}
           </h1>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 whitespace-nowrap">
             {userName && (
               <Link href={`/account/${encodeURIComponent(userName)}/profile`} className="zen-ghost">個人檔案</Link>
             )}
