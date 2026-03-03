@@ -105,3 +105,12 @@ body {
 .z-60 {
   z-index: 60 !important;
 }
+
+.header-dark .zen-ghost {
+  color: #f3f4f6;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.header-dark .zen-subtle {
+  color: #c7c7c7;
+}

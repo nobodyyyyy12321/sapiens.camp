@@ -51,8 +51,8 @@ export default function RootLayout({
           />
           <Sidebar />
           <header
-            className="w-full py-6 sticky top-0 z-40"
-            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+            className="header-dark w-full py-6 sticky top-0 z-40"
+            style={{ backgroundColor: "#0b0b0b", boxShadow: "none", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
           >
             <VisitPing />
             <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
