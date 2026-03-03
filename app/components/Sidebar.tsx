@@ -52,7 +52,7 @@ export default function Sidebar() {
             <Link href="/links" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">正派連結</Link>
           </nav>
 
-          <div className="mt-auto text-sm zen-subtle">&copy; 智人系統</div>
+          
         </div>
       </aside>
     </>
