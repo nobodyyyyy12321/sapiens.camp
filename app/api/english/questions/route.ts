@@ -9,11 +9,9 @@ export async function GET() {
       ...doc.data(),
     }));
 
-    return Response.json({
-      questions,
-    });
+    return Response.json({ questions });
   } catch (error) {
-    console.error("Error fetching English questions:", error);
+    console.error("Error fetching english questions:", error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }

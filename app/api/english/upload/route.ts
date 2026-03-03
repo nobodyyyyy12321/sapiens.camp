@@ -36,10 +36,7 @@ export async function POST() {
       total: questions.length,
     });
   } catch (error) {
-    console.error("Error uploading English questions:", error);
-    return Response.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Error uploading english questions:", error);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
 }
