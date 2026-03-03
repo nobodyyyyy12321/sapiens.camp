@@ -19,20 +19,31 @@ export async function POST(req: Request) {
     if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
     const body = await req.json();
-    const { data } = body; // expect data URL: data:image/png;base64,....
-    if (!data) return NextResponse.json({ error: "No data provided" }, { status: 400 });
+    const rawData = typeof body?.data === "string" ? body.data.trim() : "";
+    // expect data URL: data:image/png;base64,....
+    if (!rawData) return NextResponse.json({ error: "No data provided" }, { status: 400 });
 
-    const matches = data.match(/^data:(image\/\w+);base64,(.+)$/);
-    if (!matches) return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    const commaIndex = rawData.indexOf(",");
+    if (commaIndex <= 0) return NextResponse.json({ error: "Invalid data" }, { status: 400 });
 
-    const mime = matches[1];
+    const header = rawData.slice(0, commaIndex);
+    const base64Part = rawData.slice(commaIndex + 1);
+    const mimeMatch = header.match(/^data:(image\/[a-zA-Z0-9.+-]+)(;[^,]*)?;base64$/i);
+    if (!mimeMatch || !base64Part) {
+      return NextResponse.json({ error: "Invalid data" }, { status: 400 });
+    }
+
+    const mime = mimeMatch[1].toLowerCase();
     const allowedMimes = new Set(["image/png", "image/jpeg", "image/webp", "image/gif"]);
     if (!allowedMimes.has(mime)) {
       return NextResponse.json({ error: "Unsupported image type" }, { status: 400 });
     }
 
     const ext = mime.split("/")[1] || "png";
-    const buffer = Buffer.from(matches[2], "base64");
+    const buffer = Buffer.from(base64Part, "base64");
+    if (!buffer.length) {
+      return NextResponse.json({ error: "Invalid image payload" }, { status: 400 });
+    }
     const maxBytes = 5 * 1024 * 1024;
     if (buffer.length > maxBytes) {
       return NextResponse.json({ error: "Image too large (max 5MB)" }, { status: 413 });
