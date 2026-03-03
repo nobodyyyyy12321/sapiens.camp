@@ -163,8 +163,8 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl zen-title mb-4">個人檔案</h1>
           <div className="flex items-center gap-2">
-            <Link href={`/account/${encodeURIComponent(name)}/record`} className="zen-ghost">紀錄</Link>
-            <button className="zen-ghost" onClick={handleShare}>
+            <Link href={`/account/${encodeURIComponent(name)}/record`} className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity">紀錄</Link>
+            <button className="px-4 py-2 border rounded-full bg-white text-black text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={handleShare}>
               {shareCopied ? "已複製" : "分享連結"}
             </button>
             {isOwner && (
