@@ -52,9 +52,9 @@ export default function TrafficYesNoRangePage() {
       .then((res) => res.json())
       .then((data) => {
         const all: Question[] = Array.isArray(data?.questions) ? data.questions : [];
-        const filtered = all.filter(
-          (q) => q.number >= parsedRange.start && q.number <= parsedRange.end
-        );
+        const filtered = all
+          .filter((q) => q.number >= parsedRange.start && q.number <= parsedRange.end)
+          .sort((a, b) => a.number - b.number);
         setQuestions(filtered);
         setUserAnswers(new Array(filtered.length).fill(null));
         setCurrentIndex(0);
@@ -207,7 +207,7 @@ export default function TrafficYesNoRangePage() {
 
         {!showResults ? (
           <div className="mt-6 space-y-4 w-full">
-            <div className="text-sm text-zinc-400">第 {currentIndex + 1} 題</div>
+            <div className="text-sm text-zinc-400">第 {currentQ.number} 題</div>
 
             <div className="p-6 border rounded text-lg">{currentQ.question}</div>
 
