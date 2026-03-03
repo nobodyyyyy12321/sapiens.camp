@@ -10,7 +10,7 @@ export async function GET(request: Request) {
     const start = parseInt(startStr, 10);
     const end = parseInt(endStr, 10);
     
-    if (isNaN(start) || isNaN(end) || start < 1 || end > 1000 || start > end) {
+    if (isNaN(start) || isNaN(end) || start < 1 || end > 1971 || start > end) {
       return Response.json({ error: "Invalid range" }, { status: 400 });
     }
 
