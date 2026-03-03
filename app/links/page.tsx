@@ -6,32 +6,32 @@ export default function LinksPage() {
 
         <div className="space-y-4 mt-10 zen-subtle">
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">維基百科</div>
+            <div className="text-lg font-medium text-white">維基百科</div>
             <a href="https://zh.wikipedia.org/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://zh.wikipedia.org/</a>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">程式題庫</div>
+            <div className="text-lg font-medium text-white">程式題庫</div>
             <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://leetcode.com/</a>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">Our World In Data</div>
+            <div className="text-lg font-medium text-white">Our World In Data</div>
             <a href="https://ourworldindata.org/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://ourworldindata.org/</a>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">World Population Review</div>
+            <div className="text-lg font-medium text-white">World Population Review</div>
             <a href="https://worldpopulationreview.com/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://worldpopulationreview.com/</a>
           </div>
                     <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">Instagram Page</div>
+            <div className="text-lg font-medium text-white">Instagram Page</div>
             <a href="https://www.instagram.com/sapiens.camp/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://www.instagram.com/sapiens.camp/</a>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">阿摩線上測驗</div>
+            <div className="text-lg font-medium text-white">阿摩線上測驗</div>
             <a href="https://yamol.tw/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://yamol.tw/</a>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-lg font-medium">均一教育平台</div>
+            <div className="text-lg font-medium text-white">均一教育平台</div>
             <a href="https://www.junyiacademy.org/" target="_blank" rel="noopener noreferrer" className="text-sm zen-subtle hover:underline whitespace-nowrap">https://www.junyiacademy.org/</a>
           </div>
           
