@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useParams } from "next/navigation";
 
 type Option = {
   label: string;
@@ -18,13 +19,17 @@ type Question = {
 
 export default function QuotePage() {
   const { data: session } = useSession();
+  const params = useParams();
+  const range = params.range as string;
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    fetch("/api/english/questions")
+    if (!range) return;
+    
+    fetch(`/api/english/questions?range=${range}`)
       .then(res => res.json())
       .then(data => {
         if (data.questions) {
@@ -33,7 +38,7 @@ export default function QuotePage() {
         }
       })
       .catch(err => console.error("Failed to load questions:", err));
-  }, []);
+  }, [range]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -88,7 +93,7 @@ export default function QuotePage() {
         body: JSON.stringify({
           answered: answeredCount,
           correct: correctCount,
-          set: "1-20",
+          set: range,
         }),
       }).catch(err => console.error("Failed to save record:", err));
     }
