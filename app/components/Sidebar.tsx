@@ -24,7 +24,8 @@ export default function Sidebar() {
       <button
         aria-label="Toggle menu"
         onClick={() => setOpen((s) => !s)}
-        className="fixed top-4 left-4 z-60 p-2 bg-white dark:bg-zinc-900 rounded-md shadow-md"
+        className="fixed top-4 left-4 z-60 p-2 rounded-md shadow-md border border-black/10 dark:border-white/10"
+        style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           {open ? (
@@ -38,14 +39,17 @@ export default function Sidebar() {
       {/* no overlay: sidebar should not cover content; main will shift */}
 
       {/* Sidebar panel */}
-      <aside className={`fixed top-0 left-0 h-full bg-zen-paper dark:bg-zinc-900 z-50 transform ${open ? "translate-x-0" : "-translate-x-full"}`} style={{ width: 260 }}>
+      <aside
+        className={`fixed top-0 left-0 h-full z-50 transform ${open ? "translate-x-0" : "-translate-x-full"}`}
+        style={{ width: 260, backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
+      >
         <div className="h-full p-6 pt-14 flex flex-col">
 
           <nav className="flex flex-col gap-2">
-            <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
-            <Link href="/quiz-bank" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">分科題庫</Link>
-            <Link href="/stats" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">全站統計</Link>
-            <Link href="/links" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">正派連結</Link>
+            <Link href="/" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">首頁</Link>
+            <Link href="/quiz-bank" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">分科題庫</Link>
+            <Link href="/stats" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">全站統計</Link>
+            <Link href="/links" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">正派連結</Link>
           </nav>
 
           <div className="mt-auto text-sm zen-subtle">&copy; 智人系統</div>
