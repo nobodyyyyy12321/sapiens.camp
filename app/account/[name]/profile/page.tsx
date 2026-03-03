@@ -170,7 +170,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="flex gap-6"
+        <div className="flex gap-6">
           <div className="w-40 flex flex-col items-center">
             <div className="mb-2">
               <img src={avatarUrl || "/avatar-placeholder.svg"} alt="avatar" className="w-40 h-40 rounded-md object-cover" />
