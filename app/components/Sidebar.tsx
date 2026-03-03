@@ -44,12 +44,11 @@ export default function Sidebar() {
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">首頁</Link>
             <Link href="/quiz-bank" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">分科題庫</Link>
-            <Link href="/ranking" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">智人榜</Link>
             <Link href="/stats" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">全站統計</Link>
             <Link href="/links" className="px-3 py-2 rounded hover:bg-zinc-100 dark:hover:bg-zinc-800">正派連結</Link>
           </nav>
 
-          <div className="mt-auto text-sm zen-subtle">&copy; 智人題庫</div>
+          <div className="mt-auto text-sm zen-subtle">&copy; 智人系統</div>
         </div>
       </aside>
     </>
