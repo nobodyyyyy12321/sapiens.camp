@@ -166,7 +166,7 @@ export default function QuotePage() {
               第 {currentIndex + 1} 題
             </div>
 
-            <div className="p-6 border rounded text-lg flex items-center justify-between gap-3">
+            <div className="p-6 border border-[1px] rounded text-lg flex items-center justify-between gap-3">
               <span>{currentQuestion.title}</span>
               <button
                 type="button"
@@ -196,7 +196,7 @@ export default function QuotePage() {
                 <button
                   key={option.label}
                   onClick={() => handleAnswer(option.label)}
-                  className={`flex-1 px-6 py-3 border rounded transition-colors ${
+                  className={`flex-1 px-6 py-3 border border-[1px] rounded transition-colors ${
                     userAnswers[currentIndex] === option.label
                       ? "border-black dark:border-zinc-200"
                       : "border-zinc-400 dark:border-zinc-600"
