@@ -242,7 +242,7 @@ export default function ProfilePage() {
                     if (f) uploadAvatar(f);
                   }}
                 />
-                <button type="button" className="zen-button mt-2" onClick={() => fileInputRef.current?.click()}>選擇檔案</button>
+                <button type="button" className="mt-2 px-4 py-2 border rounded-full bg-white text-zinc-700 text-sm cursor-pointer hover:opacity-90 transition-opacity" onClick={() => fileInputRef.current?.click()}>選擇檔案</button>
               </>
             )}
           </div>
