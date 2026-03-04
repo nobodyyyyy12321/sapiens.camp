@@ -122,8 +122,8 @@ export default function RecordsPage() {
 
   return (
     <div className="flex min-h-screen items-start justify-center pt-8 bg-transparent font-sans dark:bg-black">
-      <main className="w-full max-w-2xl zen-card p-8">
-        <div className="mb-8 flex w-full max-w-md flex-wrap items-center gap-3">
+      <main className="w-full max-w-2xl zen-card p-8 flex flex-col items-center text-center">
+        <div className="mb-8 flex w-full max-w-md flex-wrap items-center justify-center gap-3 mx-auto">
           <h1 className="text-3xl font-bold zen-title whitespace-nowrap">
             {userName ? `${userName} 的紀錄` : "紀錄"}
           </h1>
@@ -140,13 +140,13 @@ export default function RecordsPage() {
         </div>
 
         {!isOwner && !recitationsPublic ? (
-          <div className="w-full max-w-md text-center py-12">
+          <div className="w-full max-w-md text-center py-12 mx-auto">
             <p className="text-gray-500">此用戶的背誦紀錄為不公開</p>
           </div>
         ) : (
-          <div className="w-full max-w-md space-y-6">
+          <div className="w-full max-w-md space-y-6 mx-auto">
             {/* Subject Dropdown */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center gap-2">
               <label className="text-sm font-medium text-gray-400">選擇科目：</label>
               <select
                 value={selectedSubject}
