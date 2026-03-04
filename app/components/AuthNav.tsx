@@ -86,11 +86,11 @@ export default function AuthNav() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {avatarUrl ? (
-            <img src={avatarUrl} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+            <img src={avatarUrl} alt={`${name} avatar`} className="w-11 h-11 rounded-full object-cover" />
           ) : session.user.image ? (
-            <img src={session.user.image} alt={`${name} avatar`} className="w-8 h-8 rounded-full object-cover" />
+            <img src={session.user.image} alt={`${name} avatar`} className="w-11 h-11 rounded-full object-cover" />
           ) : (
-            <span className="w-8 h-8 rounded-full bg-gray-600 text-white text-sm font-semibold flex items-center justify-center">
+            <span className="w-11 h-11 rounded-full bg-gray-600 text-white text-base font-semibold flex items-center justify-center">
               {name.slice(0, 1).toUpperCase()}
             </span>
           )}
