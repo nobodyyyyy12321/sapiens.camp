@@ -151,7 +151,7 @@ export default function RecordsPage() {
               <select
                 value={selectedSubject}
                 onChange={(e) => setSelectedSubject(e.target.value as Subject)}
-                className="px-4 py-2 rounded border border-white bg-transparent text-white text-sm font-medium cursor-pointer hover:bg-white/5 transition-colors"
+                className="record-select px-4 py-2 rounded border text-sm font-medium cursor-pointer transition-colors"
               >
                 {subjects.map((subject) => (
                   <option key={subject} value={subject}>

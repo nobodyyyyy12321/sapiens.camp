@@ -96,6 +96,17 @@ body {
   color: #fff !important;
 }
 
+.record-select {
+  background-color: var(--zen-bg) !important;
+  color: var(--zen-ink) !important;
+  border-color: rgba(127, 127, 127, 0.35) !important;
+}
+
+.record-select option {
+  background-color: var(--zen-bg) !important;
+  color: var(--zen-ink) !important;
+}
+
 /* small screens center */
 @media (max-width: 640px) {
   .zen-card { padding: 2rem; margin: 1rem; }
