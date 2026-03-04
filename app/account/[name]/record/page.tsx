@@ -121,8 +121,8 @@ export default function RecordsPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
+    <div className="flex min-h-screen items-start justify-center pt-8 bg-transparent font-sans dark:bg-black">
+      <main className="w-full max-w-2xl zen-card p-8">
         <div className="mb-8 flex w-full max-w-md flex-wrap items-center gap-3">
           <h1 className="text-3xl font-bold zen-title whitespace-nowrap">
             {userName ? `${userName} 的紀錄` : "紀錄"}
