@@ -162,9 +162,10 @@ export default function QuotePage() {
                   onClick={() => handleAnswer(option.label)}
                   className={`flex-1 px-6 py-3 border rounded transition-colors ${
                     userAnswers[currentIndex] === option.label
-                      ? "bg-white text-black border-black"
-                      : "bg-black text-white border-white"
+                      ? "border-black dark:border-zinc-200"
+                      : "border-zinc-400 dark:border-zinc-600"
                   }`}
+                  style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
                 >
                   <span className="font-semibold">{option.label}</span> {option.text}
                 </button>

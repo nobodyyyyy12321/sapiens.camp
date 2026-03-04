@@ -217,13 +217,15 @@ export default function TrafficYesNoRangePage() {
 
             <div className="flex items-center gap-3">
               <button
-                className={`px-6 py-3 border rounded transition-transform duration-150 ${answer === "是" ? "bg-white text-black border-black" : "bg-black text-white border-white"} ${recognizedToken === "是" ? "ring-2 ring-white scale-95" : ""}`}
+                className={`px-6 py-3 border rounded transition-transform duration-150 ${answer === "是" ? "border-black dark:border-zinc-200" : "border-zinc-400 dark:border-zinc-600"} ${recognizedToken === "是" ? "ring-2 ring-white scale-95" : ""}`}
+                style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
                 onClick={() => handleAnswer("是")}
               >
                 是 (Y)
               </button>
               <button
-                className={`px-6 py-3 border rounded transition-transform duration-150 ${answer === "否" ? "bg-white text-black border-black" : "bg-black text-white border-white"} ${recognizedToken === "否" ? "ring-2 ring-white scale-95" : ""}`}
+                className={`px-6 py-3 border rounded transition-transform duration-150 ${answer === "否" ? "border-black dark:border-zinc-200" : "border-zinc-400 dark:border-zinc-600"} ${recognizedToken === "否" ? "ring-2 ring-white scale-95" : ""}`}
+                style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
                 onClick={() => handleAnswer("否")}
               >
                 否 (N)
