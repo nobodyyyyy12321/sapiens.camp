@@ -51,11 +51,11 @@ export default function RootLayout({
           />
           <Sidebar />
           <header
-            className="w-full py-3 sticky top-0 z-40"
+            className="w-full py-5 sticky top-0 z-40"
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
           >
             <VisitPing />
-            <nav className="w-full flex items-center justify-end pr-3 pl-16">
+            <nav className="w-full flex items-center justify-end pr-5 pl-16">
               <div className="flex items-center gap-3">
                 <AuthNav />
               </div>
