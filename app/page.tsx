@@ -42,7 +42,7 @@ function HomeContent({ categories }: HomeContentProps) {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black sm:items-start">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         {verificationMessage && (
           <div className={`w-full mb-6 p-4 rounded-md ${
             verificationMessage === "success"
@@ -67,7 +67,7 @@ function HomeContent({ categories }: HomeContentProps) {
           </div>
         )}
 
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+        <div className="flex flex-col items-center gap-6 text-center">
           <h1 className="max-w-xs text-4xl font-bold zen-title">智人系統</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
@@ -81,8 +81,8 @@ export default function Home() {
   return (
     <Suspense fallback={
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black sm:items-start">
-          <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
+        <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
+          <div className="flex flex-col items-center gap-6 text-center">
             <h1 className="max-w-xs text-4xl font-bold zen-title">智人系統</h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           </div>
