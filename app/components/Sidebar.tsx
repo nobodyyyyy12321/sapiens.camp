@@ -49,7 +49,6 @@ export default function Sidebar() {
             <Link href="/" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">首頁</Link>
             <Link href="/quiz-bank" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">分科題庫</Link>
             <Link href="/stats" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">全站統計</Link>
-            <Link href="/links" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">正派連結</Link>
           </nav>
 
           
