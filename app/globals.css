@@ -105,3 +105,27 @@ body {
 .z-60 {
   z-index: 60 !important;
 }
+
+@media (min-width: 640px) {
+  .sm\:items-start {
+    align-items: center !important;
+  }
+
+  .sm\:text-left {
+    text-align: center !important;
+  }
+}
+
+main.items-start {
+  align-items: center !important;
+}
+
+main .bg-white.text-black {
+  background-color: var(--zen-bg) !important;
+  color: var(--zen-ink) !important;
+}
+
+main a.rounded-full.border,
+main button.rounded-full.border {
+  background-color: var(--zen-bg);
+}
