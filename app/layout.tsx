@@ -55,10 +55,7 @@ export default function RootLayout({
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
           >
             <VisitPing />
-            <nav className="max-w-5xl mx-auto flex items-center justify-between px-6">
-              <div className="flex items-center gap-4 flex-nowrap">
-              </div>
-
+            <nav className="w-full flex items-center justify-end pr-2 pl-16">
               <div className="flex items-center gap-3">
                 <AuthNav />
               </div>
