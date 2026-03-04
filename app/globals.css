@@ -20,10 +20,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #171717;
+    --background: #141414;
     --foreground: #ededed;
-    --zen-bg: #171717;
-    --zen-paper: #1f1f1f;
+    --zen-bg: #141414;
+    --zen-paper: #1b1b1b;
     --zen-ink: #e6e6e6;
     --zen-accent: #8fa88f;
     --zen-muted: #6f7a6f;
