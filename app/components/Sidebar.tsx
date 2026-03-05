@@ -47,7 +47,6 @@ export default function Sidebar() {
 
           <nav className="flex flex-col gap-2">
             <Link href="/" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">首頁</Link>
-            <Link href="/quiz-bank" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">分科題庫</Link>
           </nav>
 
           

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 type LanguageCode = "zh-TW" | "zh-CN" | "en";
 
 const QUIZ_PREFIXES = [
-  "/quiz-bank",
   "/quote",
   "/english",
   "/study-chinese",

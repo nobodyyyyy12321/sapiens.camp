@@ -15,6 +15,14 @@ function HomeContent({ categories, siteTitle, isSimplified }: HomeContentProps) 
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [loadedCategories, setLoadedCategories] = useState<string[]>([]);
+  const subjects = [
+    { name: "詩文背誦", href: "/recitation" },
+    { name: "Learn Chinese", href: "/study-chinese" },
+    { name: "英文", href: "/english" },
+    { name: "名言佳句", href: "/quote" },
+    { name: "數學", href: "/math" },
+    { name: "交通", href: "/traffic" },
+  ];
 
   useEffect(() => {
     // Fetch categories
@@ -77,6 +85,18 @@ function HomeContent({ categories, siteTitle, isSimplified }: HomeContentProps) 
           </h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
+
+          <div className="mt-4 flex w-full max-w-md flex-col gap-3">
+            {subjects.map((subject) => (
+              <Link
+                key={subject.name}
+                href={subject.href}
+                className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
+              >
+                {subject.name}
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
     </div>
