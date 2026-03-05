@@ -44,9 +44,20 @@ export default function LanguageGate({ children }: { children: React.ReactNode }
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = (localStorage.getItem("siteLanguage") as LanguageCode | null) ?? "zh-TW";
-    setLanguage(stored);
+    const syncLanguage = () => {
+      const stored = (localStorage.getItem("siteLanguage") as LanguageCode | null) ?? "zh-TW";
+      setLanguage(stored);
+    };
+
+    syncLanguage();
     setMounted(true);
+
+    window.addEventListener("storage", syncLanguage);
+    window.addEventListener("site-language-change", syncLanguage);
+    return () => {
+      window.removeEventListener("storage", syncLanguage);
+      window.removeEventListener("site-language-change", syncLanguage);
+    };
   }, []);
 
   const blocked = useMemo(() => {

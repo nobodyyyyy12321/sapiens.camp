@@ -6,6 +6,7 @@ import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
 import Sidebar from "./components/Sidebar";
 import LanguageGate from "./components/LanguageGate";
+import LanguageSelector from "./components/LanguageSelector";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -58,6 +59,9 @@ export default function RootLayout({
             <VisitPing />
             <nav className="w-full flex items-center justify-end pr-5 pl-16">
               <div className="flex items-center gap-3">
+                <div style={{ marginRight: "3cm" }}>
+                  <LanguageSelector />
+                </div>
                 <AuthNav />
               </div>
             </nav>
