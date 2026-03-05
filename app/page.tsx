@@ -92,7 +92,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
         <div className="flex flex-col items-center gap-6 text-center">
           <h1
-            className={`max-w-xs text-4xl font-bold ${isSimplified ? "font-sans" : "zen-title"}`}
+            className={`max-w-xs text-4xl font-bold ${isSimplified ? "zen-title-sc" : "zen-title"}`}
           >
             {siteTitle}
           </h1>
@@ -144,7 +144,7 @@ export default function Home() {
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
           <div className="flex flex-col items-center gap-6 text-center">
             <h1
-              className={`max-w-xs text-4xl font-bold ${isSimplified ? "font-sans" : "zen-title"}`}
+              className={`max-w-xs text-4xl font-bold ${isSimplified ? "zen-title-sc" : "zen-title"}`}
             >
               {siteTitle}
             </h1>

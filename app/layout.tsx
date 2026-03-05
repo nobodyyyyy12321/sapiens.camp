@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Noto_Serif_TC } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Serif_SC, Noto_Serif_TC } from "next/font/google";
 import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Providers from "./providers/SessionProvider";
@@ -24,6 +24,11 @@ const notoSerif = Noto_Serif_TC({
   subsets: ["latin"],
 });
 
+const notoSerifSc = Noto_Serif_SC({
+  variable: "--font-zen-serif-sc",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "智人題庫",
   description: "多方位學習管理平台",
@@ -37,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${notoSerifSc.variable} antialiased`}
       >
         <Providers>
           <script

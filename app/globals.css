@@ -58,6 +58,12 @@ body {
   color: var(--zen-ink);
 }
 
+.zen-title-sc {
+  font-family: var(--font-zen-serif-sc), var(--font-zen-serif);
+  letter-spacing: 0.02em;
+  color: var(--zen-ink);
+}
+
 .zen-subtle {
   color: var(--zen-muted);
 }
