@@ -23,7 +23,7 @@ const notoSerif = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
-  title: "智人系統",
+  title: "智人題庫",
   description: "多方位學習管理平台",
 };
 
@@ -44,7 +44,7 @@ export default function RootLayout({
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Organization",
-                "name": "智人系統",
+                "name": "智人題庫",
                 "url": "https://sapiens.camp",
               }),
             }}
