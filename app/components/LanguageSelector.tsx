@@ -28,7 +28,7 @@ export default function LanguageSelector() {
       aria-label="語言選擇"
     >
       <option value="zh-TW">中文繁體</option>
-      <option value="zh-CN">中文簡體</option>
+      <option value="zh-CN">中文简体</option>
       <option value="en">English</option>
     </select>
   );

@@ -6,9 +6,10 @@ import Link from "next/link";
 
 type HomeContentProps = {
   categories: string[];
+  siteTitle: string;
 };
 
-function HomeContent({ categories }: HomeContentProps) {
+function HomeContent({ categories, siteTitle }: HomeContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
@@ -68,7 +69,7 @@ function HomeContent({ categories }: HomeContentProps) {
         )}
 
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="max-w-xs text-4xl font-bold zen-title">智人題庫</h1>
+          <h1 className="max-w-xs text-4xl font-bold zen-title">{siteTitle}</h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
@@ -78,18 +79,35 @@ function HomeContent({ categories }: HomeContentProps) {
 }
 
 export default function Home() {
+  const [siteTitle, setSiteTitle] = useState("智人題庫");
+
+  useEffect(() => {
+    const syncTitle = () => {
+      const language = localStorage.getItem("siteLanguage") || "zh-TW";
+      setSiteTitle(language === "zh-CN" ? "智人题库" : "智人題庫");
+    };
+
+    syncTitle();
+    window.addEventListener("storage", syncTitle);
+    window.addEventListener("site-language-change", syncTitle);
+    return () => {
+      window.removeEventListener("storage", syncTitle);
+      window.removeEventListener("site-language-change", syncTitle);
+    };
+  }, []);
+
   return (
     <Suspense fallback={
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
           <div className="flex flex-col items-center gap-6 text-center">
-            <h1 className="max-w-xs text-4xl font-bold zen-title">智人題庫</h1>
+            <h1 className="max-w-xs text-4xl font-bold zen-title">{siteTitle}</h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           </div>
         </main>
       </div>
     }>
-      <HomeContent categories={[]} />
+      <HomeContent categories={[]} siteTitle={siteTitle} />
     </Suspense>
   );
 }
