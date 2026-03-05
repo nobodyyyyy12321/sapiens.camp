@@ -11,27 +11,43 @@ type TrafficRecord = {
 };
 
 export default function TrafficRegionPage() {
-  const [tooltip, setTooltip] = useState("尚無作答紀錄");
+  const [yesNoTooltip, setYesNoTooltip] = useState("尚無作答紀錄");
+  const [carQuizTooltip, setCarQuizTooltip] = useState("尚無作答紀錄");
 
   useEffect(() => {
     fetch("/api/user/profile")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         const records: TrafficRecord[] = data?.user?.trafficRecords || [];
-        const setRecords = records.filter((r) => typeof r?.set === "string" && r.set.startsWith("yesno"));
-        if (setRecords.length === 0) {
-          setTooltip("尚無作答紀錄");
-          return;
+        const latestDateText = (record: TrafficRecord) => {
+          const date = new Date(record.timestamp).toLocaleDateString("zh-TW", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          });
+          return `最近：${date}，${record.correct}/${record.answered}`;
+        };
+
+        const yesNoRecords = records.filter((r) => typeof r?.set === "string" && r.set.startsWith("yesno"));
+        if (yesNoRecords.length > 0) {
+          const latestYesNo = yesNoRecords.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+          setYesNoTooltip(latestDateText(latestYesNo));
+        } else {
+          setYesNoTooltip("尚無作答紀錄");
         }
-        const latest = setRecords.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
-        const date = new Date(latest.timestamp).toLocaleDateString("zh-TW", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
-        setTooltip(`最近：${date}，${latest.correct}/${latest.answered}`);
+
+        const carRecords = records.filter((r) => typeof r?.set === "string" && r.set.startsWith("car"));
+        if (carRecords.length > 0) {
+          const latestCar = carRecords.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+          setCarQuizTooltip(latestDateText(latestCar));
+        } else {
+          setCarQuizTooltip("尚無作答紀錄");
+        }
       })
-      .catch(() => setTooltip("尚無作答紀錄"));
+      .catch(() => {
+        setYesNoTooltip("尚無作答紀錄");
+        setCarQuizTooltip("尚無作答紀錄");
+      });
   }, []);
 
   return (
@@ -41,8 +57,11 @@ export default function TrafficRegionPage() {
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
         <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
-          <Link href="/traffic/yesno" title={tooltip} className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
+          <Link href="/traffic/yesno" title={yesNoTooltip} className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
             汽車是非題
+          </Link>
+          <Link href="/traffic/car" title={carQuizTooltip} className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
+            汽車選擇題
           </Link>
         </div>
       </main>

@@ -29,6 +29,12 @@ export default function TrafficYesNoPage() {
               {range.start}-{range.end}
             </Link>
           ))}
+          <Link
+            href="/traffic/car"
+            className="mt-3 flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
+          >
+            汽車選擇題
+          </Link>
         </div>
       </main>
     </div>
