@@ -85,7 +85,8 @@ export default function StudyChineseSetPage() {
       if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable)) return;
       if (showResults || questions.length === 0) return;
 
-      const k = e.key.toUpperCase();
+      const keyToOption: Record<string, string> = { "1": "A", "2": "B", "3": "C", "4": "D" };
+      const k = keyToOption[e.key] ?? e.key.toUpperCase();
       if (["A", "B", "C", "D"].includes(k)) {
         handleAnswer(k);
       }
