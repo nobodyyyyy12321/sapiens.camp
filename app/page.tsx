@@ -19,12 +19,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
   const subjects =
     language === "en"
       ? [
-          { name: "Recitation", href: "/recitation" },
           { name: "Learn Chinese", href: "/study-chinese" },
-          { name: "English", href: "/english" },
-          { name: "Quotes", href: "/quote" },
-          { name: "Math", href: "/math" },
-          { name: "Traffic", href: "/traffic" },
         ]
       : language === "zh-CN"
         ? [
@@ -158,12 +153,7 @@ export default function Home() {
             <div className="mt-4 flex w-full max-w-md flex-col gap-3">
               {(language === "en"
                 ? [
-                    { name: "Recitation", href: "/recitation" },
                     { name: "Learn Chinese", href: "/study-chinese" },
-                    { name: "English", href: "/english" },
-                    { name: "Quotes", href: "/quote" },
-                    { name: "Math", href: "/math" },
-                    { name: "Traffic", href: "/traffic" },
                   ]
                 : language === "zh-CN"
                   ? [
