@@ -21,7 +21,8 @@ export default function LanguageSelector() {
 
   return (
     <select
-      className="p-2 rounded-md border border-zinc-300 bg-white text-black text-sm"
+      className="p-2 rounded-md border border-zinc-200 dark:border-zinc-800 text-sm"
+      style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
       value={language}
       onChange={(e) => handleLanguageChange(e.target.value as LanguageCode)}
       aria-label="語言選擇"
