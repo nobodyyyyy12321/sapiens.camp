@@ -29,11 +29,27 @@ const OPTION_LABELS = ["A", "B", "C", "D"];
 
 export default function StudyChineseSetPage() {
   const { data: session } = useSession();
+  const [language, setLanguage] = useState("zh-TW");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      const stored = localStorage.getItem("siteLanguage") || "zh-TW";
+      setLanguage(stored);
+    };
+
+    syncLanguage();
+    window.addEventListener("storage", syncLanguage);
+    window.addEventListener("site-language-change", syncLanguage);
+    return () => {
+      window.removeEventListener("storage", syncLanguage);
+      window.removeEventListener("site-language-change", syncLanguage);
+    };
+  }, []);
 
   useEffect(() => {
     fetch("/api/study-chinese/questions")
@@ -162,7 +178,7 @@ export default function StudyChineseSetPage() {
     <div className="flex min-h-screen items-start justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex w-full max-w-3xl flex-col items-start justify-start py-8 px-16 bg-transparent dark:bg-black sm:items-start">
         <div className="flex items-center justify-between w-full">
-          <h1 className="text-3xl font-bold zen-title">Learn Chinese</h1>
+          <h1 className="text-3xl font-bold zen-title">{language === "en" ? "Learn Chinese" : "分科題庫"}</h1>
           {!showResults && !loading && questions.length > 0 && (
             <div className="flex gap-3">
               <button

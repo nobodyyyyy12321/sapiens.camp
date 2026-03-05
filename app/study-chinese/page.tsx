@@ -12,6 +12,22 @@ type StudyChineseRecord = {
 
 export default function StudyChinesePage() {
   const [tooltip, setTooltip] = useState("尚無作答紀錄");
+  const [language, setLanguage] = useState("zh-TW");
+
+  useEffect(() => {
+    const syncLanguage = () => {
+      const stored = localStorage.getItem("siteLanguage") || "zh-TW";
+      setLanguage(stored);
+    };
+
+    syncLanguage();
+    window.addEventListener("storage", syncLanguage);
+    window.addEventListener("site-language-change", syncLanguage);
+    return () => {
+      window.removeEventListener("storage", syncLanguage);
+      window.removeEventListener("site-language-change", syncLanguage);
+    };
+  }, []);
 
   useEffect(() => {
     fetch("/api/user/profile")
@@ -37,7 +53,7 @@ export default function StudyChinesePage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black text-center">
-        <h1 className="max-w-xs text-4xl font-bold zen-title">Learn Chinese</h1>
+        <h1 className="max-w-xs text-4xl font-bold zen-title">{language === "en" ? "Learn Chinese" : "分科題庫"}</h1>
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
         <div className="mt-8 flex w-full max-w-md flex-col gap-3">
