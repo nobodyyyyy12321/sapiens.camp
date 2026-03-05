@@ -5,6 +5,7 @@ import AuthNav from "./components/AuthNav";
 import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
 import Sidebar from "./components/Sidebar";
+import LanguageGate from "./components/LanguageGate";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -62,7 +63,7 @@ export default function RootLayout({
             </nav>
           </header>
 
-          {children}
+          <LanguageGate>{children}</LanguageGate>
         </Providers>
         <Analytics />
       </body>
