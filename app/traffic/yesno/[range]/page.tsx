@@ -215,7 +215,7 @@ export default function TrafficYesNoRangePage() {
 
             <div className="p-6 border border-[1px] rounded text-lg">{currentQ.question}</div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col items-stretch gap-3">
               <button
                 className={`px-6 py-3 border border-[1px] rounded transition-transform duration-150 ${answer === "是" ? "border-black dark:border-zinc-200" : "border-zinc-400 dark:border-zinc-600"} ${recognizedToken === "是" ? "ring-2 ring-white scale-95" : ""}`}
                 style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}

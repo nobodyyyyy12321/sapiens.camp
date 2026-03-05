@@ -220,7 +220,7 @@ export default function StudyChineseSetPage() {
               </button>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col gap-3">
               {currentQuestion.options.map((option) => (
                 <button
                   key={option.label}
