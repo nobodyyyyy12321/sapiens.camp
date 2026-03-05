@@ -8,21 +8,41 @@ type HomeContentProps = {
   categories: string[];
   siteTitle: string;
   isSimplified: boolean;
+  language: string;
 };
 
-function HomeContent({ categories, siteTitle, isSimplified }: HomeContentProps) {
+function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [loadedCategories, setLoadedCategories] = useState<string[]>([]);
-  const subjects = [
-    { name: "詩文背誦", href: "/recitation" },
-    { name: "Learn Chinese", href: "/study-chinese" },
-    { name: "英文", href: "/english" },
-    { name: "名言佳句", href: "/quote" },
-    { name: "數學", href: "/math" },
-    { name: "交通", href: "/traffic" },
-  ];
+  const subjects =
+    language === "en"
+      ? [
+          { name: "Recitation", href: "/recitation" },
+          { name: "Learn Chinese", href: "/study-chinese" },
+          { name: "English", href: "/english" },
+          { name: "Quotes", href: "/quote" },
+          { name: "Math", href: "/math" },
+          { name: "Traffic", href: "/traffic" },
+        ]
+      : language === "zh-CN"
+        ? [
+            { name: "诗文背诵", href: "/recitation" },
+            { name: "分科题库", href: "/study-chinese" },
+            { name: "英文", href: "/english" },
+            { name: "名言佳句", href: "/quote" },
+            { name: "数学", href: "/math" },
+            { name: "交通", href: "/traffic" },
+          ]
+        : [
+            { name: "詩文背誦", href: "/recitation" },
+            { name: "分科題庫", href: "/study-chinese" },
+            { name: "英文", href: "/english" },
+            { name: "名言佳句", href: "/quote" },
+            { name: "數學", href: "/math" },
+            { name: "交通", href: "/traffic" },
+          ];
 
   useEffect(() => {
     // Fetch categories
@@ -106,10 +126,12 @@ function HomeContent({ categories, siteTitle, isSimplified }: HomeContentProps) 
 export default function Home() {
   const [siteTitle, setSiteTitle] = useState("智人題庫");
   const [isSimplified, setIsSimplified] = useState(false);
+  const [language, setLanguage] = useState("zh-TW");
 
   useEffect(() => {
     const syncTitle = () => {
       const language = localStorage.getItem("siteLanguage") || "zh-TW";
+      setLanguage(language);
       setIsSimplified(language === "zh-CN");
       setSiteTitle(language === "zh-CN" ? "智人题库" : "智人題庫");
     };
@@ -134,11 +156,49 @@ export default function Home() {
               {siteTitle}
             </h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
+
+            <div className="mt-4 flex w-full max-w-md flex-col gap-3">
+              {(language === "en"
+                ? [
+                    { name: "Recitation", href: "/recitation" },
+                    { name: "Learn Chinese", href: "/study-chinese" },
+                    { name: "English", href: "/english" },
+                    { name: "Quotes", href: "/quote" },
+                    { name: "Math", href: "/math" },
+                    { name: "Traffic", href: "/traffic" },
+                  ]
+                : language === "zh-CN"
+                  ? [
+                      { name: "诗文背诵", href: "/recitation" },
+                      { name: "分科题库", href: "/study-chinese" },
+                      { name: "英文", href: "/english" },
+                      { name: "名言佳句", href: "/quote" },
+                      { name: "数学", href: "/math" },
+                      { name: "交通", href: "/traffic" },
+                    ]
+                  : [
+                      { name: "詩文背誦", href: "/recitation" },
+                      { name: "分科題庫", href: "/study-chinese" },
+                      { name: "英文", href: "/english" },
+                      { name: "名言佳句", href: "/quote" },
+                      { name: "數學", href: "/math" },
+                      { name: "交通", href: "/traffic" },
+                    ]
+              ).map((subject) => (
+                <Link
+                  key={subject.name}
+                  href={subject.href}
+                  className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
+                >
+                  {subject.name}
+                </Link>
+              ))}
+            </div>
           </div>
         </main>
       </div>
     }>
-      <HomeContent categories={[]} siteTitle={siteTitle} isSimplified={isSimplified} />
+      <HomeContent categories={[]} siteTitle={siteTitle} isSimplified={isSimplified} language={language} />
     </Suspense>
   );
 }
