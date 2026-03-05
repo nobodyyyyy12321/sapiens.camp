@@ -225,7 +225,7 @@ export default function StudyChineseSetPage() {
                 <button
                   key={option.label}
                   onClick={() => handleAnswer(option.label)}
-                  className={`flex-1 px-6 py-3 border border-[1px] rounded transition-colors ${
+                  className={`flex-1 px-6 py-3 border border-[1px] rounded text-left transition-colors ${
                     userAnswers[currentIndex] === option.label
                       ? "border-black dark:border-zinc-200"
                       : "border-zinc-400 dark:border-zinc-600"
