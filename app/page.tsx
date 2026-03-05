@@ -7,9 +7,10 @@ import Link from "next/link";
 type HomeContentProps = {
   categories: string[];
   siteTitle: string;
+  isSimplified: boolean;
 };
 
-function HomeContent({ categories, siteTitle }: HomeContentProps) {
+function HomeContent({ categories, siteTitle, isSimplified }: HomeContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
@@ -69,7 +70,11 @@ function HomeContent({ categories, siteTitle }: HomeContentProps) {
         )}
 
         <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="max-w-xs text-4xl font-bold zen-title">{siteTitle}</h1>
+          <h1
+            className={`max-w-xs text-4xl font-bold ${isSimplified ? "font-sans" : "zen-title"}`}
+          >
+            {siteTitle}
+          </h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
         </div>
@@ -80,10 +85,12 @@ function HomeContent({ categories, siteTitle }: HomeContentProps) {
 
 export default function Home() {
   const [siteTitle, setSiteTitle] = useState("智人題庫");
+  const [isSimplified, setIsSimplified] = useState(false);
 
   useEffect(() => {
     const syncTitle = () => {
       const language = localStorage.getItem("siteLanguage") || "zh-TW";
+      setIsSimplified(language === "zh-CN");
       setSiteTitle(language === "zh-CN" ? "智人题库" : "智人題庫");
     };
 
@@ -101,13 +108,17 @@ export default function Home() {
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
         <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-white dark:bg-black">
           <div className="flex flex-col items-center gap-6 text-center">
-            <h1 className="max-w-xs text-4xl font-bold zen-title">{siteTitle}</h1>
+            <h1
+              className={`max-w-xs text-4xl font-bold ${isSimplified ? "font-sans" : "zen-title"}`}
+            >
+              {siteTitle}
+            </h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           </div>
         </main>
       </div>
     }>
-      <HomeContent categories={[]} siteTitle={siteTitle} />
+      <HomeContent categories={[]} siteTitle={siteTitle} isSimplified={isSimplified} />
     </Suspense>
   );
 }
