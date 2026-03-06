@@ -149,7 +149,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
 
-          <div className="mt-4 flex w-full max-w-5xl flex-col gap-3">
+          <div className="mt-4 flex w-full max-w-5xl flex-col gap-4">
             <input
               className="w-full p-3 rounded-full border border-zinc-200 text-sm"
               style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
@@ -217,7 +217,7 @@ export default function Home() {
             </h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
 
-            <div className="mt-4 flex w-full max-w-5xl flex-col gap-3">
+            <div className="mt-4 flex w-full max-w-5xl flex-col gap-4">
               {(language === "en"
                 ? [
                     { name: "Learn Chinese", href: "/study-chinese" },
