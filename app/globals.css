@@ -161,6 +161,7 @@ main button.rounded-full.border {
   gap: 0.875rem;
   align-items: end;
   padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--shelf-line);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,
@@ -194,6 +195,14 @@ main button.rounded-full.border {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transition: background-color 0.2s;
+}
+
+.category-bookshelf-grid {
+  gap: 0.5rem;
+}
+
+.category-book-link {
+  min-width: 3.75rem;
 }
 
 .book-link:hover {

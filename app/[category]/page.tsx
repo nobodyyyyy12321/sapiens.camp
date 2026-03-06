@@ -24,11 +24,11 @@ export default async function CategoryPage({ params }: Props) {
             <p className="text-sm zen-subtle text-center">目前無詩文</p>
           ) : (
             <div className="bookshelf-scroll">
-              <div className="bookshelf-grid">
+              <div className="bookshelf-grid category-bookshelf-grid">
                 {articles.map((a) => (
                   <Link
                     key={a.id}
-                    className="book-link"
+                    className="book-link category-book-link"
                     href={`/${encodeURIComponent(category)}/${a.number}`}
                     title={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
                     aria-label={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
