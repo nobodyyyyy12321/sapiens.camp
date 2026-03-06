@@ -36,6 +36,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "英文", href: "/english" },
             { name: "名言佳句", href: "/quote" },
             { name: "数学", href: "/math" },
+            { name: "物理", href: "/physics" },
             { name: "交通", href: "/traffic" },
           ]
         : [
@@ -43,6 +44,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "英文", href: "/english" },
             { name: "名言佳句", href: "/quote" },
             { name: "數學", href: "/math" },
+            { name: "物理", href: "/physics" },
             { name: "交通", href: "/traffic" },
           ];
 
@@ -276,6 +278,7 @@ export default function Home() {
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
                       { name: "数学", href: "/math" },
+                      { name: "物理", href: "/physics" },
                       { name: "交通", href: "/traffic" },
                     ]
                   : [
@@ -283,6 +286,7 @@ export default function Home() {
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
                       { name: "數學", href: "/math" },
+                      { name: "物理", href: "/physics" },
                       { name: "交通", href: "/traffic" },
                     ]
               ).length > 0 && (
@@ -298,6 +302,7 @@ export default function Home() {
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
                             { name: "数学", href: "/math" },
+                            { name: "物理", href: "/physics" },
                             { name: "交通", href: "/traffic" },
                           ]
                         : [
@@ -305,6 +310,7 @@ export default function Home() {
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
                             { name: "數學", href: "/math" },
+                            { name: "物理", href: "/physics" },
                             { name: "交通", href: "/traffic" },
                           ]
                     ).map((subject) => (
