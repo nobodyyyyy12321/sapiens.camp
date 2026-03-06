@@ -165,10 +165,10 @@ main button.rounded-full.border {
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent calc(8.5rem - 1px),
-    var(--shelf-line) calc(8.5rem - 1px),
-    var(--shelf-line) 8.5rem,
-    transparent 8.5rem,
+    transparent calc(8.75rem - 1px),
+    var(--shelf-line) calc(8.75rem - 1px),
+    var(--shelf-line) 8.75rem,
+    transparent 8.75rem,
     transparent 9rem
   );
 }
@@ -187,8 +187,9 @@ main button.rounded-full.border {
   border: 1px solid rgb(228 228 231);
   padding: 0.5rem 0.25rem;
   color: inherit;
+  font-family: inherit;
   text-align: center;
-  font-weight: 500;
+  font-weight: 400;
   writing-mode: vertical-rl;
   text-orientation: mixed;
   transition: background-color 0.2s;
