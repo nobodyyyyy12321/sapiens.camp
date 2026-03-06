@@ -38,11 +38,54 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "交通", href: "/traffic" },
           ];
 
+  const childSubjects =
+    language === "en"
+      ? []
+      : language === "zh-CN"
+        ? [
+            { name: "2000单字", href: "/english/2000" },
+            { name: "算数", href: "/under-construction" },
+            { name: "代数", href: "/under-construction" },
+            { name: "几何", href: "/under-construction" },
+            { name: "三角函数", href: "/under-construction" },
+            { name: "指数与复数", href: "/under-construction" },
+            { name: "解析几何", href: "/under-construction" },
+            { name: "统计", href: "/under-construction" },
+            { name: "排列组合", href: "/under-construction" },
+            { name: "微积分", href: "/under-construction" },
+            { name: "微分方程", href: "/under-construction" },
+            { name: "线性代数", href: "/under-construction" },
+            { name: "复变函数", href: "/under-construction" },
+            { name: "中华民国", href: "/traffic/中華民國" },
+          ]
+        : [
+            { name: "2000單字", href: "/english/2000" },
+            { name: "算數", href: "/under-construction" },
+            { name: "代數", href: "/under-construction" },
+            { name: "幾何", href: "/under-construction" },
+            { name: "三角函數", href: "/under-construction" },
+            { name: "指數與複數", href: "/under-construction" },
+            { name: "解析幾何", href: "/under-construction" },
+            { name: "統計", href: "/under-construction" },
+            { name: "排列組合", href: "/under-construction" },
+            { name: "微積分", href: "/under-construction" },
+            { name: "微分方程", href: "/under-construction" },
+            { name: "線性代數", href: "/under-construction" },
+            { name: "複變函數", href: "/under-construction" },
+            { name: "中華民國", href: "/traffic/中華民國" },
+          ];
+
   const filteredSubjects = useMemo(() => {
     const q = subjectQuery.trim().toLowerCase();
     if (!q) return subjects;
-    return subjects.filter((subject) => subject.name.toLowerCase().includes(q));
-  }, [subjects, subjectQuery]);
+    const rangePattern = /^\d+\s*-\s*\d+$/;
+    const searchPool = [...subjects, ...childSubjects].filter((subject) => !rangePattern.test(subject.name.trim()));
+    const unique = new Map<string, { name: string; href: string }>();
+    for (const item of searchPool) {
+      unique.set(`${item.name}::${item.href}`, item);
+    }
+    return Array.from(unique.values()).filter((subject) => subject.name.toLowerCase().includes(q));
+  }, [subjects, childSubjects, subjectQuery]);
 
   useEffect(() => {
     // Fetch categories
