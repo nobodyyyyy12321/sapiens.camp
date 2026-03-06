@@ -11,12 +11,20 @@ type HomeContentProps = {
   language: string;
 };
 
+type SearchArticle = {
+  title?: string;
+  author?: string;
+  category?: string;
+  number?: number;
+};
+
 function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [loadedCategories, setLoadedCategories] = useState<string[]>([]);
   const [subjectQuery, setSubjectQuery] = useState("");
+  const [articleMatches, setArticleMatches] = useState<Array<{ name: string; href: string }>>([]);
   const subjects =
     language === "en"
       ? [
@@ -75,17 +83,57 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "中華民國", href: "/traffic/中華民國" },
           ];
 
+  useEffect(() => {
+    const q = subjectQuery.trim();
+    if (q.length < 2) {
+      setArticleMatches([]);
+      return;
+    }
+
+    const controller = new AbortController();
+    const debounce = setTimeout(() => {
+      fetch(`/api/search?q=${encodeURIComponent(q)}`, { signal: controller.signal })
+        .then((res) => (res.ok ? res.json() : { articles: [] }))
+        .then((data) => {
+          const results: SearchArticle[] = Array.isArray(data?.articles) ? data.articles : [];
+          const mapped = results
+            .filter((article) => article?.title && article?.number)
+            .slice(0, 30)
+            .map((article) => ({
+              name: `${article.number} · ${article.title}${article.author ? ` - ${article.author}` : ""}`,
+              href: `/${encodeURIComponent(article.category || "未分類")}/${article.number}`,
+            }));
+          setArticleMatches(mapped);
+        })
+        .catch(() => {
+          setArticleMatches([]);
+        });
+    }, 250);
+
+    return () => {
+      controller.abort();
+      clearTimeout(debounce);
+    };
+  }, [subjectQuery]);
+
   const filteredSubjects = useMemo(() => {
     const q = subjectQuery.trim().toLowerCase();
     if (!q) return subjects;
     const rangePattern = /^\d+\s*-\s*\d+$/;
     const searchPool = [...subjects, ...childSubjects].filter((subject) => !rangePattern.test(subject.name.trim()));
+    const subjectMatches = searchPool.filter((subject) => subject.name.toLowerCase().includes(q));
     const unique = new Map<string, { name: string; href: string }>();
-    for (const item of searchPool) {
+
+    for (const item of subjectMatches) {
       unique.set(`${item.name}::${item.href}`, item);
     }
-    return Array.from(unique.values()).filter((subject) => subject.name.toLowerCase().includes(q));
-  }, [subjects, childSubjects, subjectQuery]);
+
+    for (const item of articleMatches) {
+      unique.set(`${item.name}::${item.href}`, item);
+    }
+
+    return Array.from(unique.values());
+  }, [subjects, childSubjects, subjectQuery, articleMatches]);
 
   useEffect(() => {
     // Fetch categories
@@ -173,7 +221,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             </div>
             {filteredSubjects.length === 0 && (
               <p className="text-sm zen-subtle text-center">
-                {language === "en" ? "No matching subjects" : language === "zh-CN" ? "没有符合的科目" : "沒有符合的科目"}
+                {language === "en" ? "No matching subjects or recitation titles" : language === "zh-CN" ? "没有符合的科目或诗文标题" : "沒有符合的科目或詩文標題"}
               </p>
             )}
           </div>
