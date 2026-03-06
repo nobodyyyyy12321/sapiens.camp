@@ -149,7 +149,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
 
-          <div className="mt-4 flex w-full max-w-md flex-col gap-3">
+          <div className="mt-4 flex w-full max-w-5xl flex-col gap-3">
             <input
               className="w-full p-3 rounded-full border border-zinc-200 text-sm"
               style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
@@ -158,15 +158,19 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               onChange={(e) => setSubjectQuery(e.target.value)}
               aria-label={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
             />
-            {filteredSubjects.map((subject) => (
-              <Link
-                key={subject.name}
-                href={subject.href}
-                className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-              >
-                {subject.name}
-              </Link>
-            ))}
+            <div className="w-full overflow-x-auto">
+              <div className="min-w-[760px] grid grid-cols-10 gap-2 items-end pb-3 border-b border-zinc-200 dark:border-zinc-700">
+                {filteredSubjects.map((subject) => (
+                  <Link
+                    key={subject.name}
+                    href={subject.href}
+                    className="flex h-36 min-w-[64px] items-center justify-center rounded-t-md border border-zinc-200 px-1 py-2 text-xs font-medium text-foreground transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center [writing-mode:vertical-rl] [text-orientation:mixed]"
+                  >
+                    {subject.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
             {filteredSubjects.length === 0 && (
               <p className="text-sm zen-subtle text-center">
                 {language === "en" ? "No matching subjects" : language === "zh-CN" ? "没有符合的科目" : "沒有符合的科目"}
@@ -213,7 +217,7 @@ export default function Home() {
             </h1>
             <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
 
-            <div className="mt-4 flex w-full max-w-md flex-col gap-3">
+            <div className="mt-4 flex w-full max-w-5xl flex-col gap-3">
               {(language === "en"
                 ? [
                     { name: "Learn Chinese", href: "/study-chinese" },
@@ -233,15 +237,40 @@ export default function Home() {
                       { name: "數學", href: "/math" },
                       { name: "交通", href: "/traffic" },
                     ]
-              ).map((subject) => (
-                <Link
-                  key={subject.name}
-                  href={subject.href}
-                  className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-                >
-                  {subject.name}
-                </Link>
-              ))}
+              ).length > 0 && (
+                <div className="w-full overflow-x-auto">
+                  <div className="min-w-[760px] grid grid-cols-10 gap-2 items-end pb-3 border-b border-zinc-200 dark:border-zinc-700">
+                    {(language === "en"
+                      ? [
+                          { name: "Learn Chinese", href: "/study-chinese" },
+                        ]
+                      : language === "zh-CN"
+                        ? [
+                            { name: "诗文背诵", href: "/recitation" },
+                            { name: "英文", href: "/english" },
+                            { name: "名言佳句", href: "/quote" },
+                            { name: "数学", href: "/math" },
+                            { name: "交通", href: "/traffic" },
+                          ]
+                        : [
+                            { name: "詩文背誦", href: "/recitation" },
+                            { name: "英文", href: "/english" },
+                            { name: "名言佳句", href: "/quote" },
+                            { name: "數學", href: "/math" },
+                            { name: "交通", href: "/traffic" },
+                          ]
+                    ).map((subject) => (
+                      <Link
+                        key={subject.name}
+                        href={subject.href}
+                        className="flex h-36 min-w-[64px] items-center justify-center rounded-t-md border border-zinc-200 px-1 py-2 text-xs font-medium text-foreground transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center [writing-mode:vertical-rl] [text-orientation:mixed]"
+                      >
+                        {subject.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </main>
