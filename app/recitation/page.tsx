@@ -26,9 +26,28 @@ export default function RecitationPage() {
     setLoading(true);
     fetch("/api/categories")
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         if (!mounted) return;
-        setLanguages(data.languages || []);
+        const fetchedLanguages: string[] = data.languages || [];
+        setLanguages(fetchedLanguages);
+
+        const defaultChineseLanguage = fetchedLanguages.find((lang) =>
+          /(中文|chinese|華語|国语|國語)/i.test(lang)
+        );
+
+        if (defaultChineseLanguage) {
+          setSelectedLanguage(defaultChineseLanguage);
+          setView("categories");
+          try {
+            const categoryRes = await fetch(`/api/categories?language=${encodeURIComponent(defaultChineseLanguage)}`);
+            const categoryData = await categoryRes.json();
+            if (!mounted) return;
+            setItems(categoryData.categories || []);
+          } catch (err) {
+            console.error("Failed to fetch categories for default language:", err);
+            if (mounted) setError("無法載入分類");
+          }
+        }
       })
       .catch((err) => {
         console.error("Failed to fetch languages:", err);
@@ -238,16 +257,20 @@ export default function RecitationPage() {
           <div className="w-full max-w-3xl" style={{ marginTop: "1cm" }}>
             {view === "languages" ? (
               (languages && languages.length > 0) ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={() => openLanguage(lang)}
-                      className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-                    >
-                      <span className="truncate">{lang}</span>
-                    </button>
-                  ))}
+                <div className="bookshelf-scroll">
+                  <div className="bookshelf-grid">
+                    {languages
+                      .filter((lang) => !/(中文|chinese|華語|国语|國語)/i.test(lang))
+                      .map((lang) => (
+                        <button
+                          key={lang}
+                          onClick={() => openLanguage(lang)}
+                          className="book-link"
+                        >
+                          {lang}
+                        </button>
+                      ))}
+                  </div>
                 </div>
               ) : (
                 <p className="text-sm zen-subtle">目前沒有語言</p>
@@ -255,16 +278,18 @@ export default function RecitationPage() {
             ) : (
               <div>
                 {(items && items.length > 0) ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="bookshelf-scroll">
+                    <div className="bookshelf-grid">
                     {items.map((c) => (
                       <Link
                         key={c}
                         href={`/${encodeURIComponent(c)}`}
-                        className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
+                        className="book-link"
                       >
-                        <span className="truncate">{c}</span>
+                        {c}
                       </Link>
                     ))}
+                    </div>
                   </div>
                 ) : (
                   <p className="text-sm zen-subtle">目前沒有分類</p>
