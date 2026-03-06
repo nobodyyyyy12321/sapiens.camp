@@ -195,3 +195,12 @@ main button.rounded-full.border {
 .dark .book-link:hover {
   background-color: rgb(39 39 42);
 }
+
+button,
+a.zen-button,
+a.zen-ghost,
+main a.rounded-full.border,
+.book-link {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
