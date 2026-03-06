@@ -24,16 +24,20 @@ export default function MathIndex() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">數學題庫</h1>
         <p className="mt-4 text-sm zen-subtle">選擇數學主題開始練習</p>
         
-        <div className="mt-8 flex w-full max-w-md flex-col gap-3">
-          {mathTopics.map((topic) => (
-            <Link
-              key={topic.name}
-              href="/under-construction"
-              className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-            >
-              {topic.name}
-            </Link>
-          ))}
+        <div className="mt-8 w-full max-w-3xl">
+          <div className="bookshelf-scroll">
+            <div className="bookshelf-grid">
+              {mathTopics.map((topic) => (
+                <Link
+                  key={topic.name}
+                  href="/under-construction"
+                  className="book-link"
+                >
+                  {topic.name}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>

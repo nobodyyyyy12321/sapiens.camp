@@ -56,14 +56,18 @@ export default function StudyChinesePage() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">{language === "en" ? "Learn Chinese" : "分科題庫"}</h1>
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
-        <div className="mt-8 flex w-full max-w-md flex-col gap-3">
-          <Link
-            href="/study-chinese/1-20"
-            title={tooltip}
-            className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-          >
-            1-20
-          </Link>
+        <div className="mt-8 w-full max-w-3xl">
+          <div className="bookshelf-scroll">
+            <div className="bookshelf-grid">
+              <Link
+                href="/study-chinese/1-20"
+                title={tooltip}
+                className="book-link"
+              >
+                1-20
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
     </div>

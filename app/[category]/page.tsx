@@ -23,18 +23,20 @@ export default async function CategoryPage({ params }: Props) {
           {articles.length === 0 ? (
             <p className="text-sm zen-subtle text-center">目前無詩文</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-              {articles.map((a) => (
-                <Link
-                  key={a.id}
-                  className="flex h-12 items-center justify-center rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100"
-                  href={`/${encodeURIComponent(category)}/${a.number}`}
-                  title={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
-                  aria-label={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
-                >
-                  <span className="truncate">{a.number ? `${a.number} · ` : ""}{a.title}{a.author ? ` - ${a.author}` : ""}</span>
-                </Link>
-              ))}
+            <div className="bookshelf-scroll">
+              <div className="bookshelf-grid">
+                {articles.map((a) => (
+                  <Link
+                    key={a.id}
+                    className="book-link"
+                    href={`/${encodeURIComponent(category)}/${a.number}`}
+                    title={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
+                    aria-label={`${a.title}${a.author ? ` — ${a.author}` : ""}`}
+                  >
+                    <span>{a.number ? `${a.number} · ` : ""}{a.title}{a.author ? ` - ${a.author}` : ""}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>

@@ -56,13 +56,17 @@ export default function TrafficRegionPage() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">中華民國</h1>
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
-        <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
-          <Link href="/traffic/yesno" title={yesNoTooltip} className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
-            汽車是非題
-          </Link>
-          <Link href="/traffic/car" title={carQuizTooltip} className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
-            汽車選擇題
-          </Link>
+        <div className="mt-8 w-full max-w-3xl">
+          <div className="bookshelf-scroll">
+            <div className="bookshelf-grid">
+              <Link href="/traffic/yesno" title={yesNoTooltip} className="book-link">
+                汽車是非題
+              </Link>
+              <Link href="/traffic/car" title={carQuizTooltip} className="book-link">
+                汽車選擇題
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
     </div>

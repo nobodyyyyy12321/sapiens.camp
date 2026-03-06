@@ -17,16 +17,20 @@ export default function TrafficCarQuizPage() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">汽車選擇題</h1>
         <p className="mt-4 text-sm zen-subtle">選擇試卷</p>
 
-        <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
-          {paperRanges.map((range) => (
-            <Link
-              key={`${range.start}-${range.end}`}
-              href={`/traffic/car/${range.start}-${range.end}`}
-              className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap"
-            >
-              {range.start}-{range.end}
-            </Link>
-          ))}
+        <div className="mt-8 w-full max-w-3xl">
+          <div className="bookshelf-scroll">
+            <div className="bookshelf-grid">
+              {paperRanges.map((range) => (
+                <Link
+                  key={`${range.start}-${range.end}`}
+                  href={`/traffic/car/${range.start}-${range.end}`}
+                  className="book-link"
+                >
+                  {range.start}-{range.end}
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>

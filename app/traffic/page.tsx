@@ -9,10 +9,14 @@ export default function TrafficPage() {
         <h1 className="max-w-xs text-4xl font-bold zen-title">交通題庫</h1>
         <p className="mt-4 text-sm zen-subtle">選擇想要的題庫</p>
 
-        <div className="mt-8 flex flex-col gap-3 w-full max-w-md">
-          <Link href="/traffic/中華民國" className="flex h-12 items-center justify-center gap-2 rounded-full border border-zinc-200 px-6 text-foreground transition-colors hover:bg-zinc-100 whitespace-nowrap">
-            中華民國
-          </Link>
+        <div className="mt-8 w-full max-w-3xl">
+          <div className="bookshelf-scroll">
+            <div className="bookshelf-grid">
+              <Link href="/traffic/中華民國" className="book-link">
+                中華民國
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
     </div>
