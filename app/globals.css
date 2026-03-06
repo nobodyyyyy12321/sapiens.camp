@@ -158,7 +158,8 @@ main button.rounded-full.border {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.875rem;
+  column-gap: 0.875rem;
+  row-gap: 0.5rem;
   align-items: end;
   padding-bottom: 0.75rem;
   background-image: repeating-linear-gradient(
