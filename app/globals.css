@@ -161,7 +161,6 @@ main button.rounded-full.border {
   gap: 0.5rem;
   align-items: end;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--shelf-line);
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,

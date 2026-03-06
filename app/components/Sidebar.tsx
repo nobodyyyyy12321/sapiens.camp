@@ -46,7 +46,7 @@ export default function Sidebar() {
         <div className="h-full p-6 pt-14 flex flex-col">
 
           <nav className="flex flex-col gap-2">
-            <Link href="/" className="px-3 py-2 rounded border border-transparent hover:border-black/10 dark:hover:border-white/10">首頁</Link>
+            <Link href="/" className="px-3 py-2 rounded border border-transparent text-base font-normal leading-6 hover:border-black/10 dark:hover:border-white/10">首頁</Link>
           </nav>
 
           
