@@ -196,6 +196,7 @@ main button.rounded-full.border {
 
 .book-link:hover {
   background-color: rgb(244 244 245);
+  color: #000;
 }
 
 .dark .book-link {
