@@ -149,13 +149,14 @@ main button.rounded-full.border {
 
 .bookshelf-scroll {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: visible;
 }
 
 .bookshelf-grid {
-  min-width: 680px;
-  display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
   align-items: end;
   padding-bottom: 0.75rem;

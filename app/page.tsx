@@ -159,12 +159,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               aria-label={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
             />
             <div className="w-full overflow-x-auto">
-              <div className="min-w-[760px] grid grid-cols-10 gap-2 items-end pb-3 border-b border-zinc-200 dark:border-zinc-700">
+              <div className="bookshelf-grid">
                 {filteredSubjects.map((subject) => (
                   <Link
                     key={subject.name}
                     href={subject.href}
-                    className="flex h-36 min-w-[64px] items-center justify-center rounded-t-md border border-zinc-200 px-1 py-2 text-xs font-medium text-foreground transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center [writing-mode:vertical-rl] [text-orientation:mixed]"
+                    className="book-link"
                   >
                     {subject.name}
                   </Link>
@@ -239,7 +239,7 @@ export default function Home() {
                     ]
               ).length > 0 && (
                 <div className="w-full overflow-x-auto">
-                  <div className="min-w-[760px] grid grid-cols-10 gap-2 items-end pb-3 border-b border-zinc-200 dark:border-zinc-700">
+                  <div className="bookshelf-grid">
                     {(language === "en"
                       ? [
                           { name: "Learn Chinese", href: "/study-chinese" },
@@ -263,7 +263,7 @@ export default function Home() {
                       <Link
                         key={subject.name}
                         href={subject.href}
-                        className="flex h-36 min-w-[64px] items-center justify-center rounded-t-md border border-zinc-200 px-1 py-2 text-xs font-medium text-foreground transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800 text-center [writing-mode:vertical-rl] [text-orientation:mixed]"
+                        className="book-link"
                       >
                         {subject.name}
                       </Link>
