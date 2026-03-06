@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useMemo, useState, Suspense } from "react";
 import Link from "next/link";
 
 type HomeContentProps = {
@@ -16,6 +16,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
   const [loadedCategories, setLoadedCategories] = useState<string[]>([]);
+  const [subjectQuery, setSubjectQuery] = useState("");
   const subjects =
     language === "en"
       ? [
@@ -36,6 +37,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "數學", href: "/math" },
             { name: "交通", href: "/traffic" },
           ];
+
+  const filteredSubjects = useMemo(() => {
+    const q = subjectQuery.trim().toLowerCase();
+    if (!q) return subjects;
+    return subjects.filter((subject) => subject.name.toLowerCase().includes(q));
+  }, [subjects, subjectQuery]);
 
   useEffect(() => {
     // Fetch categories
@@ -100,7 +107,15 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           {/* 全站統計已移至 「全站統計」 頁面 */}
 
           <div className="mt-4 flex w-full max-w-md flex-col gap-3">
-            {subjects.map((subject) => (
+            <input
+              className="w-full p-3 rounded-full border border-zinc-200 text-sm"
+              style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
+              placeholder={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
+              value={subjectQuery}
+              onChange={(e) => setSubjectQuery(e.target.value)}
+              aria-label={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
+            />
+            {filteredSubjects.map((subject) => (
               <Link
                 key={subject.name}
                 href={subject.href}
@@ -109,6 +124,11 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
                 {subject.name}
               </Link>
             ))}
+            {filteredSubjects.length === 0 && (
+              <p className="text-sm zen-subtle text-center">
+                {language === "en" ? "No matching subjects" : language === "zh-CN" ? "没有符合的科目" : "沒有符合的科目"}
+              </p>
+            )}
           </div>
         </div>
       </main>
