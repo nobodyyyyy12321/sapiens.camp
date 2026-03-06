@@ -106,7 +106,7 @@ export default function AuthNav() {
               <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
-                className="w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="w-full text-left px-4 py-3 !text-sm !leading-5 font-normal hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 登出
               </button>
