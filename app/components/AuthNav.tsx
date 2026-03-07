@@ -74,9 +74,11 @@ export default function AuthNav() {
 
   const handleSignOut = async () => {
     try {
-      await signOut({ redirectTo: "/" });
+      const result = await signOut({ redirect: false, callbackUrl: "/" });
+      setIsMenuOpen(false);
+      window.location.href = result?.url || "/";
     } catch {
-      window.location.href = "/api/auth/signout";
+      window.location.href = "/";
     }
   };
 
