@@ -83,7 +83,7 @@ export default function RootLayout({
             <VisitPing />
             <nav className="w-full flex items-center justify-end pr-5 pl-5">
               <div className="flex items-center gap-3">
-                <div style={{ marginRight: "3cm" }}>
+                <div className="mr-0 md:mr-[3cm]">
                   <LanguageSelector />
                 </div>
                 <AuthNav />
