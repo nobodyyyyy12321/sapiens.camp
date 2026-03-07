@@ -8,6 +8,7 @@ import VisitPing from "./components/VisitPing";
 import LanguageGate from "./components/LanguageGate";
 import LanguageSelector from "./components/LanguageSelector";
 import PWARegister from "./components/PWARegister";
+import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -58,6 +59,7 @@ export default function RootLayout({
       >
         <Providers>
           <PWARegister />
+          <BookshelfContextMenu />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
