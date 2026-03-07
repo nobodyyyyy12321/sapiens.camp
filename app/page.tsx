@@ -35,6 +35,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "诗文背诵", href: "/recitation" },
             { name: "国文", href: "/chinese" },
             { name: "英文", href: "/english" },
+          { name: "公职考试", href: "/公職考試" },
             { name: "名言佳句", href: "/quote" },
             { name: "数学", href: "/math" },
             { name: "物理", href: "/physics" },
@@ -50,6 +51,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "詩文背誦", href: "/recitation" },
             { name: "國文", href: "/chinese" },
             { name: "英文", href: "/english" },
+          { name: "公職考試", href: "/公職考試" },
             { name: "名言佳句", href: "/quote" },
             { name: "數學", href: "/math" },
             { name: "物理", href: "/physics" },
@@ -68,6 +70,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
       : language === "zh-CN"
         ? [
             { name: "2000单字", href: "/english/2000" },
+          { name: "台电", href: "/台電" },
+          { name: "台水", href: "/台水" },
+          { name: "中油", href: "/中油" },
             { name: "算数", href: "/under-construction" },
             { name: "代数", href: "/under-construction" },
             { name: "几何", href: "/under-construction" },
@@ -83,6 +88,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           ]
         : [
             { name: "2000單字", href: "/english/2000" },
+          { name: "台電", href: "/台電" },
+          { name: "台水", href: "/台水" },
+          { name: "中油", href: "/中油" },
             { name: "算數", href: "/under-construction" },
             { name: "代數", href: "/under-construction" },
             { name: "幾何", href: "/under-construction" },

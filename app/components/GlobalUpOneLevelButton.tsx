@@ -5,8 +5,9 @@ import { usePathname, useRouter } from "next/navigation";
 export default function GlobalUpOneLevelButton() {
   const pathname = usePathname();
   const router = useRouter();
+  const isAccountPage = pathname?.startsWith("/account/");
 
-  if (!pathname || pathname === "/") {
+  if (!pathname || pathname === "/" || isAccountPage) {
     return null;
   }
 
