@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_SC, Noto_Serif_TC } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Providers from "./providers/SessionProvider";
 import VisitPing from "./components/VisitPing";
-import Sidebar from "./components/Sidebar";
 import LanguageGate from "./components/LanguageGate";
 import LanguageSelector from "./components/LanguageSelector";
 import PWARegister from "./components/PWARegister";
@@ -69,13 +69,19 @@ export default function RootLayout({
               }),
             }}
           />
-          <Sidebar />
+          <Link
+            href="/"
+            aria-label="回到首頁"
+            className="fixed top-4 left-4 z-60 h-11 w-11 rounded-full overflow-hidden border border-black/10 dark:border-white/10"
+          >
+            <img src="/logo.png" alt="sapiens.camp logo" className="h-full w-full object-cover" />
+          </Link>
           <header
             className="w-full py-5 sticky top-0 z-40"
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
           >
             <VisitPing />
-            <nav className="w-full flex items-center justify-end pr-5 pl-16">
+            <nav className="w-full flex items-center justify-end pr-5 pl-5">
               <div className="flex items-center gap-3">
                 <div style={{ marginRight: "3cm" }}>
                   <LanguageSelector />
