@@ -7,6 +7,7 @@ import VisitPing from "./components/VisitPing";
 import Sidebar from "./components/Sidebar";
 import LanguageGate from "./components/LanguageGate";
 import LanguageSelector from "./components/LanguageSelector";
+import PWARegister from "./components/PWARegister";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -32,6 +33,17 @@ const notoSerifSc = Noto_Serif_SC({
 export const metadata: Metadata = {
   title: "智人題庫",
   description: "多方位學習管理平台",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
@@ -45,6 +57,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${notoSerifSc.variable} antialiased`}
       >
         <Providers>
+          <PWARegister />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{
