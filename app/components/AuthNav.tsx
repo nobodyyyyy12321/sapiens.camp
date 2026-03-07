@@ -83,26 +83,26 @@ export default function AuthNav() {
       const csrfJson = await csrfRes.json();
       const csrfToken = csrfJson?.csrfToken;
       if (!csrfToken) throw new Error("csrf_missing");
-
-      const body = new URLSearchParams({
-        csrfToken,
-        callbackUrl: "/",
-        json: "true",
-      });
-
-      const signoutRes = await fetch("/api/auth/signout", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: body.toString(),
-      });
-
-      if (!signoutRes.ok) throw new Error("signout_failed");
-      const signoutJson = await signoutRes.json();
       setIsMenuOpen(false);
-      window.location.href = signoutJson?.url || "/";
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = "/api/auth/signout";
+
+      const csrfInput = document.createElement("input");
+      csrfInput.type = "hidden";
+      csrfInput.name = "csrfToken";
+      csrfInput.value = csrfToken;
+
+      const callbackInput = document.createElement("input");
+      callbackInput.type = "hidden";
+      callbackInput.name = "callbackUrl";
+      callbackInput.value = "/";
+
+      form.appendChild(csrfInput);
+      form.appendChild(callbackInput);
+      document.body.appendChild(form);
+      form.submit();
     } catch {
       window.location.href = "/api/auth/signout";
     }
