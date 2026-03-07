@@ -39,6 +39,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "物理", href: "/physics" },
             { name: "化学", href: "/under-construction" },
             { name: "生物", href: "/under-construction" },
+            { name: "地理", href: "/under-construction" },
+            { name: "历史", href: "/under-construction" },
+            { name: "公民", href: "/under-construction" },
           ]
         : [
             { name: "詩文背誦", href: "/recitation" },
@@ -48,6 +51,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "物理", href: "/physics" },
             { name: "化學", href: "/under-construction" },
             { name: "生物", href: "/under-construction" },
+            { name: "地理", href: "/under-construction" },
+            { name: "歷史", href: "/under-construction" },
+            { name: "公民", href: "/under-construction" },
           ];
 
   const childSubjects =
@@ -281,6 +287,9 @@ export default function Home() {
                       { name: "物理", href: "/physics" },
                       { name: "化学", href: "/under-construction" },
                       { name: "生物", href: "/under-construction" },
+                      { name: "地理", href: "/under-construction" },
+                      { name: "历史", href: "/under-construction" },
+                      { name: "公民", href: "/under-construction" },
                     ]
                   : [
                       { name: "詩文背誦", href: "/recitation" },
@@ -290,6 +299,9 @@ export default function Home() {
                       { name: "物理", href: "/physics" },
                       { name: "化學", href: "/under-construction" },
                       { name: "生物", href: "/under-construction" },
+                      { name: "地理", href: "/under-construction" },
+                      { name: "歷史", href: "/under-construction" },
+                      { name: "公民", href: "/under-construction" },
                     ]
               ).length > 0 && (
                 <div className="w-full overflow-visible">
@@ -307,6 +319,9 @@ export default function Home() {
                             { name: "物理", href: "/physics" },
                             { name: "化学", href: "/under-construction" },
                             { name: "生物", href: "/under-construction" },
+                            { name: "地理", href: "/under-construction" },
+                            { name: "历史", href: "/under-construction" },
+                            { name: "公民", href: "/under-construction" },
                           ]
                         : [
                             { name: "詩文背誦", href: "/recitation" },
@@ -316,6 +331,9 @@ export default function Home() {
                             { name: "物理", href: "/physics" },
                             { name: "化學", href: "/under-construction" },
                             { name: "生物", href: "/under-construction" },
+                            { name: "地理", href: "/under-construction" },
+                            { name: "歷史", href: "/under-construction" },
+                            { name: "公民", href: "/under-construction" },
                           ]
                     ).map((subject) => (
                       <Link
