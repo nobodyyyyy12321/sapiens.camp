@@ -287,7 +287,7 @@ export default function Home() {
                 : language === "zh-CN"
                   ? [
                       { name: "诗文背诵", href: "/recitation" },
-                      { name: "国文科", href: "/chinese" },
+                      { name: "国文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
                       { name: "数学", href: "/math" },
@@ -302,7 +302,7 @@ export default function Home() {
                     ]
                   : [
                       { name: "詩文背誦", href: "/recitation" },
-                      { name: "國文科", href: "/chinese" },
+                      { name: "國文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
                       { name: "數學", href: "/math" },
@@ -325,7 +325,7 @@ export default function Home() {
                       : language === "zh-CN"
                         ? [
                             { name: "诗文背诵", href: "/recitation" },
-                            { name: "国文科", href: "/chinese" },
+                            { name: "国文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
                             { name: "数学", href: "/math" },
@@ -340,7 +340,7 @@ export default function Home() {
                           ]
                         : [
                             { name: "詩文背誦", href: "/recitation" },
-                            { name: "國文科", href: "/chinese" },
+                            { name: "國文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
                             { name: "數學", href: "/math" },
