@@ -75,9 +75,9 @@ export default function RootLayout({
           <Link
             href="/"
             aria-label="回到首頁"
-            className="fixed top-4 left-4 z-60 h-11 w-11 rounded-full overflow-hidden border border-black/10 dark:border-white/10"
+            className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden border border-black/10 dark:border-white/10"
           >
-            <img src="/logo.png" alt="sapiens.camp logo" className="h-full w-full object-cover" />
+            <img src="/logo.png" alt="sapiens.camp logo" className="h-full w-full object-contain scale-125 mix-blend-screen" />
           </Link>
           <GlobalUpOneLevelButton />
           <header
