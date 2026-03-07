@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import UpOneLevelButton from "../../components/UpOneLevelButton";
 
 export default function ChineseXueCePage() {
   const years = Array.from({ length: 115 - 83 + 1 }, (_, index) => 83 + index);
@@ -22,7 +21,6 @@ export default function ChineseXueCePage() {
             </div>
           </div>
 
-          <UpOneLevelButton href="/chinese" />
         </div>
       </main>
     </div>

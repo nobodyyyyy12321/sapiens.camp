@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import UpOneLevelButton from "../../../components/UpOneLevelButton";
 
 type PageProps = {
   params: {
@@ -29,7 +28,6 @@ export default function NaturalXueCeYearPage({ params }: PageProps) {
             </div>
           </div>
 
-          <UpOneLevelButton href="/natural/學測" />
         </div>
       </main>
     </div>

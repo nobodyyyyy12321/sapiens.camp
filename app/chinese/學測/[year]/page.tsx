@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import UpOneLevelButton from "../../../components/UpOneLevelButton";
 
 type PageProps = {
   params: {
@@ -29,7 +28,6 @@ export default function ChineseXueCeYearPage({ params }: PageProps) {
             </div>
           </div>
 
-          <UpOneLevelButton href="/chinese/學測" />
         </div>
       </main>
     </div>

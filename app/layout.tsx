@@ -9,6 +9,7 @@ import LanguageGate from "./components/LanguageGate";
 import LanguageSelector from "./components/LanguageSelector";
 import PWARegister from "./components/PWARegister";
 import BookshelfContextMenu from "./components/BookshelfContextMenu";
+import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
@@ -78,6 +79,7 @@ export default function RootLayout({
           >
             <img src="/logo.png" alt="sapiens.camp logo" className="h-full w-full object-cover" />
           </Link>
+          <GlobalUpOneLevelButton />
           <header
             className="w-full py-5 sticky top-0 z-40"
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
