@@ -204,7 +204,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               onChange={(e) => setSubjectQuery(e.target.value)}
               aria-label={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
             />
-            <div className="w-full overflow-x-auto">
+            <div className="w-full overflow-visible">
               <div className="bookshelf-grid home-bookshelf-grid">
                 {filteredSubjects.map((subject) => (
                   <Link
@@ -284,7 +284,7 @@ export default function Home() {
                       { name: "物理", href: "/physics" },
                     ]
               ).length > 0 && (
-                <div className="w-full overflow-x-auto">
+                <div className="w-full overflow-visible">
                   <div className="bookshelf-grid home-bookshelf-grid">
                     {(language === "en"
                       ? [
