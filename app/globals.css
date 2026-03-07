@@ -212,8 +212,12 @@ main button.rounded-full.border {
   transform: translateY(-2px);
 }
 
+.home-bookshelf-grid {
+  --shelf-line-y: 9.2rem;
+}
+
 .home-bookshelf-grid .book-link:hover {
-  transform: none;
+  transform: translateY(-2px);
 }
 
 .dark .book-link {
