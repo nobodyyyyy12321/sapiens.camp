@@ -205,7 +205,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               aria-label={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
             />
             <div className="w-full overflow-x-auto">
-              <div className="bookshelf-grid">
+              <div className="bookshelf-grid home-bookshelf-grid">
                 {filteredSubjects.map((subject) => (
                   <Link
                     key={subject.name}
@@ -285,7 +285,7 @@ export default function Home() {
                     ]
               ).length > 0 && (
                 <div className="w-full overflow-x-auto">
-                  <div className="bookshelf-grid">
+                  <div className="bookshelf-grid home-bookshelf-grid">
                     {(language === "en"
                       ? [
                           { name: "Learn Chinese", href: "/study-chinese" },
