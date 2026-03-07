@@ -126,24 +126,6 @@ export async function GET(request: Request) {
           });
         }
 
-        // Traffic records
-        if (Array.isArray(userData.trafficRecords)) {
-          userData.trafficRecords.forEach((rec: any) => {
-            records.push({
-              id: `${userId}-traffic-${rec.timestamp}`,
-              type: 'quiz',
-              category: '交通題庫',
-              userName,
-              userId,
-              answered: rec.answered,
-              correct: rec.correct,
-              set: rec.set,
-              timestamp: rec.timestamp,
-              title: `交通 ${rec.set}`,
-            });
-          });
-        }
-
         // Quote records
         if (Array.isArray(userData.quoteRecords)) {
           userData.quoteRecords.forEach((rec: any) => {

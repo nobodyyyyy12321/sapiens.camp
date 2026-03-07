@@ -9,7 +9,6 @@ const QUIZ_PREFIXES = [
   "/quote",
   "/english",
   "/study-chinese",
-  "/traffic",
   "/math",
   "/recitation",
 ];

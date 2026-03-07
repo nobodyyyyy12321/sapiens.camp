@@ -37,7 +37,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "名言佳句", href: "/quote" },
             { name: "数学", href: "/math" },
             { name: "物理", href: "/physics" },
-            { name: "交通", href: "/traffic" },
           ]
         : [
             { name: "詩文背誦", href: "/recitation" },
@@ -45,7 +44,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "名言佳句", href: "/quote" },
             { name: "數學", href: "/math" },
             { name: "物理", href: "/physics" },
-            { name: "交通", href: "/traffic" },
           ];
 
   const childSubjects =
@@ -66,7 +64,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "微分方程", href: "/under-construction" },
             { name: "线性代数", href: "/under-construction" },
             { name: "复变函数", href: "/under-construction" },
-            { name: "中华民国", href: "/traffic/中華民國" },
           ]
         : [
             { name: "2000單字", href: "/english/2000" },
@@ -82,7 +79,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "微分方程", href: "/under-construction" },
             { name: "線性代數", href: "/under-construction" },
             { name: "複變函數", href: "/under-construction" },
-            { name: "中華民國", href: "/traffic/中華民國" },
           ];
 
   useEffect(() => {
@@ -279,7 +275,6 @@ export default function Home() {
                       { name: "名言佳句", href: "/quote" },
                       { name: "数学", href: "/math" },
                       { name: "物理", href: "/physics" },
-                      { name: "交通", href: "/traffic" },
                     ]
                   : [
                       { name: "詩文背誦", href: "/recitation" },
@@ -287,7 +282,6 @@ export default function Home() {
                       { name: "名言佳句", href: "/quote" },
                       { name: "數學", href: "/math" },
                       { name: "物理", href: "/physics" },
-                      { name: "交通", href: "/traffic" },
                     ]
               ).length > 0 && (
                 <div className="w-full overflow-x-auto">
@@ -303,7 +297,6 @@ export default function Home() {
                             { name: "名言佳句", href: "/quote" },
                             { name: "数学", href: "/math" },
                             { name: "物理", href: "/physics" },
-                            { name: "交通", href: "/traffic" },
                           ]
                         : [
                             { name: "詩文背誦", href: "/recitation" },
@@ -311,7 +304,6 @@ export default function Home() {
                             { name: "名言佳句", href: "/quote" },
                             { name: "數學", href: "/math" },
                             { name: "物理", href: "/physics" },
-                            { name: "交通", href: "/traffic" },
                           ]
                     ).map((subject) => (
                       <Link
