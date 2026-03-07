@@ -154,6 +154,8 @@ main button.rounded-full.border {
 
 .bookshelf-grid {
   --shelf-line: rgb(228 228 231);
+  --shelf-step: 9.5rem;
+  --shelf-line-y: 9rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -165,11 +167,11 @@ main button.rounded-full.border {
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent calc(8.75rem - 1px),
-    var(--shelf-line) calc(8.75rem - 1px),
-    var(--shelf-line) 8.75rem,
-    transparent 8.75rem,
-    transparent 9rem
+    transparent calc(var(--shelf-line-y) - 1px),
+    var(--shelf-line) calc(var(--shelf-line-y) - 1px),
+    var(--shelf-line) var(--shelf-line-y),
+    transparent var(--shelf-line-y),
+    transparent var(--shelf-step)
   );
 }
 
@@ -185,6 +187,7 @@ main button.rounded-full.border {
   justify-content: center;
   border-radius: 0.5rem;
   border: 1px solid rgb(228 228 231);
+  background-color: var(--zen-bg);
   padding: 0.5rem 0.25rem;
   color: inherit;
   font-family: inherit;
@@ -198,7 +201,7 @@ main button.rounded-full.border {
 }
 
 .category-bookshelf-grid {
-  gap: 0.5rem;
+  column-gap: 0.5rem;
 }
 
 .category-book-link {
