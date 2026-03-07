@@ -72,6 +72,14 @@ export default function AuthNav() {
   const name = displayName || session.user.name || session.user.email || "使用者";
   const encodedName = encodeURIComponent(name);
 
+  const handleSignOut = async () => {
+    try {
+      await signOut({ redirectTo: "/" });
+    } catch {
+      window.location.href = "/api/auth/signout";
+    }
+  };
+
   return (
     <div className="flex items-center">
       <div 
@@ -105,7 +113,7 @@ export default function AuthNav() {
               <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人書櫃</Link>
               <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</Link>
               <button
-                onClick={() => signOut({ callbackUrl: "/" })}
+                onClick={handleSignOut}
                 className="w-full text-left px-4 py-3 !text-sm !leading-5 font-normal hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
                 登出
