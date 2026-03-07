@@ -14,6 +14,8 @@ const STORAGE_KEY = "my-bookshelf-links";
 export default function ListsPage() {
   const [items, setItems] = useState<SavedBook[]>([]);
   const [draggingHref, setDraggingHref] = useState<string | null>(null);
+  const [dragGhost, setDragGhost] = useState<{ title: string; x: number; y: number } | null>(null);
+  const [droppedHref, setDroppedHref] = useState<string | null>(null);
 
   useEffect(() => {
     const load = () => {
@@ -58,6 +60,10 @@ export default function ListsPage() {
     window.dispatchEvent(new Event("my-bookshelf-updated"));
   };
 
+  const updateDragGhostPosition = (clientX: number, clientY: number) => {
+    setDragGhost((prev) => (prev ? { ...prev, x: clientX, y: clientY } : prev));
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black text-center">
@@ -72,24 +78,42 @@ export default function ListsPage() {
                 {items.map((item) => (
                   <div
                     key={item.href}
-                    className={`relative group ${draggingHref === item.href ? "opacity-60" : ""}`}
+                    className={`relative group transition-all duration-200 ${draggingHref === item.href ? "opacity-60 scale-95" : ""} ${droppedHref === item.href ? "scale-105 ring-2 ring-zinc-400 dark:ring-zinc-500 rounded-lg" : ""}`}
                     draggable
                     onDragStart={(event) => {
                       event.dataTransfer.effectAllowed = "move";
                       event.dataTransfer.setData("text/plain", item.href);
+                      const transparentImage = new Image();
+                      transparentImage.src =
+                        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+                      event.dataTransfer.setDragImage(transparentImage, 0, 0);
                       setDraggingHref(item.href);
+                      setDragGhost({ title: item.title, x: event.clientX, y: event.clientY });
+                    }}
+                    onDrag={(event) => {
+                      if (event.clientX || event.clientY) {
+                        updateDragGhostPosition(event.clientX, event.clientY);
+                      }
                     }}
                     onDragOver={(event) => {
                       event.preventDefault();
                       event.dataTransfer.dropEffect = "move";
+                      if (event.clientX || event.clientY) {
+                        updateDragGhostPosition(event.clientX, event.clientY);
+                      }
                     }}
                     onDrop={(event) => {
                       event.preventDefault();
                       const fromHref = event.dataTransfer.getData("text/plain");
                       if (!fromHref) return;
                       reorderItems(fromHref, item.href);
+                      setDroppedHref(item.href);
+                      setTimeout(() => setDroppedHref(null), 220);
                     }}
-                    onDragEnd={() => setDraggingHref(null)}
+                    onDragEnd={() => {
+                      setDraggingHref(null);
+                      setDragGhost(null);
+                    }}
                   >
                     <Link href={item.href} className="book-link">
                       {item.title}
@@ -109,6 +133,15 @@ export default function ListsPage() {
           )}
         </div>
       </main>
+
+      {dragGhost && (
+        <div
+          className="fixed z-[95] pointer-events-none"
+          style={{ left: dragGhost.x, top: dragGhost.y, transform: "translate(-50%, -50%)" }}
+        >
+          <div className="book-link opacity-95 shadow-lg">{dragGhost.title}</div>
+        </div>
+      )}
     </div>
   );
 }
