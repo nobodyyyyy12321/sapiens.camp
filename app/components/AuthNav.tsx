@@ -9,6 +9,7 @@ export default function AuthNav() {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | null>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
@@ -74,11 +75,13 @@ export default function AuthNav() {
 
   const handleSignOut = async () => {
     try {
+      setLogoutError(null);
+
       const csrfRes = await fetch("/api/auth/csrf", {
         method: "GET",
         credentials: "include",
       });
-      if (!csrfRes.ok) throw new Error("csrf_failed");
+      if (!csrfRes.ok) throw new Error(`csrf_http_${csrfRes.status}`);
 
       const csrfJson = await csrfRes.json();
       const csrfToken = csrfJson?.csrfToken;
@@ -103,8 +106,10 @@ export default function AuthNav() {
       form.appendChild(callbackInput);
       document.body.appendChild(form);
       form.submit();
-    } catch {
-      window.location.href = "/api/auth/signout";
+    } catch (error) {
+      const code = error instanceof Error ? error.message : "logout_unknown";
+      setLogoutError(code);
+      console.error("Logout failed:", error);
     }
   };
 
@@ -146,6 +151,12 @@ export default function AuthNav() {
               >
                 登出
               </button>
+              {logoutError && (
+                <div className="px-4 py-2 border-t border-zinc-200 dark:border-zinc-800">
+                  <p className="text-xs text-red-600 dark:text-red-400 break-all">登出失敗：{logoutError}</p>
+                  <a href="/api/auth/signout" className="mt-1 inline-block text-xs underline">改用預設登出頁</a>
+                </div>
+              )}
             </div>
           </div>
         )}
