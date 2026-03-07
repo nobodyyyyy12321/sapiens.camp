@@ -77,7 +77,11 @@ export default function RootLayout({
             aria-label="回到首頁"
             className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden border border-black/10 dark:border-white/10"
           >
-            <img src="/logo.png" alt="sapiens.camp logo" className="h-full w-full object-contain scale-125 mix-blend-screen" />
+            <img
+              src="/logo.png"
+              alt="sapiens.camp logo"
+              className="h-full w-full object-contain scale-125 mix-blend-screen [filter:contrast(2.6)_brightness(1.25)]"
+            />
           </Link>
           <GlobalUpOneLevelButton />
           <header
