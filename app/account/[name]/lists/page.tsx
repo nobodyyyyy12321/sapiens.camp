@@ -9,6 +9,21 @@ type SavedBook = {
   addedAt: string;
 };
 
+type QuizRecord = {
+  answered: number;
+  correct: number;
+  set: string;
+  timestamp: string;
+};
+
+type RecitationRecord = {
+  articleNumber: number;
+  title: string;
+  success: boolean;
+  timestamp: string;
+  category?: string;
+};
+
 const STORAGE_KEY = "my-bookshelf-links";
 
 export default function ListsPage() {
@@ -16,6 +31,7 @@ export default function ListsPage() {
   const [draggingHref, setDraggingHref] = useState<string | null>(null);
   const [dragGhost, setDragGhost] = useState<{ title: string; x: number; y: number } | null>(null);
   const [droppedHref, setDroppedHref] = useState<string | null>(null);
+  const [recordTips, setRecordTips] = useState<Record<string, string>>({});
   const itemsRef = useRef<SavedBook[]>([]);
 
   useEffect(() => {
@@ -41,6 +57,101 @@ export default function ListsPage() {
       window.removeEventListener("storage", load);
     };
   }, []);
+
+  useEffect(() => {
+    const formatDate = (timestamp: string) => {
+      return new Date(timestamp).toLocaleDateString("zh-TW", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      });
+    };
+
+    const normalizePath = (value: string) => {
+      try {
+        const decoded = decodeURIComponent(value);
+        return decoded.startsWith("/") ? decoded : `/${decoded}`;
+      } catch {
+        return value.startsWith("/") ? value : `/${value}`;
+      }
+    };
+
+    const run = async () => {
+      try {
+        const res = await fetch("/api/user/profile");
+        if (!res.ok) return;
+        const data = await res.json();
+        const user = data?.user;
+        if (!user) return;
+
+        const tips: Record<string, string> = {};
+
+        const englishRecords: QuizRecord[] = Array.isArray(user.englishRecords) ? user.englishRecords : [];
+        const quoteRecords: QuizRecord[] = Array.isArray(user.quoteRecords) ? user.quoteRecords : [];
+        const studyChineseRecords: QuizRecord[] = Array.isArray(user.studyChineseRecords) ? user.studyChineseRecords : [];
+        const recitations: RecitationRecord[] = Array.isArray(user.recitations) ? user.recitations : [];
+
+        for (const item of items) {
+          const path = normalizePath(item.href);
+
+          if (path.startsWith("/english/")) {
+            const set = path.replace("/english/", "");
+            const candidates = englishRecords.filter((r) => r?.set === set);
+            if (candidates.length > 0) {
+              const latest = candidates.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+              tips[item.href] = `最近：${formatDate(latest.timestamp)}，${latest.correct}/${latest.answered}`;
+              continue;
+            }
+          }
+
+          if (path.startsWith("/quote/")) {
+            const set = path.replace("/quote/", "");
+            const candidates = quoteRecords.filter((r) => r?.set === set);
+            if (candidates.length > 0) {
+              const latest = candidates.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+              tips[item.href] = `最近：${formatDate(latest.timestamp)}，${latest.correct}/${latest.answered}`;
+              continue;
+            }
+          }
+
+          if (path.startsWith("/study-chinese/")) {
+            const set = path.replace("/study-chinese/", "");
+            const candidates = studyChineseRecords.filter((r) => r?.set === set);
+            if (candidates.length > 0) {
+              const latest = candidates.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+              tips[item.href] = `最近：${formatDate(latest.timestamp)}，${latest.correct}/${latest.answered}`;
+              continue;
+            }
+          }
+
+          const articleMatch = path.match(/^\/(.+)\/(\d+)$/);
+          if (articleMatch) {
+            const category = articleMatch[1];
+            const number = Number(articleMatch[2]);
+            const candidates = recitations.filter((r) => {
+              const sameNumber = Number(r.articleNumber) === number;
+              const recitationCategory = normalizePath(`/${r.category || ""}`).slice(1);
+              return sameNumber && (!r.category || recitationCategory === category);
+            });
+            if (candidates.length > 0) {
+              const latest = candidates.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())[0];
+              tips[item.href] = `最近：${formatDate(latest.timestamp)}，${latest.success ? "成功" : "失敗"}`;
+              continue;
+            }
+          }
+
+          tips[item.href] = "尚無作答紀錄";
+        }
+
+        setRecordTips(tips);
+      } catch {
+        setRecordTips({});
+      }
+    };
+
+    if (items.length > 0) run();
+    else setRecordTips({});
+  }, [items]);
 
   const removeItem = (href: string) => {
     const next = items.filter((item) => item.href !== href);
@@ -126,7 +237,7 @@ export default function ListsPage() {
                       setDragGhost(null);
                     }}
                   >
-                    <Link href={item.href} className="book-link">
+                    <Link href={item.href} className="book-link" title={recordTips[item.href] || "尚無作答紀錄"}>
                       {item.title}
                     </Link>
                     <button
