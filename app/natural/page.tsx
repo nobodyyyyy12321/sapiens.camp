@@ -11,7 +11,7 @@ export default function NaturalPage() {
         <div className="mt-8 w-full max-w-3xl">
           <div className="bookshelf-scroll">
             <div className="bookshelf-grid">
-              <Link href="/under-construction" className="book-link">
+              <Link href="/natural/學測" className="book-link">
                 學測
               </Link>
             </div>
