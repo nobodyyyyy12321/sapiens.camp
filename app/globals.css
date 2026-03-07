@@ -153,51 +153,35 @@ main button.rounded-full.border {
 }
 
 .bookshelf-grid {
-  --shelf-line: rgb(228 228 231);
-  --shelf-step: 10.5rem;
-  --shelf-line-y: 8.8rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 0.875rem;
-  row-gap: 2rem;
-  align-items: end;
-  padding-bottom: 0.75rem;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent calc(var(--shelf-line-y) - 1px),
-    var(--shelf-line) calc(var(--shelf-line-y) - 1px),
-    var(--shelf-line) var(--shelf-line-y),
-    transparent var(--shelf-line-y),
-    transparent var(--shelf-step)
-  );
-}
-
-.dark .bookshelf-grid {
-  --shelf-line: rgb(63 63 70);
+  row-gap: 1rem;
+  align-items: stretch;
+  padding-bottom: 0.5rem;
 }
 
 .book-link {
   display: flex;
-  height: 8.5rem;
-  min-width: 3.25rem;
+  height: 3.25rem;
+  min-width: 9rem;
   align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
+  justify-content: flex-start;
+  border-radius: 0.75rem;
   border: 1px solid rgb(228 228 231);
   background-color: var(--zen-bg);
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 0.9rem;
   color: inherit;
   font-family: inherit;
-  text-align: center;
+  text-align: left;
   font-size: 1rem !important;
   line-height: 1.5rem !important;
   font-weight: 400;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  transition: transform 0.2s ease;
+  white-space: nowrap;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .category-bookshelf-grid {
@@ -205,19 +189,16 @@ main button.rounded-full.border {
 }
 
 .category-book-link {
-  min-width: 3.75rem;
+  min-width: 10rem;
 }
 
 .book-link:hover {
-  transform: translateY(-2px);
+  transform: translateX(6px);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.12);
 }
 
 .home-bookshelf-grid {
-  transform: translateY(2px);
-}
-
-.home-bookshelf-grid .book-link:hover {
-  transform: translateY(-2px);
+  transform: none;
 }
 
 .dark .book-link {
