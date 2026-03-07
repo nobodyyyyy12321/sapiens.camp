@@ -75,7 +75,7 @@ export default function RootLayout({
           <Link
             href="/"
             aria-label="回到首頁"
-            className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden border border-black/10 dark:border-white/10"
+            className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden"
           >
             <img
               src="/logo-removebg-preview.png"
