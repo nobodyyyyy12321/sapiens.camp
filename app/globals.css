@@ -155,7 +155,7 @@ main button.rounded-full.border {
 .bookshelf-grid {
   --shelf-line: rgb(228 228 231);
   --shelf-step: 9.5rem;
-  --shelf-line-y: 9rem;
+  --shelf-line-y: 8.5rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
