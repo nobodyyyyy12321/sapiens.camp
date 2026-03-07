@@ -153,13 +153,6 @@ export default function ListsPage() {
     else setRecordTips({});
   }, [items]);
 
-  const removeItem = (href: string) => {
-    const next = items.filter((item) => item.href !== href);
-    setItems(next);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-    window.dispatchEvent(new Event("my-bookshelf-updated"));
-  };
-
   const moveDraggingItem = (fromHref: string, toHref: string) => {
     if (fromHref === toHref) return;
 
@@ -240,14 +233,6 @@ export default function ListsPage() {
                     <Link href={item.href} className="book-link" title={recordTips[item.href] || "尚無作答紀錄"}>
                       {item.title}
                     </Link>
-                    <button
-                      onClick={() => removeItem(item.href)}
-                      className="absolute -top-2 -right-2 hidden group-hover:flex items-center justify-center h-6 w-6 rounded-full border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-xs"
-                      title="移除"
-                      aria-label="移除"
-                    >
-                      ×
-                    </button>
                   </div>
                 ))}
               </div>

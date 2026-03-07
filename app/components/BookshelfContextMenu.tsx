@@ -16,6 +16,17 @@ export default function BookshelfContextMenu() {
   const [y, setY] = useState(0);
   const [target, setTarget] = useState<{ title: string; href: string } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [isInBookshelf, setIsInBookshelf] = useState(false);
+
+  const getCurrentBookshelf = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const parsed: SavedBook[] = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
 
   useEffect(() => {
     const closeMenu = () => setOpen(false);
@@ -29,8 +40,12 @@ export default function BookshelfContextMenu() {
       const title = (anchor.textContent || "").trim();
       if (!href || !title) return;
 
+      const current = getCurrentBookshelf();
+      const exists = current.some((item) => item.href === href);
+
       event.preventDefault();
       setTarget({ title, href });
+      setIsInBookshelf(exists);
       setX(event.clientX);
       setY(event.clientY);
       setOpen(true);
@@ -57,8 +72,7 @@ export default function BookshelfContextMenu() {
     if (!target) return;
 
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const current: SavedBook[] = raw ? JSON.parse(raw) : [];
+      const current = getCurrentBookshelf();
       const exists = current.some((item) => item.href === target.href);
       if (exists) {
         setToast("已在個人書櫃");
@@ -66,10 +80,34 @@ export default function BookshelfContextMenu() {
         const next: SavedBook[] = [{ ...target, addedAt: new Date().toISOString() }, ...current];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
         window.dispatchEvent(new Event("my-bookshelf-updated"));
+        setIsInBookshelf(true);
         setToast("已加入個人書櫃");
       }
     } catch {
       setToast("加入失敗");
+    }
+
+    setOpen(false);
+    setTimeout(() => setToast(null), 1400);
+  };
+
+  const removeFromBookshelf = () => {
+    if (!target) return;
+
+    try {
+      const current = getCurrentBookshelf();
+      const exists = current.some((item) => item.href === target.href);
+      if (!exists) {
+        setToast("不在個人書櫃");
+      } else {
+        const next = current.filter((item) => item.href !== target.href);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        window.dispatchEvent(new Event("my-bookshelf-updated"));
+        setIsInBookshelf(false);
+        setToast("已移出個人書櫃");
+      }
+    } catch {
+      setToast("移出失敗");
     }
 
     setOpen(false);
@@ -89,6 +127,13 @@ export default function BookshelfContextMenu() {
             className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
           >
             加入個人書櫃
+          </button>
+          <button
+            onClick={removeFromBookshelf}
+            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50"
+            disabled={!isInBookshelf}
+          >
+            移出個人書櫃
           </button>
         </div>
       )}
