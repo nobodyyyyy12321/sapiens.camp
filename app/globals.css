@@ -212,8 +212,8 @@ main button.rounded-full.border {
 
   .book-link,
   .category-book-link {
-    min-width: fit-content;
-    width: auto;
+    min-width: calc(50% - 0.625rem);
+    width: fit-content;
     max-width: 100%;
   }
 }
