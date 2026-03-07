@@ -16,7 +16,6 @@ export default function ListsPage() {
   const [draggingHref, setDraggingHref] = useState<string | null>(null);
   const [dragGhost, setDragGhost] = useState<{ title: string; x: number; y: number } | null>(null);
   const [droppedHref, setDroppedHref] = useState<string | null>(null);
-  const [dropHintHref, setDropHintHref] = useState<string | null>(null);
   const itemsRef = useRef<SavedBook[]>([]);
 
   useEffect(() => {
@@ -83,7 +82,7 @@ export default function ListsPage() {
                 {items.map((item) => (
                   <div
                     key={item.href}
-                    className={`relative group transition-all duration-200 ${draggingHref === item.href ? "opacity-60 scale-95" : ""} ${droppedHref === item.href ? "scale-105 ring-2 ring-zinc-400 dark:ring-zinc-500 rounded-lg" : ""} ${dropHintHref === item.href && draggingHref && draggingHref !== item.href ? "ring-2 ring-blue-500/80 dark:ring-blue-300/80 rounded-lg" : ""}`}
+                    className={`relative group transition-all duration-300 ${draggingHref === item.href ? "opacity-60 scale-95" : ""} ${droppedHref === item.href ? "scale-105 ring-2 ring-zinc-400 dark:ring-zinc-500 rounded-lg" : ""}`}
                     draggable
                     onDragStart={(event) => {
                       event.dataTransfer.effectAllowed = "move";
@@ -107,7 +106,6 @@ export default function ListsPage() {
                         updateDragGhostPosition(event.clientX, event.clientY);
                       }
                       if (draggingHref && draggingHref !== item.href) {
-                        setDropHintHref(item.href);
                         moveDraggingItem(draggingHref, item.href);
                       }
                     }}
@@ -118,14 +116,12 @@ export default function ListsPage() {
                       if (fromHref !== item.href) {
                         moveDraggingItem(fromHref, item.href);
                       }
-                      setDropHintHref(null);
                       setDroppedHref(item.href);
                       setTimeout(() => setDroppedHref(null), 220);
                     }}
                     onDragEnd={() => {
                       localStorage.setItem(STORAGE_KEY, JSON.stringify(itemsRef.current));
                       window.dispatchEvent(new Event("my-bookshelf-updated"));
-                      setDropHintHref(null);
                       setDraggingHref(null);
                       setDragGhost(null);
                     }}
