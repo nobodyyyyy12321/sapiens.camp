@@ -154,14 +154,14 @@ main button.rounded-full.border {
 
 .bookshelf-grid {
   --shelf-line: rgb(228 228 231);
-  --shelf-step: 9.5rem;
-  --shelf-line-y: 8.7rem;
+  --shelf-step: 10.5rem;
+  --shelf-line-y: 8.8rem;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 0.875rem;
-  row-gap: 1rem;
+  row-gap: 2rem;
   align-items: end;
   padding-bottom: 0.75rem;
   background-image: repeating-linear-gradient(
