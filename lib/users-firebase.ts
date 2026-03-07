@@ -46,13 +46,6 @@ export type User = {
     timestamp: string;
     category: "學中文";
   }>;
-  trafficRecords?: Array<{
-    answered: number;
-    correct: number;
-    set: string;
-    timestamp: string;
-    category: "交通題庫";
-  }>;
 };
 
 const COLLECTION_NAME = "users";
