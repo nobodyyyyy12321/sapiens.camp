@@ -61,12 +61,12 @@ export default function BookshelfContextMenu() {
       const current: SavedBook[] = raw ? JSON.parse(raw) : [];
       const exists = current.some((item) => item.href === target.href);
       if (exists) {
-        setToast("已在我的書櫃");
+        setToast("已在個人書櫃");
       } else {
         const next: SavedBook[] = [{ ...target, addedAt: new Date().toISOString() }, ...current];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
         window.dispatchEvent(new Event("my-bookshelf-updated"));
-        setToast("已加入我的書櫃");
+        setToast("已加入個人書櫃");
       }
     } catch {
       setToast("加入失敗");
@@ -88,7 +88,7 @@ export default function BookshelfContextMenu() {
             onClick={addToBookshelf}
             className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
           >
-            加入我的書櫃
+            加入個人書櫃
           </button>
         </div>
       )}
