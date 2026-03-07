@@ -68,7 +68,5 @@ export const authOptions = {
 };
 
 const { handlers, auth } = NextAuth(authOptions as any);
-const handler = handlers.GET;
 
-export { auth, handler };
-export default handler;
+export { auth, handlers };
