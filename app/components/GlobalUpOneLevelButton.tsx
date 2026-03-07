@@ -25,7 +25,7 @@ export default function GlobalUpOneLevelButton() {
     <button
       type="button"
       onClick={handleGoUp}
-      className="fixed bottom-6 right-6 z-50 h-9 w-9 rounded-md border border-zinc-200 dark:border-zinc-700 bg-[var(--zen-bg)] flex items-center justify-center shadow-sm -translate-x-[2.5cm] -translate-y-[4.33cm]"
+      className="fixed bottom-6 right-6 z-50 h-9 w-9 rounded-md border border-zinc-200 dark:border-zinc-700 bg-[var(--zen-bg)] flex items-center justify-center shadow-sm -translate-x-[3.5cm] -translate-y-[2.6cm]"
       aria-label="回到上一層"
       title="上一層"
     >
