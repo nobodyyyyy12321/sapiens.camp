@@ -10,7 +10,7 @@ export default function XueCe114Page() {
         <p className="mt-4 text-sm zen-subtle">這是一個 114 題庫的占位頁面，請在此加入題目或連結。</p>
 
         <div className="mt-8 w-full max-w-md">
-          <Link href="/math/學測" className="inline-block px-4 py-2 rounded-md bg-zinc-100 hover:bg-zinc-200">返回 學測題庫</Link>
+          <Link href="/math/學測" className="inline-block px-4 py-2 rounded-md bg-zinc-100 hover:bg-zinc-200">上一層</Link>
         </div>
       </main>
     </div>

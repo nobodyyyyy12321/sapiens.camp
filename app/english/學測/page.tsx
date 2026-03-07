@@ -23,7 +23,7 @@ export default function EnglishXueCePage() {
 
           <div className="mt-6">
             <Link href="/english" className="book-link">
-              返回 英文
+              上一層
             </Link>
           </div>
         </div>

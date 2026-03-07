@@ -23,7 +23,7 @@ export default function NaturalXueCePage() {
 
           <div className="mt-6">
             <Link href="/natural" className="book-link">
-              返回 自然
+              上一層
             </Link>
           </div>
         </div>

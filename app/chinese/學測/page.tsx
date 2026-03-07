@@ -23,7 +23,7 @@ export default function ChineseXueCePage() {
 
           <div className="mt-6">
             <Link href="/chinese" className="book-link">
-              返回 國文科
+              上一層
             </Link>
           </div>
         </div>

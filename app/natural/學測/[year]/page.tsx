@@ -30,7 +30,7 @@ export default function NaturalXueCeYearPage({ params }: PageProps) {
 
           <div className="mt-6">
             <Link href="/natural/學測" className="book-link">
-              返回 學測年份列表
+              上一層
             </Link>
           </div>
         </div>

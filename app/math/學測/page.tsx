@@ -27,7 +27,7 @@ export default function XueCePage() {
 
           <div className="mt-6">
             <Link href="/math" className="book-link">
-              返回 數學題庫
+              上一層
             </Link>
           </div>
         </div>

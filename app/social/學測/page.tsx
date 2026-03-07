@@ -23,7 +23,7 @@ export default function SocialXueCePage() {
 
           <div className="mt-6">
             <Link href="/social" className="book-link">
-              返回 社會
+              上一層
             </Link>
           </div>
         </div>

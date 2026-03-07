@@ -30,7 +30,7 @@ export default function ChineseXueCeYearPage({ params }: PageProps) {
 
           <div className="mt-6">
             <Link href="/chinese/學測" className="book-link">
-              返回 學測年份列表
+              上一層
             </Link>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function MathXueCeYearPage({ params }: PageProps) {
 
           <div className="mt-6">
             <Link href="/math/學測" className="book-link">
-              返回 學測年份列表
+              上一層
             </Link>
           </div>
         </div>
