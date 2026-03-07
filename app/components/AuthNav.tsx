@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function AuthNav() {
@@ -74,11 +74,37 @@ export default function AuthNav() {
 
   const handleSignOut = async () => {
     try {
-      const result = await signOut({ redirect: false, callbackUrl: "/" });
+      const csrfRes = await fetch("/api/auth/csrf", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!csrfRes.ok) throw new Error("csrf_failed");
+
+      const csrfJson = await csrfRes.json();
+      const csrfToken = csrfJson?.csrfToken;
+      if (!csrfToken) throw new Error("csrf_missing");
+
+      const body = new URLSearchParams({
+        csrfToken,
+        callbackUrl: "/",
+        json: "true",
+      });
+
+      const signoutRes = await fetch("/api/auth/signout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: body.toString(),
+      });
+
+      if (!signoutRes.ok) throw new Error("signout_failed");
+      const signoutJson = await signoutRes.json();
       setIsMenuOpen(false);
-      window.location.href = result?.url || "/";
+      window.location.href = signoutJson?.url || "/";
     } catch {
-      window.location.href = "/";
+      window.location.href = "/api/auth/signout";
     }
   };
 
