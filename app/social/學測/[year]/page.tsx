@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import UpOneLevelButton from "../../../components/UpOneLevelButton";
 
 type PageProps = {
   params: {
@@ -28,11 +29,7 @@ export default function SocialXueCeYearPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="mt-6">
-            <Link href="/social/學測" className="book-link">
-              上一層
-            </Link>
-          </div>
+          <UpOneLevelButton href="/social/學測" />
         </div>
       </main>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import UpOneLevelButton from "../../../components/UpOneLevelButton";
 
 export default function XueCe114Page() {
   return (
@@ -17,11 +18,7 @@ export default function XueCe114Page() {
             </div>
           </div>
 
-          <div className="mt-6">
-            <Link href="/math/學測" className="book-link">
-              上一層
-            </Link>
-          </div>
+          <UpOneLevelButton href="/math/學測" />
         </div>
       </main>
     </div>

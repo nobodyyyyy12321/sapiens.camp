@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import UpOneLevelButton from "../../components/UpOneLevelButton";
 
 export default function SocialXueCePage() {
   const years = Array.from({ length: 115 - 83 + 1 }, (_, index) => 83 + index);
@@ -21,11 +22,7 @@ export default function SocialXueCePage() {
             </div>
           </div>
 
-          <div className="mt-6">
-            <Link href="/social" className="book-link">
-              上一層
-            </Link>
-          </div>
+          <UpOneLevelButton href="/social" />
         </div>
       </main>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import UpOneLevelButton from "../../components/UpOneLevelButton";
 
 export default function XueCePage() {
   const years = Array.from({ length: 115 - 83 + 1 }, (_, index) => 83 + index);
@@ -25,11 +26,7 @@ export default function XueCePage() {
             </div>
           </div>
 
-          <div className="mt-6">
-            <Link href="/math" className="book-link">
-              上一層
-            </Link>
-          </div>
+          <UpOneLevelButton href="/math" />
         </div>
       </main>
     </div>
