@@ -20,6 +20,9 @@ export default function PublicExamPage() {
               <Link href="/中油" className="book-link">
                 中油
               </Link>
+              <Link href="/高普考" className="book-link">
+                高普考
+              </Link>
             </div>
           </div>
         </div>
