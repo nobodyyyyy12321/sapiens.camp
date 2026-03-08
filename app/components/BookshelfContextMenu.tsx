@@ -117,7 +117,7 @@ export default function BookshelfContextMenu() {
   const downloadPdf = () => {
     if (!target) return;
 
-    if (target.href === "/chinese/學測/115") {
+    if (target.href === "/chinese/學測/115/選擇題") {
       fetch("/api/chineseGSATpdf/single")
         .then(async (res) => {
           const data = await res.json();
@@ -125,14 +125,8 @@ export default function BookshelfContextMenu() {
             throw new Error(data?.error || "download_failed");
           }
 
-          const link = document.createElement("a");
-          link.href = data.url;
-          link.download = data.fileName || "國文學測115.pdf";
-          document.body.appendChild(link);
-          link.click();
-          link.remove();
-
-          setToast("開始下載PDF");
+          window.open(data.url, "_blank", "noopener,noreferrer");
+          setToast("已在新分頁開啟PDF");
         })
         .catch(() => {
           setToast("下載失敗");
@@ -152,14 +146,8 @@ export default function BookshelfContextMenu() {
       return;
     }
 
-    const link = document.createElement("a");
-    link.href = target.href;
-    link.download = `${target.title}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    setToast("開始下載PDF");
+    window.open(target.href, "_blank", "noopener,noreferrer");
+    setToast("已在新分頁開啟PDF");
     setOpen(false);
     setTimeout(() => setToast(null), 1400);
   };
