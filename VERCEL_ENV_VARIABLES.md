@@ -100,17 +100,25 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
 - 使用 Resend 預設：`onboarding@resend.dev`
 - 使用自訂域名：`noreply@sapiens.camp`
 
+### 8. 意見回饋收件地址（建議）
+
+**變數名稱：** `FEEDBACK_TO_EMAIL`
+
+**用途：** 網站「意見回饋」表單的收件信箱
+
+**值範例：** `support@sapiens.camp`
+
 ---
 
 ## 🔑 GitHub OAuth（如果使用 GitHub 登入）
 
-### 8. GitHub Client ID
+### 9. GitHub Client ID
 
 **變數名稱：** `GITHUB_ID`
 
 **值範例：** `Iv1.xxxxxxxxxxxxx`
 
-### 9. GitHub Client Secret
+### 10. GitHub Client Secret
 
 **變數名稱：** `GITHUB_SECRET`
 
@@ -131,6 +139,7 @@ MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC...
 | `FIREBASE_PRIVATE_KEY` | ⚠️ 如果使用 Firebase | Firebase 私鑰 |
 | `RESEND_API_KEY` | ⚠️ 如果使用 Resend | Resend API 金鑰 |
 | `MAIL_FROM` | ❌ 可選 | 郵件發送者地址 |
+| `FEEDBACK_TO_EMAIL` | ❌ 建議 | 意見回饋收件信箱 |
 | `GITHUB_ID` | ❌ 可選 | GitHub OAuth Client ID |
 | `GITHUB_SECRET` | ❌ 可選 | GitHub OAuth Client Secret |
 
@@ -209,6 +218,7 @@ FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY----
 # Resend（如果使用）
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxx
 MAIL_FROM=onboarding@resend.dev
+FEEDBACK_TO_EMAIL=support@sapiens.camp
 
 # GitHub OAuth（如果使用）
 GITHUB_ID=your-github-client-id
