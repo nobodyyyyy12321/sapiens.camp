@@ -223,7 +223,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
           <div className="mt-4 flex w-full max-w-5xl flex-col gap-10">
             <input
-              className="w-full p-3 rounded-full border border-zinc-200 text-sm"
+              className="w-full max-w-sm mx-auto p-3 rounded-full border border-zinc-200 text-sm"
               style={{ backgroundColor: "var(--zen-bg)", color: "var(--zen-ink)" }}
               placeholder={language === "en" ? "Search subjects" : language === "zh-CN" ? "搜索科目" : "搜尋科目"}
               value={subjectQuery}
