@@ -50,6 +50,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "天文", href: "/under-construction" },
             { name: "历史", href: "/under-construction" },
             { name: "公民", href: "/under-construction" },
+            { name: "心理", href: "/under-construction" },
             { name: "自然", href: "/natural" },
             { name: "社会", href: "/social" },
           ]
@@ -72,6 +73,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "天文", href: "/under-construction" },
             { name: "歷史", href: "/under-construction" },
             { name: "公民", href: "/under-construction" },
+            { name: "心理", href: "/under-construction" },
             { name: "自然", href: "/natural" },
             { name: "社會", href: "/social" },
           ];
@@ -387,6 +389,7 @@ export default function Home() {
                       { name: "地理", href: "/under-construction" },
                       { name: "历史", href: "/under-construction" },
                       { name: "公民", href: "/under-construction" },
+                      { name: "心理", href: "/under-construction" },
                       { name: "自然", href: "/natural" },
                       { name: "社会", href: "/social" },
                     ]
@@ -404,6 +407,7 @@ export default function Home() {
                       { name: "地理", href: "/under-construction" },
                       { name: "歷史", href: "/under-construction" },
                       { name: "公民", href: "/under-construction" },
+                      { name: "心理", href: "/under-construction" },
                       { name: "自然", href: "/natural" },
                       { name: "社會", href: "/social" },
                     ]
@@ -429,6 +433,7 @@ export default function Home() {
                             { name: "地理", href: "/under-construction" },
                             { name: "历史", href: "/under-construction" },
                             { name: "公民", href: "/under-construction" },
+                            { name: "心理", href: "/under-construction" },
                             { name: "自然", href: "/natural" },
                             { name: "社会", href: "/social" },
                           ]
@@ -446,6 +451,7 @@ export default function Home() {
                             { name: "地理", href: "/under-construction" },
                             { name: "歷史", href: "/under-construction" },
                             { name: "公民", href: "/under-construction" },
+                            { name: "心理", href: "/under-construction" },
                             { name: "自然", href: "/natural" },
                             { name: "社會", href: "/social" },
                           ]
