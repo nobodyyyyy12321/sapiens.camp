@@ -14,7 +14,7 @@ export default function EnglishPage() {
               <Link href="/english/2000" className="book-link">
                 2000單字
               </Link>
-              <Link href="/english/學測" className="book-link">
+              <Link href="/under-construction" className="book-link">
                 學測
               </Link>
             </div>
