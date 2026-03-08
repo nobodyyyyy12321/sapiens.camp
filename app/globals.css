@@ -181,7 +181,6 @@ main button.rounded-full.border {
 .book-link {
   display: flex;
   height: 3.25rem;
-  min-width: 9rem;
   align-items: center;
   justify-content: flex-start;
   border-radius: 0.75rem;
@@ -204,7 +203,6 @@ main button.rounded-full.border {
 }
 
 .category-book-link {
-  min-width: 10rem;
 }
 
 .book-link:hover {
@@ -232,7 +230,6 @@ main button.rounded-full.border {
 
   .book-link,
   .category-book-link {
-    min-width: calc(50% - 0.625rem);
     width: fit-content;
     max-width: 100%;
   }
