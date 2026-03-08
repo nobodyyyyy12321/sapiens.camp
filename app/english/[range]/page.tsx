@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 type Option = {
   label: string;
@@ -20,7 +20,9 @@ type Question = {
 export default function QuotePage() {
   const { data: session } = useSession();
   const params = useParams();
+  const searchParams = useSearchParams();
   const range = params.range as string;
+  const randomMode = searchParams?.get("random") === "1";
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
@@ -28,17 +30,27 @@ export default function QuotePage() {
 
   useEffect(() => {
     if (!range) return;
+
+    const shuffleQuestions = (items: Question[]) => {
+      const shuffled = [...items];
+      for (let i = shuffled.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
     
     fetch(`/api/english/questions?range=${range}`)
       .then(res => res.json())
       .then(data => {
         if (data.questions) {
-          setQuestions(data.questions);
-          setUserAnswers(new Array(data.questions.length).fill(null));
+          const loadedQuestions: Question[] = randomMode ? shuffleQuestions(data.questions) : data.questions;
+          setQuestions(loadedQuestions);
+          setUserAnswers(new Array(loadedQuestions.length).fill(null));
         }
       })
       .catch(err => console.error("Failed to load questions:", err));
-  }, [range]);
+  }, [range, randomMode]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
