@@ -198,7 +198,7 @@ main button.rounded-full.border {
   box-shadow:
     inset 0 -3px 0 rgba(0, 0, 0, 0.12),
     0 0 0 1px rgba(60, 60, 63, 0.28),
-    0 0 10px rgba(40, 40, 43, 0.24);
+    0 0 18px rgba(40, 40, 43, 0.24);
   filter: none;
 }
 
