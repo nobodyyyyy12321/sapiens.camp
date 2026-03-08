@@ -175,7 +175,7 @@ export default function BookshelfContextMenu() {
           </button>
           <button
             onClick={downloadPdf}
-            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50"
             disabled={!canDownloadPdf}
           >
             下載pdf
