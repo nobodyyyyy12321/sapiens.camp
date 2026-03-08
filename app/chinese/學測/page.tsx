@@ -14,7 +14,11 @@ export default function ChineseXueCePage() {
           <div className="bookshelf-scroll">
             <div className="bookshelf-grid">
               {years.map((year) => (
-                <Link key={year} href="/under-construction" className="book-link">
+                <Link
+                  key={year}
+                  href={year === 115 ? "/chinese/學測/115/選擇題" : "/under-construction"}
+                  className="book-link"
+                >
                   {year}
                 </Link>
               ))}
