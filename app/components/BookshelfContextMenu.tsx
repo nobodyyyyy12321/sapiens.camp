@@ -14,7 +14,7 @@ export default function BookshelfContextMenu() {
   const [open, setOpen] = useState(false);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-  const [target, setTarget] = useState<{ title: string; href: string } | null>(null);
+  const [target, setTarget] = useState<{ title: string; href: string; pagePath: string } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isInBookshelf, setIsInBookshelf] = useState(false);
 
@@ -44,7 +44,7 @@ export default function BookshelfContextMenu() {
       const exists = current.some((item) => item.href === href);
 
       event.preventDefault();
-      setTarget({ title, href });
+      setTarget({ title, href, pagePath: window.location.pathname });
       setIsInBookshelf(exists);
       setX(event.clientX);
       setY(event.clientY);
@@ -117,7 +117,7 @@ export default function BookshelfContextMenu() {
   const downloadPdf = () => {
     if (!target) return;
 
-    if (target.href === "/chinese/學測/115/選擇題") {
+    if (target.pagePath === "/chinese/學測" && target.title === "115") {
       fetch("/api/chineseGSATpdf/single")
         .then(async (res) => {
           const data = await res.json();
