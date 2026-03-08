@@ -69,6 +69,11 @@ body {
 }
 
 .zen-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  white-space: nowrap;
   background: var(--zen-accent);
   color: white;
   border-radius: 9999px;
@@ -84,6 +89,11 @@ body {
 
 /* Ghost button */
 .zen-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  white-space: nowrap;
   background: transparent;
   border: 1px solid rgba(27,27,27,0.06);
   color: var(--zen-ink);
@@ -144,6 +154,11 @@ main .bg-white.text-black {
 
 main a.rounded-full.border,
 main button.rounded-full.border {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  white-space: nowrap;
   background-color: var(--zen-bg);
 }
 

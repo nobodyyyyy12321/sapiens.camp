@@ -72,7 +72,7 @@ function LoginInner() {
           </div>
           <button
             type="button"
-            className="w-full zen-button"
+            className="zen-button"
             onClick={() => signIn("google", { callbackUrl })}
           >
             使用 Google 帳號登入

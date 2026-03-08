@@ -85,7 +85,7 @@ export default function RegisterPage() {
               <span className="text-sm text-zen-subtle">或</span>
               <hr className="flex-1" />
             </div>
-            <button type="button" className="w-full zen-button" onClick={() => signIn("google", { callbackUrl: "/" })}>
+            <button type="button" className="zen-button" onClick={() => signIn("google", { callbackUrl: "/" })}>
               使用 Google 帳號登入
             </button>
           </div>
