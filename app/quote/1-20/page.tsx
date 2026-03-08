@@ -23,13 +23,23 @@ export default function QuotePage() {
   const [userAnswers, setUserAnswers] = useState<(string | null)[]>([]);
   const [showResults, setShowResults] = useState(false);
 
+  const shuffleQuestions = (items: Question[]) => {
+    const shuffled = [...items];
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   useEffect(() => {
     fetch("/api/quote/questions")
       .then(res => res.json())
       .then(data => {
         if (data.questions) {
-          setQuestions(data.questions);
-          setUserAnswers(new Array(data.questions.length).fill(null));
+          const randomizedQuestions = shuffleQuestions(data.questions);
+          setQuestions(randomizedQuestions);
+          setUserAnswers(new Array(randomizedQuestions.length).fill(null));
         }
       })
       .catch(err => console.error("Failed to load questions:", err));
