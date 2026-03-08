@@ -117,7 +117,7 @@ export default function BookshelfContextMenu() {
   const downloadPdf = () => {
     if (!target) return;
 
-    if (target.pagePath === "/chinese/學測" && target.title === "115") {
+    if (target.pagePath.startsWith("/chinese/學測") && target.title === "115") {
       fetch("/api/chineseGSATpdf/single")
         .then(async (res) => {
           const data = await res.json();
