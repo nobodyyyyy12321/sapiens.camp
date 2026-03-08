@@ -320,7 +320,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </div>
         </div>
 
-        <footer className="w-full pt-12 pb-6 flex items-center justify-center">
+        <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
           <Link
             href="/feedback"
             className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
@@ -464,7 +464,7 @@ export default function Home() {
             </div>
           </div>
 
-          <footer className="w-full pt-12 pb-6 flex items-center justify-center">
+          <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
             <Link
               href="/feedback"
               className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
