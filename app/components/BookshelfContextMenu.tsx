@@ -17,6 +17,12 @@ export default function BookshelfContextMenu() {
   const [target, setTarget] = useState<{ title: string; href: string; pagePath: string } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [isInBookshelf, setIsInBookshelf] = useState(false);
+  const canDownloadPdf = Boolean(
+    target && (
+      (target.pagePath.startsWith("/chinese/學測") && target.title === "115") ||
+      /\.pdf($|\?)/i.test(target.href)
+    )
+  );
 
   const getCurrentBookshelf = () => {
     try {
@@ -117,6 +123,8 @@ export default function BookshelfContextMenu() {
   const downloadPdf = () => {
     if (!target) return;
 
+    if (!canDownloadPdf) return;
+
     if (target.pagePath.startsWith("/chinese/學測") && target.title === "115") {
       fetch("/api/chineseGSATpdf/single")
         .then(async (res) => {
@@ -135,14 +143,6 @@ export default function BookshelfContextMenu() {
           setOpen(false);
           setTimeout(() => setToast(null), 1400);
         });
-      return;
-    }
-
-    const isPdfLink = /\.pdf($|\?)/i.test(target.href);
-    if (!isPdfLink) {
-      setToast("目前無PDF可下載");
-      setOpen(false);
-      setTimeout(() => setToast(null), 1400);
       return;
     }
 
@@ -175,7 +175,8 @@ export default function BookshelfContextMenu() {
           </button>
           <button
             onClick={downloadPdf}
-            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!canDownloadPdf}
           >
             下載pdf
           </button>
