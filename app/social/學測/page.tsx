@@ -14,7 +14,7 @@ export default function SocialXueCePage() {
           <div className="bookshelf-scroll">
             <div className="bookshelf-grid">
               {years.map((year) => (
-                <Link key={year} href={`/social/學測/${year}`} className="book-link">
+                <Link key={year} href="/under-construction" className="book-link">
                   {year}
                 </Link>
               ))}

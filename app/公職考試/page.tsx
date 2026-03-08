@@ -11,16 +11,16 @@ export default function PublicExamPage() {
         <div className="mt-8 w-full max-w-3xl">
           <div className="bookshelf-scroll">
             <div className="bookshelf-grid">
-              <Link href="/台電" className="book-link">
+              <Link href="/under-construction" className="book-link">
                 台電
               </Link>
-              <Link href="/台水" className="book-link">
+              <Link href="/under-construction" className="book-link">
                 台水
               </Link>
-              <Link href="/中油" className="book-link">
+              <Link href="/under-construction" className="book-link">
                 中油
               </Link>
-              <Link href="/高普考" className="book-link">
+              <Link href="/under-construction" className="book-link">
                 高普考
               </Link>
             </div>
