@@ -225,6 +225,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             {siteTitle}
           </h1>
           <p className="max-w-md text-lg leading-8 zen-subtle">sapiens.camp</p>
+          <p className="max-w-xl rounded-md border border-zinc-200 px-4 py-2 text-sm zen-subtle dark:border-zinc-700">
+            目前有內容的只有詩文背誦、英文、Learn Chinese、名言佳句
+          </p>
           {/* 全站統計已移至 「全站統計」 頁面 */}
 
           <div className="mt-4 flex w-full max-w-5xl flex-col gap-10">
