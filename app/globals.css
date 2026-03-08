@@ -193,13 +193,13 @@ main button.rounded-full.border {
 }
 
 .book-link:hover {
-  transform: translateX(4px);
+  transform: none;
   border-color: var(--zen-accent);
   box-shadow:
     inset 0 -3px 0 rgba(0, 0, 0, 0.12),
-    0 0 0 1px var(--zen-accent),
-    0 0 16px var(--zen-accent);
-  filter: brightness(1.02);
+    0 0 0 1px color-mix(in srgb, var(--zen-accent) 60%, transparent),
+    0 0 10px color-mix(in srgb, var(--zen-accent) 45%, transparent);
+  filter: brightness(1.01);
 }
 
 .home-bookshelf-grid {
