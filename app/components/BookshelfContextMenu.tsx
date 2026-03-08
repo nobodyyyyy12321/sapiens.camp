@@ -114,6 +114,56 @@ export default function BookshelfContextMenu() {
     setTimeout(() => setToast(null), 1400);
   };
 
+  const downloadPdf = () => {
+    if (!target) return;
+
+    if (target.href === "/chinese/學測/115") {
+      fetch("/api/chineseGSATpdf/single")
+        .then(async (res) => {
+          const data = await res.json();
+          if (!res.ok || !data?.url) {
+            throw new Error(data?.error || "download_failed");
+          }
+
+          const link = document.createElement("a");
+          link.href = data.url;
+          link.download = data.fileName || "國文學測115.pdf";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          setToast("開始下載PDF");
+        })
+        .catch(() => {
+          setToast("下載失敗");
+        })
+        .finally(() => {
+          setOpen(false);
+          setTimeout(() => setToast(null), 1400);
+        });
+      return;
+    }
+
+    const isPdfLink = /\.pdf($|\?)/i.test(target.href);
+    if (!isPdfLink) {
+      setToast("目前無PDF可下載");
+      setOpen(false);
+      setTimeout(() => setToast(null), 1400);
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = target.href;
+    link.download = `${target.title}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setToast("開始下載PDF");
+    setOpen(false);
+    setTimeout(() => setToast(null), 1400);
+  };
+
   return (
     <>
       {open && (
@@ -134,6 +184,12 @@ export default function BookshelfContextMenu() {
             disabled={!isInBookshelf}
           >
             移出個人書櫃
+          </button>
+          <button
+            onClick={downloadPdf}
+            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          >
+            下載pdf
           </button>
         </div>
       )}
