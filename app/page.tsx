@@ -37,6 +37,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "英文", href: "/english" },
           { name: "公职考试", href: "/公職考試" },
             { name: "名言佳句", href: "/quote" },
+            { name: "综合", href: "/綜合" },
             { name: "撩语录", href: "/under-construction" },
             { name: "八卦", href: "/under-construction" },
             { name: "猜谜", href: "/under-construction" },
@@ -58,6 +59,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "英文", href: "/english" },
           { name: "公職考試", href: "/公職考試" },
             { name: "名言佳句", href: "/quote" },
+            { name: "綜合", href: "/綜合" },
             { name: "撩語錄", href: "/under-construction" },
             { name: "八卦", href: "/under-construction" },
             { name: "猜謎", href: "/under-construction" },
@@ -317,6 +319,15 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             )}
           </div>
         </div>
+
+        <footer className="w-full pt-12 pb-6 flex items-center justify-center">
+          <Link
+            href="/feedback"
+            className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            意見回饋
+          </Link>
+        </footer>
       </main>
     </div>
   );
@@ -367,6 +378,7 @@ export default function Home() {
                       { name: "国文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
+                      { name: "综合", href: "/綜合" },
                       { name: "撩语录", href: "/under-construction" },
                       { name: "数学", href: "/math" },
                       { name: "物理", href: "/physics" },
@@ -383,6 +395,7 @@ export default function Home() {
                       { name: "國文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
+                      { name: "綜合", href: "/綜合" },
                       { name: "撩語錄", href: "/under-construction" },
                       { name: "數學", href: "/math" },
                       { name: "物理", href: "/physics" },
@@ -407,6 +420,7 @@ export default function Home() {
                             { name: "国文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
+                            { name: "综合", href: "/綜合" },
                             { name: "撩语录", href: "/under-construction" },
                             { name: "数学", href: "/math" },
                             { name: "物理", href: "/physics" },
@@ -423,6 +437,7 @@ export default function Home() {
                             { name: "國文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
+                            { name: "綜合", href: "/綜合" },
                             { name: "撩語錄", href: "/under-construction" },
                             { name: "數學", href: "/math" },
                             { name: "物理", href: "/physics" },
@@ -448,6 +463,15 @@ export default function Home() {
               )}
             </div>
           </div>
+
+          <footer className="w-full pt-12 pb-6 flex items-center justify-center">
+            <Link
+              href="/feedback"
+              className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              意見回饋
+            </Link>
+          </footer>
         </main>
       </div>
     }>
