@@ -102,6 +102,14 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Kompetisi", href: "/under-construction" },
             { name: "Kutipan", href: "/under-construction" },
           ]
+      : language === "ko"
+        ? [
+            { name: "수학", href: "/under-construction" },
+            { name: "물리", href: "/under-construction" },
+            { name: "화학", href: "/under-construction" },
+            { name: "대회", href: "/under-construction" },
+            { name: "명언", href: "/under-construction" },
+          ]
       : [
             { name: "詩文背誦", href: "/recitation" },
             { name: "國文", href: "/chinese" },
