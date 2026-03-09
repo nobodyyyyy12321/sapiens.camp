@@ -224,8 +224,8 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      {/* Record player icon button */}
-      <div className="fixed left-6 top-6 z-40">
+      {/* Record player icon button above announcement */}
+      <div className="fixed left-10 top-4 z-40">
         <button
           className="bg-transparent border-none p-0 hover:scale-110 transition-transform"
           aria-label="播放輕音樂"
@@ -240,7 +240,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             }
           }}
         >
-          <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12" />
+          <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
         </button>
         <audio
           ref={audioRef}
