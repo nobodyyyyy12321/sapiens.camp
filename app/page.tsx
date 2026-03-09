@@ -228,32 +228,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       {/* ...existing code... */}
-              if (!tonearmOn) {
-                audioRef.current.play();
-                setMusicPlaying(true);
-                setTonearmOn(true);
-              } else {
-                audioRef.current.pause();
-                setMusicPlaying(false);
-                setTonearmOn(false);
-              }
-            }}
-          >
-            <g style={{ transition: 'transform 0.5s cubic-bezier(.4,2,.6,1)', transform: tonearmOn ? 'rotate(30deg)' : 'rotate(-30deg)', transformOrigin: '8px 8px' }}>
-              <rect x="7" y="7" width="2" height="18" fill="#fff" rx="1" />
-              <circle cx="8" cy="7" r="2" fill="#fff" />
-              <rect x="7" y="25" width="6" height="2" fill="#fff" rx="1" />
-            </g>
-          </svg>
-        </div>
-        <audio
-          ref={audioRef}
-          src={musicUrl}
-          loop
-          preload="auto"
-          style={{ display: "none" }}
-        />
-      </div>
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         {verificationMessage && (
           <div className={`w-full mb-6 p-4 rounded-md ${
