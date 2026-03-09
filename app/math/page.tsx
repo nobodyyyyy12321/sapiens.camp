@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function MathIndex() {
   const mathTopics = [
-    { name: "English版", href: "/under-construction" },
     { name: "學測", href: "/math/學測" },
     { name: "算數" },
     { name: "代數" },

@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function ChemistryPage() {
   const chemistryTopics = [
-    { name: "English版", href: "/under-construction" },
     { name: "無機化學" },
     { name: "有機化學" },
     { name: "分析化學" },

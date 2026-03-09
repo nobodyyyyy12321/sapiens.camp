@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function PhysicsPage() {
   const physicsTopics = [
-    { name: "English版" },
     { name: "力學" },
     { name: "熱力學" },
     { name: "光學" },
