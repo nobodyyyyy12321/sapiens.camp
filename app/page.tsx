@@ -225,23 +225,30 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       {/* Record player icon button above announcement */}
-      <div className="fixed left-10 top-4 z-40">
-        <button
-          className="bg-transparent border-none p-0 hover:scale-110 transition-transform"
-          aria-label="播放輕音樂"
-          onClick={() => {
-            if (!audioRef.current) return;
-            if (musicPlaying) {
-              audioRef.current.pause();
-              setMusicPlaying(false);
-            } else {
+      <div className="fixed left-10 top-4 z-40 flex flex-col items-center">
+        <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12 mb-2" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
+        <div className="flex gap-2">
+          <button
+            className="bg-white text-black rounded-full px-4 py-1 text-sm font-semibold shadow hover:bg-zinc-200 transition"
+            aria-label="播放音樂"
+            onClick={() => {
+              if (!audioRef.current) return;
               audioRef.current.play();
               setMusicPlaying(true);
-            }
-          }}
-        >
-          <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
-        </button>
+            }}
+            disabled={musicPlaying}
+          >播放</button>
+          <button
+            className="bg-white text-black rounded-full px-4 py-1 text-sm font-semibold shadow hover:bg-zinc-200 transition"
+            aria-label="停止音樂"
+            onClick={() => {
+              if (!audioRef.current) return;
+              audioRef.current.pause();
+              setMusicPlaying(false);
+            }}
+            disabled={!musicPlaying}
+          >停止</button>
+        </div>
         <audio
           ref={audioRef}
           src={musicUrl}
