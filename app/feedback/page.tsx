@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState, useEffect } from "react";
-
+export default function FeedbackPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -63,79 +63,7 @@ import { FormEvent, useMemo, useState, useEffect } from "react";
     }
   }
 
-  // Language dictionary
-  const dict = {
-    "zh-TW": {
-      title: "意見回饋",
-      desc: "有任何建議、問題或想法，歡迎留言給我們。",
-      name: "名稱",
-      email: "Email",
-      content: "回饋內容",
-      placeholderName: "你的名稱",
-      placeholderEmail: "you@example.com",
-      placeholderContent: "請輸入你想告訴我們的內容",
-      sending: "送出中...",
-      send: "送出回饋",
-      success: "回饋已送出，謝謝你！",
-      error: "送出失敗，請稍後再試。",
-      netError: "網路連線異常，請稍後再試。"
-    },
-    "zh-CN": {
-      title: "意见反馈",
-      desc: "有任何建议、问题或想法，欢迎留言给我们。",
-      name: "名称",
-      email: "Email",
-      content: "反馈内容",
-      placeholderName: "你的名称",
-      placeholderEmail: "you@example.com",
-      placeholderContent: "请输入你想告诉我们的内容",
-      sending: "发送中...",
-      send: "发送反馈",
-      success: "反馈已发送，感谢你！",
-      error: "发送失败，请稍后再试。",
-      netError: "网络连接异常，请稍后再试。"
-    },
-    "en": {
-      title: "Feedback",
-      desc: "Any suggestions, questions or ideas? Leave us a message.",
-      name: "Name",
-      email: "Email",
-      content: "Feedback",
-      placeholderName: "Your name",
-      placeholderEmail: "you@example.com",
-      placeholderContent: "Please enter your feedback",
-      sending: "Sending...",
-      send: "Send Feedback",
-      success: "Feedback sent, thank you!",
-      error: "Failed to send, please try again later.",
-      netError: "Network error, please try again later."
-    },
-    "es": {
-      title: "Retroalimentación",
-      desc: "¿Tienes sugerencias, preguntas o ideas? Déjanos un mensaje.",
-      name: "Nombre",
-      email: "Email",
-      content: "Retroalimentación",
-      placeholderName: "Tu nombre",
-      placeholderEmail: "you@example.com",
-      placeholderContent: "Por favor ingresa tus comentarios",
-      sending: "Enviando...",
-      send: "Enviar comentarios",
-      success: "¡Comentarios enviados, gracias!",
-      error: "Error al enviar, inténtalo de nuevo más tarde.",
-      netError: "Error de red, inténtalo de nuevo más tarde."
-    },
-    "ru": {
-      title: "Обратная связь",
-      desc: "Есть предложения, вопросы или идеи? Оставьте нам сообщение.",
-      name: "Имя",
-      email: "Email",
-      content: "Обратная связь",
-      placeholderName: "Ваше имя",
-      placeholderEmail: "you@example.com",
-      placeholderContent: "Пожалуйста, введите ваш отзыв",
-      sending: "Отправка...",
-      send: "Отправить отзыв",
+// ...existing code...
       success: "Отзыв отправлен, спасибо!",
       error: "Не удалось отправить, попробуйте позже.",
       netError: "Ошибка сети, попробуйте позже."
