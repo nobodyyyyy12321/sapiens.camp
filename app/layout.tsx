@@ -4,6 +4,7 @@ import Link from "next/link";
 import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Providers from "./providers/SessionProvider";
+import { AudioPlayerProvider } from "./components/audio-player-context";
 import VisitPing from "./components/VisitPing";
 import LanguageGate from "./components/LanguageGate";
 import LanguageSelector from "./components/LanguageSelector";
@@ -59,52 +60,54 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${notoSerifSc.variable} antialiased`}
       >
-        <Providers>
-          <PWARegister />
-          <BookshelfContextMenu />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "智人題庫",
-                "url": "https://sapiens.camp",
-              }),
-            }}
-          />
-          <Link
-            href="/"
-            aria-label="回到首頁"
-            className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden"
-          >
-            <img
-              src="/logo-removebg-preview.png"
-              alt="sapiens.camp logo"
-              className="h-full w-full object-contain scale-125"
+        <AudioPlayerProvider>
+          <Providers>
+            <PWARegister />
+            <BookshelfContextMenu />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  "name": "智人題庫",
+                  "url": "https://sapiens.camp",
+                }),
+              }}
             />
-          </Link>
-          {/* Hide GlobalUpOneLevelButton on feedback page */}
-          {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
-          <header
-            className="w-full py-5 sticky top-0 z-40"
-            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
-          >
-            <VisitPing />
-            <nav className="w-full flex items-center justify-end pr-5 pl-5">
-              <div className="flex items-center gap-3">
-                <div className="mr-0 md:mr-[3cm]">
-                  <LanguageSelector />
+            <Link
+              href="/"
+              aria-label="回到首頁"
+              className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden"
+            >
+              <img
+                src="/logo-removebg-preview.png"
+                alt="sapiens.camp logo"
+                className="h-full w-full object-contain scale-125"
+              />
+            </Link>
+            {/* Hide GlobalUpOneLevelButton on feedback page */}
+            {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
+            <header
+              className="w-full py-5 sticky top-0 z-40"
+              style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+            >
+              <VisitPing />
+              <nav className="w-full flex items-center justify-end pr-5 pl-5">
+                <div className="flex items-center gap-3">
+                  <div className="mr-0 md:mr-[3cm]">
+                    <LanguageSelector />
+                  </div>
+                  <AuthNav />
                 </div>
-                <AuthNav />
-              </div>
-            </nav>
-          </header>
+              </nav>
+            </header>
 
-          <RecordPlayer />
+            <RecordPlayer />
 
-          <LanguageGate>{children}</LanguageGate>
-        </Providers>
+            <LanguageGate>{children}</LanguageGate>
+          </Providers>
+        </AudioPlayerProvider>
         <Analytics />
       </body>
     </html>

@@ -1,12 +1,8 @@
 "use client";
-import { useRef, useState } from "react";
+import { useAudioPlayer } from "./audio-player-context";
 
 export default function RecordPlayer() {
-  const [musicPlaying, setMusicPlaying] = useState(false);
-  // Tonearm is ON when music is playing
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const musicUrl = "/music/light-music.mp3";
-
+  const { musicPlaying, setMusicPlaying, audioRef } = useAudioPlayer();
   return (
     <div className="fixed left-10 z-40 flex flex-col items-center" style={{ top: 'calc(100% - 6rem - 1cm)' }}>
       <div style={{ position: 'relative', width: 40, height: 40 }}>
@@ -34,13 +30,6 @@ export default function RecordPlayer() {
           </g>
         </svg>
       </div>
-      <audio
-        ref={audioRef}
-        src={musicUrl}
-        loop
-        preload="auto"
-        style={{ display: "none" }}
-      />
     </div>
   );
 }
