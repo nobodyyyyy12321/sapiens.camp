@@ -12,7 +12,7 @@ export default function RecordPlayer() {
         <img
           src="/icons/Record_player_(77801)_-_The_Noun_Project.svg"
           alt="唱片機"
-          className="w-10 h-10 mb-1 transition-transform duration-700"
+          className="w-14 h-14 mb-1 transition-transform duration-700"
           style={{ filter: "invert(1) brightness(2)", transform: musicPlaying ? "scale(1.05) rotate(5deg)" : "scale(1) rotate(0deg)" }}
         />
           {/* Overlay transparent SVG for clickable tonearm animation, rectangle only, anchored at original tonearm circle center */}
