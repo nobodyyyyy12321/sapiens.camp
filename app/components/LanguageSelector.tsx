@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-type LanguageCode = "zh-TW" | "zh-CN" | "en" | "es" | "th" | "id";
+type LanguageCode = "zh-TW" | "zh-CN" | "en" | "es" | "th" | "id" | "ko";
 
 export default function LanguageSelector() {
   const [language, setLanguage] = useState<LanguageCode>("zh-TW");
@@ -33,6 +33,7 @@ export default function LanguageSelector() {
       <option value="es">Español</option>
       <option value="th">ไทย</option>
       <option value="id">Bahasa Indonesia</option>
+      <option value="ko">한국어</option>
     </select>
   );
 }
