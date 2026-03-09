@@ -71,12 +71,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Química", href: "/under-construction" },
             { name: "Concurso", href: "/under-construction" },
           ]
-      : language === "ru"
+      : language === "th"
         ? [
-            { name: "Математика", href: "/under-construction" },
-            { name: "Физика", href: "/under-construction" },
-            { name: "Химия", href: "/under-construction" },
-            { name: "Конкурс", href: "/under-construction" },
+            { name: "คณิตศาสตร์", href: "/under-construction" },
+            { name: "ฟิสิกส์", href: "/under-construction" },
+            { name: "เคมี", href: "/under-construction" },
+            { name: "การแข่งขัน", href: "/under-construction" },
           ]
       : language === "th"
         ? [
