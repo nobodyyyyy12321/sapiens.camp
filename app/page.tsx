@@ -224,12 +224,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      {/* Record player icon button above announcement */}
-      <div className="fixed left-10 top-4 z-40 flex flex-col items-center">
+      {/* Record player icon and controls above announcement */}
+      <div className="fixed left-10 top-2 z-40 flex flex-col items-center">
         <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12 mb-2" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
         <div className="flex gap-2">
           <button
-            className="bg-white text-black rounded-full px-4 py-1 text-sm font-semibold shadow hover:bg-zinc-200 transition"
+            className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus:outline-none"
             aria-label="播放音樂"
             onClick={() => {
               if (!audioRef.current) return;
@@ -237,9 +237,13 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               setMusicPlaying(true);
             }}
             disabled={musicPlaying}
-          >播放</button>
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="7,5 23,14 7,23" fill="#fff" />
+            </svg>
+          </button>
           <button
-            className="bg-white text-black rounded-full px-4 py-1 text-sm font-semibold shadow hover:bg-zinc-200 transition"
+            className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus:outline-none"
             aria-label="停止音樂"
             onClick={() => {
               if (!audioRef.current) return;
@@ -247,7 +251,11 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               setMusicPlaying(false);
             }}
             disabled={!musicPlaying}
-          >停止</button>
+          >
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="7" width="14" height="14" fill="#fff" />
+            </svg>
+          </button>
         </div>
         <audio
           ref={audioRef}
