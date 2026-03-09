@@ -1,6 +1,7 @@
 "use client";
 import { useAudioPlayer } from "./audio-player-context";
 
+export default function RecordPlayer() {
   const { musicPlaying, setMusicPlaying, audioRef } = useAudioPlayer();
   return (
     <div
