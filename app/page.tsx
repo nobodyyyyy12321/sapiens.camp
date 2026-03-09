@@ -19,6 +19,9 @@ type SearchArticle = {
 };
 
 function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
+    const [musicPlaying, setMusicPlaying] = useState(false);
+    const audioRef = useState<HTMLAudioElement | null>(null)[0];
+    const musicUrl = "/music/light-music.mp3";
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationMessage, setVerificationMessage] = useState<string | null>(null);
@@ -209,6 +212,34 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
+      {/* Record player icon button */}
+      <div className="fixed left-6 top-6 z-40">
+        <button
+          className="bg-transparent border-none p-0 hover:scale-110 transition-transform"
+          aria-label="播放輕音樂"
+          onClick={() => {
+            if (!audioRef) return;
+            if (musicPlaying) {
+              audioRef.pause();
+              setMusicPlaying(false);
+            } else {
+              audioRef.play();
+              setMusicPlaying(true);
+            }
+          }}
+        >
+          <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12" />
+        </button>
+        <audio
+          ref={(el) => {
+            if (el) audioRef = el;
+          }}
+          src={musicUrl}
+          loop
+          preload="auto"
+          style={{ display: "none" }}
+        />
+      </div>
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         {verificationMessage && (
           <div className={`w-full mb-6 p-4 rounded-md ${
