@@ -19,6 +19,7 @@ type SearchArticle = {
 };
 
 function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
+      const [tonearmOn, setTonearmOn] = useState(false);
     const [musicPlaying, setMusicPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const musicUrl = "/music/light-music.mp3";
@@ -225,37 +226,33 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       {/* Record player icon and controls above announcement */}
-      <div className="fixed left-10 top-2 z-40 flex flex-col items-center">
-        <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12 mb-2" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
-        <div className="flex gap-2">
-          <button
-            className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus:outline-none"
-            aria-label="播放音樂"
+      <div className="fixed left-10 z-40 flex flex-col items-center" style={{ top: 'calc(100% - 6rem - 1cm)' }}>
+        <div style={{ position: 'relative', width: 40, height: 40 }}>
+          <img src="/icons/record-player.svg" alt="唱片機" className="w-10 h-10 mb-1" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
+          {/* Tonearm animation */}
+          <svg
+            width="40"
+            height="40"
+            style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'auto', cursor: 'pointer', zIndex: 2 }}
             onClick={() => {
               if (!audioRef.current) return;
-              audioRef.current.play();
-              setMusicPlaying(true);
+              if (!tonearmOn) {
+                audioRef.current.play();
+                setMusicPlaying(true);
+                setTonearmOn(true);
+              } else {
+                audioRef.current.pause();
+                setMusicPlaying(false);
+                setTonearmOn(false);
+              }
             }}
-            disabled={musicPlaying}
           >
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="7,5 23,14 7,23" fill="#fff" />
-            </svg>
-          </button>
-          <button
-            className="p-0 m-0 bg-transparent border-none shadow-none hover:bg-transparent focus:outline-none"
-            aria-label="停止音樂"
-            onClick={() => {
-              if (!audioRef.current) return;
-              audioRef.current.pause();
-              setMusicPlaying(false);
-            }}
-            disabled={!musicPlaying}
-          >
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="7" y="7" width="14" height="14" fill="#fff" />
-            </svg>
-          </button>
+            <g style={{ transition: 'transform 0.5s cubic-bezier(.4,2,.6,1)', transform: tonearmOn ? 'rotate(30deg)' : 'rotate(-30deg)', transformOrigin: '8px 8px' }}>
+              <rect x="7" y="7" width="2" height="18" fill="#fff" rx="1" />
+              <circle cx="8" cy="7" r="2" fill="#fff" />
+              <rect x="7" y="25" width="6" height="2" fill="#fff" rx="1" />
+            </g>
+          </svg>
         </div>
         <audio
           ref={audioRef}
