@@ -45,7 +45,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "公职考试", href: "/公職考試" },
             { name: "名言佳句", href: "/quote" },
             { name: "综合", href: "/綜合" },
-            { name: "比賽", href: "/under-construction" },
+            { name: "比赛", href: "/under-construction" },
             { name: "撩语录", href: "/under-construction" },
             { name: "八卦", href: "/under-construction" },
             { name: "猜谜", href: "/under-construction" },
