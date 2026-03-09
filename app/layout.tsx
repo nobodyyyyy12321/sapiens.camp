@@ -11,6 +11,7 @@ import PWARegister from "./components/PWARegister";
 import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
+import RecordPlayer from "./components/RecordPlayer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -98,6 +99,8 @@ export default function RootLayout({
               </div>
             </nav>
           </header>
+
+          <RecordPlayer />
 
           <LanguageGate>{children}</LanguageGate>
         </Providers>
