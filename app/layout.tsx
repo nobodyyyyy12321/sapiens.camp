@@ -84,7 +84,8 @@ export default function RootLayout({
               className="h-full w-full object-contain scale-125"
             />
           </Link>
-          <GlobalUpOneLevelButton />
+          {/* Hide GlobalUpOneLevelButton on feedback page */}
+          {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
           <header
             className="w-full py-5 sticky top-0 z-40"
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
