@@ -20,6 +20,19 @@ type SearchArticle = {
 
 function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
       const [tonearmOn, setTonearmOn] = useState(false);
+    // Add childSubjects declaration
+    const childSubjects =
+      language === "en"
+        ? []
+        : language === "zh-CN"
+          ? []
+          : language === "es"
+            ? []
+            : language === "th"
+              ? []
+              : language === "id"
+                ? []
+                : [];
     const [musicPlaying, setMusicPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const musicUrl = "/music/light-music.mp3";
@@ -37,6 +50,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           { name: "Physics", href: "/under-construction" },
           { name: "Chemistry", href: "/under-construction" },
           { name: "Contest", href: "/under-construction" },
+          { name: "Quote", href: "/under-construction" },
         ]
       : language === "zh-CN"
         ? [
@@ -70,6 +84,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Física", href: "/under-construction" },
             { name: "Química", href: "/under-construction" },
             { name: "Concurso", href: "/under-construction" },
+            { name: "Cita", href: "/under-construction" },
           ]
       : language === "th"
         ? [
@@ -77,13 +92,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "ฟิสิกส์", href: "/under-construction" },
             { name: "เคมี", href: "/under-construction" },
             { name: "การแข่งขัน", href: "/under-construction" },
-          ]
-      : language === "th"
-        ? [
-            { name: "คณิตศาสตร์", href: "/under-construction" },
-            { name: "ฟิสิกส์", href: "/under-construction" },
-            { name: "เคมี", href: "/under-construction" },
-            { name: "การแข่งขัน", href: "/under-construction" },
+            { name: "คำคม", href: "/under-construction" },
           ]
       : language === "id"
         ? [
@@ -91,6 +100,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Fisika", href: "/under-construction" },
             { name: "Kimia", href: "/under-construction" },
             { name: "Kompetisi", href: "/under-construction" },
+            { name: "Kutipan", href: "/under-construction" },
           ]
       : [
             { name: "詩文背誦", href: "/recitation" },
@@ -116,49 +126,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "哲學", href: "/under-construction" },
             { name: "自然", href: "/natural" },
             { name: "社會", href: "/social" },
-          ];
-
-  const childSubjects =
-    language === "en"
-      ? []
-      : language === "zh-CN"
-        ? [
-            { name: "2000单字", href: "/english/2000" },
-          { name: "台电", href: "/台電" },
-          { name: "台水", href: "/台水" },
-          { name: "中油", href: "/中油" },
-          { name: "高普考", href: "/高普考" },
-            { name: "算数", href: "/under-construction" },
-            { name: "代数", href: "/under-construction" },
-            { name: "几何", href: "/under-construction" },
-            { name: "三角函数", href: "/under-construction" },
-            { name: "指数与复数", href: "/under-construction" },
-            { name: "解析几何", href: "/under-construction" },
-            { name: "统计", href: "/under-construction" },
-            { name: "排列组合", href: "/under-construction" },
-            { name: "微积分", href: "/under-construction" },
-            { name: "微分方程", href: "/under-construction" },
-            { name: "线性代数", href: "/under-construction" },
-            { name: "复变函数", href: "/under-construction" },
-          ]
-        : [
-            { name: "2000單字", href: "/english/2000" },
-          { name: "台電", href: "/台電" },
-          { name: "台水", href: "/台水" },
-          { name: "中油", href: "/中油" },
-          { name: "高普考", href: "/高普考" },
-            { name: "算數", href: "/under-construction" },
-            { name: "代數", href: "/under-construction" },
-            { name: "幾何", href: "/under-construction" },
-            { name: "三角函數", href: "/under-construction" },
-            { name: "指數與複數", href: "/under-construction" },
-            { name: "解析幾何", href: "/under-construction" },
-            { name: "統計", href: "/under-construction" },
-            { name: "排列組合", href: "/under-construction" },
-            { name: "微積分", href: "/under-construction" },
-            { name: "微分方程", href: "/under-construction" },
-            { name: "線性代數", href: "/under-construction" },
-            { name: "複變函數", href: "/under-construction" },
           ];
 
   useEffect(() => {
