@@ -33,9 +33,9 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
     language === "en"
       ? [
           { name: "Learn Chinese", href: "/study-chinese" },
-          { name: "Math", href: "/math" },
-          { name: "Physics", href: "/physics" },
-          { name: "Chemistry", href: "/chemistry" },
+          { name: "Math", href: "/under-construction" },
+          { name: "Physics", href: "/under-construction" },
+          { name: "Chemistry", href: "/under-construction" },
           { name: "Contest", href: "/under-construction" },
         ]
       : language === "zh-CN"
@@ -66,16 +66,16 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           ]
       : language === "es"
         ? [
-            { name: "Matemáticas", href: "/math" },
-            { name: "Física", href: "/physics" },
-            { name: "Química", href: "/chemistry" },
+            { name: "Matemáticas", href: "/under-construction" },
+            { name: "Física", href: "/under-construction" },
+            { name: "Química", href: "/under-construction" },
             { name: "Concurso", href: "/under-construction" },
           ]
       : language === "ru"
         ? [
-            { name: "Математика", href: "/math" },
-            { name: "Физика", href: "/physics" },
-            { name: "Химия", href: "/chemistry" },
+            { name: "Математика", href: "/under-construction" },
+            { name: "Физика", href: "/under-construction" },
+            { name: "Химия", href: "/under-construction" },
             { name: "Конкурс", href: "/under-construction" },
           ]
       : [
