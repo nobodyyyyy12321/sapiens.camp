@@ -29,6 +29,10 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
     language === "en"
       ? [
           { name: "Learn Chinese", href: "/study-chinese" },
+          { name: "Math", href: "/math" },
+          { name: "Physics", href: "/physics" },
+          { name: "Chemistry", href: "/chemistry" },
+          { name: "Contest", href: "/under-construction" },
         ]
       : language === "zh-CN"
         ? [
