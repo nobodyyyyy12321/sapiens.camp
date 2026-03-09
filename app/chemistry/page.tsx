@@ -20,7 +20,7 @@ export default function ChemistryPage() {
           <div className="bookshelf-scroll">
             <div className="bookshelf-grid">
               {chemistryTopics.map((topic) => (
-                <Link key={topic.name} href={topic.href || "/under-construction"} className="book-link">
+                <Link key={topic.name} href="/under-construction" className="book-link">
                   {topic.name}
                 </Link>
               ))}
