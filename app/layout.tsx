@@ -12,7 +12,7 @@ import PWARegister from "./components/PWARegister";
 import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
-import RecordPlayer from "./components/RecordPlayer";
+// ...existing code...
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -103,7 +103,7 @@ export default function RootLayout({
               </nav>
             </header>
 
-            <RecordPlayer />
+            {/* <RecordPlayer /> 已移除 */}
 
             <LanguageGate>{children}</LanguageGate>
           </Providers>

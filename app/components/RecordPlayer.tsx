@@ -13,7 +13,7 @@ export default function RecordPlayer() {
           src="/icons/record_player.png"
           alt="唱片機"
           className="w-10 h-10 mb-1 transition-transform duration-700"
-          style={{ filter: "drop-shadow(0 0 2px #fff)", transform: musicPlaying ? "scale(1.05) rotate(5deg)" : "scale(1) rotate(0deg)" }}
+          style={{ transform: musicPlaying ? "scale(1.05) rotate(5deg)" : "scale(1) rotate(0deg)" }}
         />
         {/* Tonearm animation */}
         <svg
