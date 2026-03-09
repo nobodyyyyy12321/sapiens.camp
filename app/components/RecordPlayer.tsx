@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 export default function RecordPlayer() {
   const [musicPlaying, setMusicPlaying] = useState(false);
-  const [tonearmOn, setTonearmOn] = useState(false);
+  // Tonearm is ON when music is playing
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const musicUrl = "/music/light-music.mp3";
 
@@ -17,18 +17,16 @@ export default function RecordPlayer() {
           style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'auto', cursor: 'pointer', zIndex: 2 }}
           onClick={() => {
             if (!audioRef.current) return;
-            if (!tonearmOn) {
+            if (!musicPlaying) {
               audioRef.current.play();
               setMusicPlaying(true);
-              setTonearmOn(true);
             } else {
               audioRef.current.pause();
               setMusicPlaying(false);
-              setTonearmOn(false);
             }
           }}
         >
-          <g style={{ transition: 'transform 0.5s cubic-bezier(.4,2,.6,1)', transform: tonearmOn ? 'rotate(30deg)' : 'rotate(-30deg)', transformOrigin: '8px 8px' }}>
+          <g style={{ transition: 'transform 0.5s cubic-bezier(.4,2,.6,1)', transform: musicPlaying ? 'rotate(30deg)' : 'rotate(-30deg)', transformOrigin: '8px 8px' }}>
             <rect x="7" y="7" width="2" height="18" fill="#fff" rx="1" />
             <circle cx="8" cy="7" r="2" fill="#fff" />
             <rect x="7" y="25" width="6" height="2" fill="#fff" rx="1" />
