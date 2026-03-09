@@ -10,7 +10,7 @@ export default function RecordPlayer() {
     >
       <div style={{ position: "relative", width: 40, height: 40 }}>
         <img
-          src="/icons/record_player.png"
+          src="/icons/record_player.svg"
           alt="唱片機"
           className="w-10 h-10 mb-1 transition-transform duration-700"
           style={{ transform: musicPlaying ? "scale(1.05) rotate(5deg)" : "scale(1) rotate(0deg)" }}
