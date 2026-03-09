@@ -69,12 +69,14 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Matemáticas", href: "/math" },
             { name: "Física", href: "/physics" },
             { name: "Química", href: "/chemistry" },
+            { name: "Concurso", href: "/under-construction" },
           ]
       : language === "ru"
         ? [
             { name: "Математика", href: "/math" },
             { name: "Физика", href: "/physics" },
             { name: "Химия", href: "/chemistry" },
+            { name: "Конкурс", href: "/under-construction" },
           ]
       : [
             { name: "詩文背誦", href: "/recitation" },
