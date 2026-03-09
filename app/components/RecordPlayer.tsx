@@ -10,10 +10,10 @@ export default function RecordPlayer() {
     >
       <div style={{ position: "relative", width: 40, height: 40 }}>
         <img
-          src="/icons/record_player.jpg"
+          src="/icons/record_player.png"
           alt="唱片機"
-          className="w-10 h-10 mb-1"
-          style={{ filter: "drop-shadow(0 0 2px #fff)" }}
+          className="w-10 h-10 mb-1 transition-transform duration-700"
+          style={{ filter: "drop-shadow(0 0 2px #fff)", transform: musicPlaying ? "scale(1.05) rotate(5deg)" : "scale(1) rotate(0deg)" }}
         />
         {/* Tonearm animation */}
         <svg
@@ -33,8 +33,8 @@ export default function RecordPlayer() {
         >
           <g
             style={{
-              transition: "transform 0.5s cubic-bezier(.4,2,.6,1)",
-              transform: musicPlaying ? "rotate(30deg)" : "rotate(-30deg)",
+              transition: "transform 0.7s cubic-bezier(.4,2,.6,1)",
+              transform: musicPlaying ? "rotate(32deg)" : "rotate(-32deg)",
               transformOrigin: "8px 8px",
             }}
           >
