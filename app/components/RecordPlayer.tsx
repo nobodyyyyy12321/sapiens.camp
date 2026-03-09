@@ -10,7 +10,7 @@ export default function RecordPlayer() {
     >
       <div style={{ position: "relative", width: 40, height: 40 }}>
         <img
-          src="/icons/record-player.svg"
+          src="/icons/record_player.jpg"
           alt="唱片機"
           className="w-10 h-10 mb-1"
           style={{ filter: "drop-shadow(0 0 2px #fff)" }}
