@@ -103,7 +103,7 @@ export default function RootLayout({
               </nav>
             </header>
 
-            {/* <RecordPlayer /> 已移除 */}
+            <RecordPlayer />
 
             <LanguageGate>{children}</LanguageGate>
           </Providers>
