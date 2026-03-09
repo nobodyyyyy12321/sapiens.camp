@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useRef, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface AudioPlayerContextProps {
   musicPlaying: boolean;
@@ -26,14 +27,14 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   return (
     <AudioPlayerContext.Provider value={{ musicPlaying, setMusicPlaying, audioRef }}>
       {children}
-      {/* Portal audio element to body */}
-      {typeof window !== "undefined" && (
+      {typeof window !== "undefined" && createPortal(
         <audio
           ref={audioRef}
           src="/music/light-music.mp3"
           loop
           style={{ display: "none" }}
-        />
+        />,
+        document.body
       )}
     </AudioPlayerContext.Provider>
   );
