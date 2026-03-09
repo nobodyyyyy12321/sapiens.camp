@@ -227,17 +227,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      {/* Record player icon and controls above announcement */}
-      <div className="fixed left-10 z-40 flex flex-col items-center" style={{ top: 'calc(100% - 6rem - 1cm)' }}>
-        <div style={{ position: 'relative', width: 40, height: 40 }}>
-          <img src="/icons/record-player.svg" alt="唱片機" className="w-10 h-10 mb-1" style={{ filter: 'drop-shadow(0 0 2px #fff)' }} />
-          {/* Tonearm animation */}
-          <svg
-            width="40"
-            height="40"
-            style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'auto', cursor: 'pointer', zIndex: 2 }}
-            onClick={() => {
-              if (!audioRef.current) return;
+      {/* ...existing code... */}
               if (!tonearmOn) {
                 audioRef.current.play();
                 setMusicPlaying(true);
