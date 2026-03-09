@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState, Suspense } from "react";
+import { useEffect, useMemo, useState, Suspense, useRef } from "react";
 import Link from "next/link";
 
 type HomeContentProps = {
@@ -20,7 +20,7 @@ type SearchArticle = {
 
 function HomeContent({ categories, siteTitle, isSimplified, language }: HomeContentProps) {
     const [musicPlaying, setMusicPlaying] = useState(false);
-    const audioRef = useState<HTMLAudioElement | null>(null)[0];
+    const audioRef = useRef<HTMLAudioElement | null>(null);
     const musicUrl = "/music/light-music.mp3";
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -63,7 +63,19 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "自然", href: "/natural" },
             { name: "社会", href: "/social" },
           ]
-        : [
+      : language === "es"
+        ? [
+            { name: "Matemáticas", href: "/math" },
+            { name: "Física", href: "/physics" },
+            { name: "Química", href: "/chemistry" },
+          ]
+      : language === "ru"
+        ? [
+            { name: "Математика", href: "/math" },
+            { name: "Физика", href: "/physics" },
+            { name: "Химия", href: "/chemistry" },
+          ]
+      : [
             { name: "詩文背誦", href: "/recitation" },
             { name: "國文", href: "/chinese" },
             { name: "英文", href: "/english" },
@@ -218,12 +230,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           className="bg-transparent border-none p-0 hover:scale-110 transition-transform"
           aria-label="播放輕音樂"
           onClick={() => {
-            if (!audioRef) return;
+            if (!audioRef.current) return;
             if (musicPlaying) {
-              audioRef.pause();
+              audioRef.current.pause();
               setMusicPlaying(false);
             } else {
-              audioRef.play();
+              audioRef.current.play();
               setMusicPlaying(true);
             }
           }}
@@ -231,9 +243,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           <img src="/icons/record-player.svg" alt="唱片機" className="w-12 h-12" />
         </button>
         <audio
-          ref={(el) => {
-            if (el) audioRef = el;
-          }}
+          ref={audioRef}
           src={musicUrl}
           loop
           preload="auto"
