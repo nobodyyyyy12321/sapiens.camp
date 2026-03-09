@@ -78,6 +78,13 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "Химия", href: "/under-construction" },
             { name: "Конкурс", href: "/under-construction" },
           ]
+      : language === "th"
+        ? [
+            { name: "คณิตศาสตร์", href: "/under-construction" },
+            { name: "ฟิสิกส์", href: "/under-construction" },
+            { name: "เคมี", href: "/under-construction" },
+            { name: "การแข่งขัน", href: "/under-construction" },
+          ]
       : [
             { name: "詩文背誦", href: "/recitation" },
             { name: "國文", href: "/chinese" },
