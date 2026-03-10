@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense, useRef } from "react";
 import Link from "next/link";
 
+
 type HomeContentProps = {
   categories: string[];
   siteTitle: string;
@@ -216,14 +217,15 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
-      {/* 左上角固定 logo */}
-      <div className="fixed left-6 top-6 z-50">
+      {/* 左上角固定 logo，點擊回首頁，無圓圈背景 */}
+      <Link href="/" className="fixed left-6 top-6 z-50 cursor-pointer group" aria-label="回到首頁">
         <img
           src="/logo-removebg-preview.png"
           alt="sapiens.camp logo"
-          className="w-10 h-10 object-contain"
+          className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
+          style={{ background: "transparent" }}
         />
-      </div>
+      </Link>
       {/* ...existing code... */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         {verificationMessage && (
