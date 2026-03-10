@@ -245,10 +245,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </div>
         )}
 
-        {/* 左下角喇叭圖示，往右移且放大 */}
-        <div className="speaker-icon">
-          <img src="/icons/speaker.png" alt="Speaker Icon" />
-        </div>
 
         <div className="flex flex-col items-center gap-6 text-center">
           <h1
@@ -347,13 +343,17 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </div>
         </div>
 
-        <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
+        <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center relative">
           <Link
             href="/feedback"
             className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
           >
             意見回饋
           </Link>
+          {/* 意見回饋左下角喇叭圖示，隨頁面滾動 */}
+          <div className="speaker-icon absolute left-0 bottom-0">
+            <img src="/icons/speaker.png" alt="Speaker Icon" />
+          </div>
         </footer>
       </main>
     </div>
