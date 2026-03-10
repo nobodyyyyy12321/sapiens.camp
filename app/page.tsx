@@ -354,6 +354,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
         {/* 固定在視窗左下角的喇叭圖示 */}
         <div className="speaker-icon">
           <img src="/icons/speaker.png" alt="Speaker Icon" />
+          <span className="speaker-tooltip">推荐搭配一點音樂</span>
         </div>
       </main>
     </div>
