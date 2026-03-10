@@ -500,16 +500,23 @@ export default function Home() {
             </Link>
           </footer>
 
-          {/* Fixed speaker icon at bottom left */}
-          <div className="fixed left-6 bottom-6 z-50 group">
+          {/* Fixed logo and speaker icon at bottom left */}
+          <div className="fixed left-6 bottom-6 z-50 flex items-center gap-4">
             <img
-              src="/icons/unnamed__1_-removebg-preview.png"
-              alt="Speaker icon"
-              className="w-10 h-10 object-contain cursor-pointer"
+              src="/logo-removebg-preview.png"
+              alt="sapiens.camp logo"
+              className="w-10 h-10 object-contain"
             />
-            <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
-              推荐搭配一點音樂
-            </span>
+            <div className="group">
+              <img
+                src="/icons/unnamed__1_-removebg-preview.png"
+                alt="Speaker icon"
+                className="w-10 h-10 object-contain cursor-pointer"
+              />
+              <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
+                推荐搭配一點音樂
+              </span>
+            </div>
           </div>
         </main>
       </div>
