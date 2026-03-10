@@ -75,34 +75,7 @@ export default function RootLayout({
               }),
             }}
           />
-          {/* Top left logo and record player icon */}
-          <div className="fixed top-4 left-4 z-60 flex items-center gap-4">
-            <Link
-              href="/"
-              aria-label="回到首頁"
-              className="h-12 w-12 rounded-full overflow-hidden"
-            >
-              <img
-                src="/logo-removebg-preview.png"
-                alt="sapiens.camp logo"
-                className="h-full w-full object-contain scale-125"
-              />
-            </Link>
-            <div className="group">
-              <div className="h-12 w-12 flex items-center justify-center rounded-full bg-transparent cursor-pointer relative">
-                <img
-                  src="/icons/speaker-inverted.png"
-                  alt="Speaker icon"
-                  className="w-10 h-10 object-contain"
-                  style={{ filter: "drop-shadow(0 0 2px rgba(0,0,0,0.15))" }}
-                />
-                {/* Tooltip */}
-                <span className="absolute left-14 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
-                  推荐搭配一點音樂
-                </span>
-              </div>
-            </div>
-          </div>
+          {/* ...existing code... */}
           {/* Hide GlobalUpOneLevelButton on feedback page */}
           {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
           <header

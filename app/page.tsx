@@ -298,9 +298,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
                   <p className="text-sm text-gray-300">
                     目前有內容的只有詩文背誦、英文、Learn Chinese、名言佳句。
                   </p>
-                  <p className="text-sm text-gray-300">
-                    點上面的三角形有音樂可以聽。
-                  </p>
+                  
                 </div>
 
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-zinc-400/10 to-zinc-600/10 blur-xl opacity-50"></div>
