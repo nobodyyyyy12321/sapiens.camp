@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Serif_SC, Noto_Serif_TC } from "next/font/google";
 import Link from "next/link";
-import LightDarkToggle from "./components/LightDarkToggle";
 import "./globals.css";
 import AuthNav from "./components/AuthNav";
 import Providers from "./providers/SessionProvider";
@@ -71,10 +70,6 @@ export default function RootLayout({
               className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
               style={{ background: "transparent" }}
             />
-            {/* 燈泡緊貼 logo 右側，切換亮暗模式 */}
-            <span className="inline-block align-middle ml-2">
-              <LightDarkToggle />
-            </span>
           </Link>
           <PWARegister />
           <BookshelfContextMenu />
