@@ -76,17 +76,22 @@ export default function RootLayout({
                 }),
               }}
             />
-            <Link
-              href="/"
-              aria-label="回到首頁"
-              className="fixed top-4 left-4 z-60 h-12 w-12 rounded-full overflow-hidden"
-            >
-              <img
-                src="/logo-removebg-preview.png"
-                alt="sapiens.camp logo"
-                className="h-full w-full object-contain scale-125"
-              />
-            </Link>
+            {/* Record player icon at top left with tooltip */}
+            <div className="fixed top-4 left-4 z-60 group">
+              <div className="h-12 w-12 flex items-center justify-center rounded-full bg-zinc-800 hover:bg-zinc-700 cursor-pointer relative">
+                {/* SVG record player icon */}
+                <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" className="w-8 h-8 text-white">
+                  <circle cx="16" cy="16" r="12" strokeWidth="2" />
+                  <circle cx="16" cy="16" r="4" strokeWidth="2" />
+                  <rect x="24" y="14" width="2" height="8" rx="1" fill="currentColor" />
+                  <rect x="25" y="21" width="2" height="2" rx="1" fill="currentColor" />
+                </svg>
+                {/* Tooltip */}
+                <span className="absolute left-14 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
+                  推荐搭配一點音樂
+                </span>
+              </div>
+            </div>
             {/* Hide GlobalUpOneLevelButton on feedback page */}
             {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
             <header
