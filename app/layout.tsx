@@ -62,6 +62,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${notoSerifSc.variable} antialiased`}
       >
         <Providers>
+          {/* 左上角固定 logo，所有頁面顯示 */}
+          <Link href="/" className="fixed left-6 top-6 z-50 cursor-pointer group" aria-label="回到首頁">
+            <img
+              src="/logo-removebg-preview.png"
+              alt="sapiens.camp logo"
+              className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
+              style={{ background: "transparent" }}
+            />
+          </Link>
           <PWARegister />
           <BookshelfContextMenu />
           <script
