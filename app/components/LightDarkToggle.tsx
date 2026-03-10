@@ -6,9 +6,15 @@ export default function LightDarkToggle() {
 
   useEffect(() => {
     // 初始根據 class 判斷
-    setDark(document.documentElement.classList.contains("dark"));
-    // 根據模式設置背景色
-    document.body.style.backgroundColor = document.documentElement.classList.contains("dark") ? "#111" : "#fff";
+    const isDark = document.documentElement.classList.contains("dark");
+    setDark(isDark);
+    if (isDark) {
+      document.body.style.backgroundColor = "#111";
+      document.body.style.color = "#fff";
+    } else {
+      document.body.style.backgroundColor = "#fff";
+      document.body.style.color = "#111";
+    }
   }, []);
 
   const toggle = () => {
@@ -17,9 +23,11 @@ export default function LightDarkToggle() {
       if (next) {
         document.documentElement.classList.add("dark");
         document.body.style.backgroundColor = "#111";
+        document.body.style.color = "#fff";
       } else {
         document.documentElement.classList.remove("dark");
         document.body.style.backgroundColor = "#fff";
+        document.body.style.color = "#111";
       }
       return next;
     });
