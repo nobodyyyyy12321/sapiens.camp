@@ -71,6 +71,9 @@ export default function RootLayout({
               style={{ background: "transparent" }}
             />
           </Link>
+
+          {/* 右上角燈泡，切換亮暗模式 */}
+          <LightDarkToggle />
           <PWARegister />
           <BookshelfContextMenu />
           <script
