@@ -148,9 +148,18 @@
   </style>
 </head>
 <body>
-  <a href="index.html" class="logo-link" style="position:absolute;top:12px;left:18px;z-index:20;display:inline-block;width:48px;height:48px;background:transparent;">
-    <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:8px;" />
-  </a>
+  <div style="display:flex;align-items:center;gap:16px;padding:1rem;">
+    <a href="index.html" class="logo-link" style="display:inline-block;width:48px;height:48px;background:transparent;">
+      <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:8px;" />
+    </a>
+    <div id="bulb-svg">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="14" fill="#FFD600" stroke="#bbb" stroke-width="2"/>
+        <rect x="20" y="34" width="8" height="8" rx="2" fill="#bbb"/>
+        <rect x="22" y="42" width="4" height="4" rx="1" fill="#bbb"/>
+      </svg>
+    </div>
+  </div>
   <div class="top-bar" style="display:flex;align-items:center;gap:16px;position:absolute;right:32px;top:24px;z-index:30;">
     <select class="lang-select" style="min-width:120px;padding:6px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--btn-bg);color:var(--btn-fg);font-size:1rem;">
       <option>繁體中文</option>
