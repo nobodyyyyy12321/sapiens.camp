@@ -72,10 +72,7 @@ export default function RootLayout({
               style={{ background: "transparent" }}
             />
           </Link>
-          {/* 左下角固定喇叭圖示 */}
-          <div className="speaker-icon">
-            <img src="\icons\unnamed__1_-removebg-preview.png" alt="Speaker Icon" width="48" height="48" />
-          </div>
+
           <PWARegister />
           <BookshelfContextMenu />
           <script
