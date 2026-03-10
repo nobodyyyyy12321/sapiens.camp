@@ -148,7 +148,7 @@
 </head>
 <body>
   <a href="index.html" class="logo-link" style="position:absolute;top:12px;left:18px;z-index:20;display:inline-block;width:48px;height:48px;background:transparent;">
-    <img src="logo-removebg-preview.png" alt="logo" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:8px;" />
+    <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:8px;" />
   </a>
   <div class="top-bar" style="display:flex;align-items:center;gap:16px;position:absolute;right:32px;top:24px;z-index:30;">
     <select class="lang-select" style="min-width:120px;padding:6px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--btn-bg);color:var(--btn-fg);font-size:1rem;">
@@ -271,6 +271,7 @@
   <div id="speaker-tooltip" style="display:none;position:fixed;top:0;left:0;background:rgba(0,0,0,0.85);color:#fff;padding:10px 18px;border-radius:12px;font-size:1.1rem;z-index:101;box-shadow:0 2px 8px rgba(0,0,0,0.15);pointer-events:none;">推荐搭配一點音樂</div>
   <script>
     const speakerImg = document.getElementById('speaker-img');
+    const logoImg = document.getElementById('logo-img');
     const tooltip = document.getElementById('speaker-tooltip');
     speakerImg.addEventListener('mouseenter', function(e) {
       tooltip.style.display = 'block';
@@ -284,5 +285,20 @@
       tooltip.style.left = (e.clientX + offsetX) + 'px';
       tooltip.style.top = (e.clientY + offsetY) + 'px';
     });
+
+    function setImageColorByMode() {
+      const isLight = document.body.classList.contains('light');
+      if (isLight) {
+        speakerImg.style.filter = 'invert(0) brightness(0)';
+        logoImg.style.filter = 'invert(0) brightness(0)';
+      } else {
+        speakerImg.style.filter = '';
+        logoImg.style.filter = '';
+      }
+    }
+    setImageColorByMode();
+    // Listen for mode changes
+    const observer = new MutationObserver(setImageColorByMode);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   </script>
 </html>
