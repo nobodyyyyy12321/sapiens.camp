@@ -255,7 +255,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               aria-label="查看公告"
               type="button"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 blur-xl group-hover:opacity-75 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-zinc-400/20 to-zinc-600/20 blur-xl group-hover:opacity-0 transition-opacity"></div>
 
               <span className="relative flex items-center gap-2">
                 <svg
