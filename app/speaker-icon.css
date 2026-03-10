@@ -1,16 +1,7 @@
-.speaker-icon {
-  position: fixed;
-  left: 400px; /* 往右移動，可依需求調整 */
-  bottom: -30px;
-  z-index: 0;
-  padding: 0;
-  margin: 0;
-}
-
 .speaker-icon img {
     position: fixed;
   left: 400px; /* 往右移動，可依需求調整 */
-  bottom: -30px;
+  bottom: -20px;
   z-index: 0;
   padding: 0;
   margin: 0;
