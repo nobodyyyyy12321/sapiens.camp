@@ -352,9 +352,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </Link>
         </footer>
         {/* 固定在視窗左下角的喇叭圖示 */}
-        <div className="speaker-icon">
-          <img src="/icons/speaker.png" alt="Speaker Icon" />
-        </div>
+
       </main>
     </div>
   );

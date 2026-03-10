@@ -8,10 +8,14 @@
 }
 
 .speaker-icon img {
-
-
-      box-shadow: none;
-      background: none;
+    position: fixed;
+  left: 400px; /* 往右移動，可依需求調整 */
+  bottom: -30px;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+  width: 120px;
+  height: 120px;
   display: block;
 }
 
