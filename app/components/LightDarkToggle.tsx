@@ -17,20 +17,26 @@ export default function LightDarkToggle() {
     }
   }, []);
 
+  const setLightMode = () => {
+    document.documentElement.classList.remove("dark");
+    document.body.style.backgroundColor = "#fff";
+    document.body.style.color = "#111";
+    setDark(false);
+  };
+
+  const setDarkMode = () => {
+    document.documentElement.classList.add("dark");
+    document.body.style.backgroundColor = "#111";
+    document.body.style.color = "#fff";
+    setDark(true);
+  };
+
   const toggle = () => {
-    setDark((prev) => {
-      const next = !prev;
-      if (next) {
-        document.documentElement.classList.add("dark");
-        document.body.style.backgroundColor = "#111";
-        document.body.style.color = "#fff";
-      } else {
-        document.documentElement.classList.remove("dark");
-        document.body.style.backgroundColor = "#fff";
-        document.body.style.color = "#111";
-      }
-      return next;
-    });
+    if (dark) {
+      setLightMode();
+    } else {
+      setDarkMode();
+    }
   };
 
   return (
