@@ -91,8 +91,8 @@ export default function RootLayout({
             <div className="group">
               <div className="h-12 w-12 flex items-center justify-center rounded-full bg-transparent cursor-pointer relative">
                 <img
-                  src="/icons/record-player-white.png"
-                  alt="Record player icon"
+                  src="/icons/speaker-inverted.png"
+                  alt="Speaker icon"
                   className="w-10 h-10 object-contain"
                   style={{ filter: "drop-shadow(0 0 2px rgba(0,0,0,0.15))" }}
                 />
