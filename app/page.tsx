@@ -219,7 +219,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
       {/* 左上角固定 logo */}
       <div className="fixed left-6 top-6 z-50">
         <img
-          src="/icons/logo-removebg-preview.png"
+          src="/logo-removebg-preview.png"
           alt="sapiens.camp logo"
           className="w-10 h-10 object-contain"
         />
