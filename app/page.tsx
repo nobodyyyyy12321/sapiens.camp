@@ -503,7 +503,7 @@ export default function Home() {
           {/* Fixed logo at top left */}
           <div className="fixed left-6 top-6 z-50">
             <img
-              src="public/logo-removebg-preview.png"
+              src="/public/logo-removebg-preview.png"
               alt="sapiens.camp logo"
               className="w-10 h-10 object-contain"
             />
@@ -512,7 +512,7 @@ export default function Home() {
           {/* Fixed speaker icon at bottom left */}
           <div className="fixed left-6 bottom-6 z-50 group">
             <img
-              src="public/icons/unnamed__1_-removebg-preview.png"
+              src="/public/icons/unnamed__1_-removebg-preview.png"
               alt="Speaker icon"
               className="w-10 h-10 object-contain cursor-pointer"
             />
