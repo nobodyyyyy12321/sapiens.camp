@@ -1,7 +1,14 @@
 .speaker-icon {
   position: fixed;
-  left: 0;
+  left: 80px; /* 往右移動，可依需求調整 */
   bottom: 0;
-  padding: 16px;
   z-index: 1000;
+  padding: 0;
+  margin: 0;
+}
+
+.speaker-icon img {
+  width: 80px;
+  height: 80px;
+  display: block;
 }

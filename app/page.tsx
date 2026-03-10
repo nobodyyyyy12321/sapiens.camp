@@ -4,6 +4,8 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense, useRef } from "react";
 import Link from "next/link";
 
+import "./speaker-icon.css";
+
 
 type HomeContentProps = {
   categories: string[];
@@ -242,6 +244,11 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             )}
           </div>
         )}
+
+        {/* 左下角喇叭圖示，往右移且放大 */}
+        <div className="speaker-icon">
+          <img src="/icons/speaker.png" alt="Speaker Icon" />
+        </div>
 
         <div className="flex flex-col items-center gap-6 text-center">
           <h1
