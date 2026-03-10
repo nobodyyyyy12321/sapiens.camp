@@ -21,8 +21,7 @@
   document.body.appendChild(btn);
 
   function updateBulbIcon() {
-    var bulbDark = document.getElementById('bulbDark');
-    var bulbLight = document.getElementById('bulbLight');
+        <div id="bulb-container"></div>
     if (document.body.classList.contains('light')) {
       bulbDark.style.display = 'none';
       bulbLight.style.display = 'block';
