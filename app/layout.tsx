@@ -61,58 +61,54 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSerif.variable} ${notoSerifSc.variable} antialiased`}
       >
-        <AudioPlayerProvider>
-          <Providers>
-            <PWARegister />
-            <BookshelfContextMenu />
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{
-                __html: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "Organization",
-                  "name": "智人題庫",
-                  "url": "https://sapiens.camp",
-                }),
-              }}
-            />
-            {/* Record player icon at top left with tooltip */}
-            <div className="fixed top-4 left-16 z-60 group">
-              <div className="h-12 w-12 flex items-center justify-center rounded-full bg-transparent cursor-pointer relative">
-                <img
-                  src="/icons/record-player-white.png"
-                  alt="Record player icon"
-                  className="w-10 h-10 object-contain"
-                  style={{ filter: "drop-shadow(0 0 2px rgba(0,0,0,0.15))" }}
-                />
-                {/* Tooltip */}
-                <span className="absolute left-14 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
-                  推荐搭配一點音樂
-                </span>
-              </div>
+        <Providers>
+          <PWARegister />
+          <BookshelfContextMenu />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "智人題庫",
+                "url": "https://sapiens.camp",
+              }),
+            }}
+          />
+          {/* Record player icon at top left with tooltip */}
+          <div className="fixed top-4 left-16 z-60 group">
+            <div className="h-12 w-12 flex items-center justify-center rounded-full bg-transparent cursor-pointer relative">
+              <img
+                src="/icons/record-player-white.png"
+                alt="Record player icon"
+                className="w-10 h-10 object-contain"
+                style={{ filter: "drop-shadow(0 0 2px rgba(0,0,0,0.15))" }}
+              />
+              {/* Tooltip */}
+              <span className="absolute left-14 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
+                推荐搭配一點音樂
+              </span>
             </div>
-            {/* Hide GlobalUpOneLevelButton on feedback page */}
-            {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
-            <header
-              className="w-full py-5 sticky top-0 z-40"
-              style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
-            >
-              <VisitPing />
-              <nav className="w-full flex items-center justify-end pr-5 pl-5">
-                <div className="flex items-center gap-3">
-                  <div className="mr-0 md:mr-[3cm]">
-                    <LanguageSelector />
-                  </div>
-                  <AuthNav />
+          </div>
+          {/* Hide GlobalUpOneLevelButton on feedback page */}
+          {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
+          <header
+            className="w-full py-5 sticky top-0 z-40"
+            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+          >
+            <VisitPing />
+            <nav className="w-full flex items-center justify-end pr-5 pl-5">
+              <div className="flex items-center gap-3">
+                <div className="mr-0 md:mr-[3cm]">
+                  <LanguageSelector />
                 </div>
-              </nav>
-            </header>
+                <AuthNav />
+              </div>
+            </nav>
+          </header>
 
-            <RecordPlayer />
-
-            <LanguageGate>{children}</LanguageGate>
-          </Providers>
-        </AudioPlayerProvider>
+          <LanguageGate>{children}</LanguageGate>
+        </Providers>
         <Analytics />
       </body>
     </html>
