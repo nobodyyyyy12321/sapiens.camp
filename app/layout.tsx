@@ -13,6 +13,7 @@ import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
 import RecordPlayer from "./components/RecordPlayer";
+import "./speaker-icon.css";
 // ...existing code...
 
 const geistSans = Geist({
@@ -71,6 +72,10 @@ export default function RootLayout({
               style={{ background: "transparent" }}
             />
           </Link>
+          {/* 左下角固定喇叭圖示 */}
+          <div className="speaker-icon">
+            <img src="\icons\unnamed__1_-removebg-preview.png" alt="Speaker Icon" width="48" height="48" />
+          </div>
           <PWARegister />
           <BookshelfContextMenu />
           <script
