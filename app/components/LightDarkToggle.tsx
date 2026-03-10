@@ -7,6 +7,8 @@ export default function LightDarkToggle() {
   useEffect(() => {
     // 初始根據 class 判斷
     setDark(document.documentElement.classList.contains("dark"));
+    // 根據模式設置背景色
+    document.body.style.backgroundColor = document.documentElement.classList.contains("dark") ? "#111" : "#fff";
   }, []);
 
   const toggle = () => {
@@ -14,8 +16,10 @@ export default function LightDarkToggle() {
       const next = !prev;
       if (next) {
         document.documentElement.classList.add("dark");
+        document.body.style.backgroundColor = "#111";
       } else {
         document.documentElement.classList.remove("dark");
+        document.body.style.backgroundColor = "#fff";
       }
       return next;
     });

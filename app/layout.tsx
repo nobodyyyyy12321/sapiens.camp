@@ -71,10 +71,11 @@ export default function RootLayout({
               className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
               style={{ background: "transparent" }}
             />
+            {/* 燈泡緊貼 logo 右側，切換亮暗模式 */}
+            <span className="inline-block align-middle ml-2">
+              <LightDarkToggle />
+            </span>
           </Link>
-
-          {/* 右上角燈泡，切換亮暗模式 */}
-          <LightDarkToggle />
           <PWARegister />
           <BookshelfContextMenu />
           <script
