@@ -496,7 +496,7 @@ export default function Home() {
           <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
             <Link
               href="/feedback"
-              className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
+              className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-0 transition-opacity"
             >
               意見回饋
             </Link>
