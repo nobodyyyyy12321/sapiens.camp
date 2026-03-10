@@ -216,6 +216,14 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
+      {/* 左上角固定 logo */}
+      <div className="fixed left-6 top-6 z-50">
+        <img
+          src="/icons/logo-removebg-preview.png"
+          alt="sapiens.camp logo"
+          className="w-10 h-10 object-contain"
+        />
+      </div>
       {/* ...existing code... */}
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black">
         {verificationMessage && (

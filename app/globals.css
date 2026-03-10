@@ -202,8 +202,7 @@ main button.rounded-full.border {
   column-gap: 0.5rem;
 }
 
-.category-book-link {
-}
+
 
 .book-link:hover {
   transform: none;
