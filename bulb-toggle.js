@@ -14,21 +14,25 @@
   btn.innerHTML = `
     <div style="display:flex;flex-direction:column;align-items:center;">
       <div style="height:48px;width:2px;background:#bbb;margin-bottom:-8px;"></div>
-      <img id="bulbDark" src="bulb-dark.png" alt="暗燈泡" style="width:80px;height:80px;display:block;transform:rotate(180deg);" />
-      <img id="bulbLight" src="bulb-light.png" alt="亮燈泡" style="width:80px;height:80px;display:none;transform:rotate(180deg);" />
+      <div id="bulb-container"></div>
     </div>
   `;
   document.body.appendChild(btn);
 
+  function createBulbSVG(isLight) {
+    const color = isLight ? '#FFD600' : '#FFF';
+    return `<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="14" fill="${color}" stroke="#bbb" stroke-width="2"/>
+      <rect x="20" y="34" width="8" height="8" rx="2" fill="#bbb"/>
+      <rect x="22" y="42" width="4" height="4" rx="1" fill="#bbb"/>
+    </svg>`;
+  }
+
   function updateBulbIcon() {
-        <div id="bulb-container"></div>
-    if (document.body.classList.contains('light')) {
-      bulbDark.style.display = 'none';
-      bulbLight.style.display = 'block';
-    } else {
-      bulbDark.style.display = 'block';
-      bulbLight.style.display = 'none';
-    }
+    var bulbContainer = document.getElementById('bulb-container');
+    if (!bulbContainer) return;
+    const isLight = document.body.classList.contains('light');
+    bulbContainer.innerHTML = createBulbSVG(isLight);
   }
   function applySavedTheme() {
     var saved = localStorage.getItem('themeMode');
