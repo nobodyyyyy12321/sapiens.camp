@@ -77,7 +77,7 @@ export default function RootLayout({
               }}
             />
             {/* Record player icon at top left with tooltip */}
-            <div className="fixed top-4 left-4 z-60 group">
+            <div className="fixed top-4 left-16 z-60 group">
               <div className="h-12 w-12 flex items-center justify-center rounded-full bg-transparent cursor-pointer relative">
                 <img
                   src="/icons/record-player-white.png"
