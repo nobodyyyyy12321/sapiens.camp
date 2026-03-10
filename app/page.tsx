@@ -494,26 +494,25 @@ export default function Home() {
           </div>
 
           <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
-            <div className="flex items-center gap-4">
-              {/* Speaker icon with tooltip */}
-              <div className="relative group">
-                <img
-                  src="/icons/speaker-inverted.png"
-                  alt="Speaker icon"
-                  className="w-10 h-10 object-contain cursor-pointer"
-                />
-                <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
-                  推荐搭配一點音樂
-                </span>
-              </div>
-              <Link
-                href="/feedback"
-                className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                意見回饋
-              </Link>
-            </div>
+            <Link
+              href="/feedback"
+              className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              意見回饋
+            </Link>
           </footer>
+
+          {/* Fixed speaker icon at bottom left */}
+          <div className="fixed left-6 bottom-6 z-50 group">
+            <img
+              src="/icons/speaker-inverted.png"
+              alt="Speaker icon"
+              className="w-10 h-10 object-contain cursor-pointer"
+            />
+            <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
+              推荐搭配一點音樂
+            </span>
+          </div>
         </main>
       </div>
     }>
