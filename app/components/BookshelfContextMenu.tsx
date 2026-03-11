@@ -146,30 +146,24 @@ export default function BookshelfContextMenu() {
     <>
       {open && (
         <div
-          className="fixed z-[80] min-w-36 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-lg"
+          className="fixed z-[80] min-w-44 rounded shadow-md border border-zinc-200 dark:border-zinc-800 bg-zen-paper dark:bg-zinc-900"
           style={{ top: y, left: x }}
           role="menu"
         >
-          <button
-            onClick={addToBookshelf}
-            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
-          >
-            加入個人書櫃
-          </button>
-          <button
-            onClick={removeFromBookshelf}
-            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50"
-            disabled={!isInBookshelf}
-          >
-            移出個人書櫃
-          </button>
-          <button
-            onClick={downloadPdf}
-            className="block w-full text-left px-3 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 disabled:opacity-50"
-            disabled={!canDownloadPdf}
-          >
-            下載pdf
-          </button>
+          <div className="py-1">
+            <div className="px-4 py-3 text-sm flex items-center gap-2 truncate border-b border-zinc-200 dark:border-zinc-800" title={target?.title || "使用者"}>
+              <span className="w-7 h-7 rounded-full bg-gray-600 text-white text-base font-semibold flex items-center justify-center mr-2">
+                {(target?.title || "使用者").slice(0, 1).toUpperCase()}
+              </span>
+              <span>{target?.title || "使用者"}</span>
+            </div>
+            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/profile`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">檔案</button>
+            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/record`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">紀錄</button>
+            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/lists`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人書櫃</button>
+            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/settings`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</button>
+            <button onClick={() => window.location.href = `/api/auth/signout`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">登出</button>
+            <button className="w-full py-2 text-sm text-center text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 border-t border-zinc-200 dark:border-zinc-800" onClick={() => setOpen(false)}>關閉</button>
+          </div>
         </div>
       )}
 
