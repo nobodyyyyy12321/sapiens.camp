@@ -4,6 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense, useRef } from "react";
 import Link from "next/link";
 import MusicTip from "./components/MusicTip";
+import ShareIcon from "./components/ShareIcon";
 
 import "./speaker-icon.css";
 
@@ -269,13 +270,22 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             <div className="w-full overflow-visible">
               <div className="bookshelf-grid home-bookshelf-grid">
                 {filteredSubjects.map((subject) => (
-                  <Link
-                    key={subject.name}
-                    href={subject.href}
-                    className="book-link"
-                  >
-                    {subject.name}
-                  </Link>
+                  <div key={subject.name} style={{ position: "relative" }}>
+                    <Link
+                      href={subject.href}
+                      className="book-link"
+                    >
+                      {subject.name}
+                    </Link>
+                    <button
+                      type="button"
+                      aria-label="分享"
+                      style={{ position: "absolute", right: 8, bottom: 8, background: "#fff", border: "2px solid #fff", borderRadius: "50%", padding: "6px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
+                      onClick={() => {}}
+                    >
+                      <ShareIcon size={24} />
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
