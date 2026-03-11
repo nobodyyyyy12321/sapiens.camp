@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import ShareIcon from "../../components/ShareIcon";
 
 type Props = {
   articleId: string;
@@ -142,6 +143,32 @@ export default function AddToListButton({ articleId, articleNumber, title }: Pro
           )}
         </div>
       )}
+
+      {/* 右下角白框分享按鈕 */}
+      <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 40 }}>
+        <button
+          type="button"
+          className="share-btn"
+          aria-label="分享"
+        >
+          <ShareIcon size={32} />
+        </button>
+        <style jsx>{`
+          .share-btn {
+            background: #fff;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+          }
+          .share-btn:active {
+            transform: scale(0.92);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+          }
+        `}</style>
+      </div>
     </div>
   );
 }
