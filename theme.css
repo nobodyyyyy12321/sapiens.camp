@@ -1,6 +1,5 @@
  :root {
    --bg: #181818;
-   --fg: #fff;
    --border: #fff;
    --btn-bg: #181818;
    --btn-fg: #fff;
@@ -25,6 +24,7 @@ body.light {
    --btn-hover-fg: #fff;
    --btn-hover-border: #ffd600;
    --input-bg: #fff;
+  }
    --input-fg: #181818;
    --input-border: #bbb;
    --subtitle: #7c8a7c;

@@ -1,6 +1,6 @@
   <link rel="stylesheet" href="theme.css">
   <link rel="icon" type="image/png" href="favicon.png">
-  <script src="bulb-toggle.js"></script>
+  
   <style>
     .main {
       display: flex;
@@ -156,14 +156,7 @@
   </div>
   <div style="position:absolute;left:32vw;top:3vh;transform:translateY(-50%);z-index:30;">
     <div style="display:flex;flex-direction:column;align-items:center;">
-      <div id="bulb-line" style="height:240px;width:2px;background:#bbb;margin-bottom:-8px;position:relative;top:-240px;"></div>
-      <div id="bulb-center" style="transform:rotate(180deg);cursor:pointer;">
-        <svg id="bulbSVG" width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle id="bulbCircle" cx="24" cy="24" r="14" fill="#FFD600" stroke="#bbb" stroke-width="2"/>
-          <rect x="20" y="34" width="8" height="8" rx="2" fill="#bbb"/>
-          <rect x="22" y="42" width="4" height="4" rx="1" fill="#bbb"/>
-        </svg>
-      </div>
+      
     </div>
   </div>
   <div class="top-bar" style="display:flex;align-items:center;gap:16px;position:absolute;right:32px;top:24px;z-index:30;">
@@ -257,27 +250,54 @@
     });
   // ...existing code...
 
-  // 繁簡切換
+  // 語言切換與按鈕翻譯
   const langSelect = document.querySelector('.lang-select');
   const titleEl = document.querySelector('.title');
-  const btns = document.querySelectorAll('.category-btn');
-  // 原始內容備份
+  const btnGroup = document.querySelector('.category-list');
   const originalTitle = titleEl.textContent;
-  const originalBtns = Array.from(btns).map(btn => btn.textContent);
-  // 簡體對應
-  const zhTw = [
-    '詩文背誦','國文','英文','公職考試','名言佳句','綜合','比賽','撩語錄','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'
-  ];
-  const zhCn = [
-    '诗文背诵','语文','英语','公职考试','名言佳句','综合','比赛','撩语录','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'
-  ];
+  const originalBtns = Array.from(btnGroup.children).map(btn => btn.textContent);
+  const zhTw = ['詩文背誦','國文','英文','公職考試','名言佳句','綜合','比賽','撩語錄','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'];
+  const zhCn = ['诗文背诵','语文','英语','公职考试','名言佳句','综合','比赛','撩语录','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'];
+  const btnTranslations = {
+    'English': ['Quote','Math','Physics','Chemistry','Competition'],
+    'Español': ['Cita','Matemáticas','Física','Química','Competencia'],
+    'ไทย': ['คำคม','คณิตศาสตร์','ฟิสิกส์','เคมี','การแข่งขัน'],
+    'Bahasa Indonesia': ['Kutipan','Matematika','Fisika','Kimia','Kompetisi'],
+    '한국어': ['명언','수학','물리','화학','경쟁']
+  };
   langSelect.addEventListener('change', function() {
-    if (langSelect.value === '简体中文') {
-      if (titleEl) titleEl.textContent = '智人题库';
-      btns.forEach((btn, i) => { btn.textContent = zhCn[i] || btn.textContent; });
-    } else {
+    const lang = langSelect.value;
+    if (lang === '繁體中文') {
       if (titleEl) titleEl.textContent = originalTitle;
-      btns.forEach((btn, i) => { btn.textContent = originalBtns[i]; });
+      btnGroup.innerHTML = '';
+      zhTw.forEach(txt => {
+        const a = document.createElement('a');
+        a.className = 'category-btn';
+        a.href = 'under_construction.html';
+        a.textContent = txt;
+        btnGroup.appendChild(a);
+      });
+    } else if (lang === '简体中文') {
+      if (titleEl) titleEl.textContent = '智人题库';
+      btnGroup.innerHTML = '';
+      zhCn.forEach(txt => {
+        const a = document.createElement('a');
+        a.className = 'category-btn';
+        a.href = 'under_construction.html';
+        a.textContent = txt;
+        btnGroup.appendChild(a);
+      });
+    } else {
+      // 其他語言只顯示五個按鈕
+      if (titleEl) titleEl.textContent = originalTitle;
+      btnGroup.innerHTML = '';
+      (btnTranslations[lang] || btnTranslations['English']).forEach(txt => {
+        const a = document.createElement('a');
+        a.className = 'category-btn';
+        a.href = 'under_construction.html';
+        a.textContent = txt;
+        btnGroup.appendChild(a);
+      });
     }
   });
 </script>
