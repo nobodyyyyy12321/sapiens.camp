@@ -91,6 +91,10 @@ export default function RootLayout({
                 </div>
               </div>
               {/* 手機版時間計時器排在語言列下方 */}
+              <div className="flex md:hidden w-full justify-end gap-6">
+                <LanguageSelector />
+                <AuthNav />
+              </div>
               <div className="flex md:hidden w-full justify-center gap-6 mt-2">
                 <TimeDisplay />
                 <TimerDisplay />
