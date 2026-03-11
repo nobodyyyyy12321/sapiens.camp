@@ -46,7 +46,7 @@ const TimerDisplay: React.FC = () => {
       </button>
       <style jsx>{`
         .timer-btn {
-          background: none;
+          background: none !important;
           border: none;
           padding: 0.25em 0.4em;
           cursor: pointer;
@@ -54,6 +54,11 @@ const TimerDisplay: React.FC = () => {
           align-items: center;
           justify-content: center;
           transition: background 0.15s, transform 0.15s;
+        }
+        .timer-btn:active,
+        .timer-btn:focus {
+          background: none !important;
+          outline: none;
         }
         .timer-icon {
           color: #fff;
