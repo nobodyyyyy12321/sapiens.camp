@@ -84,9 +84,9 @@ export default function RootLayout({
             <nav className="w-full flex items-center justify-between pr-5 pl-5">
               <div className="flex items-center gap-6">
                 <TimeDisplay />
-                <TimerDisplay />
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-6">
+                <TimerDisplay />
                 <LanguageSelector />
                 <AuthNav />
               </div>
