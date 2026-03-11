@@ -58,7 +58,11 @@ const TimerDisplay: React.FC = () => {
         .timer-btn:active,
         .timer-btn:focus {
           background: none !important;
-          outline: none;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+        .timer-btn {
+          -webkit-tap-highlight-color: transparent;
         }
         .timer-icon {
           color: #fff;
