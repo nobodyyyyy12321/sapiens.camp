@@ -73,6 +73,19 @@ export default function RootLayout({
             />
           </Link>
 
+          {/* 新增時間與計時器顯示區塊 */}
+          <div className="w-full flex justify-center items-center gap-8 py-2 bg-transparent" style={{ position: "relative", zIndex: 41 }}>
+            <React.Suspense fallback={null}>
+              {/* @ts-expect-error Server Component */}
+              {typeof window !== "undefined" && (
+                <>
+                  {require("./components/TimeDisplay").default && <require("./components/TimeDisplay").default />}
+                  {require("./components/TimerDisplay").default && <require("./components/TimerDisplay").default />}
+                </>
+              )}
+            </React.Suspense>
+          </div>
+
           <PWARegister />
           <BookshelfContextMenu />
           <script
