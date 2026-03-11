@@ -126,67 +126,6 @@ export default function AuthNav() {
     }
   };
 
-  return (
-    <div className="flex items-center">
-      <div 
-        className="relative"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <button 
-          aria-haspopup="true" 
-          aria-label="開啟個人選單"
-          className="flex items-center"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {avatarUrl ? (
-            <img src={avatarUrl} alt={`${name} avatar`} className="w-11 h-11 rounded-full object-cover" />
-          ) : session.user.image ? (
-            <img src={session.user.image} alt={`${name} avatar`} className="w-11 h-11 rounded-full object-cover" />
-          ) : (
-            <span className="w-11 h-11 rounded-full bg-gray-600 text-white text-base font-semibold flex items-center justify-center">
-              {name.slice(0, 1).toUpperCase()}
-            </span>
-          )}
-        </button>
-
-        {isMenuOpen && (
-          <div className="fixed z-[80] min-w-44 rounded shadow-md border border-zinc-200 dark:border-zinc-800 bg-zen-paper dark:bg-zinc-900" style={{ top: "20vh", right: "5vw" }}>
-            <div className="py-1">
-              <div className="px-4 py-3 text-sm flex items-center gap-2 truncate border-b border-zinc-200 dark:border-zinc-800" title={name}>
-                {avatarUrl ? (
-                  <img src={avatarUrl} alt={`${name} avatar`} className="w-7 h-7 rounded-full object-cover mr-2" />
-                ) : session.user.image ? (
-                  <img src={session.user.image} alt={`${name} avatar`} className="w-7 h-7 rounded-full object-cover mr-2" />
-                ) : (
-                  <span className="w-7 h-7 rounded-full bg-gray-600 text-white text-base font-semibold flex items-center justify-center mr-2">
-                    {name.slice(0, 1).toUpperCase()}
-                  </span>
-                )}
-                <span>{name}</span>
-              </div>
-              <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">檔案</Link>
-              <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">紀錄</Link>
-              <Link href="/under-construction" className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">付費方案</Link>
-              <Link href={`/account/${encodedName}/lists`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人書櫃</Link>
-              <Link href={`/account/${encodedName}/settings`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</Link>
-              <button
-                onClick={handleSignOut}
-                className="w-full text-left px-4 py-3 !text-sm !leading-5 font-normal hover:bg-zinc-100 dark:hover:bg-zinc-800"
-              >
-                登出
-              </button>
-              {logoutError && (
-                <div className="px-4 py-2 border-t border-zinc-200 dark:border-zinc-800">
-                  <p className="text-xs text-red-600 dark:text-red-400 break-all">登出失敗：{logoutError}</p>
-                  <a href="/api/auth/signout" className="mt-1 inline-block text-xs underline">改用預設登出頁</a>
-                </div>
-              )}
-            </div>
-            <button className="w-full py-2 text-sm text-center text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 border-t border-zinc-200 dark:border-zinc-800" onClick={() => setIsMenuOpen(false)}>關閉</button>
-          </div>
-        )}
-      </div>
-    </div>
+  return null;
   );
 }
