@@ -18,7 +18,22 @@ const TimeDisplay: React.FC = () => {
   }, []);
 
   return (
-    <span style={{ fontFamily: "monospace", fontSize: "1.2em", letterSpacing: "0.1em" }}>{time}</span>
+    <span
+      style={{
+        fontFamily: "monospace",
+        fontSize: "1.2em",
+        letterSpacing: "0.1em",
+        background: "#fff",
+        border: "2px solid #fff",
+        borderRadius: "0.7em",
+        padding: "0.25em 0.8em",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+        color: "#222",
+        display: "inline-block"
+      }}
+    >
+      {time}
+    </span>
   );
 };
 

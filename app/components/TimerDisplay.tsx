@@ -6,20 +6,21 @@ const TimerDisplay: React.FC = () => {
   const [seconds, setSeconds] = useState(0);
   const [running, setRunning] = useState(false);
 
-  useEffect(() => {
-    if (!running) return;
-    const interval = setInterval(() => {
-      setSeconds((s) => s + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [running]);
-
-  const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
-  const ss = String(seconds % 60).padStart(2, "0");
-
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-      <span style={{ fontFamily: "monospace", fontSize: "1.2em", letterSpacing: "0.1em", color: "#fff" }}>{mm}:{ss}</span>
+    <div
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.5em",
+        background: "#fff",
+        border: "2px solid #fff",
+        borderRadius: "0.7em",
+        padding: "0.25em 0.8em",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+        color: "#222"
+      }}
+    >
+      <span style={{ fontFamily: "monospace", fontSize: "1.2em", letterSpacing: "0.1em", color: "#222" }}>{mm}:{ss}</span>
       <button
         type="button"
         aria-label="開始"
@@ -50,6 +51,17 @@ const TimerDisplay: React.FC = () => {
           border: none;
           padding: 0.25em 0.4em;
           cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.15s, transform 0.15s;
+        }
+        .timer-btn:active,
+        .timer-btn:focus {
+          background: none !important;
+        }
+      `}</style>
+    </div>
           display: flex;
           align-items: center;
           justify-content: center;
