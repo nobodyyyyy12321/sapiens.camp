@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 
 // 顯示四位數字時間（HH:mm）

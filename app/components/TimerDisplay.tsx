@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 
 // 顯示四位數字計時器（mm:ss），預設 1 分鐘倒數

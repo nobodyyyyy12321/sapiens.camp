@@ -13,6 +13,8 @@ import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
 import RecordPlayer from "./components/RecordPlayer";
+import TimeDisplay from "./components/TimeDisplay";
+import TimerDisplay from "./components/TimerDisplay";
 import "./speaker-icon.css";
 // ...existing code...
 
@@ -75,15 +77,8 @@ export default function RootLayout({
 
           {/* 新增時間與計時器顯示區塊 */}
           <div className="w-full flex justify-center items-center gap-8 py-2 bg-transparent" style={{ position: "relative", zIndex: 41 }}>
-            <React.Suspense fallback={null}>
-              {/* @ts-expect-error Server Component */}
-              {typeof window !== "undefined" && (
-                <>
-                  {require("./components/TimeDisplay").default && <require("./components/TimeDisplay").default />}
-                  {require("./components/TimerDisplay").default && <require("./components/TimerDisplay").default />}
-                </>
-              )}
-            </React.Suspense>
+            <TimeDisplay />
+            <TimerDisplay />
           </div>
 
           <PWARegister />
