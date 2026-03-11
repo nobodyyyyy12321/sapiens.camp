@@ -82,11 +82,18 @@ export default function RootLayout({
           >
             <VisitPing />
             <nav className="w-full flex items-center justify-end pr-5 pl-5">
-              <div className="flex items-center gap-6">
-                <TimeDisplay />
-                <TimerDisplay />
+              <div className="flex items-center gap-6 flex-wrap">
                 <LanguageSelector />
                 <AuthNav />
+                <div className="hidden md:flex items-center gap-6">
+                  <TimeDisplay />
+                  <TimerDisplay />
+                </div>
+              </div>
+              {/* 手機版時間計時器排在語言列下方 */}
+              <div className="flex md:hidden w-full justify-center gap-6 mt-2">
+                <TimeDisplay />
+                <TimerDisplay />
               </div>
             </nav>
           </header>
