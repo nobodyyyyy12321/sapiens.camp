@@ -271,15 +271,14 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               <div className="bookshelf-grid home-bookshelf-grid">
                 {filteredSubjects.map((subject) => (
                   <div key={subject.name} style={{ position: "relative" }}>
-                    <button
+                    <Link
+                      href={subject.href}
                       className="book-link bookshelf-btn"
                       data-title={subject.name}
                       data-href={subject.href}
-                      style={{ width: "100%", textAlign: "left", background: "none", border: "none", padding: 0, cursor: "pointer" }}
-                      onClick={() => window.location.href = subject.href}
                     >
                       {subject.name}
-                    </button>
+                    </Link>
                   </div>
                 ))}
               </div>
