@@ -75,11 +75,23 @@ export default function RootLayout({
             />
           </Link>
 
-          {/* 新增時間與計時器顯示區塊 */}
-          <div className="w-full flex justify-center items-center gap-8 py-2 bg-transparent" style={{ position: "relative", zIndex: 41 }}>
-            <TimeDisplay />
-            <TimerDisplay />
-          </div>
+          {/* 新 header：時間、計時器、語言選單、頭像同一橫排 */}
+          <header
+            className="w-full py-5 sticky top-0 z-40"
+            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+          >
+            <VisitPing />
+            <nav className="w-full flex items-center justify-between pr-5 pl-5">
+              <div className="flex items-center gap-6">
+                <TimeDisplay />
+                <TimerDisplay />
+              </div>
+              <div className="flex items-center gap-3">
+                <LanguageSelector />
+                <AuthNav />
+              </div>
+            </nav>
+          </header>
 
           <PWARegister />
           <BookshelfContextMenu />
@@ -97,20 +109,6 @@ export default function RootLayout({
           {/* ...existing code... */}
           {/* Hide GlobalUpOneLevelButton on feedback page */}
           {typeof window !== "undefined" && window.location.pathname.startsWith("/feedback") ? null : <GlobalUpOneLevelButton />}
-          <header
-            className="w-full py-5 sticky top-0 z-40"
-            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
-          >
-            <VisitPing />
-            <nav className="w-full flex items-center justify-end pr-5 pl-5">
-              <div className="flex items-center gap-3">
-                <div className="mr-0 md:mr-[3cm]">
-                  <LanguageSelector />
-                </div>
-                <AuthNav />
-              </div>
-            </nav>
-          </header>
 
           <LanguageGate>{children}</LanguageGate>
         </Providers>
