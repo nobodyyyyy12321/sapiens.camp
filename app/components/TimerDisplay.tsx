@@ -19,25 +19,40 @@ const TimerDisplay: React.FC = () => {
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "0.5em" }}>
-      <span style={{ fontFamily: "monospace", fontSize: "1.2em", letterSpacing: "0.1em" }}>{mm}:{ss}</span>
+      <span style={{ fontFamily: "monospace", fontSize: "1.2em", letterSpacing: "0.1em", color: "#fff" }}>{mm}:{ss}</span>
       <button
         type="button"
         aria-label="開始"
         onClick={() => setRunning(true)}
-        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.2em" }}
+        className="timer-btn"
       >▶️</button>
       <button
         type="button"
         aria-label="停止"
         onClick={() => setRunning(false)}
-        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.2em" }}
+        className="timer-btn"
       >⏸️</button>
       <button
         type="button"
         aria-label="歸零"
         onClick={() => { setSeconds(0); setRunning(false); }}
-        style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1.2em" }}
+        className="timer-btn"
       >⏹️</button>
+      <style jsx>{`
+        .timer-btn {
+          background: none;
+          border: none;
+          color: #fff;
+          font-size: 1.4em;
+          cursor: pointer;
+          transition: transform 0.15s, color 0.15s;
+          padding: 0 0.15em;
+        }
+        .timer-btn:active {
+          transform: scale(0.85);
+          color: #ffd700;
+        }
+      `}</style>
     </div>
   );
 };
