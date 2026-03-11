@@ -25,32 +25,44 @@ const TimerDisplay: React.FC = () => {
         aria-label="開始"
         onClick={() => setRunning(true)}
         className="timer-btn"
-      >▶️</button>
+      >
+        <span className="timer-icon">▶️</span>
+      </button>
       <button
         type="button"
-        aria-label="停止"
+        aria-label="暫停"
         onClick={() => setRunning(false)}
         className="timer-btn"
-      >⏸️</button>
+      >
+        <span className="timer-icon">⏸️</span>
+      </button>
       <button
         type="button"
         aria-label="歸零"
         onClick={() => { setSeconds(0); setRunning(false); }}
         className="timer-btn"
-      >⏹️</button>
+      >
+        <span className="timer-icon">⏹️</span>
+      </button>
       <style jsx>{`
         .timer-btn {
           background: none;
           border: none;
+          padding: 0.25em 0.4em;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background 0.15s, transform 0.15s;
+        }
+        .timer-icon {
           color: #fff;
           font-size: 1.4em;
-          cursor: pointer;
-          transition: transform 0.15s, color 0.15s;
-          padding: 0 0.15em;
+          transition: color 0.15s, transform 0.15s;
         }
-        .timer-btn:active {
-          transform: scale(0.85);
+        .timer-btn:active .timer-icon {
           color: #ffd700;
+          transform: scale(0.85);
         }
       `}</style>
     </div>
