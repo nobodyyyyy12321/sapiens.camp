@@ -81,7 +81,7 @@ export default function RootLayout({
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
           >
             <VisitPing />
-            <nav className="w-full flex items-center justify-between pr-5 pl-5">
+            <nav className="w-full flex items-center justify-end pr-5 pl-5">
               <div className="flex items-center gap-6">
                 <TimeDisplay />
                 <TimerDisplay />
