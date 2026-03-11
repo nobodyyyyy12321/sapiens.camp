@@ -153,7 +153,18 @@ export default function AuthNav() {
         {isMenuOpen && (
           <div className="fixed z-[80] min-w-44 rounded shadow-md border border-zinc-200 dark:border-zinc-800 bg-zen-paper dark:bg-zinc-900" style={{ top: "20vh", right: "5vw" }}>
             <div className="py-1">
-              <div className="px-4 py-3 text-sm truncate border-b border-zinc-200 dark:border-zinc-800" title={name}>{name}</div>
+              <div className="px-4 py-3 text-sm flex items-center gap-2 truncate border-b border-zinc-200 dark:border-zinc-800" title={name}>
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt={`${name} avatar`} className="w-7 h-7 rounded-full object-cover mr-2" />
+                ) : session.user.image ? (
+                  <img src={session.user.image} alt={`${name} avatar`} className="w-7 h-7 rounded-full object-cover mr-2" />
+                ) : (
+                  <span className="w-7 h-7 rounded-full bg-gray-600 text-white text-base font-semibold flex items-center justify-center mr-2">
+                    {name.slice(0, 1).toUpperCase()}
+                  </span>
+                )}
+                <span>{name}</span>
+              </div>
               <Link href={`/account/${encodedName}/profile`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">檔案</Link>
               <Link href={`/account/${encodedName}/record`} className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">紀錄</Link>
               <Link href="/under-construction" className="block px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">付費方案</Link>
