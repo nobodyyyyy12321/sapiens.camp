@@ -3,6 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, Suspense, useRef } from "react";
 import Link from "next/link";
+import MusicTip from "./components/MusicTip";
 
 import "./speaker-icon.css";
 
@@ -295,9 +296,10 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </Link>
         </footer>
         {/* 固定在視窗左下角的喇叭圖示 */}
-        <div className="speaker-icon">
-          <img src="/icons/speaker.png" alt="Speaker Icon" />
-          <span className="speaker-tooltip">推荐搭配一點音樂</span>
+          <div className="speaker-icon">
+            <img src="/icons/speaker.png" alt="Speaker Icon" />
+            {/* 音樂提示隨語言切換 */}
+            <MusicTip />
         </div>
       </main>
     </div>
@@ -469,7 +471,7 @@ export default function Home() {
               className="w-10 h-10 object-contain cursor-pointer"
             />
             <span className="absolute left-12 top-1/2 -translate-y-1/2 bg-zinc-900 text-white text-xs rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg border border-zinc-700">
-              推荐搭配一點音樂
+              <MusicTip />
             </span>
           </div>
         </main>
