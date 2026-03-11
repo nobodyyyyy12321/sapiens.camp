@@ -96,7 +96,14 @@ export default function AddToListButton({ articleId, articleNumber, title }: Pro
 
   return (
     <div className="relative inline-block">
-      <button onClick={toggle} className="ml-4 px-3 py-1 border rounded text-sm">加入清單</button>
+      <button
+        onClick={toggle}
+        className="ml-4 px-3 py-1 border rounded text-sm bookshelf-btn"
+        data-title={title}
+        data-href={typeof articleId === "string" ? `/article/${articleId}` : `/article/${articleNumber}`}
+      >
+        加入清單
+      </button>
       {open && (
         <div className="absolute mt-2 right-0 w-56 bg-white dark:bg-gray-900 border rounded shadow z-30 p-2">
           {loading ? <div className="p-2">載入中…</div> : (
@@ -148,8 +155,10 @@ export default function AddToListButton({ articleId, articleNumber, title }: Pro
       <div style={{ position: "fixed", bottom: 24, right: 24, zIndex: 40 }}>
         <button
           type="button"
-          className="share-btn"
+          className="share-btn bookshelf-btn"
           aria-label="分享"
+          data-title={title}
+          data-href={typeof articleId === "string" ? `/article/${articleId}` : `/article/${articleNumber}`}
         >
           <ShareIcon size={32} />
         </button>
