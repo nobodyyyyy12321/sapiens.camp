@@ -14,14 +14,17 @@ const MusicTip: React.FC = () => {
   const [language, setLanguage] = useState("zh-TW");
 
   useEffect(() => {
-    const stored = localStorage.getItem("siteLanguage") || "zh-TW";
-    setLanguage(stored);
-    const handler = () => {
+    const updateLanguage = () => {
       const lang = localStorage.getItem("siteLanguage") || "zh-TW";
       setLanguage(lang);
     };
-    window.addEventListener("site-language-change", handler);
-    return () => window.removeEventListener("site-language-change", handler);
+    updateLanguage();
+    window.addEventListener("site-language-change", updateLanguage);
+    window.addEventListener("storage", updateLanguage);
+    return () => {
+      window.removeEventListener("site-language-change", updateLanguage);
+      window.removeEventListener("storage", updateLanguage);
+    };
   }, []);
 
   return <span className="speaker-tooltip">{tipTexts[language] || tipTexts["zh-TW"]}</span>;
