@@ -38,8 +38,19 @@ export default function BookshelfContextMenu() {
     const closeMenu = () => setOpen(false);
 
     const onContextMenu = (event: MouseEvent) => {
+      const node = event.target as HTMLElement | null;
+      const bookshelfBtn = node?.closest("button.bookshelf-btn") as HTMLButtonElement | null;
+      if (bookshelfBtn) {
+        event.preventDefault();
+        // 書櫃按鈕右鍵：顯示書櫃選單
+        setTarget({ title: bookshelfBtn.dataset.title || "", href: bookshelfBtn.dataset.href || "", pagePath: window.location.pathname });
+        setX(event.clientX);
+        setY(event.clientY);
+        setOpen(true);
+        return;
+      }
+      // 其他區域右鍵：顯示個人選單
       event.preventDefault();
-      // 取得登入者名稱
       const name = localStorage.getItem("userName") || "使用者";
       setTarget({ title: name, href: "", pagePath: window.location.pathname });
       setX(event.clientX);
