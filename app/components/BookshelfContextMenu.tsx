@@ -162,7 +162,7 @@ export default function BookshelfContextMenu() {
             <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/lists`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人書櫃</button>
             <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/settings`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</button>
             <button onClick={() => window.location.href = `/api/auth/signout`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">登出</button>
-            <button className="w-full py-2 text-sm text-center text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 border-t border-zinc-200 dark:border-zinc-800" onClick={() => setOpen(false)}>關閉</button>
+            {/* 點左鍵自動關閉選單，不顯示關閉按鈕 */}
           </div>
         </div>
       )}
