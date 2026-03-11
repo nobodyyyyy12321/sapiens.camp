@@ -277,14 +277,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
                     >
                       {subject.name}
                     </Link>
-                    <button
-                      type="button"
-                      aria-label="分享"
-                      style={{ position: "absolute", right: 8, bottom: 8, background: "#fff", border: "2px solid #fff", borderRadius: "50%", padding: "6px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)", cursor: "pointer", transition: "transform 0.15s, box-shadow 0.15s" }}
-                      onClick={() => {}}
-                    >
-                      <ShareIcon size={24} />
-                    </button>
                   </div>
                 ))}
               </div>
