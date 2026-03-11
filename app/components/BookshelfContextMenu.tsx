@@ -38,20 +38,10 @@ export default function BookshelfContextMenu() {
     const closeMenu = () => setOpen(false);
 
     const onContextMenu = (event: MouseEvent) => {
-      const node = event.target as HTMLElement | null;
-      const anchor = node?.closest("a.book-link") as HTMLAnchorElement | null;
-      if (!anchor) return;
-
-      const href = anchor.getAttribute("href") || "";
-      const title = (anchor.textContent || "").trim();
-      if (!href || !title) return;
-
-      const current = getCurrentBookshelf();
-      const exists = current.some((item) => item.href === href);
-
       event.preventDefault();
-      setTarget({ title, href, pagePath: window.location.pathname });
-      setIsInBookshelf(exists);
+      // 取得登入者名稱
+      const name = localStorage.getItem("userName") || "使用者";
+      setTarget({ title: name, href: "", pagePath: window.location.pathname });
       setX(event.clientX);
       setY(event.clientY);
       setOpen(true);
