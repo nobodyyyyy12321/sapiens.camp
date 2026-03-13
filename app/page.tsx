@@ -296,7 +296,21 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             href="/feedback"
             className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
           >
-            意見回饋
+            {language === "en"
+              ? "Feedback"
+              : language === "zh-CN"
+              ? "意见反馈"
+              : language === "es"
+              ? "Retroalimentación"
+              : language === "th"
+              ? "ข้อเสนอแนะ"
+              : language === "id"
+              ? "Masukan"
+              : language === "ko"
+              ? "피드백"
+              : language === "ru"
+              ? "Обратная связь"
+              : "意見回饋"}
           </Link>
         </footer>
         {/* 固定在視窗左下角的喇叭圖示 */}
@@ -454,7 +468,21 @@ export default function Home() {
               href="/feedback"
               className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-0 transition-opacity"
             >
-              意見回饋
+              {language === "en"
+                ? "Feedback"
+                : language === "zh-CN"
+                ? "意见反馈"
+                : language === "es"
+                ? "Retroalimentación"
+                : language === "th"
+                ? "ข้อเสนอแนะ"
+                : language === "id"
+                ? "Masukan"
+                : language === "ko"
+                ? "피드백"
+                : language === "ru"
+                ? "Обратная связь"
+                : "意見回饋"}
             </Link>
           </footer>
 
