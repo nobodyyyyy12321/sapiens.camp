@@ -59,7 +59,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
         ]
       : language === "zh-CN"
         ? [
-            { name: "诗文背诵", href: "/recitation" },
+            { name: "背东西", href: "/recitation" },
             { name: "国文", href: "/chinese" },
             { name: "英文", href: "/english" },
             { name: "公职考试", href: "/公職考試" },
@@ -116,7 +116,7 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
             { name: "명언", href: "/under-construction" },
           ]
       : [
-            { name: "詩文背誦", href: "/recitation" },
+            { name: "背東西", href: "/recitation" },
             { name: "國文", href: "/chinese" },
             { name: "英文", href: "/english" },
             { name: "公職考試", href: "/公職考試" },
@@ -365,7 +365,7 @@ export default function Home() {
                   ]
                 : language === "zh-CN"
                   ? [
-                      { name: "诗文背诵", href: "/recitation" },
+                      { name: "背东西", href: "/recitation" },
                       { name: "国文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
@@ -384,7 +384,7 @@ export default function Home() {
                       { name: "社会", href: "/social" },
                     ]
                   : [
-                      { name: "詩文背誦", href: "/recitation" },
+                      { name: "背東西", href: "/recitation" },
                       { name: "國文", href: "/chinese" },
                       { name: "英文", href: "/english" },
                       { name: "名言佳句", href: "/quote" },
@@ -411,7 +411,7 @@ export default function Home() {
                         ]
                       : language === "zh-CN"
                         ? [
-                            { name: "诗文背诵", href: "/recitation" },
+                            { name: "背东西", href: "/recitation" },
                             { name: "国文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
@@ -430,7 +430,7 @@ export default function Home() {
                             { name: "社会", href: "/social" },
                           ]
                         : [
-                            { name: "詩文背誦", href: "/recitation" },
+                            { name: "背東西", href: "/recitation" },
                             { name: "國文", href: "/chinese" },
                             { name: "英文", href: "/english" },
                             { name: "名言佳句", href: "/quote" },
