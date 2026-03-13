@@ -176,7 +176,7 @@ export default function ListsPage() {
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black text-center">
         <div className="flex flex-col items-center gap-6 text-center w-full">
-          <h1 className="max-w-xs text-4xl font-bold zen-title">個人書櫃</h1>
+          <h1 className="max-w-xs text-4xl font-bold zen-title">個人清單</h1>
 
           {items.length === 0 ? (
             <p className="text-sm zen-subtle">目前尚未收藏項目</p>

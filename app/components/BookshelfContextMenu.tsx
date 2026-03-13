@@ -82,13 +82,13 @@ export default function BookshelfContextMenu() {
       const current = getCurrentBookshelf();
       const exists = current.some((item) => item.href === target.href);
       if (exists) {
-        setToast("已在個人書櫃");
+        setToast("已在個人清單");
       } else {
         const next: SavedBook[] = [{ ...target, addedAt: new Date().toISOString() }, ...current];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
         window.dispatchEvent(new Event("my-bookshelf-updated"));
         setIsInBookshelf(true);
-        setToast("已加入個人書櫃");
+        setToast("已加入個人清單");
       }
     } catch {
       setToast("加入失敗");
@@ -105,13 +105,13 @@ export default function BookshelfContextMenu() {
       const current = getCurrentBookshelf();
       const exists = current.some((item) => item.href === target.href);
       if (!exists) {
-        setToast("不在個人書櫃");
+        setToast("不在個人清單");
       } else {
         const next = current.filter((item) => item.href !== target.href);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
         window.dispatchEvent(new Event("my-bookshelf-updated"));
         setIsInBookshelf(false);
-        setToast("已移出個人書櫃");
+        setToast("已移出個人清單");
       }
     } catch {
       setToast("移出失敗");
@@ -170,7 +170,7 @@ export default function BookshelfContextMenu() {
             </div>
             <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/profile`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">檔案</button>
             <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/record`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">紀錄</button>
-            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/lists`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人書櫃</button>
+            <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/lists`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">個人清單</button>
             <button onClick={() => window.location.href = `/account/${encodeURIComponent(target?.title || "")}/settings`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">設定</button>
             <button onClick={() => window.location.href = `/api/auth/signout`} className="block w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800">登出</button>
             {/* 點左鍵自動關閉選單，不顯示關閉按鈕 */}
