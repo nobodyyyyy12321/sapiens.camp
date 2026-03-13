@@ -37,6 +37,10 @@ function isQuizPath(pathname: string) {
 }
 
 function isAllowedForLanguage(language: LanguageCode, pathname: string) {
+  // 允許所有語言瀏覽 /feedback
+  if (pathname === "/feedback" || pathname.startsWith("/feedback/")) {
+    return true;
+  }
   if (language === "en") {
     if (pathname === "/study-chinese" || pathname.startsWith("/study-chinese/")) {
       return true;
