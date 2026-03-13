@@ -82,15 +82,16 @@ export default function RootLayout({
           >
             <VisitPing />
             <nav className="w-full flex items-center justify-end pr-5 pl-5">
-              <div className="w-full flex items-center justify-between flex-wrap">
-                <div className="hidden md:flex w-full justify-center items-center gap-6">
+              <div className="w-full flex items-center justify-center flex-wrap">
+                <div className="hidden md:flex justify-center items-center gap-6">
                   <TimeDisplay />
                   <TimerDisplay />
                 </div>
-                <div className="flex items-center gap-6 absolute right-5 top-0">
-                  <LanguageSelector />
-                </div>
-                </div>
+              </div>
+            </nav>
+            <div className="w-full flex items-center justify-end gap-6 mt-2">
+              <LanguageSelector />
+            </div>
             </nav>
           </header>
 
