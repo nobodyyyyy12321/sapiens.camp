@@ -67,31 +67,30 @@ export default function RootLayout({
 
           {/* 新 header：時間、計時器、語言選單、頭像同一橫排 */}
           <header
-            className="w-full py-5 sticky top-0 z-40"
-            style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
-          >
-            <VisitPing />
-            <div className="w-full flex items-center gap-6 flex-nowrap" style={{ minHeight: '56px' }}>
-              {/* logo */}
-              <div className="flex-shrink-0">
-                <Link href="/" className="cursor-pointer group" aria-label="回到首頁">
-                  <img
-                    src="/logo-removebg-preview.png"
-                    alt="sapiens.camp logo"
-                    className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
-                    style={{ background: "transparent" }}
-                  />
-                </Link>
+              className="w-full py-5 sticky top-0 z-40"
+              style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
+            >
+              <VisitPing />
+              <div className="w-full flex items-center flex-nowrap" style={{ minHeight: '56px' }}>
+                {/* logo靠左 */}
+                <div className="flex-shrink-0 pl-5">
+                  <Link href="/" className="cursor-pointer group" aria-label="回到首頁">
+                    <img
+                      src="/logo-removebg-preview.png"
+                      alt="sapiens.camp logo"
+                      className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
+                      style={{ background: "transparent" }}
+                    />
+                  </Link>
+                </div>
+                {/* 中間空白區或其他元件 */}
+                <div className="flex-1" />
+                {/* 語言列靠右並加右側間距 */}
+                <div className="flex-shrink-0 flex items-center gap-6 pr-5">
+                  <LanguageSelector />
+                </div>
               </div>
-              {/* 時間與計時器 */}
-              <div className="flex-1 flex justify-center items-center gap-6">
-              </div>
-              {/* 語言列 */}
-              <div className="flex-shrink-0 flex items-center gap-6">
-                <LanguageSelector />
-              </div>
-            </div>
-          </header>
+            </header>
 
           <PWARegister />
           <BookshelfContextMenu />
