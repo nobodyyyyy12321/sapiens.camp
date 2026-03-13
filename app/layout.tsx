@@ -92,7 +92,6 @@ export default function RootLayout({
             <div className="w-full flex items-center justify-end gap-6 mt-2">
               <LanguageSelector />
             </div>
-            </nav>
           </header>
 
           <PWARegister />
