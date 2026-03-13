@@ -81,16 +81,27 @@ export default function RootLayout({
             style={{ backgroundColor: "var(--zen-bg)", boxShadow: "none", borderBottom: "none" }}
           >
             <VisitPing />
-            <nav className="w-full flex items-center justify-end pr-5 pl-5">
-              <div className="w-full flex items-center justify-center flex-wrap">
-                <div className="hidden md:flex justify-center items-center gap-6">
-                  <TimeDisplay />
-                  <TimerDisplay />
-                </div>
+            <div className="w-full flex items-center gap-6 flex-nowrap" style={{ minHeight: '56px' }}>
+              {/* logo */}
+              <div className="flex-shrink-0">
+                <Link href="/" className="cursor-pointer group" aria-label="回到首頁">
+                  <img
+                    src="/logo-removebg-preview.png"
+                    alt="sapiens.camp logo"
+                    className="w-14 h-14 object-contain transition-opacity group-hover:opacity-80"
+                    style={{ background: "transparent" }}
+                  />
+                </Link>
               </div>
-            </nav>
-            <div className="w-full flex items-center justify-end gap-6 mt-2">
-              <LanguageSelector />
+              {/* 時間與計時器 */}
+              <div className="flex-1 flex justify-center items-center gap-6">
+                <TimeDisplay />
+                <TimerDisplay />
+              </div>
+              {/* 語言列 */}
+              <div className="flex-shrink-0 flex items-center gap-6">
+                <LanguageSelector />
+              </div>
             </div>
           </header>
 
