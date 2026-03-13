@@ -89,7 +89,6 @@ export default function RootLayout({
                 </div>
                 <div className="flex items-center gap-6 absolute right-5 top-0">
                   <LanguageSelector />
-                  <AuthNav />
                 </div>
               </div>
               </div>
