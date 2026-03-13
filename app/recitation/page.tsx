@@ -4,6 +4,17 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function RecitationPage() {
+    // 取得語言
+    const [language, setLanguage] = useState("zh-TW");
+    useEffect(() => {
+      const syncLanguage = () => {
+        const lang = localStorage.getItem("siteLanguage") || "zh-TW";
+        setLanguage(lang);
+      };
+      syncLanguage();
+      window.addEventListener("site-language-change", syncLanguage);
+      return () => window.removeEventListener("site-language-change", syncLanguage);
+    }, []);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -47,7 +58,23 @@ export default function RecitationPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-transparent font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-start py-20 px-16 bg-transparent dark:bg-black text-center">
-        <h1 className="max-w-xs text-4xl font-bold zen-title">詩文背誦</h1>
+        <h1 className="max-w-xs text-4xl font-bold zen-title">
+          {language === "en"
+            ? "Recitation"
+            : language === "zh-CN"
+            ? "背东西"
+            : language === "es"
+            ? "Memorizar"
+            : language === "th"
+            ? "ท่องจำ"
+            : language === "id"
+            ? "Menghafal"
+            : language === "ko"
+            ? "암기하기"
+            : language === "ru"
+            ? "Заучивание"
+            : "背東西"}
+        </h1>
 
         <div className="mt-8 w-full max-w-3xl">
           {loading ? (
