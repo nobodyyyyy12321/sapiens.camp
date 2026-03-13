@@ -13,8 +13,6 @@ import BookshelfContextMenu from "./components/BookshelfContextMenu";
 import GlobalUpOneLevelButton from "./components/GlobalUpOneLevelButton";
 import { Analytics } from "@vercel/analytics/next";
 import RecordPlayer from "./components/RecordPlayer";
-import TimeDisplay from "./components/TimeDisplay";
-import TimerDisplay from "./components/TimerDisplay";
 import "./speaker-icon.css";
 // ...existing code...
 
@@ -87,8 +85,6 @@ export default function RootLayout({
               </div>
               {/* 時間與計時器 */}
               <div className="flex-1 flex justify-center items-center gap-6">
-                <TimeDisplay />
-                <TimerDisplay />
               </div>
               {/* 語言列 */}
               <div className="flex-shrink-0 flex items-center gap-6">
