@@ -8,7 +8,7 @@ export default function FeedbackPage() {
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusText, setStatusText] = useState("");
-  type LanguageCode = "zh-TW" | "zh-CN" | "en" | "es" | "ru";
+  type LanguageCode = "zh-TW" | "zh-CN" | "en" | "es" | "ru" | "th" | "id" | "ko";
   const [language, setLanguage] = useState<LanguageCode>("zh-TW");
 
   useEffect(() => {
@@ -153,6 +153,52 @@ export default function FeedbackPage() {
       success: "Отзыв отправлен, спасибо!",
       error: "Не удалось отправить, попробуйте позже.",
       netError: "Ошибка сети, попробуйте позже."
+    }
+    ,
+    "th": {
+      title: "ข้อเสนอแนะ",
+      desc: "หากคุณมีข้อเสนอแนะ คำถาม หรือไอเดียใด ๆ กรุณาฝากข้อความถึงเรา",
+      name: "ชื่อ",
+      email: "อีเมล",
+      content: "ข้อเสนอแนะ",
+      placeholderName: "ชื่อของคุณ",
+      placeholderEmail: "you@example.com",
+      placeholderContent: "กรุณากรอกข้อเสนอแนะของคุณ",
+      sending: "กำลังส่ง...",
+      send: "ส่งข้อเสนอแนะ",
+      success: "ส่งข้อเสนอแนะเรียบร้อย ขอบคุณค่ะ!",
+      error: "ส่งไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+      netError: "เครือข่ายผิดพลาด กรุณาลองใหม่อีกครั้ง"
+    },
+    "id": {
+      title: "Masukan",
+      desc: "Ada saran, pertanyaan, atau ide? Tinggalkan pesan untuk kami.",
+      name: "Nama",
+      email: "Email",
+      content: "Masukan",
+      placeholderName: "Nama Anda",
+      placeholderEmail: "you@example.com",
+      placeholderContent: "Silakan masukkan masukan Anda",
+      sending: "Mengirim...",
+      send: "Kirim Masukan",
+      success: "Masukan telah dikirim, terima kasih!",
+      error: "Gagal mengirim, silakan coba lagi nanti.",
+      netError: "Kesalahan jaringan, silakan coba lagi nanti."
+    },
+    "ko": {
+      title: "피드백",
+      desc: "제안, 질문 또는 아이디어가 있으신가요? 메시지를 남겨주세요.",
+      name: "이름",
+      email: "이메일",
+      content: "피드백",
+      placeholderName: "이름을 입력하세요",
+      placeholderEmail: "you@example.com",
+      placeholderContent: "피드백을 입력해 주세요",
+      sending: "전송 중...",
+      send: "피드백 보내기",
+      success: "피드백이 전송되었습니다. 감사합니다!",
+      error: "전송에 실패했습니다. 나중에 다시 시도해 주세요.",
+      netError: "네트워크 오류입니다. 나중에 다시 시도해 주세요."
     }
   };
   const t = dict[language as LanguageCode] || dict["zh-TW"];
