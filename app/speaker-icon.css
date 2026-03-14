@@ -1,14 +1,14 @@
 .speaker-icon {
   position: relative;
-  left: 0;
-  bottom: 0;
+  left: -32px;
+  bottom: -12px;
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 .speaker-icon img {
-  width: 200px;
+  width: 180px;
   height: auto;
   display: block;
 }
