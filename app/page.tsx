@@ -291,7 +291,12 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
           </div>
         </div>
 
-        <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center">
+        <footer className="w-full mt-auto pt-16 pb-6 flex items-center justify-center gap-4 relative">
+          <div className="speaker-icon">
+            <img src="/icons/speaker.png" alt="Speaker Icon" />
+            {/* 音樂提示隨語言切換 */}
+            <MusicTip />
+          </div>
           <Link
             href="/feedback"
             className="inline-flex items-center justify-center whitespace-nowrap px-4 py-2 rounded-full bg-transparent text-[var(--zen-ink)] text-sm leading-none cursor-pointer hover:opacity-90 transition-opacity"
@@ -313,12 +318,6 @@ function HomeContent({ categories, siteTitle, isSimplified, language }: HomeCont
               : "意見回饋"}
           </Link>
         </footer>
-        {/* 固定在視窗左下角的喇叭圖示 */}
-          <div className="speaker-icon">
-            <img src="/icons/speaker.png" alt="Speaker Icon" />
-            {/* 音樂提示隨語言切換 */}
-            <MusicTip />
-        </div>
       </main>
     </div>
   );
