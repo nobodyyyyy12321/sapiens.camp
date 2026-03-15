@@ -42,14 +42,20 @@ export default function BookshelfContextMenu() {
       const bookshelfBtn = node?.closest("button.bookshelf-btn") as HTMLButtonElement | null;
       if (bookshelfBtn) {
         event.preventDefault();
-        // 只在書櫃按鈕右鍵時顯示選單
+        // 書櫃按鈕右鍵：顯示書本選單
         setTarget({ title: bookshelfBtn.dataset.title || "", href: bookshelfBtn.dataset.href || "", pagePath: window.location.pathname });
         setX(event.clientX);
         setY(event.clientY);
         setOpen(true);
-      } else {
-        setOpen(false);
+        return;
       }
+      // 其他區域右鍵：顯示個人選單
+      event.preventDefault();
+      const name = localStorage.getItem("userName") || "使用者";
+      setTarget({ title: name, href: "", pagePath: window.location.pathname });
+      setX(event.clientX);
+      setY(event.clientY);
+      setOpen(true);
     };
 
     const onKeydown = (event: KeyboardEvent) => {
