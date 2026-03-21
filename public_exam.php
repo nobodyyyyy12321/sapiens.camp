@@ -22,23 +22,6 @@
       border: 2px solid var(--btn-border);
       border-radius: 12px;
       padding: 0.8rem 2rem;
-    }
-  </style>
-</head>
-<body>
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:1rem;">
-    <img src="logo.png" alt="Sapiens Camp Logo" style="height:40px;">
-    
-  </header>
-  <main class="main">
-    <div class="title">公職考試 - 智人題庫</div>
-    <div class="btn-group">
-      <a class="exam-btn" href="exam_bank.html">國考題庫</a>
-      <a class="exam-btn" href="index.html">回首頁</a>
-    </div>
-  </main>
-</body>
-</html>
       font-size: 1.1rem;
       font-weight: 700;
       cursor: pointer;
@@ -68,11 +51,18 @@
   </style>
 </head>
 <body>
-  <div class="title">公職考試</div>
-  <div class="btn-group">
-    <a class="exam-btn" href="under_construction.html">初等考試</a>
-    <a class="exam-btn" href="under_construction.html">高普考</a>
-    <a class="exam-btn" href="under_construction.html">地方特考</a>
-  </div>
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:1rem;">
+    <img src="logo.png" alt="Sapiens Camp Logo" style="height:40px;">
+  </header>
+  <main class="main" style="text-align: center; margin-top: 50px;">
+    <div class="title" style="font-size: 2.5rem; margin-bottom: 30px;">公職考試 - 智人題庫</div>
+    <div class="btn-group">
+      <a class="exam-btn" href="exam_bank.php">國考題庫</a>
+      <a class="exam-btn" href="under_construction.php">初等考試</a>
+      <a class="exam-btn" href="under_construction.php">高普考</a>
+      <a class="exam-btn" href="under_construction.php">地方特考</a>
+      <a class="exam-btn" href="index.php">回首頁</a>
+    </div>
+  </main>
 </body>
 </html>

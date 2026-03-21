@@ -1,4 +1,7 @@
-  <?php /* index.php - converted from HTML */ ?>
+  <!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
   <link rel="stylesheet" href="theme.css">
   <link rel="icon" type="image/png" href="favicon.png">
   
@@ -51,7 +54,8 @@
       flex-wrap: wrap;
       gap: 18px;
       justify-content: center;
-      margin-bottom: 2rem;
+      max-width: 900px;
+      margin: 0 auto 2rem auto;
     }
     .category-btn {
       display: inline-block;
@@ -151,7 +155,7 @@
 </head>
 <body>
   <div style="display:flex;align-items:center;gap:16px;padding:1rem;">
-    <a href="index.html" class="logo-link" style="display:inline-block;width:48px;height:48px;background:transparent;position:absolute;top:12px;left:18px;z-index:20;">
+    <a href="index.php" class="logo-link" style="display:inline-block;width:48px;height:48px;background:transparent;position:absolute;top:12px;left:18px;z-index:20;">
       <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:0;object-fit:contain;" />
     </a>
   </div>
@@ -185,29 +189,29 @@
       <input class="search-input" type="text" placeholder="搜尋科目" />
     </div>
     <div class="category-list">
-      <a class="category-btn" href="under_construction.html">詩文背誦</a>
-      <a class="category-btn" href="under_construction.html">國文</a>
-      <a class="category-btn" href="under_construction.html">英文</a>
-      <a class="category-btn" href="public_exam.html">公職考試</a>
-      <a class="category-btn" href="under_construction.html">名言佳句</a>
-      <a class="category-btn" href="under_construction.html">綜合</a>
-      <a class="category-btn" href="under_construction.html">比賽</a>
-      <a class="category-btn" href="under_construction.html">撩語錄</a>
-      <a class="category-btn" href="under_construction.html">八卦</a>
-      <a class="category-btn" href="under_construction.html">猜謎</a>
-      <a class="category-btn" href="under_construction.html">笑話</a>
-      <a class="category-btn" href="under_construction.html">數學</a>
-      <a class="category-btn" href="under_construction.html">物理</a>
-      <a class="category-btn" href="under_construction.html">化學</a>
-      <a class="category-btn" href="under_construction.html">生物</a>
-      <a class="category-btn" href="under_construction.html">地理</a>
-      <a class="category-btn" href="under_construction.html">天文</a>
-      <a class="category-btn" href="under_construction.html">歷史</a>
-      <a class="category-btn" href="under_construction.html">公民</a>
-      <a class="category-btn" href="under_construction.html">心理</a>
-      <a class="category-btn" href="under_construction.html">哲學</a>
-      <a class="category-btn" href="under_construction.html">自然</a>
-      <a class="category-btn" href="under_construction.html">社會</a>
+      <a class="category-btn" href="under_construction.php">背東西</a>
+      <a class="category-btn" href="under_construction.php">國文</a>
+      <a class="category-btn" href="under_construction.php">英文</a>
+      <a class="category-btn" href="public_exam.php">公職考試</a>
+      <a class="category-btn" href="under_construction.php">名言佳句</a>
+      <a class="category-btn" href="under_construction.php">綜合</a>
+      <a class="category-btn" href="under_construction.php">比賽</a>
+      <a class="category-btn" href="under_construction.php">撩語錄</a>
+      <a class="category-btn" href="under_construction.php">八卦</a>
+      <a class="category-btn" href="under_construction.php">猜謎</a>
+      <a class="category-btn" href="under_construction.php">笑話</a>
+      <a class="category-btn" href="under_construction.php">數學</a>
+      <a class="category-btn" href="under_construction.php">物理</a>
+      <a class="category-btn" href="under_construction.php">化學</a>
+      <a class="category-btn" href="under_construction.php">生物</a>
+      <a class="category-btn" href="under_construction.php">地理</a>
+      <a class="category-btn" href="under_construction.php">天文</a>
+      <a class="category-btn" href="under_construction.php">歷史</a>
+      <a class="category-btn" href="under_construction.php">公民</a>
+      <a class="category-btn" href="under_construction.php">心理</a>
+      <a class="category-btn" href="under_construction.php">哲學</a>
+      <a class="category-btn" href="under_construction.php">自然</a>
+      <a class="category-btn" href="under_construction.php">社會</a>
     </div>
   </div>
   <!-- 公告已移除 -->
@@ -257,8 +261,8 @@
   const btnGroup = document.querySelector('.category-list');
   const originalTitle = titleEl.textContent;
   const originalBtns = Array.from(btnGroup.children).map(btn => btn.textContent);
-  const zhTw = ['詩文背誦','國文','英文','公職考試','名言佳句','綜合','比賽','撩語錄','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'];
-  const zhCn = ['诗文背诵','语文','英语','公职考试','名言佳句','综合','比赛','撩语录','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'];
+  const zhTw = ['背東西','國文','英文','公職考試','名言佳句','綜合','比賽','撩語錄','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'];
+  const zhCn = ['背东西','语文','英语','公职考试','名言佳句','综合','比赛','撩语录','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'];
   const btnTranslations = {
     'English': ['Quote','Math','Physics','Chemistry','Competition'],
     'Español': ['Cita','Matemáticas','Física','Química','Competencia'],
@@ -274,7 +278,7 @@
       zhTw.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = 'under_construction.html';
+        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -284,7 +288,7 @@
       zhCn.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = 'under_construction.html';
+        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -295,7 +299,7 @@
       (btnTranslations[lang] || btnTranslations['English']).forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = 'under_construction.html';
+        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
