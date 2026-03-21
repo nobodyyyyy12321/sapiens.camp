@@ -19,15 +19,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 80px;
-      min-height: 48px;
       background: var(--btn-bg);
       color: var(--btn-fg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.5rem 1rem;
+      padding: 2mm;
       font-size: 1.1rem;
       font-weight: 500;
+      line-height: 1;
       cursor: pointer;
       transition: all 0.2s;
       text-decoration: none;

@@ -44,9 +44,9 @@
     }
     .search-input {
       width: 100%;
-      padding: 0.8rem 1rem;
-      border-radius: 32px;
-      border: 2px solid var(--input-border);
+      padding: 2mm 1.25rem;
+      border-radius: 24px;
+      border: 1.5px solid var(--input-border);
       background: var(--input-bg);
       color: var(--input-fg);
       font-size: 1.1rem;
@@ -59,7 +59,7 @@
     .category-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 12px;
       justify-content: center;
       max-width: 900px;
       margin: 0 auto 2rem auto;
@@ -68,15 +68,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 80px;
-      min-height: 48px;
       background: var(--btn-bg);
       color: var(--btn-fg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.5rem 1rem;
+      padding: 2mm;
       font-size: 1.1rem;
       font-weight: 500;
+      line-height: 1;
       cursor: pointer;
       transition: all 0.2s;
       text-decoration: none;
@@ -204,7 +203,7 @@
       <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
       <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
       <a class="category-btn" href="english.php">英文</a>
-      <a class="category-btn" href="public_exam.php">公職考試</a>
+      <a class="category-btn" href="under_construction.php">公職考試</a>
       <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
       <a class="category-btn btn-disabled" href="under_construction.php">綜合</a>
       <a class="category-btn btn-disabled" href="under_construction.php">比賽</a>
