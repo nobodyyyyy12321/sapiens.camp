@@ -38,3 +38,15 @@ body {
   min-height: 100vh;
   transition: background 0.3s, color 0.3s;
 }
+
+.btn-disabled {
+  color: #888 !important;
+  border-color: #555 !important;
+  opacity: 0.7;
+  cursor: default;
+}
+
+body.light .btn-disabled {
+  color: #999 !important;
+  border-color: #ddd !important;
+}

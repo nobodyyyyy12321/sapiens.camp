@@ -16,16 +16,20 @@
       margin-bottom: 2rem;
     }
     .exam-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
+      min-height: 48px;
       background: var(--btn-bg);
       color: var(--btn-fg);
-      border: 2px solid var(--btn-border);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.8rem 2rem;
+      padding: 0.5rem 1rem;
       font-size: 1.1rem;
-      font-weight: 700;
+      font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, border 0.2s;
+      transition: all 0.2s;
       text-decoration: none;
       text-align: center;
     }
@@ -56,18 +60,24 @@
     document.body.classList.add('light');
   }
 </script>
-  <header style="display:flex;align-items:center;justify-content:space-between;padding:1rem;">
-    <img src="logo.png" alt="Sapiens Camp Logo" style="height:40px;">
-  </header>
+<a href="index.php" style="display:inline-block;width:48px;height:48px;background:transparent;position:absolute;top:12px;left:18px;z-index:20;">
+  <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:0;object-fit:contain;" />
+</a>
   <main class="main" style="text-align: center; margin-top: 50px;">
     <div class="title" style="font-size: 2.5rem; margin-bottom: 30px;">公職考試 - 智人題庫</div>
     <div class="btn-group">
       <a class="exam-btn" href="exam_bank.php">國考題庫</a>
-      <a class="exam-btn" href="under_construction.php">初等考試</a>
-      <a class="exam-btn" href="under_construction.php">高普考</a>
-      <a class="exam-btn" href="under_construction.php">地方特考</a>
+      <a class="exam-btn btn-disabled" href="under_construction.php">初等考試</a>
+      <a class="exam-btn btn-disabled" href="under_construction.php">高普考</a>
+      <a class="exam-btn btn-disabled" href="under_construction.php">地方特考</a>
       <a class="exam-btn" href="index.php">回首頁</a>
     </div>
   </main>
+  <script>
+    const logoImg = document.getElementById('logo-img');
+    if (document.body.classList.contains('light')) {
+      logoImg.style.filter = 'invert(0) brightness(0)';
+    }
+  </script>
 </body>
 </html>

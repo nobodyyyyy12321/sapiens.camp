@@ -40,7 +40,16 @@
     document.body.classList.add('light');
   }
 </script>
+<a href="index.php" style="display:inline-block;width:48px;height:48px;background:transparent;position:absolute;top:12px;left:18px;z-index:20;">
+  <img src="logo-removebg-preview.png" alt="logo" id="logo-img" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:0;object-fit:contain;" />
+</a>
   <div class="icon">🚧</div>
   <div class="title">建構中</div>
+  <script>
+    const logoImg = document.getElementById('logo-img');
+    if (document.body.classList.contains('light')) {
+      logoImg.style.filter = 'invert(0) brightness(0)';
+    }
+  </script>
 </body>
 </html>

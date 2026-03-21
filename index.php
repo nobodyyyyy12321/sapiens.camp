@@ -7,25 +7,32 @@
   
   <style>
     .main {
+      display: grid;
+      grid-template-rows: 260px auto;
+      justify-items: center;
+      width: 100%;
+      min-height: 90vh;
+    }
+    .title-group {
+      grid-row: 1;
+      align-self: end;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 90vh;
+      margin-bottom: 2rem;
     }
     .title {
       font-size: 3rem;
       font-weight: 700;
-      margin-top: 40px;
       margin-bottom: 0.5rem;
       letter-spacing: 2px;
-      color: var(--title-color);
+      color: var(--fg);
       font-family: 'Noto Serif TC', serif;
     }
     .subtitle {
       font-size: 1.3rem;
-      color: #a0a0a0;
-      margin-bottom: 2rem;
+      color: var(--subtitle);
+      margin-top: -0.5rem;
     }
     .search-box {
       width: 500px;
@@ -61,16 +68,17 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      min-width: 80px;
+      min-height: 48px;
       background: var(--btn-bg);
       color: var(--btn-fg);
-      border: 2px solid var(--btn-border);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.8rem 1.5rem;
+      padding: 0.5rem 1rem;
       font-size: 1.1rem;
-      font-weight: 400;
-      font-family: 'Noto Sans TC', Arial, sans-serif;
+      font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, border 0.2s;
+      transition: all 0.2s;
       text-decoration: none;
       text-align: center;
     }
@@ -185,34 +193,36 @@
     <!-- <div class="avatar"></div> -->
   </div>
   <div class="main">
-    <div class="title">智人題庫</div>
-    <div class="subtitle">sapiens.camp</div>
+    <div class="title-group">
+      <div class="title">智人題庫</div>
+      <div class="subtitle">sapiens.camp</div>
+    </div>
     <div class="search-box">
       <input class="search-input" type="text" placeholder="搜尋科目" />
     </div>
     <div class="category-list">
-      <a class="category-btn" href="under_construction.php">背東西</a>
-      <a class="category-btn" href="under_construction.php">國文</a>
-      <a class="category-btn" href="under_construction.php">英文</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
+      <a class="category-btn" href="english.php">英文</a>
       <a class="category-btn" href="public_exam.php">公職考試</a>
-      <a class="category-btn" href="under_construction.php">名言佳句</a>
-      <a class="category-btn" href="under_construction.php">綜合</a>
-      <a class="category-btn" href="under_construction.php">比賽</a>
-      <a class="category-btn" href="under_construction.php">八卦</a>
-      <a class="category-btn" href="under_construction.php">猜謎</a>
-      <a class="category-btn" href="under_construction.php">笑話</a>
-      <a class="category-btn" href="under_construction.php">數學</a>
-      <a class="category-btn" href="under_construction.php">物理</a>
-      <a class="category-btn" href="under_construction.php">化學</a>
-      <a class="category-btn" href="under_construction.php">生物</a>
-      <a class="category-btn" href="under_construction.php">地理</a>
-      <a class="category-btn" href="under_construction.php">天文</a>
-      <a class="category-btn" href="under_construction.php">歷史</a>
-      <a class="category-btn" href="under_construction.php">公民</a>
-      <a class="category-btn" href="under_construction.php">心理</a>
-      <a class="category-btn" href="under_construction.php">哲學</a>
-      <a class="category-btn" href="under_construction.php">自然</a>
-      <a class="category-btn" href="under_construction.php">社會</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">綜合</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">比賽</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">八卦</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">猜謎</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">笑話</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">數學</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">物理</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">化學</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">生物</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">地理</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">天文</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">歷史</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">公民</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">心理</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">哲學</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">自然</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">社會</a>
     </div>
   </div>
   <!-- 公告已移除 -->
@@ -279,7 +289,9 @@
       zhTw.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
+        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        if (!isApp) a.classList.add('btn-disabled');
+        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -289,7 +301,9 @@
       zhCn.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
+        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        if (!isApp) a.classList.add('btn-disabled');
+        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -300,7 +314,9 @@
       (btnTranslations[lang] || btnTranslations['English']).forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        a.href = (txt === '公職考試' || txt === '公职考试') ? 'public_exam.php' : 'under_construction.php';
+        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        if (!isApp) a.classList.add('btn-disabled');
+        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
