@@ -203,7 +203,7 @@
       <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
       <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
       <a class="category-btn" href="english.php">英文</a>
-      <a class="category-btn" href="under_construction.php">公職考試</a>
+      <a class="category-btn btn-disabled" href="under_construction.php">公職考試</a>
       <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
       <a class="category-btn btn-disabled" href="under_construction.php">綜合</a>
       <a class="category-btn btn-disabled" href="under_construction.php">比賽</a>
@@ -288,9 +288,9 @@
       zhTw.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        const isApp = (txt === '英文' || txt === '英语');
         if (!isApp) a.classList.add('btn-disabled');
-        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
+        a.href = isApp ? 'english.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -300,9 +300,9 @@
       zhCn.forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        const isApp = (txt === '英文' || txt === '英语');
         if (!isApp) a.classList.add('btn-disabled');
-        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
+        a.href = isApp ? 'english.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
@@ -313,9 +313,9 @@
       (btnTranslations[lang] || btnTranslations['English']).forEach(txt => {
         const a = document.createElement('a');
         a.className = 'category-btn';
-        const isApp = (txt === '公職考試' || txt === '公职考试' || txt === '英文' || txt === '英语');
+        const isApp = (txt === '英文' || txt === '英语');
         if (!isApp) a.classList.add('btn-disabled');
-        a.href = isApp ? ((txt === '英文' || txt === '英语') ? 'english.php' : 'public_exam.php') : 'under_construction.php';
+        a.href = isApp ? 'english.php' : 'under_construction.php';
         a.textContent = txt;
         btnGroup.appendChild(a);
       });
