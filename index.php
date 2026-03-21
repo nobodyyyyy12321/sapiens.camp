@@ -58,12 +58,14 @@
       margin: 0 auto 2rem auto;
     }
     .category-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background: var(--btn-bg);
       color: var(--btn-fg);
       border: 2px solid var(--btn-border);
       border-radius: 12px;
-      padding: 0.8rem 2rem;
+      padding: 0.8rem 1.5rem;
       font-size: 1.1rem;
       font-weight: 400;
       font-family: 'Noto Sans TC', Arial, sans-serif;
@@ -196,7 +198,6 @@
       <a class="category-btn" href="under_construction.php">名言佳句</a>
       <a class="category-btn" href="under_construction.php">綜合</a>
       <a class="category-btn" href="under_construction.php">比賽</a>
-      <a class="category-btn" href="under_construction.php">撩語錄</a>
       <a class="category-btn" href="under_construction.php">八卦</a>
       <a class="category-btn" href="under_construction.php">猜謎</a>
       <a class="category-btn" href="under_construction.php">笑話</a>
@@ -261,8 +262,8 @@
   const btnGroup = document.querySelector('.category-list');
   const originalTitle = titleEl.textContent;
   const originalBtns = Array.from(btnGroup.children).map(btn => btn.textContent);
-  const zhTw = ['背東西','國文','英文','公職考試','名言佳句','綜合','比賽','撩語錄','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'];
-  const zhCn = ['背东西','语文','英语','公职考试','名言佳句','综合','比赛','撩语录','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'];
+  const zhTw = ['背東西','國文','英文','公職考試','名言佳句','綜合','比賽','八卦','猜謎','笑話','數學','物理','化學','生物','地理','天文','歷史','公民','心理','哲學','自然','社會'];
+  const zhCn = ['背东西','语文','英语','公职考试','名言佳句','综合','比赛','八卦','猜谜','笑话','数学','物理','化学','生物','地理','天文','历史','公民','心理','哲学','自然','社会'];
   const btnTranslations = {
     'English': ['Quote','Math','Physics','Chemistry','Competition'],
     'Español': ['Cita','Matemáticas','Física','Química','Competencia'],
