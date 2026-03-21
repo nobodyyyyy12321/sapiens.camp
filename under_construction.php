@@ -9,7 +9,7 @@
     body {
       font-family: 'Noto Sans TC', Arial, sans-serif;
       margin: 0;
-      background: #181818;
+      background: #222;
       color: #fff;
       min-height: 100vh;
       display: flex;
