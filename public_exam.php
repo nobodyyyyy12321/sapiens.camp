@@ -51,6 +51,11 @@
   </style>
 </head>
 <body>
+<script>
+  if (localStorage.getItem('themeMode') === 'light') {
+    document.body.classList.add('light');
+  }
+</script>
   <header style="display:flex;align-items:center;justify-content:space-between;padding:1rem;">
     <img src="logo.png" alt="Sapiens Camp Logo" style="height:40px;">
   </header>

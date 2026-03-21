@@ -5,13 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>建構中 - 智人題庫</title>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
   <style>
     body {
-      font-family: 'Noto Sans TC', Arial, sans-serif;
-      margin: 0;
-      background: #222;
-      color: #fff;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,7 +18,7 @@
       font-weight: 700;
       margin-bottom: 1.5rem;
       letter-spacing: 2px;
-      color: #fff;
+      color: var(--fg);
       text-align: center;
     }
     .subtitle {
@@ -39,6 +35,11 @@
   </style>
 </head>
 <body>
+<script>
+  if (localStorage.getItem('themeMode') === 'light') {
+    document.body.classList.add('light');
+  }
+</script>
   <div class="icon">🚧</div>
   <div class="title">建構中</div>
 </body>
