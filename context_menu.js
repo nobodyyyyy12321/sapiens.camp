@@ -6,7 +6,6 @@
       <div class="context-menu-item">檔案</div>
       <div class="context-menu-item">紀錄</div>
       <div class="context-menu-item">個人清單</div>
-      <div class="context-menu-separator"></div>
       <div class="context-menu-item">設定</div>
       <div class="context-menu-item">付費方案</div>
     </div>
