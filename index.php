@@ -366,4 +366,6 @@
       setImageColorByMode();
     });
   </script>
+  <script src="context_menu.js"></script>
+</body>
 </html>

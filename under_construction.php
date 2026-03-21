@@ -51,5 +51,6 @@
       logoImg.style.filter = 'invert(0) brightness(0)';
     }
   </script>
+  <script src="context_menu.js"></script>
 </body>
 </html>

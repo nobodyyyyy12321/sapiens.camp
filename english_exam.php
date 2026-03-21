@@ -3,9 +3,9 @@
 $json_data = file_get_contents('english.json');
 $questions_all = json_decode($json_data, true);
 
-// Select 10 random questions for the test session
+// Select all questions for the test session
 shuffle($questions_all);
-$questions = array_slice($questions_all, 0, 10);
+$questions = $questions_all;
 ?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -39,9 +39,10 @@ $questions = array_slice($questions_all, 0, 10);
 
         .header-left .brand {
             font-size: 2rem;
-            font-weight: bold;
+            font-weight: 500;
             margin: 0;
             color: var(--fg);
+            font-family: 'Noto Serif TC', serif;
         }
 
         .header-left .qid {
@@ -97,34 +98,44 @@ $questions = array_slice($questions_all, 0, 10);
             background: var(--btn-bg);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 50px 40px;
-            text-align: center;
-            font-size: 3rem;
-            font-weight: bold;
+            padding: 25px 30px;
             margin-bottom: 25px;
             position: relative;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             color: var(--fg);
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between; /* Header style: Word on left, Speaker on right */
+            min-height: 80px;
+            box-sizing: border-box;
+        }
+
+        #word-text {
+            font-size: 1.25rem;
+            font-weight: 400; /* Regular weight to match options */
+            text-align: left;
         }
 
         .speaker-icon {
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
+            width: 44px;
+            height: 44px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
             cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s;
-            filter: var(--speaker-filter);
+            opacity: 0.8;
+            transition: all 0.2s;
+            color: var(--fg);
+            stroke: var(--fg);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .speaker-icon:hover {
             opacity: 1;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .options-list {
@@ -136,27 +147,27 @@ $questions = array_slice($questions_all, 0, 10);
         .option-item {
             background: var(--btn-bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 18px 25px;
+            border-radius: 6px;
+            padding: 22px 30px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             display: flex;
             align-items: center;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
+            font-weight: 400; /* Regular weight to match question text */
             color: var(--fg);
         }
 
         .option-item.selected {
             border-color: var(--btn-hover-border);
-            border-width: 2px;
-            padding: 17px 24px;
+            border-width: 1px;
             background: var(--btn-hover-bg);
         }
 
         .option-label {
-            font-weight: bold;
-            margin-right: 18px;
-            width: 20px;
+            font-weight: 900;
+            margin-right: 22px;
+            width: 24px;
         }
 
         .result-overlay {
@@ -207,7 +218,7 @@ $questions = array_slice($questions_all, 0, 10);
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <h1 class="brand">英文</h1>
+                <h1 class="brand">2000單</h1>
                 <p class="qid" id="question-id">題號 0</p>
             </div>
             <div class="header-right">
@@ -219,7 +230,13 @@ $questions = array_slice($questions_all, 0, 10);
 
         <div class="word-card">
             <span id="word-text">Loading...</span>
-            <img src="speaker.png" alt="Play" class="speaker-icon" id="speaker-btn">
+            <div id="speaker-btn" class="speaker-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+            </div>
         </div>
 
         <div class="options-list" id="options-list">
@@ -342,5 +359,6 @@ $questions = array_slice($questions_all, 0, 10);
             logoImg.style.filter = 'invert(0) brightness(0)';
         }
     </script>
+    <script src="context_menu.js"></script>
 </body>
 </html>
