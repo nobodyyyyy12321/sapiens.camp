@@ -59,9 +59,12 @@
     .category-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      column-gap: 12px;
+      row-gap: 12px;
       justify-content: center;
-      max-width: 900px;
+      align-items: flex-start;
+      align-content: flex-start;
+      max-width: 700px;
       margin: 0 auto 2rem auto;
     }
     .category-btn {
@@ -72,7 +75,7 @@
       color: var(--btn-fg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2mm;
+      padding: 4mm;
       font-size: 1.1rem;
       font-weight: 500;
       line-height: 1;

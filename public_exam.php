@@ -11,8 +11,10 @@
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      column-gap: 8px;
+      row-gap: 4px;
       justify-content: center;
+      align-items: flex-start;
       margin-bottom: 2rem;
     }
     .exam-btn {
@@ -23,7 +25,7 @@
       color: var(--btn-fg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2mm;
+      padding: 2mm 4mm;
       font-size: 1.1rem;
       font-weight: 500;
       line-height: 1;
