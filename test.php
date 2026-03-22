@@ -25,7 +25,32 @@ if ($subject === 'english') {
         .submit-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); background: var(--btn-bg); color: var(--fg); cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: all 0.2s; font-family: 'Inter', 'Noto Serif TC', serif; }
         .submit-btn:hover { background: var(--btn-hover-bg); border-color: var(--btn-hover-border); }
         .word-card { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 8px; padding: 25px 30px; margin-bottom: 25px; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.15); color: var(--fg); display: flex; align-items: center; min-height: 80px; box-sizing: border-box; }
-        #word-text { font-size: 1.25rem; font-weight: 400; text-align: left; }
+        #word-text { font-size: 1.25rem; font-weight: 400; text-align: left; flex: 1; }
+        .speaker-icon {
+            width: 44px;
+            height: 44px;
+            padding: 10px;
+            background: #2e2e2e;
+            border-radius: 10px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: all 0.2s;
+            color: var(--fg);
+            stroke: var(--fg);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .speaker-icon:hover {
+            opacity: 1;
+            background: #2e2e2e;
+        }
         .options-list { display: flex; flex-direction: column; gap: 14px; }
         .option-item { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 6px; padding: 22px 30px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; font-size: 1.25rem; font-weight: 400; color: var(--fg); font-family: 'Inter', 'Noto Serif TC', serif; }
         .option-item.selected { border-color: var(--btn-hover-border); border-width: 1px; background: var(--btn-hover-bg); }
@@ -54,7 +79,7 @@ if ($subject === 'english') {
         <div class="word-card">
             <?php if ($subject === 'english'): ?>
             <span id="word-text">Loading...</span>
-            <div id="speaker-btn" class="speaker-icon" style="margin-left:18px;">
+            <div id="speaker-btn" class="speaker-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                     <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
