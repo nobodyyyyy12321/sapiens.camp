@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -12,6 +12,14 @@
   <link rel="apple-touch-icon" href="favicon.png">
   
   <style>
+
+    .category-btn.sub-open {
+      background: #202020 !important;
+      color: #ffffff !important;
+    }
+    .category-btn.sub-open.btn-disabled {
+      color: #e53935 !important;
+    }
     .main {
       display: grid;
       grid-template-rows: 260px auto;
@@ -42,11 +50,21 @@
     }
     .search-box {
       width: 500px;
-      max-width: 90vw;
-      margin-bottom: 2rem;
+      max-width: 500px;
+      min-width: 320px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto 2rem auto;
+      z-index: 20;
+      background: var(--input-bg, #fff);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-radius: 0 0 18px 18px;
     }
     .search-input {
       width: 100%;
@@ -71,7 +89,7 @@
       align-items: flex-start;
       align-content: flex-start;
       max-width: 700px;
-      margin: 0 auto 2rem auto;
+      margin: 24px auto 2rem auto; /* top margin prevents buttons from going above search box */
       position: relative;
     }
     .category-btn {
@@ -80,7 +98,7 @@
       justify-content: center;
       background: var(--btn-bg);
       color: var(--btn-fg);
-      border: 1px solid var(--border);
+      border: 1px solid #fff;
       border-radius: 12px;
       padding: 4mm;
       font-size: 1.1rem;
@@ -91,6 +109,7 @@
       text-decoration: none;
       text-align: center;
       font-family: 'Inter';
+      white-space: nowrap;
     }
     .category-btn:hover {
       background: var(--btn-hover-bg);
@@ -122,30 +141,46 @@
     }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-    .speaker-img-fixed {
-      position: fixed;
-      left: 400px;
-      bottom: -30px;
-      z-index: 0;
-      width: 200px;
+    .footer-bar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 60px;
+      position: relative;
+    }
+    .speaker-img-static {
+      width: 300px;
       height: auto;
       margin: 0;
       padding: 0;
       box-shadow: none;
       background: none;
+      pointer-events: auto;
+      display: block;
+      position: absolute;
+      left: 400px;
+      bottom: -150px;
     }
     .announcement-btn i {
       font-style: normal;
       font-size: 1.2rem;
     }
     .feedback {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
       color: var(--feedback-color);
       font-size: 1rem;
       opacity: 0.8;
+      background: rgba(20,20,20,0.85);
+      padding: 8px 24px;
+      border-radius: 16px;
+      pointer-events: auto;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      bottom: -100px;
+      transform: translateX(-50%);
+      z-index: 200;
     }
     @media (max-width: 600px) {
       .main {
@@ -215,11 +250,6 @@
       <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
       <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
       <a class="category-btn" href="#" id="english-expand-btn">英文</a>
-      <span id="english-sublist" style="display:none; position:absolute; left:0; top:100%; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-radius:10px; padding:8px 0; min-width:120px; z-index:10;">
-        <a class="category-btn" href="test.php?subject=english">2000單</a>
-        <a class="category-btn btn-disabled" href="#">學測</a>
-        <a class="category-btn btn-disabled" href="#">指考</a>
-      </span>
       <a class="category-btn btn-disabled" href="under_construction.php">公職考試</a>
       <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
       <a class="category-btn btn-disabled" href="under_construction.php">綜合</a>
@@ -240,37 +270,113 @@
       <a class="category-btn btn-disabled" href="under_construction.php">自然</a>
       <a class="category-btn btn-disabled" href="under_construction.php">社會</a>
     <script>
-    // 英文按鈕展開/收合子分類（不跳轉，且不影響搜尋框）
+    // 英文按鈕展開/收合子分類（inline 顯示在右側）
     document.addEventListener('DOMContentLoaded', function() {
       var btn = document.getElementById('english-expand-btn');
-      var sublist = document.getElementById('english-sublist');
-      if (btn && sublist) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (sublist.style.display === 'none' || sublist.style.display === '') {
-            // 計算按鈕在父容器的位置
-            var btnRect = btn.getBoundingClientRect();
-            var parentRect = btn.parentElement.getBoundingClientRect();
-            sublist.style.left = (btn.offsetLeft) + 'px';
-            sublist.style.top = (btn.offsetTop + btn.offsetHeight + 4) + 'px';
-            sublist.style.display = 'block';
-          } else {
-            sublist.style.display = 'none';
-          }
-        });
-        // 點擊外部自動收合
-        document.addEventListener('click', function(e) {
-          if (!btn.contains(e.target) && !sublist.contains(e.target)) {
-            sublist.style.display = 'none';
-          }
-        });
+      var btnGroup = document.querySelector('.category-list');
+      var subBtns = [
+        { text: '2000單', href: 'test.php?subject=english', disabled: false },
+        { text: '學測', href: '#', disabled: true },
+        { text: '指考', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true }
+      ];
+      // 第二層 english2 按鈕
+      var subBtns2 = [];
+      for (var i = 1; i <= 20; i++) {
+        subBtns2.push({ text: 'english2-' + i, href: '#', disabled: true });
       }
+      var inserted = false;
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (inserted) {
+          // 移除子分類（同時移除 english 和 english2）
+          var sib = btn.nextElementSibling;
+          while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+            var next = sib.nextElementSibling;
+            sib.remove();
+            sib = next;
+          }
+          inserted = false;
+          return;
+        }
+        // 插入子分類
+        // 第一層
+        subBtns.forEach(function(item, idx) {
+          var a = document.createElement('a');
+          // 只有第一個（2000單）不加 btn-disabled
+          a.className = 'category-btn sub-open' + (idx === 0 ? '' : ' btn-disabled');
+          a.textContent = item.text;
+          a.href = item.href;
+          a.dataset.sub = 'english';
+          btnGroup.insertBefore(a, btn.nextSibling);
+        });
+        // 第二層 english2
+        var lastEnglish = btn;
+        while (lastEnglish.nextElementSibling && lastEnglish.nextElementSibling.classList.contains('category-btn') && lastEnglish.nextElementSibling.dataset.sub === 'english') {
+          lastEnglish = lastEnglish.nextElementSibling;
+        }
+        subBtns2.forEach(function(item) {
+          var a = document.createElement('a');
+          a.className = 'category-btn btn-disabled sub-open';
+          a.textContent = item.text;
+          a.href = item.href;
+          a.dataset.sub = 'english2';
+          btnGroup.insertBefore(a, lastEnglish.nextElementSibling);
+          lastEnglish = a;
+        });
+        inserted = true;
+      });
+      // 點擊其他主分類時自動收合
+      document.querySelectorAll('.category-list .category-btn').forEach(function(mainBtn) {
+        if (mainBtn !== btn) {
+          mainBtn.addEventListener('click', function() {
+            if (inserted) {
+              // 移除子分類（同時移除 english 和 english2）
+              var sib = btn.nextElementSibling;
+              while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+                var next = sib.nextElementSibling;
+                sib.remove();
+                sib = next;
+              }
+              inserted = false;
+            }
+          });
+        }
+      });
+      // 點擊外部自動收合
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !btnGroup.contains(e.target)) {
+          if (inserted) {
+            // 移除子分類（同時移除 english 和 english2）
+            var sib = btn.nextElementSibling;
+            while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+              var next = sib.nextElementSibling;
+              sib.remove();
+              sib = next;
+            }
+            inserted = false;
+          }
+        }
+      });
     });
     </script>
     </div>
   </div>
   <!-- 公告已移除 -->
-  <div class="feedback">意見回饋</div>
+  <!-- footer-bar 置底 -->
+  <div class="footer-bar">
+    <img src="speaker.png" alt="speaker" class="speaker-img-static" id="speaker-img" style="z-index:102;pointer-events:auto;">
+    <div class="feedback">意見回饋</div>
+  </div>
 </body>
 <script>
   // 註冊 service worker 以支援 PWA
@@ -293,7 +399,7 @@
   const btnTranslations = {
     'English': ['Quote','Math','Physics','Chemistry','Competition'],
     'Español': ['Cita','Matemáticas','Física','Química','Competencia'],
-    'ไทย': ['คำคม','คณิตศาสตร์','ฟิสิกส์','เคมี','การแข่งขัน'],
+    'Thai': ['คำคม','คณิตศาสตร์','ฟิสิกส์','เคมี','การแข่งขัน'],
     'Bahasa Indonesia': ['Kutipan','Matematika','Fisika','Kimia','Kompetisi'],
     '한국어': ['명언','수학','물리','화학','경쟁']
   };
@@ -339,7 +445,7 @@
     }
   });
 </script>
-  <img src="speaker.png" alt="speaker" class="speaker-img-fixed" id="speaker-img">
+  <!-- speaker已移至footer-bar -->
   <div id="speaker-tooltip" style="display:none;position:fixed;top:0;left:0;background:rgba(0,0,0,0.85);color:#fff;padding:10px 18px;border-radius:12px;font-size:1.1rem;z-index:101;box-shadow:0 2px 8px rgba(0,0,0,0.15);pointer-events:none;">推荐搭配一點音樂</div>
   <script>
     const speakerImg = document.getElementById('speaker-img');

@@ -1,21 +1,16 @@
 <?php
-// 支援 URL 參數 subject=xxx 來載入不同題庫，預設 quote.json
 $subject = $_GET['subject'] ?? 'quote';
-$json_file = $subject . '.json';
-if (!file_exists($json_file)) {
-    die('題庫不存在');
+// english 對應 english_2000.json
+if ($subject === 'english') {
+    $json_file = 'english_2000.json';
 }
-$json_data = file_get_contents($json_file);
-$questions_all = json_decode($json_data, true);
-shuffle($questions_all);
-$questions = $questions_all;
 ?>
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>測驗 - 智人題庫</title>
+    <title><?php echo ($subject === 'english') ? '2000單' : '測驗'; ?> - 智人題庫</title>
     <link rel="stylesheet" href="theme.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
@@ -30,7 +25,32 @@ $questions = $questions_all;
         .submit-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border); background: var(--btn-bg); color: var(--fg); cursor: pointer; font-weight: bold; font-size: 0.95rem; transition: all 0.2s; font-family: 'Inter', 'Noto Serif TC', serif; }
         .submit-btn:hover { background: var(--btn-hover-bg); border-color: var(--btn-hover-border); }
         .word-card { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 8px; padding: 25px 30px; margin-bottom: 25px; position: relative; box-shadow: 0 4px 12px rgba(0,0,0,0.15); color: var(--fg); display: flex; align-items: center; min-height: 80px; box-sizing: border-box; }
-        #word-text { font-size: 1.25rem; font-weight: 400; text-align: left; }
+        #word-text { font-size: 1.25rem; font-weight: 400; text-align: left; flex: 1; }
+        .speaker-icon {
+            width: 44px;
+            height: 44px;
+            padding: 10px;
+            background: #2e2e2e;
+            border-radius: 10px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: all 0.2s;
+            color: var(--fg);
+            stroke: var(--fg);
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+        }
+        .speaker-icon:hover {
+            opacity: 1;
+            background: #2e2e2e;
+        }
         .options-list { display: flex; flex-direction: column; gap: 14px; }
         .option-item { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 6px; padding: 22px 30px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; font-size: 1.25rem; font-weight: 400; color: var(--fg); font-family: 'Inter', 'Noto Serif TC', serif; }
         .option-item.selected { border-color: var(--btn-hover-border); border-width: 1px; background: var(--btn-hover-bg); }
@@ -47,7 +67,7 @@ $questions = $questions_all;
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <h1 class="brand">測驗</h1>
+                <h1 class="brand"><?php echo ($subject === 'english') ? '2000單' : '測驗'; ?></h1>
                 <p class="qid" id="question-id">題號 0</p>
             </div>
             <div class="header-right">
@@ -57,7 +77,18 @@ $questions = $questions_all;
             </div>
         </div>
         <div class="word-card">
+            <?php if ($subject === 'english'): ?>
             <span id="word-text">Loading...</span>
+            <div id="speaker-btn" class="speaker-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+            </div>
+            <?php else: ?>
+            <span id="word-text">Loading...</span>
+            <?php endif; ?>
         </div>
         <div class="options-list" id="options-list">
             <!-- Options will be injected here -->
@@ -75,43 +106,72 @@ $questions = $questions_all;
         </div>
     </div>
     <script>
-        const questions = <?php echo json_encode($questions); ?>;
         let currentIndex = 0;
-        // userAnswers: 單選存字串，多選存陣列
-        let userAnswers = questions.map(q => q.type === 'multi' ? [] : null);
+        let totalQuestions = 0;
+        let userAnswers = [];
+        let questionsMeta = [];
         const wordText = document.getElementById('word-text');
         const questionId = document.getElementById('question-id');
         const optionsList = document.getElementById('options-list');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
-        function loadQuestion(index) {
-            const q = questions[index];
+        const subject = '<?php echo $subject; ?>';
+
+        function fetchQuestion(index) {
+            wordText.textContent = 'Loading...';
+            optionsList.innerHTML = '';
+            // 首次載入時帶 reset=1，之後不帶
+            let extra = '';
+            if (index === 0 && !fetchQuestion.hasLoadedOnce) {
+                extra = '&reset=1';
+                fetchQuestion.hasLoadedOnce = true;
+            }
+            fetch(`get_question.php?subject=${encodeURIComponent(subject)}&index=${index}${extra}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        wordText.textContent = data.error;
+                        return;
+                    }
+                    totalQuestions = data.total;
+                    questionsMeta[index] = data.question;
+                    renderQuestion(data.question, index);
+                });
+        }
+
+        function renderQuestion(q, index) {
             wordText.textContent = q.title;
             questionId.textContent = `題號 ${q.number}`;
             optionsList.innerHTML = '';
-            if (q.type === 'multi') {
-                for (const opt of q.options) {
-                    const item = document.createElement('div');
-                    item.className = 'option-item' + (userAnswers[index].includes(opt.label) ? ' selected' : '');
-                    item.innerHTML = `<span class=\"option-label\">${opt.label}</span> ${opt.text}`;
-                    item.onclick = () => selectMultiOption(opt.label);
-                    optionsList.appendChild(item);
-                }
-            } else {
-                for (const opt of q.options) {
-                    const item = document.createElement('div');
-                    item.className = 'option-item' + (userAnswers[index] === opt.label ? ' selected' : '');
-                    item.innerHTML = `<span class=\"option-label\">${opt.label}</span> ${opt.text}`;
-                    item.onclick = () => selectSingleOption(opt.label);
-                    optionsList.appendChild(item);
+            // speaker 按鈕發音（SVG 樣式）
+            if (subject === 'english') {
+                const speakerBtn = document.getElementById('speaker-btn');
+                if (speakerBtn) {
+                    speakerBtn.onclick = () => {
+                        if (window.speechSynthesis) {
+                            const utter = new SpeechSynthesisUtterance(q.title);
+                            utter.lang = 'en-US';
+                            window.speechSynthesis.cancel(); // 先停止前一筆
+                            window.speechSynthesis.speak(utter);
+                        }
+                    };
                 }
             }
+            for (const [key, value] of Object.entries(q.options)) {
+                const item = document.createElement('div');
+                item.className = 'option-item' + (userAnswers[index] === key ? ' selected' : '');
+                item.innerHTML = `<span class=\"option-label\">${key}</span> ${value}`;
+                item.onclick = () => selectSingleOption(key);
+                optionsList.appendChild(item);
+            }
         }
+
         function selectSingleOption(label) {
             userAnswers[currentIndex] = label;
+            const q = questionsMeta[currentIndex];
             const items = optionsList.querySelectorAll('.option-item');
-            const options = questions[currentIndex].options.map(opt => opt.label);
+            const options = Object.keys(q.options);
             items.forEach((item, i) => {
                 if (options[i] === label) {
                     item.classList.add('selected');
@@ -120,25 +180,28 @@ $questions = $questions_all;
                 }
             });
             setTimeout(() => {
-                if (currentIndex < questions.length - 1) {
+                if (currentIndex < totalQuestions - 1) {
                     currentIndex++;
-                    loadQuestion(currentIndex);
+                    if (questionsMeta[currentIndex]) {
+                        renderQuestion(questionsMeta[currentIndex], currentIndex);
+                    } else {
+                        fetchQuestion(currentIndex);
+                    }
                 }
-            }, 50);
+            }, 200);
         }
-        function selectMultiOption(label) {
-            const arr = userAnswers[currentIndex];
-            const idx = arr.indexOf(label);
-            if (idx === -1) arr.push(label); else arr.splice(idx, 1);
-            loadQuestion(currentIndex);
-        }
+
         function navigate(direction) {
-            if (direction === 'next' && currentIndex < questions.length - 1) {
+            if (direction === 'next' && currentIndex < totalQuestions - 1) {
                 currentIndex++;
-                loadQuestion(currentIndex);
+                if (questionsMeta[currentIndex]) {
+                    renderQuestion(questionsMeta[currentIndex], currentIndex);
+                } else {
+                    fetchQuestion(currentIndex);
+                }
             } else if (direction === 'prev' && currentIndex > 0) {
                 currentIndex--;
-                loadQuestion(currentIndex);
+                renderQuestion(questionsMeta[currentIndex], currentIndex);
             }
         }
         prevBtn.onclick = () => navigate('prev');
@@ -146,59 +209,33 @@ $questions = $questions_all;
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') navigate('next');
             if (e.key === 'ArrowLeft') navigate('prev');
-            const key = e.key.toUpperCase();
-            if (questions[currentIndex].type === 'multi') {
-                if (['A', 'B', 'C', 'D'].includes(key)) selectMultiOption(key);
-            } else {
-                if (['A', 'B', 'C', 'D'].includes(key)) selectSingleOption(key);
+            let key = e.key.toUpperCase();
+            if (["1","2","3","4"].includes(key)) {
+                key = String.fromCharCode('A'.charCodeAt(0) + parseInt(key) - 1);
             }
+            const q = questionsMeta[currentIndex];
+            if (!q) return;
+            if (["A", "B", "C", "D"].includes(key)) selectSingleOption(key);
         });
         submitBtn.onclick = () => {
             let correct = 0;
             let html = '';
             let answeredCount = 0;
-            questions.forEach((q, i) => {
+            for (let i = 0; i < totalQuestions; i++) {
+                const q = questionsMeta[i];
                 const userAns = userAnswers[i];
-                if (q.type === 'multi') {
-                    if (!userAns.length) return;
-                    answeredCount++;
-                    const isCorrect = Array.isArray(q.answer) && q.answer.length === userAns.length && q.answer.every(a => userAns.includes(a));
-                    if (isCorrect) correct++;
-                    let userAnsText = userAns.map(l => `${l} ${(q.options.find(opt => opt.label === l) || {}).text || ''}`).join(', ');
-                    if (isCorrect) {
-                        html += `<div style=\"border:2px solid #1a4d1a;background:#1a4d1a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
-                            <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
-                            <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#388e3c;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
-                        </div>`;
-                    } else {
-                        let correctAnsText = q.answer.map(l => `${l} ${(q.options.find(opt => opt.label === l) || {}).text || ''}`).join(', ');
-                        html += `<div style=\"border:2px solid #a00;background:#220a0a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
-                            <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
-                            <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#a00;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
-                            <div>正確答案：<span style=\"background:#1a4d1a;color:#fff;padding:2px 8px;border-radius:6px;\">${correctAnsText}</span></div>
-                        </div>`;
-                    }
+                if (!q || !userAns) continue;
+                answeredCount++;
+                const isCorrect = userAns === q.answer;
+                if (isCorrect) correct++;
+                let userAnsText = `${userAns} ${q.options[userAns] || ''}`;
+                if (isCorrect) {
+                    html += `<div style=\"border:2px solid #1a4d1a;background:#1a4d1a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">\n                        <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>\n                        <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#388e3c;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>\n                    </div>`;
                 } else {
-                    if (!userAns) return;
-                    answeredCount++;
-                    const isCorrect = userAns === q.answer;
-                    if (isCorrect) correct++;
-                    let userAnsText = `${userAns} ${(q.options.find(opt => opt.label === userAns) || {}).text || ''}`;
-                    if (isCorrect) {
-                        html += `<div style=\"border:2px solid #1a4d1a;background:#1a4d1a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
-                            <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
-                            <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#388e3c;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
-                        </div>`;
-                    } else {
-                        let correctAnsText = `${q.answer} ${(q.options.find(opt => opt.label === q.answer) || {}).text || ''}`;
-                        html += `<div style=\"border:2px solid #a00;background:#220a0a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
-                            <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
-                            <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#a00;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
-                            <div>正確答案：<span style=\"background:#1a4d1a;color:#fff;padding:2px 8px;border-radius:6px;\">${correctAnsText}</span></div>
-                        </div>`;
-                    }
+                    let correctAnsText = `${q.answer} ${q.options[q.answer]}`;
+                    html += `<div style=\"border:2px solid #a00;background:#220a0a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">\n                        <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>\n                        <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#a00;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>\n                        <div>正確答案：<span style=\"background:#1a4d1a;color:#fff;padding:2px 8px;border-radius:6px;\">${correctAnsText}</span></div>\n                    </div>`;
                 }
-            });
+            }
             document.getElementById('answer-details').innerHTML = html;
             document.getElementById('score-details').textContent = `對 ${correct} 題 / 寫 ${answeredCount} 題`;
             document.getElementById('result-overlay').style.display = 'flex';
@@ -206,7 +243,7 @@ $questions = $questions_all;
         if (localStorage.getItem('themeMode') === 'light') {
             document.body.classList.add('light');
         }
-        loadQuestion(0);
+        fetchQuestion(0);
         // Set logo color based on mode
         const logoImg = document.getElementById('logo-img');
         if (document.body.classList.contains('light')) {
