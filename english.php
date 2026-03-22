@@ -11,7 +11,7 @@
             color: var(--fg);
             transition: background 0.3s, color 0.3s;
             margin: 0;
-            font-family: 'Noto Sans TC', Arial, sans-serif;
+            font-family: 'Noto Serif TC', serif;
         }
         .main {
             display: grid;

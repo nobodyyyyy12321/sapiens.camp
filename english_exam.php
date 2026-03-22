@@ -21,6 +21,7 @@ $questions = $questions_all;
             font-family: 'Noto Sans TC', Arial, sans-serif;
             color: var(--fg);
             transition: background 0.3s, color 0.3s;
+            overflow: hidden;
         }
 
         .container {
@@ -70,7 +71,8 @@ $questions = $questions_all;
             transition: all 0.2s;
             font-size: 1.3rem;
             color: var(--fg);
-        }
+                font-family: 'Inter', 'Noto Serif TC', serif;
+            }
         
         .nav-circle-btn:hover {
             background: var(--btn-hover-bg);
@@ -87,7 +89,8 @@ $questions = $questions_all;
             font-weight: bold;
             font-size: 0.95rem;
             transition: all 0.2s;
-        }
+                font-family: 'Inter', 'Noto Serif TC', serif;
+            }
 
         .submit-btn:hover {
             background: var(--btn-hover-bg);
@@ -156,7 +159,9 @@ $questions = $questions_all;
             font-size: 1.25rem;
             font-weight: 400; /* Regular weight to match question text */
             color: var(--fg);
+            font-family: 'Inter', 'Noto Serif TC', serif;
         }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
         .option-item.selected {
             border-color: var(--btn-hover-border);
@@ -178,8 +183,25 @@ $questions = $questions_all;
             z-index: 100;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             color: var(--fg);
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+
+        .result-overlay > h2,
+        .result-overlay > #score-details,
+        .result-overlay > #answer-details,
+        .result-overlay > div[style*="margin-top: 25px"] {
+            margin-top: 48px !important;
+        }
+
+        #answer-details {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            max-height: 60vh;
+            overflow-y: auto;
         }
 
         .score-circle {
@@ -245,12 +267,14 @@ $questions = $questions_all;
     </div>
 
     <div class="result-overlay" id="result-overlay">
-        <h2>測驗成果</h2>
-        <div class="score-circle" id="final-score">0</div>
-        <p id="score-details"></p>
-        <div style="margin-top: 25px; display: flex; gap: 15px;">
-            <button class="submit-btn" onclick="location.reload()">再試一次</button>
-            <a href="english.php" class="submit-btn" style="text-decoration:none;">返回</a>
+        <a href="index.php" style="display:inline-block;width:48px;height:48px;background:transparent;position:absolute;top:12px;left:18px;z-index:120;">
+            <img src="logo-removebg-preview.png" alt="logo" style="width:60px;height:60px;display:block;margin:4px auto;background:transparent;border-radius:0;object-fit:contain;" />
+        </a>
+        <h2 style="margin-top:72px;font-family:'Noto Serif TC',serif;">測驗結果</h2>
+        <p id="score-details" style="font-size:1.5rem;font-weight:bold;margin:32px 0 0 0;font-family:'Noto Serif TC',serif;"> </p>
+        <div id="answer-details"></div>
+        <div style="margin-top: 25px; display: flex; justify-content: center;">
+            <button class="submit-btn" style="font-family:'Noto Serif TC',serif;" onclick="location.reload()">再試一次</button>
         </div>
     </div>
 
@@ -338,12 +362,31 @@ $questions = $questions_all;
 
         submitBtn.onclick = () => {
             let correct = 0;
+            let html = '';
+            let answeredCount = 0;
             questions.forEach((q, i) => {
-                if (userAnswers[i] === q.answer) correct++;
+                const userAns = userAnswers[i];
+                if (!userAns) return; // 跳過未作答
+                answeredCount++;
+                const isCorrect = userAns === q.answer;
+                if (isCorrect) correct++;
+                let userAnsText = `${userAns} ${q.options[userAns] || ''}`;
+                if (isCorrect) {
+                    html += `<div style=\"border:2px solid #1a4d1a;background:#1a4d1a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
+                        <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
+                        <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#388e3c;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
+                    </div>`;
+                } else {
+                    let correctAnsText = `${q.answer} ${q.options[q.answer]}`;
+                    html += `<div style=\"border:2px solid #a00;background:#220a0a;margin-bottom:18px;border-radius:10px;padding:12px 18px;\">
+                        <div style=\"font-weight:bold;font-size:1.1rem;margin-bottom:4px;\">題號${q.number}: ${q.title}</div>
+                        <div style=\"margin-bottom:2px;\">你的答案：<span style=\"background:#a00;color:#fff;padding:2px 8px;border-radius:6px;\">${userAnsText}</span></div>
+                        <div>正確答案：<span style=\"background:#1a4d1a;color:#fff;padding:2px 8px;border-radius:6px;\">${correctAnsText}</span></div>
+                    </div>`;
+                }
             });
-            const score = Math.round((correct / questions.length) * 100);
-            document.getElementById('final-score').textContent = score;
-            document.getElementById('score-details').textContent = `答對 ${correct} 題 / 共 ${questions.length} 題`;
+            document.getElementById('answer-details').innerHTML = html;
+            document.getElementById('score-details').textContent = `對 ${correct} 題 / 寫 ${answeredCount} 題`;
             document.getElementById('result-overlay').style.display = 'flex';
         };
 

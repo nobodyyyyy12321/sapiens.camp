@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
   <link rel="stylesheet" href="theme.css">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#141414">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="智人題庫">
+  <link rel="apple-touch-icon" href="favicon.png">
   
   <style>
     .main {
@@ -83,6 +89,7 @@
       transition: all 0.2s;
       text-decoration: none;
       text-align: center;
+      font-family: 'Inter', 'Noto Serif TC', serif;
     }
     .category-btn:hover {
       background: var(--btn-hover-bg);
@@ -107,7 +114,12 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       cursor: pointer;
       z-index: 10;
+      font-family: 'Inter', 'Noto Serif TC', serif;
     }
+    select.lang-select {
+      font-family: 'Inter', 'Noto Serif TC', serif;
+    }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
     .speaker-img-fixed {
       position: fixed;
@@ -231,6 +243,12 @@
   <div class="feedback">意見回饋</div>
 </body>
 <script>
+  // 註冊 service worker 以支援 PWA
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('service-worker.js');
+    });
+  }
     // 亮暗模式切換（燈泡圖示）
     const modeToggle = document.getElementById('modeToggle');
     function updateBulbIcon() {

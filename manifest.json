@@ -1,0 +1,21 @@
+{
+  "name": "智人題庫 Sapiens Camp",
+  "short_name": "智人題庫",
+  "start_url": "./index.php",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#141414",
+  "description": "智人題庫 - 學習與測驗平台",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
