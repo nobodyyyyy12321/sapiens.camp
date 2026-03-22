@@ -1,5 +1,4 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
@@ -149,6 +148,7 @@
       align-items: center;
       gap: 18px;
       margin-top: 60px;
+      position: relative;
     }
     .speaker-img-static {
       width: 300px;
@@ -159,6 +159,9 @@
       background: none;
       pointer-events: auto;
       display: block;
+      position: absolute;
+      left: 400px;
+      bottom: -150px;
     }
     .announcement-btn i {
       font-style: normal;
@@ -173,6 +176,11 @@
       border-radius: 16px;
       pointer-events: auto;
       display: inline-block;
+      position: absolute;
+      left: 50%;
+      bottom: -100px;
+      transform: translateX(-50%);
+      z-index: 200;
     }
     @media (max-width: 600px) {
       .main {
@@ -391,7 +399,7 @@
   const btnTranslations = {
     'English': ['Quote','Math','Physics','Chemistry','Competition'],
     'Español': ['Cita','Matemáticas','Física','Química','Competencia'],
-    'ไทย': ['คำคม','คณิตศาสตร์','ฟิสิกส์','เคมี','การแข่งขัน'],
+    'Thai': ['คำคม','คณิตศาสตร์','ฟิสิกส์','เคมี','การแข่งขัน'],
     'Bahasa Indonesia': ['Kutipan','Matematika','Fisika','Kimia','Kompetisi'],
     '한국어': ['명언','수학','물리','화학','경쟁']
   };
