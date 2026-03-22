@@ -2,7 +2,11 @@
 header('Content-Type: application/json; charset=utf-8');
 $subject = $_GET['subject'] ?? 'quote';
 $index = isset($_GET['index']) ? intval($_GET['index']) : 0;
-$json_file = $subject . '.json';
+if ($subject === 'english') {
+    $json_file = 'english_2000.json';
+} else {
+    $json_file = $subject . '.json';
+}
 if (!file_exists($json_file)) {
     echo json_encode(['error' => '題庫不存在']);
     exit;
