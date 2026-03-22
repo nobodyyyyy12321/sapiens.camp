@@ -379,8 +379,7 @@
     const observer = new MutationObserver(setImageColorByMode);
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
-    // 點擊燈泡切換亮暗模式
-    document.getElementById('bulb-center').addEventListener('click', function() {
+
       const isLight = document.body.classList.toggle('light');
       localStorage.setItem('themeMode', isLight ? 'light' : 'dark');
       setImageColorByMode();

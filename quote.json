@@ -1,0 +1,222 @@
+[
+  {
+    "number": 1,
+    "title": "欲窮千里目，更__一層樓                    —王之渙",
+    "options": [
+      { "label": "A", "text": "上" },
+      { "label": "B", "text": "下" },
+      { "label": "C", "text": "左" },
+      { "label": "D", "text": "右" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 2,
+    "title": "大__假設，小心求證。                    —胡適",
+    "options": [
+      { "label": "A", "text": "方" },
+      { "label": "B", "text": "略" },
+      { "label": "C", "text": "膽" },
+      { "label": "D", "text": "意" }
+    ],
+    "answer": "C"
+  },
+  {
+    "number": 3,
+    "title": "工欲善其事，必先利其__。                    —論語",
+    "options": [
+      { "label": "A", "text": "身" },
+      { "label": "B", "text": "器" },
+      { "label": "C", "text": "手" },
+      { "label": "D", "text": "刀" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 4,
+    "title": "己所不欲，勿__於人。                    —論語",
+    "options": [
+      { "label": "A", "text": "施" },
+      { "label": "B", "text": "加" },
+      { "label": "C", "text": "予" },
+      { "label": "D", "text": "求" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 5,
+    "title": "學而時習之，不亦__乎。                    —論語",
+    "options": [
+      { "label": "A", "text": "樂" },
+      { "label": "B", "text": "喜" },
+      { "label": "C", "text": "悅" },
+      { "label": "D", "text": "好" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 6,
+    "title": "千里之行，始於__下。                    —老子",
+    "options": [
+      { "label": "A", "text": "足" },
+      { "label": "B", "text": "步" },
+      { "label": "C", "text": "一" },
+      { "label": "D", "text": "腳" }
+    ],
+    "answer": "C"
+  },
+  {
+    "number": 7,
+    "title": "鍥而不舍，金石可__。                    —荀子",
+    "options": [
+      { "label": "A", "text": "破" },
+      { "label": "B", "text": "穿" },
+      { "label": "C", "text": "削" },
+      { "label": "D", "text": "裂" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 8,
+    "title": "書到用時方恨__。                    —古諺",
+    "options": [
+      { "label": "A", "text": "無" },
+      { "label": "B", "text": "少" },
+      { "label": "C", "text": "缺" },
+      { "label": "D", "text": "晚" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 9,
+    "title": "知識就是__。                    —培根",
+    "options": [
+      { "label": "A", "text": "力量" },
+      { "label": "B", "text": "財富" },
+      { "label": "C", "text": "光明" },
+      { "label": "D", "text": "希望" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 10,
+    "title": "業精於勤，荒於__。                    —韓愈",
+    "options": [
+      { "label": "A", "text": "思" },
+      { "label": "B", "text": "言" },
+      { "label": "C", "text": "嬉" },
+      { "label": "D", "text": "樂" }
+    ],
+    "answer": "C"
+  },
+  {
+    "number": 11,
+    "title": "黃沙百戰穿金甲，__未還鄉。                    —王昌齡",
+    "options": [
+      { "label": "A", "text": "功業" },
+      { "label": "B", "text": "歸心" },
+      { "label": "C", "text": "人生" },
+      { "label": "D", "text": "志向" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 12,
+    "title": "明月幾時有，__問青天。                    —蘇軾",
+    "options": [
+      { "label": "A", "text": "舉杯" },
+      { "label": "B", "text": "何故" },
+      { "label": "C", "text": "為誰" },
+      { "label": "D", "text": "我欲" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 13,
+    "title": "人生不相見，__與參商。                    —杜甫",
+    "options": [
+      { "label": "A", "text": "動如" },
+      { "label": "B", "text": "聚如" },
+      { "label": "C", "text": "散如" },
+      { "label": "D", "text": "落如" }
+    ],
+    "answer": "C"
+  },
+  {
+    "number": 14,
+    "title": "近鄉情更怯，不敢問__。                    —宋之問",
+    "options": [
+      { "label": "A", "text": "消息" },
+      { "label": "B", "text": "故人" },
+      { "label": "C", "text": "家人" },
+      { "label": "D", "text": "前塵" }
+    ],
+    "answer": "A"
+  },
+  {
+    "number": 15,
+    "title": "洛陽親友如相問，一片冰心在__。                    —王昌齡",
+    "options": [
+      { "label": "A", "text": "天涯" },
+      { "label": "B", "text": "玉壺" },
+      { "label": "C", "text": "明月" },
+      { "label": "D", "text": "清流" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 16,
+    "title": "海上生明月，__共此時。                    —張九齡",
+    "options": [
+      { "label": "A", "text": "天涯人" },
+      { "label": "B", "text": "天下人" },
+      { "label": "C", "text": "相思人" },
+      { "label": "D", "text": "故人心" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 17,
+    "title": "舉杯邀明月，__成三人。                    —李白",
+    "options": [
+      { "label": "A", "text": "此心" },
+      { "label": "B", "text": "影中" },
+      { "label": "C", "text": "對影" },
+      { "label": "D", "text": "影隨" }
+    ],
+    "answer": "C"
+  },
+  {
+    "number": 18,
+    "title": "三五之夜，明月半牆，__入舍來。                    —歸有光",
+    "options": [
+      { "label": "A", "text": "光華" },
+      { "label": "B", "text": "清輝" },
+      { "label": "C", "text": "月影" },
+      { "label": "D", "text": "月光" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 19,
+    "title": "但願人長__，千里共__。                    —蘇軾",
+    "options": [
+      { "label": "A", "text": "安，婵娟" },
+      { "label": "B", "text": "壽，婵娟" },
+      { "label": "C", "text": "安，明月" },
+      { "label": "D", "text": "在，婵娟" }
+    ],
+    "answer": "B"
+  },
+  {
+    "number": 20,
+    "title": "春風又綠江南岸，明月何時照我__。                    —王安石",
+    "options": [
+      { "label": "A", "text": "還" },
+      { "label": "B", "text": "鄉" },
+      { "label": "C", "text": "家" },
+      { "label": "D", "text": "身" }
+    ],
+    "answer": "A"
+  }
+]
