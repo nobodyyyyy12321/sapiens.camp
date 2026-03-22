@@ -151,8 +151,8 @@
       margin-top: 60px;
     }
     .speaker-img-static {
-      width: 48px;
-      height: 48px;
+      width: 300px;
+      height: auto;
       margin: 0;
       padding: 0;
       box-shadow: none;
