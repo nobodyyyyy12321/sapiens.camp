@@ -15,7 +15,7 @@ $questions = $questions_all;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>測驗 - 智人題庫</title>
+    <title><?php echo ($subject === 'english') ? '2000單' : '測驗'; ?> - 智人題庫</title>
     <link rel="stylesheet" href="theme.css">
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
@@ -47,7 +47,7 @@ $questions = $questions_all;
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <h1 class="brand">測驗</h1>
+                <h1 class="brand"><?php echo ($subject === 'english') ? '2000單' : '測驗'; ?></h1>
                 <p class="qid" id="question-id">題號 0</p>
             </div>
             <div class="header-right">
@@ -90,8 +90,10 @@ $questions = $questions_all;
             wordText.textContent = q.title;
             questionId.textContent = `題號 ${q.number}`;
             optionsList.innerHTML = '';
+            // 將 options 物件轉為陣列 [{label, text}]
+            const opts = Array.isArray(q.options) ? q.options : Object.entries(q.options).map(([label, text]) => ({ label, text }));
             if (q.type === 'multi') {
-                for (const opt of q.options) {
+                for (const opt of opts) {
                     const item = document.createElement('div');
                     item.className = 'option-item' + (userAnswers[index].includes(opt.label) ? ' selected' : '');
                     item.innerHTML = `<span class=\"option-label\">${opt.label}</span> ${opt.text}`;
@@ -99,7 +101,7 @@ $questions = $questions_all;
                     optionsList.appendChild(item);
                 }
             } else {
-                for (const opt of q.options) {
+                for (const opt of opts) {
                     const item = document.createElement('div');
                     item.className = 'option-item' + (userAnswers[index] === opt.label ? ' selected' : '');
                     item.innerHTML = `<span class=\"option-label\">${opt.label}</span> ${opt.text}`;
@@ -146,7 +148,11 @@ $questions = $questions_all;
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') navigate('next');
             if (e.key === 'ArrowLeft') navigate('prev');
-            const key = e.key.toUpperCase();
+            let key = e.key.toUpperCase();
+            // 支援 1/2/3/4 對應 A/B/C/D
+            if (['1','2','3','4'].includes(key)) {
+                key = String.fromCharCode('A'.charCodeAt(0) + parseInt(key) - 1);
+            }
             if (questions[currentIndex].type === 'multi') {
                 if (['A', 'B', 'C', 'D'].includes(key)) selectMultiOption(key);
             } else {
