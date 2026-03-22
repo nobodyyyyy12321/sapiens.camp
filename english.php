@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英文 - 智人題庫</title>
     <link rel="stylesheet" href="theme.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         body {
             background-color: var(--bg);

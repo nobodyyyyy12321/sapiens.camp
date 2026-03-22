@@ -14,6 +14,7 @@ $questions = $questions_all;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英文 - 智人題庫</title>
     <link rel="stylesheet" href="theme.css">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         body {
             background-color: var(--bg);
@@ -324,7 +325,7 @@ $questions = $questions_all;
                     currentIndex++;
                     loadQuestion(currentIndex);
                 }
-            }, 400); // 400ms delay for visual feedback
+            }, 200); // 200ms，作答後快速切換
         }
 
         function navigate(direction) {

@@ -89,7 +89,7 @@
       transition: all 0.2s;
       text-decoration: none;
       text-align: center;
-      font-family: 'Inter', 'Noto Serif TC', serif;
+      font-family: 'Inter';
     }
     .category-btn:hover {
       background: var(--btn-hover-bg);
