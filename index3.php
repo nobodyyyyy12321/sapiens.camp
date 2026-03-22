@@ -1,3 +1,4 @@
+
   <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -12,6 +13,14 @@
   <link rel="apple-touch-icon" href="favicon.png">
   
   <style>
+
+    .category-btn.sub-open {
+      background: #202020 !important;
+      color: #ffffff !important;
+    }
+    .category-btn.sub-open.btn-disabled {
+      color: #e53935 !important;
+    }
     .main {
       display: grid;
       grid-template-rows: 260px auto;
@@ -90,7 +99,7 @@
       justify-content: center;
       background: var(--btn-bg);
       color: var(--btn-fg);
-      border: 1px solid var(--border);
+      border: 1px solid #fff;
       border-radius: 12px;
       padding: 4mm;
       font-size: 1.1rem;
@@ -133,30 +142,37 @@
     }
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
-    .speaker-img-fixed {
-      position: fixed;
-      left: 400px;
-      bottom: -30px;
-      z-index: 0;
-      width: 200px;
-      height: auto;
+    .footer-bar {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 60px;
+    }
+    .speaker-img-static {
+      width: 48px;
+      height: 48px;
       margin: 0;
       padding: 0;
       box-shadow: none;
       background: none;
+      pointer-events: auto;
+      display: block;
     }
     .announcement-btn i {
       font-style: normal;
       font-size: 1.2rem;
     }
     .feedback {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
       color: var(--feedback-color);
       font-size: 1rem;
       opacity: 0.8;
+      background: rgba(20,20,20,0.85);
+      padding: 8px 24px;
+      border-radius: 16px;
+      pointer-events: auto;
+      display: inline-block;
     }
     @media (max-width: 600px) {
       .main {
@@ -225,9 +241,7 @@
     <div class="category-list">
       <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
       <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
-      <span id="english-btn-group" style="display:inline-flex; align-items:center; gap:8px;">
-        <a class="category-btn" href="#" id="english-expand-btn">英文</a>
-      </span>
+      <a class="category-btn" href="#" id="english-expand-btn">英文</a>
       <a class="category-btn btn-disabled" href="under_construction.php">公職考試</a>
       <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
       <a class="category-btn btn-disabled" href="under_construction.php">綜合</a>
@@ -251,7 +265,7 @@
     // 英文按鈕展開/收合子分類（inline 顯示在右側）
     document.addEventListener('DOMContentLoaded', function() {
       var btn = document.getElementById('english-expand-btn');
-      var btnGroup = document.getElementById('english-btn-group');
+      var btnGroup = document.querySelector('.category-list');
       var subBtns = [
         { text: '2000單', href: 'test.php?subject=english', disabled: false },
         { text: '學測', href: '#', disabled: true },
@@ -267,28 +281,49 @@
         { text: 'english1', href: '#', disabled: true },
         { text: 'english1', href: '#', disabled: true }
       ];
+      // 第二層 english2 按鈕
+      var subBtns2 = [];
+      for (var i = 1; i <= 20; i++) {
+        subBtns2.push({ text: 'english2-' + i, href: '#', disabled: true });
+      }
       var inserted = false;
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         if (inserted) {
-          // 移除子分類
-          subBtns.forEach(function(_, i) {
-            var sib = btn.nextElementSibling;
-            if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
-              sib.remove();
-            }
-          });
+          // 移除子分類（同時移除 english 和 english2）
+          var sib = btn.nextElementSibling;
+          while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+            var next = sib.nextElementSibling;
+            sib.remove();
+            sib = next;
+          }
           inserted = false;
           return;
         }
         // 插入子分類
-        subBtns.forEach(function(item) {
+        // 第一層
+        subBtns.forEach(function(item, idx) {
           var a = document.createElement('a');
-          a.className = 'category-btn' + (item.disabled ? ' btn-disabled' : '');
+          // 只有第一個（2000單）不加 btn-disabled
+          a.className = 'category-btn sub-open' + (idx === 0 ? '' : ' btn-disabled');
           a.textContent = item.text;
           a.href = item.href;
           a.dataset.sub = 'english';
           btnGroup.insertBefore(a, btn.nextSibling);
+        });
+        // 第二層 english2
+        var lastEnglish = btn;
+        while (lastEnglish.nextElementSibling && lastEnglish.nextElementSibling.classList.contains('category-btn') && lastEnglish.nextElementSibling.dataset.sub === 'english') {
+          lastEnglish = lastEnglish.nextElementSibling;
+        }
+        subBtns2.forEach(function(item) {
+          var a = document.createElement('a');
+          a.className = 'category-btn btn-disabled sub-open';
+          a.textContent = item.text;
+          a.href = item.href;
+          a.dataset.sub = 'english2';
+          btnGroup.insertBefore(a, lastEnglish.nextElementSibling);
+          lastEnglish = a;
         });
         inserted = true;
       });
@@ -297,12 +332,13 @@
         if (mainBtn !== btn) {
           mainBtn.addEventListener('click', function() {
             if (inserted) {
-              subBtns.forEach(function(_, i) {
-                var sib = btn.nextElementSibling;
-                if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
-                  sib.remove();
-                }
-              });
+              // 移除子分類（同時移除 english 和 english2）
+              var sib = btn.nextElementSibling;
+              while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+                var next = sib.nextElementSibling;
+                sib.remove();
+                sib = next;
+              }
               inserted = false;
             }
           });
@@ -312,12 +348,13 @@
       document.addEventListener('click', function(e) {
         if (!btn.contains(e.target) && !btnGroup.contains(e.target)) {
           if (inserted) {
-            subBtns.forEach(function(_, i) {
-              var sib = btn.nextElementSibling;
-              if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
-                sib.remove();
-              }
-            });
+            // 移除子分類（同時移除 english 和 english2）
+            var sib = btn.nextElementSibling;
+            while (sib && sib.classList.contains('category-btn') && (sib.dataset.sub === 'english' || sib.dataset.sub === 'english2')) {
+              var next = sib.nextElementSibling;
+              sib.remove();
+              sib = next;
+            }
             inserted = false;
           }
         }
@@ -327,7 +364,11 @@
     </div>
   </div>
   <!-- 公告已移除 -->
-  <div class="feedback">意見回饋</div>
+  <!-- footer-bar 置底 -->
+  <div class="footer-bar">
+    <img src="speaker.png" alt="speaker" class="speaker-img-static" id="speaker-img" style="z-index:102;pointer-events:auto;">
+    <div class="feedback">意見回饋</div>
+  </div>
 </body>
 <script>
   // 註冊 service worker 以支援 PWA
@@ -396,7 +437,7 @@
     }
   });
 </script>
-  <img src="speaker.png" alt="speaker" class="speaker-img-fixed" id="speaker-img">
+  <!-- speaker已移至footer-bar -->
   <div id="speaker-tooltip" style="display:none;position:fixed;top:0;left:0;background:rgba(0,0,0,0.85);color:#fff;padding:10px 18px;border-radius:12px;font-size:1.1rem;z-index:101;box-shadow:0 2px 8px rgba(0,0,0,0.15);pointer-events:none;">推荐搭配一點音樂</div>
   <script>
     const speakerImg = document.getElementById('speaker-img');
