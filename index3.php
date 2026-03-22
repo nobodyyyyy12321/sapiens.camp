@@ -42,11 +42,21 @@
     }
     .search-box {
       width: 500px;
-      max-width: 90vw;
-      margin-bottom: 2rem;
+      max-width: 500px;
+      min-width: 320px;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto 2rem auto;
+      z-index: 20;
+      background: var(--input-bg, #fff);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-radius: 0 0 18px 18px;
     }
     .search-input {
       width: 100%;
@@ -71,7 +81,7 @@
       align-items: flex-start;
       align-content: flex-start;
       max-width: 700px;
-      margin: 0 auto 2rem auto;
+      margin: 24px auto 2rem auto; /* top margin prevents buttons from going above search box */
       position: relative;
     }
     .category-btn {
@@ -91,6 +101,7 @@
       text-decoration: none;
       text-align: center;
       font-family: 'Inter';
+      white-space: nowrap;
     }
     .category-btn:hover {
       background: var(--btn-hover-bg);
@@ -214,11 +225,8 @@
     <div class="category-list">
       <a class="category-btn btn-disabled" href="under_construction.php">背東西</a>
       <a class="category-btn btn-disabled" href="under_construction.php">國文</a>
-      <a class="category-btn" href="#" id="english-expand-btn">英文</a>
-      <span id="english-sublist" style="display:none; position:absolute; left:0; top:100%; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.08); border-radius:10px; padding:8px 0; min-width:120px; z-index:10;">
-        <a class="category-btn" href="test.php?subject=english">2000單</a>
-        <a class="category-btn btn-disabled" href="#">學測</a>
-        <a class="category-btn btn-disabled" href="#">指考</a>
+      <span id="english-btn-group" style="display:inline-flex; align-items:center; gap:8px;">
+        <a class="category-btn" href="#" id="english-expand-btn">英文</a>
       </span>
       <a class="category-btn btn-disabled" href="under_construction.php">公職考試</a>
       <a class="category-btn btn-disabled" href="under_construction.php">名言佳句</a>
@@ -240,31 +248,80 @@
       <a class="category-btn btn-disabled" href="under_construction.php">自然</a>
       <a class="category-btn btn-disabled" href="under_construction.php">社會</a>
     <script>
-    // 英文按鈕展開/收合子分類（不跳轉，且不影響搜尋框）
+    // 英文按鈕展開/收合子分類（inline 顯示在右側）
     document.addEventListener('DOMContentLoaded', function() {
       var btn = document.getElementById('english-expand-btn');
-      var sublist = document.getElementById('english-sublist');
-      if (btn && sublist) {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          if (sublist.style.display === 'none' || sublist.style.display === '') {
-            // 計算按鈕在父容器的位置
-            var btnRect = btn.getBoundingClientRect();
-            var parentRect = btn.parentElement.getBoundingClientRect();
-            sublist.style.left = (btn.offsetLeft) + 'px';
-            sublist.style.top = (btn.offsetTop + btn.offsetHeight + 4) + 'px';
-            sublist.style.display = 'block';
-          } else {
-            sublist.style.display = 'none';
-          }
+      var btnGroup = document.getElementById('english-btn-group');
+      var subBtns = [
+        { text: '2000單', href: 'test.php?subject=english', disabled: false },
+        { text: '學測', href: '#', disabled: true },
+        { text: '指考', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true },
+        { text: 'english1', href: '#', disabled: true }
+      ];
+      var inserted = false;
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (inserted) {
+          // 移除子分類
+          subBtns.forEach(function(_, i) {
+            var sib = btn.nextElementSibling;
+            if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
+              sib.remove();
+            }
+          });
+          inserted = false;
+          return;
+        }
+        // 插入子分類
+        subBtns.forEach(function(item) {
+          var a = document.createElement('a');
+          a.className = 'category-btn' + (item.disabled ? ' btn-disabled' : '');
+          a.textContent = item.text;
+          a.href = item.href;
+          a.dataset.sub = 'english';
+          btnGroup.insertBefore(a, btn.nextSibling);
         });
-        // 點擊外部自動收合
-        document.addEventListener('click', function(e) {
-          if (!btn.contains(e.target) && !sublist.contains(e.target)) {
-            sublist.style.display = 'none';
+        inserted = true;
+      });
+      // 點擊其他主分類時自動收合
+      document.querySelectorAll('.category-list .category-btn').forEach(function(mainBtn) {
+        if (mainBtn !== btn) {
+          mainBtn.addEventListener('click', function() {
+            if (inserted) {
+              subBtns.forEach(function(_, i) {
+                var sib = btn.nextElementSibling;
+                if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
+                  sib.remove();
+                }
+              });
+              inserted = false;
+            }
+          });
+        }
+      });
+      // 點擊外部自動收合
+      document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !btnGroup.contains(e.target)) {
+          if (inserted) {
+            subBtns.forEach(function(_, i) {
+              var sib = btn.nextElementSibling;
+              if (sib && sib.classList.contains('category-btn') && sib.dataset.sub === 'english') {
+                sib.remove();
+              }
+            });
+            inserted = false;
           }
-        });
-      }
+        }
+      });
     });
     </script>
     </div>
